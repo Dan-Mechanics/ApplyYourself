@@ -40,6 +40,7 @@ Icon?
 ehthumbs.db
 Thumbs.db
 
-/Immerse/Logs
-/Immerse/.vs
+/ApplyYourself/.vs
 *.zip
+/ApplyYourself/Logs
+/ApplyYourself/UserSettings/Layouts
