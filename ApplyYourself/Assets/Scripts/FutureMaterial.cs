@@ -1,23 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class FutureMaterial : MonoBehaviour
+    // dont make this here !!!!
+    public enum Ending { Water, Dry }
+    
+    public class FutureMaterial : MonoBehaviour, IPreviewable
     {
+        [SerializeField] private Ending previewEnding = default;
+        [SerializeField] private Material defaultMaterial = default;
         [SerializeField] private Material[] materials = default;
+        private MeshRenderer rend;
 
-        private void Start()
+        public void Setup(Ending ending) => SetMaterial(GetMaterial(ending));
+
+        private Material GetMaterial(Ending ending)
         {
-            MeshRenderer rend = GetComponent<MeshRenderer>();
-            rend.sharedMaterial = materials[0];
-            
-            // either string based.
-            // or like index based or someth esle
+            int index = -1;
+            for (int i = 0; i < materials.Length; i++)
+            {
+                string name = materials[i].name.ToLowerInvariant();
+                if (name.Contains(ending.ToString().ToLowerInvariant()))
+                {
+                    index = i;
+                    break;
+                }
+            }
 
-            // add editor meme, met dat je preview ziet, dus like tool development
-            // en like scene als geheel erin kan slepen. additive scene load wil ik.
+            if (index < 0)
+            {
+                Debug.LogError($"Ending material not found! --> {ending}");
+                return null;
+            }
+
+            return materials[index];
         }
+
+        private void SetMaterial(Material material)
+        {
+            if(rend == null)
+                rend = GetComponent<MeshRenderer>();
+
+            rend.sharedMaterial = material;
+        }
+
+        public void ShowPreview() => SetMaterial(GetMaterial(previewEnding));
+        public void HidePreview() => SetMaterial(defaultMaterial);
+        private void OnValidate() => HidePreview();
     }
 }
