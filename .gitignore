@@ -39,4 +39,8 @@ sysinfo.txt
 Icon?
 ehthumbs.db
 Thumbs.db
+
 /ApplyYourself/.vs
+*.zip
+/ApplyYourself/Logs
+/ApplyYourself/UserSettings/Layouts

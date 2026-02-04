@@ -3,19 +3,22 @@ using UnityEngine;
 namespace ApplyYourself
 {
     // dont make this here !!!!
-    public enum Ending { Water, Dry }
+    public enum World { Placeholder, Water, Dry }
     
     public class FutureMaterial : MonoBehaviour, IPreviewable
     {
-        [SerializeField] private Ending previewEnding = default;
+        [SerializeField] private World previewEnding = default;
         [SerializeField] private Material defaultMaterial = default;
         [SerializeField] private Material[] materials = default;
         private MeshRenderer rend;
 
-        public void Setup(Ending ending) => SetMaterial(GetMaterial(ending));
+        public void Setup(World ending) => SetMaterial(GetMaterial(ending));
 
-        private Material GetMaterial(Ending ending)
+        private Material GetMaterial(World ending)
         {
+            if(ending == World.Placeholder)
+                return defaultMaterial;
+
             int index = -1;
             for (int i = 0; i < materials.Length; i++)
             {

@@ -4,56 +4,22 @@ namespace ApplyYourself
 {
     public class FutureProp : MonoBehaviour, IPreviewable
     {
-        [SerializeField] private Ending previewEnding = default;
-        [SerializeField] private GameObject defaultPrefab = default;
-        [SerializeField] private GameObject[] prefabs = default;
+        [SerializeField] private World previewEnding = default;
+        public void Setup(World ending) => SetEnding(ending);
 
-        public void Setup(Ending ending) => SetPrefab(GetPrefab(ending));
-
-        /// <summary>
-        ///  Make this general method in utils and put enum there too.
-        /// </summary>
-        /// <param name="ending"></param>
-        /// <returns></returns>
-        private GameObject GetPrefab(Ending ending)
+        private void SetEnding(World ending)
         {
-            int index = -1;
-            for (int i = 0; i < prefabs.Length; i++)
+            for (int i = 0; i < transform.childCount; i++)
             {
-                string name = prefabs[i].name.ToLowerInvariant();
-                if (name.Contains(ending.ToString().ToLowerInvariant()))
-                {
-                    index = i;
-                    break;
-                }
+                transform.GetChild(i).gameObject.SetActive(false);
             }
 
-            if (index < 0)
-            {
-                Debug.LogError($"Ending prefab not found! --> {ending}");
-                return null;
-            }
-
-            return prefabs[index];
+            Debug.Log(ending);
+            transform.Find(ending.ToString().ToLowerInvariant()).gameObject.SetActive(true);   
         }
 
-        private void SetPrefab(GameObject prefab)
-        {
-            string previewName = "preview";
-            Transform preview = transform.Find(previewName);
-            if (preview != null)
-                preview.gameObject.SetActive(false);
-
-            GameObject go = Instantiate(prefab);
-            go.transform.SetParent(transform);
-            go.transform.SetLocalPositionAndRotation(prefab.transform.localPosition,
-                prefab.transform.localRotation);
-            go.transform.localScale = prefab.transform.localScale;
-            go.name = previewName;
-        }
-
-        public void ShowPreview() => SetPrefab(GetPrefab(previewEnding));
-        public void HidePreview() => SetPrefab(defaultPrefab);
+        public void ShowPreview() => SetEnding(previewEnding);
+        public void HidePreview() => SetEnding(World.Placeholder);
         private void OnValidate() => HidePreview();
     }
 }
