@@ -2,6 +2,13 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
+    /// <summary>
+    /// Possible:
+    /// make noita
+    /// make terrain editor like level
+    /// make terrain editor marhcing cubes
+    /// easy peasy type beat.
+    /// </summary>
     public class FutureProp : MonoBehaviour, IPreviewable
     {
         [SerializeField] private World previewEnding = default;
