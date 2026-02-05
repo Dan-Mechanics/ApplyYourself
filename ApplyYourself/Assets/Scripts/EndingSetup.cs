@@ -16,11 +16,10 @@ namespace ApplyYourself
 
         private void SetAs(Ending ending)
         {
-            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(transform.tag);
-            for (int i = 0; i < gameObjects.Length; i++)
+            Placeholder[] placeholders = FindObjectsByType<Placeholder>(FindObjectsSortMode.None);
+            for (int i = 0; i < placeholders.Length; i++)
             {
-                if (gameObjects[i].TryGetComponent(out IPlaceholder future))
-                    future.SetAs(ending);
+                placeholders[i].SetAs(ending);
             }
         }
 

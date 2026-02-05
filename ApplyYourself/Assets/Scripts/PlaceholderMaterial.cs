@@ -2,9 +2,11 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class PlaceholderMaterial : MonoBehaviour, IPlaceholder
+    /// <summary>
+    /// todo, add clever overrides.
+    /// </summary>
+    public class PlaceholderMaterial : Placeholder
     {
-        [SerializeField] private Material[] materials = default;
         private MeshRenderer rend;
 
         private void SetMaterial(Material material)
@@ -15,10 +17,10 @@ namespace ApplyYourself
             rend.sharedMaterial = material;
         }
 
-        public void SetAs(Ending ending)
+        public override void SetAs(Ending ending)
         {
-            int index = Utils.GetIndexByName(materials, ending);
-            SetMaterial(materials[index]);
+            Material mat = Resources.Load<Material>($"{ending}/{resourceName}");
+            SetMaterial(mat);
         }
     }
 }

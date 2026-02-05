@@ -2,11 +2,9 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class PlaceholderProp : MonoBehaviour, IPlaceholder
+    public class PlaceholderProp : Placeholder
     {
-        [SerializeField] private GameObject[] prefabs = default;
-
-        private void SetPrefab(GameObject prefab)
+        private void SetGraphic(GameObject prefab)
         {
             Transform graphic = transform.Find("graphic");
             if (graphic != null)
@@ -19,10 +17,9 @@ namespace ApplyYourself
             go.transform.localScale = prefab.transform.localScale;
         }
 
-        public void SetAs(Ending ending)
+        public override void SetAs(Ending ending)
         {
-            int index = Utils.GetIndexByName(prefabs, ending);
-            SetPrefab(prefabs[index]);
+            SetGraphic(Resources.Load<GameObject>($"{ending}/{resourceName}"));
         }
     }
 }
