@@ -23,5 +23,16 @@ namespace ApplyYourself
             Debug.LogWarning($"Could not find element in array --> {str}.");
             return -1;
         }
+
+        public static Ending Filter(Ending ending, EndingOverride[] endingOverrides) 
+        {
+            for (int i = 0;i < endingOverrides.Length; i++)
+            {
+                if (endingOverrides[i].from == ending)
+                    return endingOverrides[i].to;
+            }
+
+            return ending;
+        }
     }
 }

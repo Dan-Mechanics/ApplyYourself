@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class PlaceholderProp : Placeholder
+    public class PlaceholderAmbient : Placeholder
     {
         private void SetGraphic(GameObject prefab)
         {
@@ -19,6 +19,7 @@ namespace ApplyYourself
 
         public override void SetAs(Ending ending)
         {
+            ending = Utils.Filter(ending, endingOverrides);
             SetGraphic(Resources.Load<GameObject>($"{ending}/{resourceName}"));
         }
     }

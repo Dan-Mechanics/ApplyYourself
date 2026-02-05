@@ -2,16 +2,13 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    /// <summary>
-    /// todo, add clever overrides.
-    /// </summary>
     public class PlaceholderMaterial : Placeholder
     {
         private MeshRenderer rend;
 
         private void SetMaterial(Material material)
         {
-            if(rend == null)
+            if (rend == null)
                 rend = GetComponent<MeshRenderer>();
 
             rend.sharedMaterial = material;
@@ -19,8 +16,8 @@ namespace ApplyYourself
 
         public override void SetAs(Ending ending)
         {
-            Material mat = Resources.Load<Material>($"{ending}/{resourceName}");
-            SetMaterial(mat);
+            ending = Utils.Filter(ending, endingOverrides);
+            SetMaterial(Resources.Load<Material>($"{ending}/{resourceName}"));
         }
     }
 }

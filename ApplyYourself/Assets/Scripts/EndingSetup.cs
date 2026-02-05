@@ -30,6 +30,8 @@ namespace ApplyYourself
         {
             if (previewEnding == Ending.Placeholder)
                 previewEnding = Ending.Wet;
+
+            // ShowPreview();
         }
     }
 }
