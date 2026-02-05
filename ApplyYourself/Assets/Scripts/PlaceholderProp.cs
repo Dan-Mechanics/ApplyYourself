@@ -2,15 +2,6 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    /// <summary>
-    /// Possible:
-    /// make noita
-    /// make terrain editor like level
-    /// make terrain editor marhcing cubes
-    /// easy peasy type beat.
-    /// 
-    /// check slide notes for more notes
-    /// </summary>
     public class PlaceholderProp : MonoBehaviour, IPlaceholder
     {
         [SerializeField] private GameObject[] prefabs = default;

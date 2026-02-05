@@ -1,0 +1,31 @@
+i wanna see if i can see multiplayer itch.io
+maybe explore multplayero options
+
+ik heb het gevoel alsof ik iets wil cooken
+voor dat het spel meer interesting moet worden en niet zo generic, maar
+like dingen mogen ook gewoon generic en goed zijn dawg.
+
+maar het voelt alof ik mezelf ook een beetje wil uitdagen.
+type beat
+
+
+noita prototype
+/// <summary>
+    /// Possible:
+    /// make noita
+    /// make terrain editor like level
+    /// make terrain editor marhcing cubes
+    /// easy peasy type beat.
+    /// 
+    /// check slide notes for more notes
+    /// </summary>
+
+we willen een soort sims gag ofzo.
+
+ik denk dat een technical probleem vooral de scope en depth is
+van dat like je en dialgoue en characters en terraformer en walking sym.
+like het is heel breed maar niet heel diep.
+
+the good news is dat ik best veel creative freedom
+heb over de actual inertkinh
+
