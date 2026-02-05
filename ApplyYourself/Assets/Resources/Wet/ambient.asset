@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ambient
   m_EditorClassIdentifier: 
   density: 0.05
-  color: {r: 0.26041287, g: 0.3980227, b: 0.78867924, a: 1}
+  color: {r: 0.3009825, g: 0.44707632, b: 0.690566, a: 1}
