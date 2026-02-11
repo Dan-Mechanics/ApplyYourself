@@ -1,3 +1,11 @@
+todo:
+make additive scene
+implement terrain ish.
+
+
+
+
+
 i wanna see if i can see multiplayer itch.io
 maybe explore multplayero options
 
