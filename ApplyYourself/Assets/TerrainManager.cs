@@ -4,29 +4,87 @@ namespace ApplyYourself
 {
     public class TerrainManager : MonoBehaviour
     {
-        [SerializeField] private GameObject chunkPrefab = default;
-        [SerializeField] private int chunkSize = default;
-        [SerializeField] private int chunkCount = default;
+        [SerializeField] private MeshColliderCookingOptions options = default;
+        [SerializeField] private Texture2D texture = default;
+        [SerializeField, Min(0f)] private float height = default;
+        [SerializeField, Min(0f)] private float spaceBetweenVerts = default;
+        [SerializeField] private bool showInEditor = default;
 
-        private IHeightmap heightmap;
-        
-        private void Awake()
+        private MeshFilter filter;
+        private MeshCollider coll;
+        private int[] triangles;
+        private Mesh mesh;
+
+        private void OnValidate()
         {
-            heightmap = GetComponent<IHeightmap>();
+            if (showInEditor)
+                Setup();
 
+            showInEditor = false;
         }
 
-        private void Start()
+        public void Setup()
         {
-            // spawn chunks.
+            filter = GetComponent<MeshFilter>();
+            coll = GetComponent<MeshCollider>();
 
-            for (int x = 0; x < chunkSize; x++)
+            mesh = new Mesh();
+            filter.mesh = mesh;
+            coll.cookingOptions = options;
+            mesh.MarkDynamic();
+
+            Vector3[] verts = GenerateVertData(texture.width);
+            SetVerticies(verts);
+        }
+
+        private Vector3[] GenerateVertData(int size)
+        {
+            Vector3[] verticies = new Vector3[(size + 1) * (size + 1)];
+
+            int i = 0;
+            for (int z = 0; z <= size; z++)
             {
-                for (int z = 0; z < chunkSize; z++)
+                for (int x = 0; x <= size; x++)
                 {
-
+                    verticies[i] = new Vector3(x * spaceBetweenVerts, texture.GetPixel(x, z).r * height, z * spaceBetweenVerts);
+                    i++;
                 }
             }
+
+            int vert = 0;
+            int tris = 0;
+            triangles = new int[size * size * 6];
+
+            for (int z = 0; z < size; z++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    triangles[tris + 0] = vert + 0;
+                    triangles[tris + 1] = vert + size + 1;
+                    triangles[tris + 2] = vert + 1;
+
+                    triangles[tris + 3] = vert + 1;
+                    triangles[tris + 4] = vert + size + 1;
+                    triangles[tris + 5] = vert + size + 2;
+
+                    vert++;
+                    tris += 6;
+                }
+
+                vert++;
+            }
+
+            return verticies;
+        }
+
+        private void SetVerticies(Vector3[] verticies)
+        {
+            mesh.vertices = verticies;
+            mesh.triangles = triangles;
+            mesh.RecalculateNormals();
+
+            Physics.BakeMesh(mesh.GetInstanceID(), false, options);
+            coll.sharedMesh = mesh;
         }
     }
 }
