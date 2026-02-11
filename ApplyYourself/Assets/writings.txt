@@ -1,8 +1,16 @@
+todo after kitchen:
+make folder for essential keeper scripts
+work further on that type beat.
+je zou kunnen overwegen om gewoon te zijn van fuck die chunks
+
+
 todo:
 make additive scene
 implement terrain ish.
-
-
+compoents like only show if ending type beat
+or dont show this ending type beat.
+enum operator --> keep, hide
+enum ending --> ....
 
 
 

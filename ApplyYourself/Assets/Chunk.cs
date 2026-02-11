@@ -8,12 +8,16 @@ namespace ApplyYourself
         [SerializeField] private MeshCollider coll = default;
         [SerializeField] private MeshColliderCookingOptions options = default;
         [SerializeField, Min(3)] private int size = default;
+        [SerializeField] private bool showInEditor = default;
         private Mesh mesh;
         private int[] triangles;
 
         private void OnValidate()
         {
-            Setup();
+            if (showInEditor)
+                Setup();
+
+            showInEditor = false;
         }
 
         public void Setup()
