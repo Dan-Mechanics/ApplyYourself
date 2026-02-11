@@ -9,6 +9,7 @@ namespace ApplyYourself
     {
         [SerializeField] private Transform target = default;
         [SerializeField] private float lerpSpeed = default;
+        [SerializeField] private bool lookAt = default;
 
         private void FixedUpdate()
         {
@@ -16,7 +17,8 @@ namespace ApplyYourself
                 Vector3.Lerp(transform.position, target.position, lerpSpeed),
                 Quaternion.Lerp(transform.rotation, target.rotation, lerpSpeed));
 
-            transform.LookAt(target.parent);
+            if (lookAt)
+                transform.LookAt(target.parent);
         }
     }
 }
