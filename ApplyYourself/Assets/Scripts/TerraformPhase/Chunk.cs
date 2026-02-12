@@ -4,67 +4,74 @@ namespace ApplyYourself
 {
     public class Chunk : MonoBehaviour
     {
-        /// <summary>
-        /// not smart idgaf
-        /// </summary>
-        public Vector3[] verticies;
-
-        [SerializeField] private MeshFilter filter = default;
-        [SerializeField] private MeshCollider coll = default;
         [SerializeField] private MeshColliderCookingOptions options = default;
+       // [SerializeField] private Texture2D texture = default;
+      //  [SerializeField] private float height = default;
+        [SerializeField] private float spaceBetweenVerts = default;
+        [SerializeField] private int vertsAcross = default;
+        //[SerializeField] private bool showInEditor = default;
+
+        private MeshFilter filter;
+        private MeshCollider coll;
+        private int[] triangles;
         private Mesh mesh;
 
-        // add:
-        // center of chunk transofmr
-        // low graphics cube
+        private IHeightmapService heightmap;
 
-        public void Setup(float[,] heightmap, int width, Vector3 offset, float spacing)
+        /*private void OnValidate()
         {
+            if (showInEditor)
+                Setup();
+
+            showInEditor = false;
+        }*/
+
+        public void Setup(IHeightmapService heightmap)
+        {
+            this.heightmap = heightmap;
+            
+            filter = GetComponent<MeshFilter>();
+            coll = GetComponent<MeshCollider>();
+
             mesh = new Mesh();
             filter.mesh = mesh;
             coll.cookingOptions = options;
             mesh.MarkDynamic();
 
-            verticies = GenerateVertData(heightmap, width, offset, spacing);
-            mesh.triangles = GenerateTriData(width);
-            ReloadMesh();
+            Vector3[] verts = GenerateVertData(vertsAcross);
+            SetVerticies(verts);
         }
 
-        private Vector3[] GenerateVertData(float[,] heightmap, int width, Vector3 offset, float spacing)
+        private Vector3[] GenerateVertData(int size)
         {
-            Vector3[] verticies = new Vector3[(width + 1) * (width + 1)];
+            Vector3[] verticies = new Vector3[(size + 1) * (size + 1)];
 
             int i = 0;
-            for (int z = 0; z <= width; z++)
+            for (int z = 0; z <= size; z++)
             {
-                for (int x = 0; x <= width; x++)
+                for (int x = 0; x <= size; x++)
                 {
-                    // also consider other chunks, i want all the verticies to be in worldspace.
-                    verticies[i] = new Vector3(x * spacing, heightmap[x, z], z * spacing) + offset;
+                    verticies[i] = new Vector3(x * spaceBetweenVerts, 0f, z * spaceBetweenVerts);
+                    verticies[i].y = heightmap.GetHeight(verticies[i].x + transform.position.x, verticies[i].z + transform.position.z);
                     i++;
                 }
             }
 
-            return verticies;
-        }
-
-        private int[] GenerateTriData(int width)
-        {
             int vert = 0;
             int tris = 0;
-            int[] triangles = new int[width * width * 6];
+            triangles = new int[size * size * 6];
 
-            for (int z = 0; z < width; z++)
+            for (int z = 0; z < size; z++)
             {
-                for (int x = 0; x < width; x++)
+                for (int x = 0; x < size; x++)
                 {
                     triangles[tris + 0] = vert + 0;
-                    triangles[tris + 1] = vert + width + 1;
+                    triangles[tris + 1] = vert + size + 1;
                     triangles[tris + 2] = vert + 1;
 
                     triangles[tris + 3] = vert + 1;
-                    triangles[tris + 4] = vert + width + 1;
-                    triangles[tris + 5] = vert + width + 2;
+                    triangles[tris + 4] = vert + size + 1;
+                    triangles[tris + 5] = vert + size + 2;
 
                     vert++;
                     tris += 6;
@@ -73,19 +80,17 @@ namespace ApplyYourself
                 vert++;
             }
 
-            return triangles;
+            return verticies;
         }
 
-        public void ReloadMesh()
+        private void SetVerticies(Vector3[] verticies)
         {
             mesh.vertices = verticies;
-            // mesh.triangles = triangles;
+            mesh.triangles = triangles;
             mesh.RecalculateNormals();
 
             Physics.BakeMesh(mesh.GetInstanceID(), false, options);
             coll.sharedMesh = mesh;
-
-            // todo, calculate av and move the big ass cube here.
         }
     }
 }

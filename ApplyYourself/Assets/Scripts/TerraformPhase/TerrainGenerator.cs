@@ -1,98 +1,44 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class TerrainGenerator : MonoBehaviour 
+    public class TerrainGenerator : MonoBehaviour, IHeightmapService 
     {
-        [SerializeField] private MeshFilter filter = default;
-        [SerializeField] private MeshCollider coll = default;
+        [SerializeField] private GameObject chunkPrefab = default;
+        [SerializeField] private int chunksAcross = default;
+        [SerializeField] private Texture2D heightmapTexture = default;
+        [SerializeField] private float spaceBetweenChunks = default;
+        [SerializeField] private float height = default;
 
-        [SerializeField] private int chunksCount = default;
-        [SerializeField] private int chunkFidelity = default;
-        [SerializeField] private MeshColliderCookingOptions options = default;
-
-        private Mesh mesh;
-        private int[] triangles;
-
-       //  public void Write(ITerrainable terrainable) => MakeNewTerrain(terrainable);
-       //  public void Write(Vector3[] verts) => UpdateMesh(verts);
-
-        private void MakeNewTerrain()
+        private void Start()
         {
-            mesh = new Mesh();
-            filter.mesh = mesh;
-            coll.cookingOptions = options;
-            mesh.MarkDynamic();
-
-            // ----
-
-            Vector3[] verts = GenerateMesh(10, 10);
-          //  listeners.ForEach(x => x.attached.Write(verts));
-            UpdateMesh(verts);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>Verts.</returns>
-        private Vector3[] GenerateMesh(int width, int depth)
-        {
-            Vector3[] verticies = new Vector3[(width + 1) * (depth + 1)];
-            int i = 0;
-            float height = 0f;
-
-            for (int z = 0; z <= width; z++)
+            for (int x = 0; x < chunksAcross; x++)
             {
-                for (int x = 0; x <= depth; x++)
+                for (int z = 0; z < chunksAcross; z++)
                 {
-                    //terrainable.SetHeightStartup(x, ref height, z);
-                    verticies[i] = new Vector3(x, height, z);
-
-                    height = 0f;
-                    i++;
+                    GameObject go = Instantiate(chunkPrefab, new Vector3(spaceBetweenChunks * x, 0f, spaceBetweenChunks * z), Quaternion.identity);
+                    go.GetComponent<Chunk>().Setup(this);
                 }
             }
-
-            triangles = new int[width * depth * 6];
-
-            int vert = 0;
-            int tris = 0;
-
-            for (int z = 0; z < width; z++)
-            {
-                for (int x = 0; x < depth; x++)
-                {
-                   // triangles[tris + 0] = vert + 0;
-                   // triangles[tris + 1] = vert + terrainable.GetSize() + 1;
-                   // triangles[tris + 2] = vert + 1;
-                   //
-                   // triangles[tris + 3] = vert + 1;
-                   // triangles[tris + 4] = vert + terrainable.GetSize() + 1;
-                   // triangles[tris + 5] = vert + terrainable.GetSize() + 2;
-
-                    vert++;
-                    tris += 6;
-                }
-
-                vert++;
-            }
-
-            return verticies;
         }
 
-        private void UpdateMesh(Vector3[] verticies)
+        public float GetHeight(float worldX, float worldZ)
         {
-            mesh.Clear();
+            int x = Mathf.RoundToInt(worldX);
+            int y = Mathf.RoundToInt(worldZ);
+            if (x < 0)
+                x = 0;
 
-            mesh.vertices = verticies;
-            mesh.triangles = triangles;
-            mesh.RecalculateNormals();
+            if (y < 0)
+                y = 0;
 
-            Physics.BakeMesh(mesh.GetInstanceID(), false, options);
-            coll.sharedMesh = mesh;
+            if (x > heightmapTexture.width - 1)
+                x = heightmapTexture.width - 1;
 
-            //cameraPivot.attached.Write(Vector3.up * ((mesh.bounds.min.y + mesh.bounds.max.y) / 2f));
+            if (y > heightmapTexture.height - 1)
+                y = heightmapTexture.height - 1;
+
+            return heightmapTexture.GetPixel(x, y).r * height;
         }
     }
 }
