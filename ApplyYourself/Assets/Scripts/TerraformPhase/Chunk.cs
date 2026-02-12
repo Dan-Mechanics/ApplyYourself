@@ -16,7 +16,7 @@ namespace ApplyYourself
         private int[] triangles;
         private Mesh mesh;
 
-        public void Setup(IHeightmap heightmap)
+        public void Setup(IHeightmap heightmap, Vector3 offset)
         {
             this.heightmap = heightmap;
             
@@ -29,7 +29,7 @@ namespace ApplyYourself
             coll.cookingOptions = options;
             mesh.MarkDynamic();
 
-            verticies = GenerateVerticies(vertsAcross);
+            verticies = GenerateVerticies(vertsAcross, offset);
             triangles = GenerateTriangles(vertsAcross);
             mesh.vertices = verticies;
             mesh.triangles = triangles;
@@ -46,7 +46,7 @@ namespace ApplyYourself
             ReloadMesh();
         }
 
-        private Vector3[] GenerateVerticies(int size)
+        private Vector3[] GenerateVerticies(int size, Vector3 offset)
         {
             Vector3[] verticies = new Vector3[(size + 1) * (size + 1)];
 
@@ -55,9 +55,9 @@ namespace ApplyYourself
             {
                 for (int x = 0; x <= size; x++)
                 {
-                    // FIX !!
-                    verticies[i] = new Vector3(x * spaceBetweenVerts, 0f, z * spaceBetweenVerts);
-                    verticies[i].y = heightmap.GetHeight(verticies[i].x + transform.position.x, verticies[i].z + transform.position.z);
+                    float worldX = x * spaceBetweenVerts + offset.x;
+                    float worldZ = z * spaceBetweenVerts + offset.z;
+                    verticies[i] = new Vector3(worldX, heightmap.GetHeight(worldX, worldZ), worldZ);
                     i++;
                 }
             }

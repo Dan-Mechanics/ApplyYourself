@@ -20,10 +20,12 @@ namespace ApplyYourself
             {
                 for (int z = 0; z < chunksAcross; z++)
                 {
-                    GameObject go = Instantiate(chunkPrefab, new Vector3(spaceBetweenChunks * x, 0f, spaceBetweenChunks * z), Quaternion.identity);
-                    go.name = $"chunk_({x}, {z})";
+                    GameObject go = Instantiate(chunkPrefab, Vector3.zero, Quaternion.identity);
                     Chunk chunk = go.GetComponent<Chunk>();
-                    chunk.Setup(this);
+                    go.name = $"chunk_({x}, {z})";
+
+                    Vector3 offset = new Vector3(spaceBetweenChunks * x, 0f, spaceBetweenChunks * z);
+                    chunk.Setup(this, offset);
                     chunks.Add(chunk);
                 }
             }

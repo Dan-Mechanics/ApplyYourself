@@ -23,7 +23,5 @@ namespace ApplyYourself
             material.SetFloat("_WorldCeilingHeight", worldCeilingHeight);
             material.SetTexture("_Texture", texture);
         }
-
-        private void OnValidate() => Setup();
     }
 }
