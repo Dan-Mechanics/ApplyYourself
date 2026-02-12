@@ -1,19 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ApplyYourself
 {
     public class TerrainManager : MonoBehaviour
     {
-        [SerializeField] private MeshColliderCookingOptions options = default;
-        [SerializeField] private Texture2D texture = default;
-        [SerializeField, Min(0f)] private float height = default;
-        [SerializeField, Min(0f)] private float spaceBetweenVerts = default;
+        [SerializeField] private GameObject chunkPrefab = default;
+        [SerializeField] private Texture2D heightmapTexture = default;
+        [SerializeField] private float height = default;
+        [SerializeField] private int vertsAcrossChunk = default;
+       // [SerializeField] private float spacing = default;
+        [SerializeField] private int chunksAcross = default;
         [SerializeField] private bool showInEditor = default;
 
-        private MeshFilter filter;
-        private MeshCollider coll;
-        private int[] triangles;
-        private Mesh mesh;
+     //  private Chunk[,] chunks;
 
         private void OnValidate()
         {
@@ -25,66 +25,40 @@ namespace ApplyYourself
 
         public void Setup()
         {
-            filter = GetComponent<MeshFilter>();
-            coll = GetComponent<MeshCollider>();
 
-            mesh = new Mesh();
-            filter.mesh = mesh;
-            coll.cookingOptions = options;
-            mesh.MarkDynamic();
-
-            Vector3[] verts = GenerateVertData(texture.width);
-            SetVerticies(verts);
-        }
-
-        private Vector3[] GenerateVertData(int size)
-        {
-            Vector3[] verticies = new Vector3[(size + 1) * (size + 1)];
-
-            int i = 0;
-            for (int z = 0; z <= size; z++)
+           // chunks = new Chunk[chunksAcross, chunksAcross];
+            for (int x = 0; x < chunksAcross; x++)
             {
-                for (int x = 0; x <= size; x++)
+                for (int z = 0; z < chunksAcross; z++)
                 {
-                    verticies[i] = new Vector3(x * spaceBetweenVerts, texture.GetPixel(x, z).r * height, z * spaceBetweenVerts);
-                    i++;
+                    Vector3 offset = new Vector3(x * vertsAcrossChunk, 0f, z * vertsAcrossChunk);
+                    GameObject go = Instantiate(chunkPrefab, offset, Quaternion.identity);
+                    Chunk chunk = go.GetComponent<Chunk>();
+
+                    go.name = $"chunk_{offset}";
+                    chunk.Setup(this, vertsAcrossChunk);
+                   // chunks[x, z] = chunk;
                 }
             }
-
-            int vert = 0;
-            int tris = 0;
-            triangles = new int[size * size * 6];
-
-            for (int z = 0; z < size; z++)
-            {
-                for (int x = 0; x < size; x++)
-                {
-                    triangles[tris + 0] = vert + 0;
-                    triangles[tris + 1] = vert + size + 1;
-                    triangles[tris + 2] = vert + 1;
-
-                    triangles[tris + 3] = vert + 1;
-                    triangles[tris + 4] = vert + size + 1;
-                    triangles[tris + 5] = vert + size + 2;
-
-                    vert++;
-                    tris += 6;
-                }
-
-                vert++;
-            }
-
-            return verticies;
         }
 
-        private void SetVerticies(Vector3[] verticies)
+        public float GetHeight(float worldX, float worldZ)
         {
-            mesh.vertices = verticies;
-            mesh.triangles = triangles;
-            mesh.RecalculateNormals();
+            int x = Mathf.RoundToInt(worldX);
+            int y = Mathf.RoundToInt(worldZ);
+            if (x < 0)
+                x = 0;
 
-            Physics.BakeMesh(mesh.GetInstanceID(), false, options);
-            coll.sharedMesh = mesh;
+            if (y < 0)
+                y = 0;
+
+            if (x > heightmapTexture.width - 1)
+                x = heightmapTexture.width - 1;
+
+            if (y > heightmapTexture.height - 1)
+                y = heightmapTexture.height - 1;
+
+            return heightmapTexture.GetPixel(x, y).r * height;
         }
     }
 }

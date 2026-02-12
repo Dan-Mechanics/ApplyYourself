@@ -7,40 +7,51 @@ namespace ApplyYourself
         /// <summary>
         /// not smart idgaf
         /// </summary>
-        public Vector3[] verticies;
+        [HideInInspector] public Vector3[] verticies;
 
         [SerializeField] private MeshFilter filter = default;
         [SerializeField] private MeshCollider coll = default;
         [SerializeField] private MeshColliderCookingOptions options = default;
         private Mesh mesh;
 
+        private TerrainManager manager;
+
         // add:
         // center of chunk transofmr
         // low graphics cube
 
-        public void Setup(float[,] heightmap, int width, Vector3 offset, float spacing)
+        public void Setup(TerrainManager manager, int vertsAcrossChunk)
         {
+            this.manager = manager;
+
             mesh = new Mesh();
+            mesh.name = gameObject.name;
             filter.mesh = mesh;
             coll.cookingOptions = options;
             mesh.MarkDynamic();
 
-            verticies = GenerateVertData(heightmap, width, offset, spacing);
-            mesh.triangles = GenerateTriData(width);
+            // save offset for lods
+
+            verticies = GenerateVerts(vertsAcrossChunk);
+            mesh.triangles = GenerateTris(vertsAcrossChunk);
+
+
+
             ReloadMesh();
         }
 
-        private Vector3[] GenerateVertData(float[,] heightmap, int width, Vector3 offset, float spacing)
+        private Vector3[] GenerateVerts(int width)
         {
             Vector3[] verticies = new Vector3[(width + 1) * (width + 1)];
 
             int i = 0;
-            for (int z = 0; z <= width; z++)
+            for (int x = 0; x <= width; x++)
             {
-                for (int x = 0; x <= width; x++)
+                for (int z = 0; z <= width; z++)
                 {
                     // also consider other chunks, i want all the verticies to be in worldspace.
-                    verticies[i] = new Vector3(x * spacing, heightmap[x, z], z * spacing) + offset;
+                    verticies[i] = new Vector3(x, 0f, z);
+                    verticies[i].y = manager.GetHeight(x + transform.position.x, z + transform.position.z);
                     i++;
                 }
             }
@@ -48,12 +59,12 @@ namespace ApplyYourself
             return verticies;
         }
 
-        private int[] GenerateTriData(int width)
+        private int[] GenerateTris(int width)
         {
-            int vert = 0;
-            int tris = 0;
             int[] triangles = new int[width * width * 6];
 
+            int vert = 0;
+            int tris = 0;
             for (int z = 0; z < width; z++)
             {
                 for (int x = 0; x < width; x++)
@@ -85,7 +96,7 @@ namespace ApplyYourself
             Physics.BakeMesh(mesh.GetInstanceID(), false, options);
             coll.sharedMesh = mesh;
 
-            // todo, calculate av and move the big ass cube here.
+            // todo, calculate avpos for LODS and move the big ass cube here.
         }
     }
 }
