@@ -4,7 +4,7 @@ namespace ApplyYourself
 {
     public class Chunk : MonoBehaviour
     {
-        [HideInInspector] public Vector3[] verticies;
+      //  [HideInInspector] public Vector3[] verticies;
         
         [SerializeField] private MeshColliderCookingOptions options = default;
         [SerializeField] private float spaceBetweenVerts = default;
@@ -29,14 +29,14 @@ namespace ApplyYourself
             coll.cookingOptions = options;
             mesh.MarkDynamic();
 
-            verticies = GenerateVerticies(vertsAcross, offset);
+           // verticies = GenerateVerticies(vertsAcross, offset);
+            SetVerticies(GenerateVerticies(vertsAcross, offset));
             triangles = GenerateTriangles(vertsAcross);
-            mesh.vertices = verticies;
             mesh.triangles = triangles;
             ReloadMesh();
         }
 
-        public void MoveUp() 
+       /* public void MoveUp() 
         {
             for (int i = 0; i < verticies.Length; i++)
             {
@@ -44,7 +44,7 @@ namespace ApplyYourself
             }
 
             ReloadMesh();
-        }
+        }*/
 
         private Vector3[] GenerateVerticies(int size, Vector3 offset)
         {
@@ -93,10 +93,13 @@ namespace ApplyYourself
             return triangles;
         }
 
+        public void SetVerticies(Vector3[] verticies) => mesh.vertices = verticies;
+
         public void ReloadMesh()
         {
-            mesh.vertices = verticies;
+            //mesh.vertices = verticies;
             mesh.RecalculateNormals();
+            // POSSIBLY RECALCULATE BOUNDS HERE TOO.
 
             Physics.BakeMesh(mesh.GetInstanceID(), false, options);
             coll.sharedMesh = mesh;

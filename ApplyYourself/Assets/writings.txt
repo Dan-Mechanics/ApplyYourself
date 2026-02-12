@@ -1,3 +1,9 @@
+future important:
+ - lots of state machine phase one because moving mouse + welcome screen
+ - consider using new input for syncing up the shit.
+
+
+
 think about:
 the game is looping so the scene amibent from the thing
 needs to be reset for the terraform scene.

@@ -38,6 +38,14 @@ namespace ApplyYourself
             return true;
         }
 
+        public static Vector3Int GetCellPos(Vector3 worldPos, float size)
+        {
+            return new Vector3Int(
+                Mathf.FloorToInt(worldPos.x / size),
+                Mathf.FloorToInt(worldPos.y / size),
+                Mathf.FloorToInt(worldPos.z / size));
+        }
+
         public static Ending Filter(Ending ending, EndingOverride[] endingOverrides) 
         {
             for (int i = 0;i < endingOverrides.Length; i++)
