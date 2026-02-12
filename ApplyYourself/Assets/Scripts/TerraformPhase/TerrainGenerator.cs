@@ -5,17 +5,14 @@ namespace ApplyYourself
 {
     public class TerrainGenerator : MonoBehaviour, IHeightmap 
     {
+        public readonly Dictionary<Vector2Int, Chunk> chunks = new Dictionary<Vector2Int, Chunk>();
+
         [SerializeField] private GameObject chunkPrefab = default;
         [SerializeField] private Texture2D heightmapTexture = default;
         [SerializeField] private float heightmapScale = default;
         [SerializeField] private float height = default;
         [SerializeField] private int chunksAcross = default;
         [SerializeField] private float spaceBetweenChunks = default;
-
-        // spatial hash !!
-        private readonly List<Chunk> chunks = new List<Chunk>();
-
-        //private readonly Dictionary<Vector3Int, Chunk> chunks = new Dictionary<Vector3Int, Chunk>();
 
         private void Start() => Setup();
 
@@ -32,17 +29,18 @@ namespace ApplyYourself
 
                     Vector3 offset = new Vector3(spaceBetweenChunks * x, 0f, spaceBetweenChunks * z);
                     chunk.Setup(this, offset);
-                    chunks.Add(chunk);
+                    chunks[new Vector2Int(x, z)] = chunk;
                 }
             }
         }
 
         public void Clear()
         {
-            for (int i = 0; i < chunks.Count; i++)
+            foreach (var pair in chunks)
             {
-                if (chunks[i] != null)
-                    DestroyImmediate(chunks[i].gameObject);
+                var chunk = pair.Value;
+                if(chunk != null)
+                    DestroyImmediate(chunk.gameObject);
             }
 
             chunks.Clear();
@@ -53,6 +51,27 @@ namespace ApplyYourself
             if (Input.GetKeyDown(KeyCode.Space))
                 chunks.ForEach(x => x.MoveUp());
         }*/
+
+        public List<Chunk> GetChunks(Vector3 point) 
+        {
+            List<Chunk> result = new List<Chunk>();
+            float max = spaceBetweenChunks * chunksAcross;
+            point.x = Mathf.Clamp(point.x, 0f, max);
+            point.z = Mathf.Clamp(point.z, 0f, max);
+
+            Vector2Int middle = Utils.GetCellPos(new Vector2(point.x, point.z), spaceBetweenChunks);
+            for (int x = -1; x <= 1; x++)
+            {
+                for (int z = -1; z <= 1; z++)
+                {
+                    Vector2Int key = middle + new Vector2Int(x, z);
+                    if (chunks.ContainsKey(key))
+                        result.Add(chunks[key]);
+                }
+            }
+
+            return result;
+        }
 
         public float GetHeight(float worldX, float worldZ)
         {

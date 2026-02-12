@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 28654549}
   - component: {fileID: 28654548}
   m_Layer: 0
-  m_Name: terrain_generator
+  m_Name: terrain_manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -323,11 +323,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 2063290156}
+  manager: {fileID: 28654548}
+  preview: {fileID: 1457942725}
   mask:
     serializedVersion: 2
     m_Bits: 1
   range: 500
-  preview: {fileID: 1457942725}
+  area: 10
+  speed: 10
 --- !u!4 &369849032
 Transform:
   m_ObjectHideFlags: 0

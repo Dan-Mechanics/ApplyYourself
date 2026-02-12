@@ -46,6 +46,13 @@ namespace ApplyYourself
                 Mathf.FloorToInt(worldPos.z / size));
         }
 
+        public static Vector2Int GetCellPos(Vector2 worldPos, float size)
+        {
+            return new Vector2Int(
+                Mathf.FloorToInt(worldPos.x / size),
+                Mathf.FloorToInt(worldPos.y / size));
+        }
+
         public static Ending Filter(Ending ending, EndingOverride[] endingOverrides) 
         {
             for (int i = 0;i < endingOverrides.Length; i++)
