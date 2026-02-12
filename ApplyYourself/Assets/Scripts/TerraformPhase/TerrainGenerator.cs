@@ -1,14 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class TerrainGenerator : MonoBehaviour, IHeightmapService 
+    public class TerrainGenerator : MonoBehaviour, IHeightmap 
     {
         [SerializeField] private GameObject chunkPrefab = default;
         [SerializeField] private int chunksAcross = default;
         [SerializeField] private Texture2D heightmapTexture = default;
         [SerializeField] private float spaceBetweenChunks = default;
         [SerializeField] private float height = default;
+
+        // spatial hash !!
+        private List<Chunk> chunks = new List<Chunk>();
 
         private void Start()
         {
@@ -17,15 +21,24 @@ namespace ApplyYourself
                 for (int z = 0; z < chunksAcross; z++)
                 {
                     GameObject go = Instantiate(chunkPrefab, new Vector3(spaceBetweenChunks * x, 0f, spaceBetweenChunks * z), Quaternion.identity);
-                    go.GetComponent<Chunk>().Setup(this);
+                    go.name = $"chunk_({x}, {z})";
+                    Chunk chunk = go.GetComponent<Chunk>();
+                    chunk.Setup(this);
+                    chunks.Add(chunk);
                 }
             }
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+                chunks.ForEach(x => x.MoveUp());
+        }
+
         public float GetHeight(float worldX, float worldZ)
         {
-            int x = Mathf.RoundToInt(worldX);
-            int y = Mathf.RoundToInt(worldZ);
+            int x = Mathf.FloorToInt(worldX);
+            int y = Mathf.FloorToInt(worldZ);
             if (x < 0)
                 x = 0;
 

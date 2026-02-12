@@ -4,29 +4,19 @@ namespace ApplyYourself
 {
     public class Chunk : MonoBehaviour
     {
+        [HideInInspector] public Vector3[] verticies;
+        
         [SerializeField] private MeshColliderCookingOptions options = default;
-       // [SerializeField] private Texture2D texture = default;
-      //  [SerializeField] private float height = default;
         [SerializeField] private float spaceBetweenVerts = default;
         [SerializeField] private int vertsAcross = default;
-        //[SerializeField] private bool showInEditor = default;
 
+        private IHeightmap heightmap;
         private MeshFilter filter;
         private MeshCollider coll;
         private int[] triangles;
         private Mesh mesh;
 
-        private IHeightmapService heightmap;
-
-        /*private void OnValidate()
-        {
-            if (showInEditor)
-                Setup();
-
-            showInEditor = false;
-        }*/
-
-        public void Setup(IHeightmapService heightmap)
+        public void Setup(IHeightmap heightmap)
         {
             this.heightmap = heightmap;
             
@@ -34,15 +24,29 @@ namespace ApplyYourself
             coll = GetComponent<MeshCollider>();
 
             mesh = new Mesh();
+            mesh.name = gameObject.name;
             filter.mesh = mesh;
             coll.cookingOptions = options;
             mesh.MarkDynamic();
 
-            Vector3[] verts = GenerateVertData(vertsAcross);
-            SetVerticies(verts);
+            verticies = GenerateVerticies(vertsAcross);
+            triangles = GenerateTriangles(vertsAcross);
+            mesh.vertices = verticies;
+            mesh.triangles = triangles;
+            ReloadMesh();
         }
 
-        private Vector3[] GenerateVertData(int size)
+        public void MoveUp() 
+        {
+            for (int i = 0; i < verticies.Length; i++)
+            {
+                verticies[i].y += 5f;
+            }
+
+            ReloadMesh();
+        }
+
+        private Vector3[] GenerateVerticies(int size)
         {
             Vector3[] verticies = new Vector3[(size + 1) * (size + 1)];
 
@@ -51,15 +55,21 @@ namespace ApplyYourself
             {
                 for (int x = 0; x <= size; x++)
                 {
+                    // FIX !!
                     verticies[i] = new Vector3(x * spaceBetweenVerts, 0f, z * spaceBetweenVerts);
                     verticies[i].y = heightmap.GetHeight(verticies[i].x + transform.position.x, verticies[i].z + transform.position.z);
                     i++;
                 }
             }
 
+            return verticies;
+        }
+
+        private int[] GenerateTriangles(int size)
+        {
+            triangles = new int[size * size * 6];
             int vert = 0;
             int tris = 0;
-            triangles = new int[size * size * 6];
 
             for (int z = 0; z < size; z++)
             {
@@ -80,13 +90,12 @@ namespace ApplyYourself
                 vert++;
             }
 
-            return verticies;
+            return triangles;
         }
 
-        private void SetVerticies(Vector3[] verticies)
+        public void ReloadMesh()
         {
             mesh.vertices = verticies;
-            mesh.triangles = triangles;
             mesh.RecalculateNormals();
 
             Physics.BakeMesh(mesh.GetInstanceID(), false, options);

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public interface IHeightmapService
+    public interface IHeightmap
     {
         float GetHeight(float worldX, float worldZ);
     }

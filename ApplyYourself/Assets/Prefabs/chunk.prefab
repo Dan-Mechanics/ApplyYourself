@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1575d5c34ed14cb479472d463084ab3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  verticies: []
   options: 16
   spaceBetweenVerts: 1
   vertsAcross: 10
