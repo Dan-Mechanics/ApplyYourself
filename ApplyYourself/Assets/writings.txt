@@ -9,10 +9,6 @@ consider that the post processing can also change with the
 different futures so like sun lighting or tone mapping,
 but then again that can all be prefabs.
 
-... bathcing ??
-
-
-
 ===
 
 
