@@ -12,6 +12,8 @@ namespace ApplyYourself
         [SerializeField] private float zoomSens = default;
         [SerializeField] private float minDistance = default;
         [SerializeField] private float maxDistance = default;
+        [SerializeField] private float minAngle = default;
+        [SerializeField] private float maxAngle = default;
         [SerializeField] private Vector3 position = default;
         [SerializeField] private Vector3 rotation = default;
 
@@ -22,7 +24,7 @@ namespace ApplyYourself
             {
                 rotation.y += sens * Input.GetAxisRaw("Mouse X");
                 rotation.x -= sens * Input.GetAxisRaw("Mouse Y");
-                rotation.x = Mathf.Clamp(rotation.x, 7.5f, 90f);
+                rotation.x = Mathf.Clamp(rotation.x, minAngle, maxAngle);
             }
 
             position.z += Input.mouseScrollDelta.y * zoomSens;
