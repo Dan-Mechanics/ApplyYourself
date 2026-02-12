@@ -2,9 +2,6 @@
 
 namespace ApplyYourself
 {
-    /// <summary>
-    /// Possible: add to repo.
-    /// </summary>
     public static class Utils
     {
         public static int GetIndexByName<T>(T[] array, Ending ending) where T : Object
@@ -22,6 +19,23 @@ namespace ApplyYourself
 
             Debug.LogWarning($"Could not find element in array --> {str}.");
             return -1;
+        }
+
+        /// <summary>
+        /// Keep scale in mind !!
+        /// </summary>
+        public static bool TryGetIndexFromPos(int x, int z, int maxX, int maxZ, out int index)
+        {
+            index = 0;
+
+            if (x < 0 || x > maxX)
+                return false;
+
+            if (z < 0 || z > maxZ)
+                return false;
+
+            index = x + z * (maxX + 1);
+            return true;
         }
 
         public static Ending Filter(Ending ending, EndingOverride[] endingOverrides) 

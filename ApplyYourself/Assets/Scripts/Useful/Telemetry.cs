@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Mithmarie
+namespace ApplyYourself
 {
     public class Telemetry : MonoBehaviour
     {

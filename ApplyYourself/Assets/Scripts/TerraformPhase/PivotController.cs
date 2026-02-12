@@ -3,7 +3,7 @@ using UnityEngine;
 namespace ApplyYourself
 {
     /// <summary>
-    /// Working on this.
+    /// TODOOD !!! Add state behaviour gag
     /// </summary>
     public class PivotController : MonoBehaviour
     {
