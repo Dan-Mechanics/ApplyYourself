@@ -36,11 +36,10 @@ namespace ApplyYourself
 
         public void Clear()
         {
-            foreach (var pair in chunks)
+            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Chunk");
+            for (int i = 0; i < gameObjects.Length; i++)
             {
-                var chunk = pair.Value;
-                if(chunk != null)
-                    DestroyImmediate(chunk.gameObject);
+                DestroyImmediate(gameObjects[i]);
             }
 
             chunks.Clear();
@@ -90,6 +89,23 @@ namespace ApplyYourself
                 y = heightmapTexture.height - 1;
 
             return heightmapTexture.GetPixel(x, y).r * height;
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (chunks.Count <= 0)
+                return;
+            
+            Gizmos.color = new Color(0f, 0f, 1f, 0.5f);
+            for (int x = 0; x < chunksAcross; x++)
+            {
+                for (int z = 0; z < chunksAcross; z++)
+                {
+                    Vector3 pos = new Vector3(x * spaceBetweenChunks, 0f, z * spaceBetweenChunks);
+                    pos += 0.5f * spaceBetweenChunks * Vector3.one;
+                    Gizmos.DrawWireCube(pos, Vector3.one * spaceBetweenChunks);
+                }
+            }
         }
     }
 }

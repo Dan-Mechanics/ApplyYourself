@@ -329,8 +329,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   range: 500
-  area: 10
-  speed: 10
+  area: 30
+  speed: 40
 --- !u!4 &369849032
 Transform:
   m_ObjectHideFlags: 0
@@ -903,7 +903,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1237,6 +1237,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 566161975431238206}
   - {fileID: 28654549}
+  - {fileID: 369849032}
   - {fileID: 2063290157}
   - {fileID: 410087041}
   - {fileID: 832575519}
@@ -1245,4 +1246,3 @@ SceneRoots:
   - {fileID: 1483412119}
   - {fileID: 128797301}
   - {fileID: 1457942725}
-  - {fileID: 369849032}
