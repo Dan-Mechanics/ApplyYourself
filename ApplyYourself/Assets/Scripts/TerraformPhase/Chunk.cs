@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ApplyYourself
@@ -10,7 +11,6 @@ namespace ApplyYourself
         [SerializeField] private float spaceBetweenVerts = default;
         [SerializeField] private int vertsAcross = default;
 
-        private IHeightmap heightmap;
         private MeshFilter filter;
         private MeshCollider coll;
         private int[] triangles;
@@ -18,8 +18,6 @@ namespace ApplyYourself
 
         public void Setup(IHeightmap heightmap, Vector3 offset)
         {
-            this.heightmap = heightmap;
-            
             filter = GetComponent<MeshFilter>();
             coll = GetComponent<MeshCollider>();
 
@@ -29,7 +27,7 @@ namespace ApplyYourself
             coll.cookingOptions = options;
             mesh.MarkDynamic();
 
-            verticies = GenerateVerticies(vertsAcross, offset);
+            verticies = GenerateVerticies(vertsAcross, heightmap, offset);
             triangles = GenerateTriangles(vertsAcross);
 
             mesh.vertices = verticies;
@@ -37,7 +35,7 @@ namespace ApplyYourself
             ReloadMesh();
         }
 
-        private Vector3[] GenerateVerticies(int size, Vector3 offset)
+        private Vector3[] GenerateVerticies(int size, IHeightmap heightmap, Vector3 offset)
         {
             Vector3[] verticies = new Vector3[(size + 1) * (size + 1)];
 
@@ -88,7 +86,7 @@ namespace ApplyYourself
         {
             mesh.vertices = verticies;
             mesh.RecalculateNormals();
-            // POSSIBLY RECALCULATE BOUNDS HERE TOO.
+            mesh.RecalculateBounds();
 
             Physics.BakeMesh(mesh.GetInstanceID(), false, options);
             coll.sharedMesh = mesh;

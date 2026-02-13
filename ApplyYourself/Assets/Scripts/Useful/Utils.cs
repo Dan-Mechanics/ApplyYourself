@@ -20,6 +20,12 @@ namespace ApplyYourself
             Debug.LogWarning($"Could not find element in array --> {str}.");
             return -1;
         }
+        
+        public static Vector3 Flatten(Vector3 vector)
+        {
+            vector.y = 0f;
+            return vector;
+        }
 
         /// <summary>
         /// Keep scale in mind !!

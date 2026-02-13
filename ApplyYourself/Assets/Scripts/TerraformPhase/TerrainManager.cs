@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class TerrainGenerator : MonoBehaviour, IHeightmap 
+    public class TerrainManager : MonoBehaviour, IHeightmap 
     {
         public readonly Dictionary<Vector2Int, Chunk> chunks = new Dictionary<Vector2Int, Chunk>();
 
@@ -18,7 +18,6 @@ namespace ApplyYourself
 
         public void Setup()
         {
-            Clear();
             for (int x = 0; x < chunksAcross; x++)
             {
                 for (int z = 0; z < chunksAcross; z++)
@@ -34,7 +33,45 @@ namespace ApplyYourself
             }
         }
 
-        public void Clear()
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+                ReloadAll();
+        }
+
+        /// <summary>
+        /// TODO: assign to button.
+        /// </summary>
+        private void ReloadAll()
+        {
+            Dictionary<Vector2Int, float> heightmap = new Dictionary<Vector2Int, float>();
+            for (int x = 0; x < chunksAcross; x++)
+            {
+                for (int z = 0; z < chunksAcross; z++)
+                {
+                    Chunk chunk = chunks[new Vector2Int(x, z)];
+                    for (int i = 0; i < chunk.verticies.Length; i++)
+                    {
+                        Vector3 vert = chunk.verticies[i];
+                        Vector2Int pos = new Vector2Int(Mathf.RoundToInt(vert.x), Mathf.RoundToInt(vert.z));
+                        if (heightmap.ContainsKey(pos))
+                        {
+                            vert.y = heightmap[pos];
+                        }
+                        else
+                        {
+                            heightmap[pos] = vert.y;
+                        }
+
+                        chunk.verticies[i] = vert;
+                    }
+
+                    chunk.ReloadMesh();
+                }
+            }
+        }
+
+        public void ClearChunks()
         {
             GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Chunk");
             for (int i = 0; i < gameObjects.Length; i++)
@@ -51,7 +88,7 @@ namespace ApplyYourself
                 chunks.ForEach(x => x.MoveUp());
         }*/
 
-        public List<Chunk> GetChunks(Vector3 point) 
+        public List<Chunk> GetChunksInProximity(Vector3 point) 
         {
             List<Chunk> result = new List<Chunk>();
             float max = spaceBetweenChunks * chunksAcross;
@@ -76,17 +113,8 @@ namespace ApplyYourself
         {
             int x = Mathf.RoundToInt(worldX / heightmapScale);
             int y = Mathf.RoundToInt(worldZ / heightmapScale);
-            if (x < 0)
-                x = 0;
-
-            if (y < 0)
-                y = 0;
-
-            if (x > heightmapTexture.width - 1)
-                x = heightmapTexture.width - 1;
-
-            if (y > heightmapTexture.height - 1)
-                y = heightmapTexture.height - 1;
+            x = Mathf.Clamp(x, 0, heightmapTexture.width - 1);
+            y = Mathf.Clamp(y, 0, heightmapTexture.height - 1);
 
             return heightmapTexture.GetPixel(x, y).r * height;
         }
