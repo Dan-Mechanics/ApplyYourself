@@ -120,7 +120,7 @@ namespace ApplyYourself
             return heightmapTexture.GetPixel(x, y).r * height;
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             if (chunks.Count <= 0)
                 return;

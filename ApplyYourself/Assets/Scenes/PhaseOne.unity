@@ -155,9 +155,9 @@ MonoBehaviour:
     type: 3}
   heightmapTexture: {fileID: 2800000, guid: 1ba0a06e62f359c42affbe193fd49219, type: 3}
   heightmapScale: 1
-  height: 20
-  chunksAcross: 50
-  spaceBetweenChunks: 10
+  height: 15
+  chunksAcross: 25
+  spaceBetweenChunks: 20
 --- !u!4 &28654549
 Transform:
   m_ObjectHideFlags: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: fa4f417138a9d6548a99185861316df8, type: 2}
   texture: {fileID: 2800000, guid: 7e43c0ce186757742b4f90a620a4e260, type: 3}
   worldFloorHeight: 0
-  worldCeilingHeight: 20
+  worldCeilingHeight: 15
 --- !u!1 &128797298
 GameObject:
   m_ObjectHideFlags: 0
