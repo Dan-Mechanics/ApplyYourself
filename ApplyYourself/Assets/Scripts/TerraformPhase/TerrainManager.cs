@@ -18,6 +18,7 @@ namespace ApplyYourself
 
         public void Setup()
         {
+            Transform cam = GameObject.FindWithTag("MainCamera").transform;
             for (int x = 0; x < chunksAcross; x++)
             {
                 for (int z = 0; z < chunksAcross; z++)
@@ -27,7 +28,7 @@ namespace ApplyYourself
                     go.name = $"chunk_({x}, {z})";
 
                     Vector3 offset = new Vector3(spaceBetweenChunks * x, 0f, spaceBetweenChunks * z);
-                    chunk.Setup(this, offset);
+                    chunk.Setup(this, offset, cam);
                     chunks[new Vector2Int(x, z)] = chunk;
                 }
             }
@@ -40,7 +41,7 @@ namespace ApplyYourself
         }
 
         /// <summary>
-        /// TODO: assign to button.
+        /// TODO: assign to button ??
         /// </summary>
         private void ReloadAll()
         {
