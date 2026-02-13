@@ -1,8 +1,20 @@
+you need to make it so there is like a player like movement on the thing
+and then you can move it type beat.
+
+and now i think it would be good to make the trees work and shit.
+
+make events:
+onreloadchunk<int int
+onhidchunk
+onshow chunk
+
+and then the decorations see if it applies to them.
+
+...
+
 future important:
  - lots of state machine phase one because moving mouse + welcome screen
  - consider using new input for syncing up the shit.
-
-
 
 think about:
 the game is looping so the scene amibent from the thing

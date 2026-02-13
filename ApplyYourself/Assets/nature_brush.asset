@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4858e146f7ea9846bf226d2d7a20650, type: 3}
+  m_Name: nature_brush
+  m_EditorClassIdentifier: 
+  size: 0
+  strength: 0
+  previewMaterial: {fileID: 2100000, guid: f325421049e99754794112cbe97599f3, type: 2}
+  prefab: {fileID: 1142473354853608644, guid: 0e3d9bf1a13475a4e9a3443317ceca28, type: 3}

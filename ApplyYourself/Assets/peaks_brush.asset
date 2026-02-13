@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dd0d27601d394a4bb453278d4169391, type: 3}
   m_Name: peaks_brush
   m_EditorClassIdentifier: 
-  size: 10
+  size: 20
   strength: 50
   previewMaterial: {fileID: 2100000, guid: e68176c6a2eb5af4782c958f05be3ad9, type: 2}

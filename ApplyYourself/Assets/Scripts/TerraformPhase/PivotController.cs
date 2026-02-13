@@ -10,6 +10,7 @@ namespace ApplyYourself
         [SerializeField] private Transform target = null;
         [SerializeField] private float sens = default;
         [SerializeField] private float zoomSens = default;
+        [SerializeField] private float movingSens = default;
         [SerializeField] private float minDistance = default;
         [SerializeField] private float maxDistance = default;
         [SerializeField] private float minAngle = default;
@@ -20,21 +21,46 @@ namespace ApplyYourself
         private void Update()
         {
             Cursor.visible = !Input.GetKey(KeyCode.Mouse1);
-            if (Input.GetKey(KeyCode.Mouse1))
+            if (Input.GetKey(KeyCode.Mouse2))
             {
-                rotation.y += sens * Input.GetAxisRaw("Mouse X");
-                rotation.x -= sens * Input.GetAxisRaw("Mouse Y");
-                rotation.x = Mathf.Clamp(rotation.x, minAngle, maxAngle);
+                Move();
+                return;
             }
 
-            position.z += Input.mouseScrollDelta.y * zoomSens;
-            position.z = Mathf.Clamp(position.z, -maxDistance, -minDistance);
+            if (Input.GetKey(KeyCode.Mouse1))
+            {
+                Rotate();
+            }
 
-            transform.localRotation = Quaternion.Euler(rotation);
-            target.localPosition = position;
+            Scroll();
+            Refresh();
         }
 
-        private void OnValidate()
+        private void Scroll()
+        {
+            position.z += Input.mouseScrollDelta.y * zoomSens;
+            position.z = Mathf.Clamp(position.z, -maxDistance, -minDistance);
+        }
+
+        private void Rotate()
+        {
+            rotation.y += sens * Input.GetAxisRaw("Mouse X");
+            rotation.x -= sens * Input.GetAxisRaw("Mouse Y");
+            rotation.x = Mathf.Clamp(rotation.x, minAngle, maxAngle);
+        }
+
+        private void Move()
+        {
+            float y = movingSens * Input.GetAxisRaw("Mouse Y");
+            float x = movingSens * Input.GetAxisRaw("Mouse X");
+
+            transform.Translate(transform.up * y, Space.Self);
+            transform.Translate(transform.right * x, Space.Self);
+        }
+
+        private void OnValidate() => Refresh();
+
+        private void Refresh()
         {
             target.localPosition = position;
             transform.localRotation = Quaternion.Euler(rotation);

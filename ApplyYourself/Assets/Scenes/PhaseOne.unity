@@ -155,7 +155,7 @@ MonoBehaviour:
     type: 3}
   heightmapTexture: {fileID: 2800000, guid: 1ba0a06e62f359c42affbe193fd49219, type: 3}
   heightmapScale: 2
-  height: 50
+  height: 40
   chunksAcross: 25
   spaceBetweenChunks: 40
 --- !u!4 &28654549
@@ -186,9 +186,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fa4f417138a9d6548a99185861316df8, type: 2}
-  texture: {fileID: 2800000, guid: ab80155ec4a8eaa4cac5d40373bf533d, type: 3}
-  worldFloorHeight: -2
-  worldCeilingHeight: 25
+  texture: {fileID: 2800000, guid: 7e43c0ce186757742b4f90a620a4e260, type: 3}
+  worldFloorHeight: 0
+  worldCeilingHeight: 40
 --- !u!1 &128797298
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,6 +394,7 @@ MonoBehaviour:
   target: {fileID: 199471836}
   sens: 0.6
   zoomSens: 20
+  movingSens: 1
   minDistance: 25
   maxDistance: 1000
   minAngle: 15
@@ -817,7 +818,7 @@ Transform:
   m_GameObject: {fileID: 1195023596}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 500, y: 2, z: 500}
+  m_LocalPosition: {x: 500, y: 1.1, z: 500}
   m_LocalScale: {x: 1000, y: 1, z: 1000}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -838,8 +839,8 @@ MonoBehaviour:
   lerpSpeed: 0.01
   minInterval: 1
   maxInterval: 1
-  startingPos: {x: 500, y: 2, z: 500}
-  magnitude: {x: 0, y: 3, z: 0}
+  startingPos: {x: 500, y: 1.1, z: 500}
+  magnitude: {x: 0, y: 2, z: 0}
 --- !u!1 &1457942721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,7 +1148,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 2000
   field of view: 60
   orthographic: 0
   orthographic size: 5

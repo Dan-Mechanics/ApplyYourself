@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   closeRenderer: {fileID: 1721734964939922903}
   farRenderer: {fileID: 2712954329466264545}
-  visibleDistance: 500
+  visibleDistance: 600
   approxHeight: 100
 --- !u!1 &4277962084818955841
 GameObject:
@@ -229,5 +229,5 @@ MonoBehaviour:
   verticies: []
   options: 16
   approximation: {fileID: 6612627558344707878}
-  spaceBetweenVerts: 4
-  vertsAcross: 10
+  spaceBetweenVerts: 2
+  vertsAcross: 20
