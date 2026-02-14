@@ -229,5 +229,5 @@ MonoBehaviour:
   verticies: []
   options: 16
   approximation: {fileID: 6612627558344707878}
-  spaceBetweenVerts: 2
+  spaceBetweenVerts: 1
   vertsAcross: 20

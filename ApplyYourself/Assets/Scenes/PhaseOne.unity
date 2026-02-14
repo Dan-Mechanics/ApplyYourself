@@ -154,10 +154,10 @@ MonoBehaviour:
   chunkPrefab: {fileID: 4277962084818955841, guid: adbf6f6155d2e8a429e0d8436d1348a5,
     type: 3}
   heightmapTexture: {fileID: 2800000, guid: 1ba0a06e62f359c42affbe193fd49219, type: 3}
-  heightmapScale: 2
-  height: 40
+  heightmapScale: 1
+  height: 20
   chunksAcross: 25
-  spaceBetweenChunks: 40
+  spaceBetweenChunks: 20
 --- !u!4 &28654549
 Transform:
   m_ObjectHideFlags: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: fa4f417138a9d6548a99185861316df8, type: 2}
   texture: {fileID: 2800000, guid: 7e43c0ce186757742b4f90a620a4e260, type: 3}
   worldFloorHeight: 0
-  worldCeilingHeight: 40
+  worldCeilingHeight: 20
 --- !u!1 &128797298
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,7 +411,7 @@ Transform:
   m_GameObject: {fileID: 376942857}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3535534, y: 0.3535534, z: -0.14644663, w: 0.85355335}
-  m_LocalPosition: {x: 500, y: 5, z: 500}
+  m_LocalPosition: {x: 250, y: 5, z: 250}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -819,8 +819,8 @@ Transform:
   m_GameObject: {fileID: 1195023596}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 500, y: 1.1, z: 500}
-  m_LocalScale: {x: 1000, y: 1, z: 1000}
+  m_LocalPosition: {x: 250, y: 1.1, z: 250}
+  m_LocalScale: {x: 500, y: 1, z: 500}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -840,7 +840,7 @@ MonoBehaviour:
   lerpSpeed: 0.01
   minInterval: 1
   maxInterval: 1
-  startingPos: {x: 500, y: 1.1, z: 500}
+  startingPos: {x: 250, y: 1.1, z: 250}
   magnitude: {x: 0, y: 2, z: 0}
 --- !u!1 &1457942721
 GameObject:
