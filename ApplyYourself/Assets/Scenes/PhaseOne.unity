@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 0
-  m_FogColor: {r: 0.7490196, g: 0.7176471, b: 0.90588236, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
   m_FogMode: 2
-  m_FogDensity: 0.002
+  m_FogDensity: 0.001
   m_LinearFogStart: 200
   m_LinearFogEnd: 400
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -153,9 +153,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunkPrefab: {fileID: 4277962084818955841, guid: adbf6f6155d2e8a429e0d8436d1348a5,
     type: 3}
-  heightmapTexture: {fileID: 2800000, guid: 1ba0a06e62f359c42affbe193fd49219, type: 3}
+  heightmapTexture: {fileID: 2800000, guid: 048d25c6e49072b4bb4e577a246d474b, type: 3}
   heightmapScale: 1
-  height: 20
+  height: 45
   chunksAcross: 25
   spaceBetweenChunks: 20
 --- !u!4 &28654549
@@ -186,9 +186,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fa4f417138a9d6548a99185861316df8, type: 2}
-  texture: {fileID: 2800000, guid: ab80155ec4a8eaa4cac5d40373bf533d, type: 3}
+  texture: {fileID: 2800000, guid: afaed16cd5d1f6d4bb2bf0b8e7e8d1d8, type: 3}
   worldFloorHeight: 0
-  worldCeilingHeight: 35
+  worldCeilingHeight: 60
 --- !u!1 &128797298
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,7 +705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &832575518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,7 +713,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832575517}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
   m_Name: 
@@ -819,7 +819,7 @@ Transform:
   m_GameObject: {fileID: 1195023596}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 250, y: 4, z: 250}
+  m_LocalPosition: {x: 250, y: 10, z: 250}
   m_LocalScale: {x: 500, y: 1, z: 500}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -840,8 +840,8 @@ MonoBehaviour:
   lerpSpeed: 0.01
   minInterval: 1
   maxInterval: 1
-  startingPos: {x: 250, y: 4, z: 250}
-  magnitude: {x: 0, y: 3, z: 0}
+  startingPos: {x: 250, y: 10, z: 250}
+  magnitude: {x: 0, y: 5, z: 0}
 --- !u!1 &1457942721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,7 +1127,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.7490196, g: 0.7176471, b: 0.90588236, a: 1}
+  m_BackGroundColor: {r: 0.22745098, g: 0.22745098, b: 0.22745098, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
