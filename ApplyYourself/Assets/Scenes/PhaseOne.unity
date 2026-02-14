@@ -392,15 +392,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 199471836}
+  cam: {fileID: 2063290157}
+  rotation: {x: 45, y: 45, z: 0}
   sens: 0.6
-  zoomSens: 20
-  movingSens: 1
-  minDistance: 25
-  maxDistance: 1000
   minAngle: 15
   maxAngle: 85
   position: {x: 0, y: 0, z: -100}
-  rotation: {x: 45, y: 45, z: 0}
+  zoomSens: 20
+  minDistance: 25
+  maxDistance: 1000
+  movingSens: 0.7
 --- !u!4 &376942859
 Transform:
   m_ObjectHideFlags: 0

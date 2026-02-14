@@ -8,15 +8,22 @@ namespace ApplyYourself
     public class PivotController : MonoBehaviour
     {
         [SerializeField] private Transform target = null;
+        [SerializeField] private Transform cam = null;
+
+        [Header("Rotation")]
+        [SerializeField] private Vector3 rotation = default;
         [SerializeField] private float sens = default;
-        [SerializeField] private float zoomSens = default;
-        [SerializeField] private float movingSens = default;
-        [SerializeField] private float minDistance = default;
-        [SerializeField] private float maxDistance = default;
         [SerializeField] private float minAngle = default;
         [SerializeField] private float maxAngle = default;
+
+        [Header("Zoom")]
         [SerializeField] private Vector3 position = default;
-        [SerializeField] private Vector3 rotation = default;
+        [SerializeField] private float zoomSens = default;
+        [SerializeField] private float minDistance = default;
+        [SerializeField] private float maxDistance = default;
+
+        [Header("Position")]
+        [SerializeField] private float movingSens = default;
 
         private void Update()
         {
@@ -51,11 +58,12 @@ namespace ApplyYourself
 
         private void Move()
         {
-            float y = movingSens * Input.GetAxisRaw("Mouse Y");
-            float x = movingSens * Input.GetAxisRaw("Mouse X");
+            float y = -Input.GetAxisRaw("Mouse Y");
+            float x = -Input.GetAxisRaw("Mouse X");
 
-            transform.Translate(transform.up * y, Space.Self);
-            transform.Translate(transform.right * x, Space.Self);
+            Vector3 movement = cam.up * y;
+            movement += cam.right * x;
+            transform.Translate(movement * movingSens, Space.World);
         }
 
         private void OnValidate() => Refresh();
