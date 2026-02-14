@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Chunk
+  - Structure
+  - Nature
+  - Seed
   layers:
   - Default
   - TransparentFX
@@ -12,8 +15,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Structure
+  - Nature
   - 
   - 
   - 

@@ -43,8 +43,8 @@ namespace ApplyYourself
         {
             index = Mathf.Clamp(index, 0, brushes.Length - 1);
             brush = brushes[index];
-            //preview.localScale = 2f * brush.size * Vector3.one;
-            preview.localScale = brush.size * Vector3.one;
+            preview.localScale = 2f * brush.size * Vector3.one;
+            //preview.localScale = brush.size * Vector3.one;
             preview.GetComponent<Renderer>().material = brush.previewMaterial;
         }
     }

@@ -6,6 +6,7 @@ namespace ApplyYourself
     public class Chunk : MonoBehaviour
     {
         [HideInInspector] public Vector3[] verticies;
+        [HideInInspector] public float height;
         
         [SerializeField] private MeshColliderCookingOptions options = default;
         [SerializeField] private ChunkApproximation approximation = default;
@@ -107,6 +108,7 @@ namespace ApplyYourself
             }
 
             avHeight /= count;
+            height = avHeight;
             approximation.UpdateHeight(avHeight);
         }
     }

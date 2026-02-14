@@ -10,8 +10,16 @@ namespace ApplyYourself
 
         private void Start()
         {
-            SetAs(previewEnding);
-            Destroy(gameObject);
+            Algorithm algorithm = GameObject.FindWithTag("Seed")?.GetComponent<Algorithm>();
+            if(algorithm != null)
+            {
+                SetAs(algorithm.ending);
+                Destroy(algorithm.gameObject);
+                Destroy(gameObject);
+            }
+            
+            /*SetAs(previewEnding);
+            Destroy(gameObject);*/
         }
 
         private void SetAs(Ending ending)
