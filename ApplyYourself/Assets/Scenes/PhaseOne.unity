@@ -153,8 +153,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunkPrefab: {fileID: 4277962084818955841, guid: adbf6f6155d2e8a429e0d8436d1348a5,
     type: 3}
-  heightmapTexture: {fileID: 2800000, guid: 27cfad96b21158d48b0cfb981e6078c2, type: 3}
-  heightmapScale: 2
+  heightmapTexture: {fileID: 2800000, guid: 1ba0a06e62f359c42affbe193fd49219, type: 3}
+  heightmapScale: 1
   height: 20
   chunksAcross: 25
   spaceBetweenChunks: 20
@@ -346,7 +346,7 @@ MonoBehaviour:
     m_Bits: 1
   range: 1000
   brushes:
-  - {fileID: 11400000, guid: c2e2403302bf99d4ca93a9037aacdf75, type: 2}
+  - {fileID: 11400000, guid: 311100113ebca9541b89d7ffbafc34d9, type: 2}
 --- !u!4 &369849032
 Transform:
   m_ObjectHideFlags: 0

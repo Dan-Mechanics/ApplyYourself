@@ -15,6 +15,8 @@ namespace ApplyYourself
 
         public override void Apply(Vector3 point)
         {
+            float mod = Input.GetKey(KeyCode.LeftShift) ? -1f : 1f;
+            
             List<Chunk> neighbourChunks = terrainManager.GetChunksInProximity(point);
             foreach (Chunk chunk in neighbourChunks)
             {
@@ -25,7 +27,7 @@ namespace ApplyYourself
                     if (Vector3.Distance(Utils.Flatten(vert), Utils.Flatten(point)) > size)
                         continue;
 
-                    vert.y += strength * Time.fixedDeltaTime;
+                    vert.y += strength *mod* Time.fixedDeltaTime;
                     chunk.verticies[i] = vert;
                     hasChanged = true;
                 }
