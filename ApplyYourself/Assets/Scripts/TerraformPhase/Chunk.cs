@@ -8,7 +8,7 @@ namespace ApplyYourself
         [HideInInspector] public Vector3[] verticies;
         
         [SerializeField] private MeshColliderCookingOptions options = default;
-        [SerializeField] private ChunkApproximation approximation = default;
+       // [SerializeField] private ChunkApproximation approximation = default;
         [SerializeField] private float spaceBetweenVerts = default;
         [SerializeField] private int vertsAcross = default;
 
@@ -21,7 +21,7 @@ namespace ApplyYourself
         {
             filter = GetComponent<MeshFilter>();
             coll = GetComponent<MeshCollider>();
-            approximation.Setup(spaceBetweenVerts * vertsAcross, cam, offset);
+         //   approximation.Setup(spaceBetweenVerts * vertsAcross, cam, offset);
 
             mesh = new Mesh();
             mesh.name = gameObject.name;
@@ -89,13 +89,13 @@ namespace ApplyYourself
             mesh.vertices = verticies;
             mesh.RecalculateNormals();
             mesh.RecalculateBounds();
-            UpdateHeight();
+           // UpdateHeight();
 
             Physics.BakeMesh(mesh.GetInstanceID(), false, options);
             coll.sharedMesh = mesh;
         }
 
-        private void UpdateHeight()
+       /* private void UpdateHeight()
         {
             int count = 0;
             float avHeight = 0f;
@@ -108,6 +108,6 @@ namespace ApplyYourself
 
             avHeight /= count;
             approximation.UpdateHeight(avHeight);
-        }
+        }*/
     }
 }
