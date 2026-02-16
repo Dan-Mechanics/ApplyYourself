@@ -8,7 +8,6 @@ namespace ApplyYourself
     public class PivotController : MonoBehaviour
     {
         [SerializeField] private Transform target = null;
-        [SerializeField] private Transform cam = null;
 
         [Header("Rotation")]
         [SerializeField] private Vector3 rotation = default;
@@ -61,8 +60,8 @@ namespace ApplyYourself
             float y = -Input.GetAxisRaw("Mouse Y");
             float x = -Input.GetAxisRaw("Mouse X");
 
-            Vector3 movement = cam.up * y;
-            movement += cam.right * x;
+            Vector3 movement = target.up * y;
+            movement += target.right * x;
             transform.Translate(movement * movingSens, Space.World);
         }
 

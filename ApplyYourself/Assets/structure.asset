@@ -15,7 +15,5 @@ MonoBehaviour:
   size: 10
   strength: 10
   previewMaterial: {fileID: 2100000, guid: e68176c6a2eb5af4782c958f05be3ad9, type: 2}
-  prefab: {fileID: 8602498514276672336, guid: a44d6fd1d0fdac740876ce0187caebad, type: 3}
-  mask:
-    serializedVersion: 2
-    m_Bits: 192
+  prefab: {fileID: 3651032899792145243, guid: 49ce13c58e470e94a84bc9705beff6fb, type: 3}
+  tag: Structure

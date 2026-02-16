@@ -8,8 +8,8 @@ namespace ApplyYourself
         [SerializeField] private Transform preview = default;
         [SerializeField] private LayerMask mask = default;
         [SerializeField] private float range = default;
-        [SerializeField] private Brush[] brushes = default;
-        private Brush brush;
+        [SerializeField] private BaseBrush[] brushes = default;
+        private BaseBrush brush;
 
         private void Start() => Setup();
 
@@ -32,11 +32,11 @@ namespace ApplyYourself
                 return;
 
             preview.position = hit.point;
-            // STATE + INPUT !!
             if (!Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse1))
                 return;
 
-            brush.Apply(preview.position);
+            Collider[] colliders = Physics.OverlapSphere(hit.point, brush.size, mask, QueryTriggerInteraction.Ignore);
+            brush.Apply(colliders);
         }
 
         public void SelectBrush(int index)

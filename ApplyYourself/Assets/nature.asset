@@ -15,7 +15,5 @@ MonoBehaviour:
   size: 10
   strength: 10
   previewMaterial: {fileID: 2100000, guid: e68176c6a2eb5af4782c958f05be3ad9, type: 2}
-  prefab: {fileID: 8602498514276672336, guid: 614ecc040841b5847a3e797f8b6aaf94, type: 3}
-  mask:
-    serializedVersion: 2
-    m_Bits: 192
+  prefab: {fileID: 4374208145866561662, guid: fb5eda7f7ca8125479050d96e1980f23, type: 3}
+  tag: Nature

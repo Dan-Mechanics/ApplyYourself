@@ -32,7 +32,7 @@ namespace ApplyYourself
 
             float biggest = 0f;
             float smallest = 0f;
-            foreach (var chunk in terrainManager.chunks)
+            /*foreach (var chunk in terrainManager.chunks)
             {
                 float height = chunk.Value.height;
                 if (height > biggest)
@@ -40,7 +40,7 @@ namespace ApplyYourself
 
                 if (height < smallest)
                     smallest = height;
-            }
+            }*/
 
             float balanceHeight = biggest + smallest / 2f;
             print($"OUTCOME: balance{decorationBalance} | height{balanceHeight}");

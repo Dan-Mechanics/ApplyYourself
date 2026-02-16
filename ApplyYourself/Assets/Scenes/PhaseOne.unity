@@ -151,13 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c8de51cd26504943aaeb16e42c15291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunkPrefab: {fileID: 4277962084818955841, guid: adbf6f6155d2e8a429e0d8436d1348a5,
-    type: 3}
-  heightmapTexture: {fileID: 2800000, guid: 048d25c6e49072b4bb4e577a246d474b, type: 3}
-  heightmapScale: 1
-  height: 45
-  chunksAcross: 50
-  spaceBetweenChunks: 10
+  prefab: {fileID: 3526021976004239255, guid: adbf6f6155d2e8a429e0d8436d1348a5, type: 3}
+  heightmap: {fileID: 2800000, guid: 65c1cc38f32bc414cad5c68a679f80a0, type: 3}
+  chunkSize: 10
+  height: 40
 --- !u!4 &28654549
 Transform:
   m_ObjectHideFlags: 0
@@ -186,9 +183,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fa4f417138a9d6548a99185861316df8, type: 2}
-  texture: {fileID: 2800000, guid: 6ecfc006adc9daf4ab31a2ab5241e6bf, type: 3}
+  texture: {fileID: 2800000, guid: afaed16cd5d1f6d4bb2bf0b8e7e8d1d8, type: 3}
   worldFloorHeight: 0
-  worldCeilingHeight: 42
+  worldCeilingHeight: 92.6
 --- !u!1 &128797298
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +340,7 @@ MonoBehaviour:
   preview: {fileID: 1457942725}
   mask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 8
   range: 1000
   brushes:
   - {fileID: 11400000, guid: 311100113ebca9541b89d7ffbafc34d9, type: 2}
@@ -394,7 +391,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 199471836}
-  cam: {fileID: 2063290157}
   rotation: {x: 45, y: 45, z: 0}
   sens: 0.6
   minAngle: 15
@@ -403,7 +399,7 @@ MonoBehaviour:
   zoomSens: 20
   minDistance: 25
   maxDistance: 1000
-  movingSens: 0.7
+  movingSens: 0.5
 --- !u!4 &376942859
 Transform:
   m_ObjectHideFlags: 0
@@ -558,7 +554,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &518823642
 RectTransform:
   m_ObjectHideFlags: 0
@@ -634,7 +630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &638259890
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1105,7 +1101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &911493390
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1374,7 +1370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1132676121
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1507,7 +1503,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1195023598
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1593,6 +1589,56 @@ MonoBehaviour:
   maxInterval: 1
   startingPos: {x: 250, y: 10, z: 250}
   magnitude: {x: 0, y: 5, z: 0}
+--- !u!1 &1422312191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1422312194}
+  - component: {fileID: 1422312195}
+  m_Layer: 0
+  m_Name: water_manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1422312194
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422312191}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1422312195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422312191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200a7e9ecc6eeca45a3900afdfd7d921, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3526021976004239255, guid: 5027209fde512f545a764a7b5bccb4e4, type: 3}
+  heightmap: {fileID: 2800000, guid: 65c1cc38f32bc414cad5c68a679f80a0, type: 3}
+  chunkSize: 10
+  height: 10
+  offset: 0
+  scale: 0.2
 --- !u!1 &1457942721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1940,7 +1986,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1993227371
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2073,7 +2119,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2042534691
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2466,6 +2512,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 566161975431238206}
   - {fileID: 28654549}
+  - {fileID: 1422312194}
   - {fileID: 369849032}
   - {fileID: 2063290157}
   - {fileID: 410087041}
