@@ -393,7 +393,7 @@ MonoBehaviour:
   target: {fileID: 199471836}
   rotation: {x: 45, y: 45, z: 0}
   sens: 0.6
-  minAngle: 15
+  minAngle: 5
   maxAngle: 85
   position: {x: 0, y: 0, z: -100}
   zoomSens: 20
