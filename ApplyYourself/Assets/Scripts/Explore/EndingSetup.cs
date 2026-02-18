@@ -1,15 +1,27 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ApplyYourself
 {
     public class EndingSetup : MonoBehaviour
     {
+        [SerializeField] private List<GameObject> prefabs = default;
         [SerializeField] private Ending previewEnding = default;
 
         private void Start()
         {
+            GameObject[] cameras = GameObject.FindGameObjectsWithTag("MainCamera");
+            for (int i = 0; i < cameras.Length; i++)
+            {
+                Destroy(cameras[i]);
+            }
+
+            prefabs.ForEach(x => Instantiate(x, x.transform.position, x.transform.rotation));
+
+            // ===
+
             Algorithm algorithm = FindAnyObjectByType<Algorithm>();
-            if(algorithm != null)
+            if (algorithm != null)
             {
                 SetAs(algorithm.ending);
                 Destroy(algorithm.gameObject);

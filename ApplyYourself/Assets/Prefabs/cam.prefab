@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2005357816326999249}
   - component: {fileID: 800978332278081726}
   m_Layer: 0
-  m_Name: explore_phase_camera
+  m_Name: cam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3268423973887316730}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12265501, y: 0.18229242, z: -0.022925457, w: 0.9752947}
+  m_LocalRotation: {x: 0.122655645, y: 0.18229216, z: -0.022925511, w: 0.97529465}
   m_LocalPosition: {x: 1.9100001, y: 5.3, z: -12.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
