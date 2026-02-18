@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5872886806524772376
+--- !u!1 &8195046949362653098
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1423992855582927039}
-  - component: {fileID: 5411576269077164682}
+  - component: {fileID: 544328996790751319}
+  - component: {fileID: 758960830609165734}
   m_Layer: 0
-  m_Name: ending_setup
+  m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1423992855582927039
+--- !u!4 &544328996790751319
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5872886806524772376}
+  m_GameObject: {fileID: 8195046949362653098}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,21 +32,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5411576269077164682
+--- !u!114 &758960830609165734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5872886806524772376}
+  m_GameObject: {fileID: 8195046949362653098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0fc983dae7b80442bd007a7f8d5f2ea, type: 3}
+  m_Script: {fileID: 11500000, guid: b2c28c4d20c233c45a857ef63fbac964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 3268423973887316730, guid: 71b33c2b6d05ef84d9bd16415f3448f2, type: 3}
-  - {fileID: 1832338757009681047, guid: 087a9cc9a7dd40d4d85e260faf36f6e5, type: 3}
-  - {fileID: 1950867359122567230, guid: 9bbed8fa2572f7c4086a049948863103, type: 3}
-  - {fileID: 8195046949362653098, guid: b00998ca2a7f6184bb4ef598b9112f5d, type: 3}
-  previewEnding: 5
+  interact: {fileID: 11400000, guid: c4334f1866f323a4b8ac94e0c1b9d0a3, type: 2}
+  mask:
+    serializedVersion: 2
+    m_Bits: 1
+  range: 500

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +8,7 @@ namespace ApplyYourself
         [HideInInspector] public Ending ending;
         
         [SerializeField] private TerrainManager terrainManager = default;
-        [SerializeField] private UnityEngine.Object placeholderScene = default;
+        [SerializeField] private Object placeholderScene = default;
         [SerializeField] private string natureTag = default;
         [SerializeField] private string structureTag = default;
         [SerializeField] private float determineHigh = default;
@@ -19,11 +18,6 @@ namespace ApplyYourself
         [SerializeField] private PositionToEnding[] conversions = default;
 
         private void Awake() => DontDestroyOnLoad(gameObject);
-
-        private void Start()
-        {
-            Debug.LogWarning(gameObject.name);
-        }
 
         public void CompleteSandboxPhase()
         {
@@ -68,11 +62,11 @@ namespace ApplyYourself
                 break;
             }
 
-            print($"{gameObject.name} OUTCOME: {ending}. avHeight {avHeight}, structureBalance {structureBalance}.");
+            print($"OUTCOME: {ending}. avHeight {avHeight}, structureBalance {structureBalance}, pos {pos}.");
             SceneManager.LoadScene(placeholderScene.name);
         }
 
-        [Serializable]
+        [System.Serializable]
         private struct PositionToEnding
         {
             public Vector2Int position;
