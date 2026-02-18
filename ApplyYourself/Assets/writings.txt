@@ -1,3 +1,12 @@
+todo now:
+implement luna clouds
+yap in discord channel about progress + yap about branhces and such type beat
+
+tomorrow:
+make algorithm work with functional textures.
+
+===
+
 you need to make it so there is like a player like movement on the thing
 and then you can move it type beat.
 

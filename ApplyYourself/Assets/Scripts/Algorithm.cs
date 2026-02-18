@@ -15,6 +15,10 @@ namespace ApplyYourself
         [SerializeField] private float determineLow = default;
         [SerializeField] private int determineNature = default;
         [SerializeField] private int determineStructure = default;
+
+        /// <summary>
+        /// TODO: Make functional texture for this.
+        /// </summary>
         [SerializeField] private PositionToEnding[] conversions = default;
 
         private void Awake() => DontDestroyOnLoad(gameObject);

@@ -17,7 +17,7 @@ namespace ApplyYourself
                 Destroy(cameras[i]);
             }
 
-            prefabs.ForEach(x => Instantiate(x, x.transform.position, x.transform.rotation));
+            prefabs.ForEach(x => Spawn(x));
 
             // ===
 
@@ -44,6 +44,11 @@ namespace ApplyYourself
             }
         }
 
+        private void Spawn(GameObject prefab)
+        {
+            Instantiate(prefab,
+                prefab.transform.position, prefab.transform.rotation).name = prefab.name;
+        }
         public void ShowPreview() => SetAs(previewEnding);
         public void HidePreview() => SetAs(Ending.Placeholder);
     }
