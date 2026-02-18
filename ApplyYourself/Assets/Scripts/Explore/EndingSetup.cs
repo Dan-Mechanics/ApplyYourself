@@ -6,6 +6,22 @@ namespace ApplyYourself
     {
         [SerializeField] private Ending previewEnding = default;
 
+        private void Start()
+        {
+            Algorithm algorithm = FindAnyObjectByType<Algorithm>();
+            if(algorithm != null)
+            {
+                SetAs(algorithm.ending);
+                Destroy(algorithm.gameObject);
+            }
+            else
+            {
+                ShowPreview();
+            }
+
+            Destroy(gameObject);
+        }
+
         public void SetAs(Ending ending)
         {
             BasePlaceholder[] placeholders = FindObjectsByType<BasePlaceholder>(FindObjectsSortMode.None);

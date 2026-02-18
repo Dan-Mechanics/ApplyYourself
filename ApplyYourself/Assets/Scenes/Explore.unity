@@ -288,6 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placeholderScene: {fileID: 102900000, guid: 5cdc19d5ab073124d838c03fca7659c0, type: 3}
+  mainCameraTag: MainCamera
 --- !u!4 &961229046
 Transform:
   m_ObjectHideFlags: 0

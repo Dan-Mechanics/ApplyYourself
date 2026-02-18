@@ -6,19 +6,29 @@ namespace ApplyYourself
     public class Seed : MonoBehaviour
     {
         [SerializeField] private Object placeholderScene = default;
+        [SerializeField] private string mainCameraTag = default;    
 
         private void Start()
         {
             Algorithm algorithm = FindAnyObjectByType<Algorithm>();
-            //SceneManager.LoadScene(placeholderScene.name, LoadSceneMode.Additive);
-            GameObject[] placeholders = SceneManager.GetSceneByName(placeholderScene.name).GetRootGameObjects();
+            SceneManager.LoadScene(placeholderScene.name, LoadSceneMode.Additive);
+
+            Scene newScene = SceneManager.GetSceneByName(placeholderScene.name);
+            Debug.LogWarning(newScene.name);
+            GameObject[] placeholders = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
+            Debug.LogWarning(placeholders.Length);
             for (int i = 0; i < placeholders.Length; i++)
             {
+                Debug.LogWarning("helloo !!");
+                if (placeholders[i].CompareTag(mainCameraTag))
+                    continue;
+
                 Instantiate(placeholders[i],
                     placeholders[i].transform.position,
-                    placeholders[i].transform.rotation).
-                    SetActive(placeholders[i].activeSelf);
+                    placeholders[i].transform.rotation);
             }
+
+            SceneManager.UnloadSceneAsync(placeholderScene.name);
 
             EndingSetup endingSetup = FindAnyObjectByType<EndingSetup>();
             if (algorithm != null)

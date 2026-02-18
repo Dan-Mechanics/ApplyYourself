@@ -1362,7 +1362,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2075519567}
         m_TargetAssemblyTypeName: ApplyYourself.Algorithm, Assembly-CSharp
-        m_MethodName: PhaseOneComplete
+        m_MethodName: CompleteSandboxPhase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2191,8 +2191,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 199471836}
+  lookAt: {fileID: 376942859}
   lerpSpeed: 0.1
-  lookAt: 1
 --- !u!114 &2063290154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2342,8 +2342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ending: 0
   terrainManager: {fileID: 28654548}
-  nextScene:
-    m_Handle: 0
+  placeholderScene: {fileID: 102900000, guid: 5cdc19d5ab073124d838c03fca7659c0, type: 3}
   natureTag: Nature
   structureTag: Structure
   determineHigh: 100

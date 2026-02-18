@@ -2,23 +2,25 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    /// <summary>
-    ///  future: base behaviour here??
-    /// </summary>
     public class LerpFollow : MonoBehaviour
     {
         [SerializeField] private Transform target = default;
+        [SerializeField] private Transform lookAt = default;
         [SerializeField] private float lerpSpeed = default;
-        [SerializeField] private bool lookAt = default;
 
         private void FixedUpdate()
         {
-            transform.SetPositionAndRotation(
-                Vector3.Lerp(transform.position, target.position, lerpSpeed),
-                Quaternion.Lerp(transform.rotation, target.rotation, lerpSpeed));
+            if (target != null)
+                transform.position = Vector3.Lerp(transform.position, target.position, lerpSpeed);
 
-            if (lookAt)
-                transform.LookAt(target.parent);
+            if (lookAt != null)
+                transform.LookAt(lookAt);
+        }
+
+        public void SetTarget(Transform target)
+        {
+            this.target = target;
+            transform.SetPositionAndRotation(target.position, target.rotation);
         }
     }
 }
