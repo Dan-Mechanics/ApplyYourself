@@ -1,9 +1,10 @@
 todo now:
 implement luna clouds V
-yap in discord channel about progress + yap about branhces and such type beat
+yap in discord channel about progress + yap about branhces and such type beat V
 
 tomorrow:
-make algorithm work with functional textures.
+make algorithm work with functional textures
+keep cooking
 
 future memes:
 assemblies
