@@ -33,13 +33,5 @@ namespace ApplyYourself
 
         public void ShowPreview() => SetAs(previewEnding);
         public void HidePreview() => SetAs(Ending.Placeholder);
-
-        private void OnValidate()
-        {
-            if (previewEnding == Ending.Placeholder)
-                previewEnding = Ending.Wet;
-
-            // ShowPreview();
-        }
     }
 }

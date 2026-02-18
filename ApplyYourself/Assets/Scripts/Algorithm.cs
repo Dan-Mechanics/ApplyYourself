@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,50 +8,70 @@ namespace ApplyYourself
     {
         [HideInInspector] public Ending ending;
         
-        [SerializeField] private string seedTag = default;
         [SerializeField] private TerrainManager terrainManager = default;
+        [SerializeField] private Scene nextScene = default;
         [SerializeField] private string natureTag = default;
         [SerializeField] private string structureTag = default;
+        [SerializeField] private float determineHigh = default;
+        [SerializeField] private float determineLow = default;
+        [SerializeField] private int determineNature = default;
+        [SerializeField] private int determineStructure = default;
+        [SerializeField] private PositionToEnding[] conversions = default;
 
-        [SerializeField] private int structuralTippingPoint = default;
-        [SerializeField] private float highTippingPoint = default;
+        private void Awake() => DontDestroyOnLoad(gameObject);
 
-      //  private Ending ending;
-
-        private void Awake()
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-
-        public void PhaseOneComplete()
+        public void CompleteSandboxPhase()
         {
             int structureCount = GameObject.FindGameObjectsWithTag(structureTag).Length;
             int natureCount = GameObject.FindGameObjectsWithTag(natureTag).Length;
 
-            int decorationBalance = structureCount - natureCount;
+            int structureBalance = structureCount - natureCount;
+            int x = 0;
+            if (structureBalance <= determineNature)
+                x = -1;
+            else if (structureBalance >= determineStructure)
+                x = 1;
 
+            float[] heightmap = terrainManager.GetHeights();
+            float highest = heightmap[0];
+            float lowest = heightmap[0];
 
-            float biggest = 0f;
-            float smallest = 0f;
-            /*foreach (var chunk in terrainManager.chunks)
+            for (int i = 1; i < heightmap.Length; i++)
             {
-                float height = chunk.Value.height;
-                if (height > biggest)
-                    biggest = height;
+                if (heightmap[i] > highest)
+                    highest = heightmap[i];
 
-                if (height < smallest)
-                    smallest = height;
-            }*/
+                if (heightmap[i] < lowest)
+                    lowest = heightmap[i];
+            }
 
-            float balanceHeight = biggest + smallest / 2f;
-            print($"OUTCOME: balance{decorationBalance} | height{balanceHeight}");
+            float avHeight = (highest + lowest) * 0.5f;
+            int y = 0;
+            if (avHeight <= determineLow)
+                y = -1;
+            else if (avHeight >= determineHigh)
+                y = 1;
 
-            bool high = balanceHeight > highTippingPoint;
-            bool structure = decorationBalance > structuralTippingPoint;
+            Vector2Int pos = new Vector2Int(x, y);
+            ending = Ending.Underwater;
+            for (int i = 0; i < conversions.Length; i++)
+            {
+                if (conversions[i].position != pos)
+                    continue;
 
-            print($"OUTCOME: {(high ? "high" : "low")} {(structure ? "city heavy" : "nature heavy")}");
-            ending = high ? Ending.Dry : Ending.Wet;
-            SceneManager.LoadScene("Scene");
+                ending = conversions[i].ending;
+                break;
+            }
+
+            print($"{gameObject.name} OUTCOME: {ending}. avHeight {avHeight}, structureBalance {structureBalance}.");
+            SceneManager.LoadScene(nextScene.name);
+        }
+
+        [Serializable]
+        private struct PositionToEnding
+        {
+            public Vector2Int position;
+            public Ending ending;
         }
     }
 }

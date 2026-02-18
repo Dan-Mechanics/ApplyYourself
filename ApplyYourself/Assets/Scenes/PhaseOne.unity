@@ -2341,12 +2341,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ending: 0
-  seedTag: Seed
   terrainManager: {fileID: 28654548}
+  nextScene:
+    m_Handle: 0
   natureTag: Nature
   structureTag: Structure
-  structuralTippingPoint: 20
-  highTippingPoint: 60
+  determineHigh: 100
+  determineLow: -10
+  determineNature: -10
+  determineStructure: 10
+  conversions:
+  - position: {x: -1, y: 1}
+    ending: 2
+  - position: {x: 1, y: 1}
+    ending: 3
+  - position: {x: -1, y: -1}
+    ending: 4
+  - position: {x: 1, y: -1}
+    ending: 5
 --- !u!4 &2075519568
 Transform:
   m_ObjectHideFlags: 0

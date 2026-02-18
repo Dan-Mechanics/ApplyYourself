@@ -1,4 +1,4 @@
 ﻿namespace ApplyYourself
 {
-    public enum Ending { Placeholder, Wet, Dry }
+    public enum Ending { Placeholder, Underwater, HighNature, HighStructure, LowNature, LowStructure }
 }
