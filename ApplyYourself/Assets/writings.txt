@@ -1,9 +1,13 @@
 todo now:
-implement luna clouds
+implement luna clouds V
 yap in discord channel about progress + yap about branhces and such type beat
 
 tomorrow:
 make algorithm work with functional textures.
+
+future memes:
+assemblies
+web build time
 
 ===
 
