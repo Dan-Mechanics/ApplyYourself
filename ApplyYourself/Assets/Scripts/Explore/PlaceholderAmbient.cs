@@ -4,13 +4,13 @@ namespace ApplyYourself
 {
     public class PlaceholderAmbient : BasePlaceholder
     {
-        private Camera cam;
+        //private Camera cam;
         
         private void SetAmbient(Ambient amb)
         {
-            cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-            if (cam == null)
-                return;
+            Camera cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+            /*if (cam == null)
+                return;*/
 
             RenderSettings.fogDensity = amb.density;
             RenderSettings.fogColor = amb.color;

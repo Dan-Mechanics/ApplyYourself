@@ -69,5 +69,10 @@ namespace ApplyYourself
 
             return ending;
         }
+
+        public static T StringToEnum<T>(string str)
+        {
+            return (T)System.Enum.Parse(typeof(T), str);
+        }
     }
 }
