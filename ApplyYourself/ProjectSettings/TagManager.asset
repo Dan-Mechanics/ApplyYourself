@@ -7,7 +7,6 @@ TagManager:
   - Chunk
   - Structure
   - Nature
-  - Seed
   layers:
   - Default
   - TransparentFX

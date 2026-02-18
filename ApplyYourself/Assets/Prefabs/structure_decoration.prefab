@@ -150,10 +150,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1721714331783939083}
     m_Modifications:
+    - target: {fileID: 7273035276611036335, guid: a44d6fd1d0fdac740876ce0187caebad,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8602498514276672336, guid: a44d6fd1d0fdac740876ce0187caebad,
         type: 3}
       propertyPath: m_Name
       value: city_house
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602498514276672336, guid: a44d6fd1d0fdac740876ce0187caebad,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9013401485003464143, guid: a44d6fd1d0fdac740876ce0187caebad,
         type: 3}

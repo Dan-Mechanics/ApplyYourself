@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3663996497072395251}
   - component: {fileID: 1435448109204365134}
   - component: {fileID: 5298514018123108772}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: city_house (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 283109913541746452}
   - component: {fileID: 8784138972692985877}
   - component: {fileID: 1797017841153675905}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: city_house (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9013401485003464143}
   - component: {fileID: 5377746976432527048}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: tree
   m_TagString: Nature
   m_Icon: {fileID: 0}

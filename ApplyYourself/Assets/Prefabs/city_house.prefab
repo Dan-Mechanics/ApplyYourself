@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 283109913541746452}
   - component: {fileID: 8784138972692985877}
   - component: {fileID: 1797017841153675905}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: city_house (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 2679192938938553310}
   - component: {fileID: 4555017595491171346}
   - component: {fileID: 5377746976432527048}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: city_house
   m_TagString: Structure
   m_Icon: {fileID: 0}

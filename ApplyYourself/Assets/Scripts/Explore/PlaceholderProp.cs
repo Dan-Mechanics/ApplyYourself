@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class PlaceholderAmbient : Placeholder
+    public class PlaceholderProp : BasePlaceholder
     {
         private void SetGraphic(GameObject prefab)
         {

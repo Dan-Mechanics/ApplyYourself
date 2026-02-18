@@ -2,14 +2,15 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class PlaceholderProp : Placeholder
+    public class PlaceholderAmbient : BasePlaceholder
     {
         private Camera cam;
         
         private void SetAmbient(Ambient amb)
         {
+            cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
             if (cam == null)
-                cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+                return;
 
             RenderSettings.fogDensity = amb.density;
             RenderSettings.fogColor = amb.color;

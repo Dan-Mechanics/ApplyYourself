@@ -9,7 +9,7 @@ namespace ApplyYourself
         [HideInInspector] public Ending ending;
         
         [SerializeField] private TerrainManager terrainManager = default;
-        [SerializeField] private Scene nextScene = default;
+        [SerializeField] private UnityEngine.Object exploreScene = default;
         [SerializeField] private string natureTag = default;
         [SerializeField] private string structureTag = default;
         [SerializeField] private float determineHigh = default;
@@ -64,7 +64,7 @@ namespace ApplyYourself
             }
 
             print($"{gameObject.name} OUTCOME: {ending}. avHeight {avHeight}, structureBalance {structureBalance}.");
-            SceneManager.LoadScene(nextScene.name);
+            SceneManager.LoadScene(exploreScene.name);
         }
 
         [Serializable]
