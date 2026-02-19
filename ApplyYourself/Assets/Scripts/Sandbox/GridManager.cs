@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public abstract class ChunkManager : MonoBehaviour 
+    public abstract class GridManager : MonoBehaviour 
     {
         [SerializeField] private GameObject prefab = default;
         [SerializeField] protected Texture2D heightmap = default;

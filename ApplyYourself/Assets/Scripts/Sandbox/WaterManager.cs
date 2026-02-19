@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class WaterManager : ChunkManager 
+    public class WaterManager : GridManager 
     {
         [SerializeField] private float height = default;
         [SerializeField] private float offset = default;
