@@ -1,6 +1,11 @@
 entirely essential for game currently:
 player + cam VV
 dialgoue system
+state machine because dialogue, player cant move when dialogue
+
+i think i need to rewrite the state machine a little more
+to fit my needs type beat.
+we can make it more simple and less shitty.
 
 todo now:
 implement luna clouds V
