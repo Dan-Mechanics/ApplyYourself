@@ -1,3 +1,7 @@
+entirely essential for game currently:
+player + cam
+dialgoue system
+
 todo now:
 implement luna clouds V
 yap in discord channel about progress + yap about branhces and such type beat V

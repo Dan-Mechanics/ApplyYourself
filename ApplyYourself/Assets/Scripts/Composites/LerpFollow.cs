@@ -22,5 +22,11 @@ namespace ApplyYourself
             this.target = target;
             transform.SetPositionAndRotation(target.position, target.rotation);
         }
+
+        public void SetLookAt(Transform lookAt)
+        {
+            this.lookAt = lookAt;
+            transform.LookAt(lookAt);
+        }
     }
 }
