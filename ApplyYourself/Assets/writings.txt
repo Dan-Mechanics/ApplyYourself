@@ -1,3 +1,7 @@
+coding questions:
+how to architect state well ?
+how to arhcitect dialogue well ?
+
 entirely essential for game currently:
 player + cam VV
 dialgoue system

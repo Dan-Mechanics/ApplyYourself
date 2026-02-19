@@ -1,26 +1,71 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace ApplyYourself
 {
     /// <summary>
-    /// Goal for this is to make it work well.
+    /// todo: 
+    /// implement friendly parsing for the script,
+    /// implement textwriter slow typer and use ~ as newline symbol
+    /// implement some state for everythign type beat
     /// </summary>
-    public class DialogueSystem : MonoBehaviour
+    public class DialogueSystem : StateBehaviour
     {
+        private const char NEWLINE = '~';
+        private const char COMMENT = '#';
+        
         [SerializeField] private EasyBinding skip = default;
+        [SerializeField] private EasyBinding exit = default;
+        [SerializeField] private GameObject graphics = default;
+        [SerializeField] private TMP_Text dialogueText = default;
+        [SerializeField] private string characterSpriteDirectory = default;
 
-        private void Awake()
+        private readonly Dictionary<string, Sprite> characterSprites = new Dictionary<string, Sprite>();
+        private Queue<Frame> frames = new Queue<Frame>();
+
+        public override void OnUpdate()
         {
-            Dialogue[] dialogues = FindObjectsByType<Dialogue>(FindObjectsSortMode.None);
-            for (int i = 0; i < dialogues.Length; i++)
+            base.OnUpdate();
+            // chekc for skip key.
+            if (skip.WasPressed)
             {
-                dialogues[i].OnDialogue += ShowDialogue;
+
             }
+
+            if (exit.WasPressed)
+                YieldState();
         }
 
-        private void ShowDialogue(TextAsset textAsset)
+        public void ShowDialogue(TextAsset dialogue)
         {
-            throw new System.NotImplementedException();
+            ClaimState();
+
+            // parse the dialogue into actual steps.
+            // make a queue or something idk.
+        }
+
+        public override void Enter()
+        {
+            base.Enter();
+            graphics.SetActive(true);
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            graphics.SetActive(false);
+            characterSprites.Clear();
+            frames.Clear();
+
+            dialogueText.text = string.Empty;
+        }
+
+        private struct Frame
+        {
+            public string characterName;
+            public string spriteName;
+            public string dialogue;
         }
     }
 }
