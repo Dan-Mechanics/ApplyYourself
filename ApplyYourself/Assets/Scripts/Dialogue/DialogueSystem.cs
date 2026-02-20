@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -24,14 +25,16 @@ namespace ApplyYourself
         [SerializeField] private TMP_Text nameText = default;
         [SerializeField] private Image icon = default;
         [SerializeField] private string charactersPath = default;
+        [SerializeField] private float dialogueCooldown = default;
 
         private readonly Dictionary<string, Sprite> sprites = new Dictionary<string, Sprite>();
         private Queue<Frame> pending = new Queue<Frame>();
+        private float nextDialogueTime;
 
         public override void OnUpdate()
         {
             base.OnUpdate();
-            if (next.WasPressed)
+            if (next.WasPressed && Time.time >= nextDialogueTime)
                 GoNextFrame();
 
             if (exit.WasPressed)
@@ -40,30 +43,59 @@ namespace ApplyYourself
 
         public void BeginDialogue(TextAsset dialogue)
         {
-            pending = ParseDialogue(dialogue);
-            GoNextFrame();
-
             ClaimState();
+            Debug.Log(dialogue.text);
+            pending = ParseDialogue(dialogue);
+            print($"pending count {pending.Count}");
+            nextDialogueTime = Time.time + dialogueCooldown;
+            GoNextFrame();
         }
 
         private void GoNextFrame()
         {
             if (pending.Count > 0)
             {
+                Debug.Log("yes");
                 ShowFrame(pending.Dequeue());
             }
             else
             {
+                Debug.Log("is done.");
                 YieldState();
             }
+        }
+
+        private void ShowFrame(Frame frame)
+        {
+            nameText.text = frame.name;
+            dialogueWriter.Write(frame.text);
+
+            if (!sprites.ContainsKey(frame.sprite))
+            {
+                string path = charactersPath + "/" + frame.sprite;
+                Debug.LogWarning(path);
+                Sprite sprite = Resources.Load<Sprite>(path);
+                print(sprite != null);
+
+                sprites[frame.sprite] = sprite;
+            }
+
+
+            icon.sprite = sprites[frame.sprite];
+            if (icon.sprite == null)
+                Debug.LogError($"{frame.sprite}.png does not exist in resources.");
         }
 
         private Queue<Frame> ParseDialogue(TextAsset dialogue)
         {
             Queue<Frame> result = new Queue<Frame>();
-            string text = dialogue.text;
-            string[] lines = text.Split(new[] { '\r', '\n' });
+            string[] lines = dialogue.text.Split(new[] { Environment.NewLine.ToCharArray()[0] });
+            for (int i = 0; i < lines.Length; i++)
+            {
+                lines[i] = lines[i].Trim();
+            }
 
+            Debug.Log(lines.Length);
             ParsingMode parsingMode = ParsingMode.Name;
             Frame current = default;
             foreach (string line in lines)
@@ -77,6 +109,7 @@ namespace ApplyYourself
                 if (line.Length > 2 && line[1] == COMMENT)
                     continue;
 
+                Debug.Log("good" + line);
                 switch (parsingMode)
                 {
                     case ParsingMode.Name:
@@ -88,23 +121,24 @@ namespace ApplyYourself
                         parsingMode = ParsingMode.Dialogue;
                         break;
                     case ParsingMode.Dialogue:
-                        if (line[0] == QUOTE)
-                        {
-                            current.text += line.Remove(0, 1);
-                        }
-                        else if (line[^1] == QUOTE)
-                        {
-                            current.text += line.Remove(line.Length - 1);
-                            current.text = current.text.Replace(NEWLINE, '\n');
+                        string newLine = line;
+                        if (newLine[0] == QUOTE)
+                            newLine = newLine.Remove(0, 1);
 
+                        if (newLine[^1] != QUOTE)
+                        {
+                            Debug.LogWarning("else if (line[^1] == QUOTE)");
+                            current.text += newLine;
+                        }
+                        else
+                        {
+                            current.text += newLine.Remove(newLine.Length - 1);
+                            current.text = current.text.Replace(NEWLINE, '\n');
+                            Debug.LogWarning("else if (line[^1] == QUOTE)");
                             // NEW ITERATION.
                             result.Enqueue(current);
                             parsingMode = ParsingMode.Name;
                             current = default;
-                        }
-                        else
-                        {
-                            current.text += line;
                         }
 
                         break;
@@ -114,17 +148,6 @@ namespace ApplyYourself
             }
 
             return result;
-        }
-
-        private void ShowFrame(Frame frame)
-        {
-            nameText.text = frame.name;
-            dialogueWriter.Write(frame.text);
-
-            if (!sprites.ContainsKey(frame.sprite))
-                sprites[frame.sprite] = Resources.Load<Sprite>(charactersPath + "/" + frame.sprite);
-
-            icon.sprite = sprites[frame.sprite];
         }
 
         public override void Enter()

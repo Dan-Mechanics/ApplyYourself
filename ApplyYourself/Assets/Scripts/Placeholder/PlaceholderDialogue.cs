@@ -12,7 +12,7 @@ namespace ApplyYourself
         public override void SetAs(Ending ending)
         {
             ending = Utils.Filter(ending, endingOverrides);
-            SetDialogue(Resources.Load<TextAsset>($"{ending}/{resourceName}"));
+            SetDialogue(Resources.Load<TextAsset>($"{ending}/{resourceName}_{ending.ToString().ToLowerInvariant()}"));
         }
     }
 }

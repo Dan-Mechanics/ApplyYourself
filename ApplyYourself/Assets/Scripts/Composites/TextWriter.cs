@@ -42,10 +42,8 @@ namespace ApplyYourself
                 text.text = builder.ToString();
             }
 
-            builder.Clear();
-            message = string.Empty;
-
             text.text = message;
+            builder.Clear();
         }
 
         public void Clear()

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace ApplyYourself
 {
@@ -55,7 +56,10 @@ namespace ApplyYourself
 
             current = state;
             if (current != null)
+            {
+                Debug.Log(state.gameObject.name.ToUpperInvariant());
                 current.Enter();
+            }
         }
 
         private void Yield(StateBehaviour from)
