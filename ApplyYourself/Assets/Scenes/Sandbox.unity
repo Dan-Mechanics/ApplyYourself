@@ -2607,7 +2607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ending: 0
   terrainManager: {fileID: 28654548}
-  placeholderScene: {fileID: 102900000, guid: 5cdc19d5ab073124d838c03fca7659c0, type: 3}
+  placeholderScene: {fileID: 102900000, guid: fb51e1f7e3c6485408ce41b3a2547828, type: 3}
   natureTag: Nature
   structureTag: Structure
   determineHigh: 45
