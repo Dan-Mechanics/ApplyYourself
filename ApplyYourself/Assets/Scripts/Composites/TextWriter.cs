@@ -23,13 +23,12 @@ namespace ApplyYourself
 
         public void Write(string message)
         {
+            Clear();
             if (!Utils.IsStringValid(message))
                 return;
 
             this.message = message;
             gameObject.name = message;
-            text.text = string.Empty;
-            StopAllCoroutines();
             StartCoroutine(WriteDelayed());
         }
 

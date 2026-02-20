@@ -16,11 +16,7 @@ namespace ApplyYourself
         
         [SerializeField] private EasyBinding next = default;
         [SerializeField] private EasyBinding exit = default;
-
-        /// <summary>
-        /// Consider using a CanvasGroup component.
-        /// </summary>
-        [SerializeField] private GameObject graphics = default;
+        [SerializeField] private CanvasGroup canvasGroup = default;
         [SerializeField] private TextWriter dialogueWriter = default;
         [SerializeField] private TMP_Text nameText = default;
         [SerializeField] private Image icon = default;
@@ -44,23 +40,19 @@ namespace ApplyYourself
         public void BeginDialogue(TextAsset dialogue)
         {
             ClaimState();
-            Debug.Log(dialogue.text);
             pending = ParseDialogue(dialogue);
-            print($"pending count {pending.Count}");
-            nextDialogueTime = Time.time + dialogueCooldown;
             GoNextFrame();
         }
 
         private void GoNextFrame()
         {
+            nextDialogueTime = Time.time + dialogueCooldown;
             if (pending.Count > 0)
             {
-                Debug.Log("yes");
                 ShowFrame(pending.Dequeue());
             }
             else
             {
-                Debug.Log("is done.");
                 YieldState();
             }
         }
@@ -71,15 +63,7 @@ namespace ApplyYourself
             dialogueWriter.Write(frame.text);
 
             if (!sprites.ContainsKey(frame.sprite))
-            {
-                string path = charactersPath + "/" + frame.sprite;
-                Debug.LogWarning(path);
-                Sprite sprite = Resources.Load<Sprite>(path);
-                print(sprite != null);
-
-                sprites[frame.sprite] = sprite;
-            }
-
+                sprites[frame.sprite] = Resources.Load<Sprite>(charactersPath + "/" + frame.sprite);
 
             icon.sprite = sprites[frame.sprite];
             if (icon.sprite == null)
@@ -95,7 +79,6 @@ namespace ApplyYourself
                 lines[i] = lines[i].Trim();
             }
 
-            Debug.Log(lines.Length);
             ParsingMode parsingMode = ParsingMode.Name;
             Frame current = default;
             foreach (string line in lines)
@@ -109,7 +92,6 @@ namespace ApplyYourself
                 if (line.Length > 2 && line[1] == COMMENT)
                     continue;
 
-                Debug.Log("good" + line);
                 switch (parsingMode)
                 {
                     case ParsingMode.Name:
@@ -127,14 +109,13 @@ namespace ApplyYourself
 
                         if (newLine[^1] != QUOTE)
                         {
-                            Debug.LogWarning("else if (line[^1] == QUOTE)");
                             current.text += newLine;
                         }
                         else
                         {
                             current.text += newLine.Remove(newLine.Length - 1);
                             current.text = current.text.Replace(NEWLINE, '\n');
-                            Debug.LogWarning("else if (line[^1] == QUOTE)");
+
                             // NEW ITERATION.
                             result.Enqueue(current);
                             parsingMode = ParsingMode.Name;
@@ -153,16 +134,16 @@ namespace ApplyYourself
         public override void Enter()
         {
             base.Enter();
-            graphics.SetActive(true);
+            canvasGroup.alpha = 1f;
         }
 
         public override void Exit()
         {
             base.Exit();
-            graphics.SetActive(false);
+            canvasGroup.alpha = 0f;
+            dialogueWriter.Clear();
             sprites.Clear();
             pending.Clear();
-            dialogueWriter.Clear();
         }
 
         private struct Frame
