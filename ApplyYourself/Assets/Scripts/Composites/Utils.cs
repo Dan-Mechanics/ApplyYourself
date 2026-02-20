@@ -17,5 +17,10 @@
         {
             return (T)System.Enum.Parse(typeof(T), str);
         }
+
+        public static bool IsStringValid(string str)
+        {
+            return !string.IsNullOrEmpty(str) && !string.IsNullOrWhiteSpace(str);
+        }
     }
 }

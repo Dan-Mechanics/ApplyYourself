@@ -4,26 +4,29 @@ namespace ApplyYourself
 {
     public class FSM 
     {
-        public readonly List<StateBehaviour> states = new List<StateBehaviour>();
-        public readonly List<StateTransition> transitions = new List<StateTransition>();
+        private readonly List<StateBehaviour> states = new List<StateBehaviour>();
+        private readonly List<StateTransition> transitions = new List<StateTransition>();
         private StateBehaviour current;
 
-        public void RegiserState(StateBehaviour state)
+        public void AddTransition(StateTransition transition) => transitions.Add(transition);
+
+        public void AddState(StateBehaviour state)
         {
             state.OnYield += Yield;
             state.OnClaim += Open;
-            state.OnDeregister += Deregister;
+            state.OnDeregister += DeregisterState;
             states.Add(state);
 
+            state.Setup();
             state.Exit();
         }
 
-        private void Deregister(StateBehaviour state)
+        private void DeregisterState(StateBehaviour state)
         {
             Yield(state);
             state.OnYield -= Yield;
             state.OnClaim -= Open;
-            state.OnDeregister -= Deregister;
+            state.OnDeregister -= DeregisterState;
             states.Remove(state);
 
             for (int i = transitions.Count - 1; i >= 0; i--)
@@ -51,7 +54,8 @@ namespace ApplyYourself
                 current.Exit();
 
             current = state;
-            current.Enter();
+            if (current != null)
+                current.Enter();
         }
 
         private void Yield(StateBehaviour from)
@@ -64,6 +68,8 @@ namespace ApplyYourself
                 Open(transition.to);
                 return;
             }
+
+            Open(null);
         }
     }
 }

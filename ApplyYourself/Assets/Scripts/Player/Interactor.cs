@@ -2,17 +2,18 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class Interactor : MonoBehaviour
+    public class Interactor : StateBehaviour
     {
         [SerializeField] private EasyBinding interact = default;
         [SerializeField] private LayerMask mask = default;
         [SerializeField] private float range = default;
         private Camera cam;
 
-        private void Start() => cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        public void SetCamera(Camera cam) => this.cam = cam;
 
-        private void Update()
+        public override void OnUpdate()
         {
+            base.OnUpdate();
             if (!interact.WasPressed)
                 return;
             

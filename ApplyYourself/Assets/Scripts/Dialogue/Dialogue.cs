@@ -13,7 +13,7 @@ namespace ApplyYourself
             if (dialogueSystem == null)
                 return;
 
-            dialogueSystem.ShowDialogue(dialogue);
+            dialogueSystem.BeginDialogue(dialogue);
         }
 
         public void SetDialogue(TextAsset dialogue) => this.dialogue = dialogue;
