@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class WaterManager : Grid 
+    public class WaterManager : GridComposite 
     {
         [SerializeField] private float height = default;
         [SerializeField] private float offset = default;

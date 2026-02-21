@@ -6,7 +6,7 @@ namespace ApplyYourself
     /// Todo: use composition over inhertience.
     /// Call it grid and make it a class.
     /// </summary>
-    public abstract class Grid : MonoBehaviour 
+    public abstract class GridComposite : MonoBehaviour 
     {
         [SerializeField] private GameObject prefab = default;
         [SerializeField] protected Texture2D heightmap = default;

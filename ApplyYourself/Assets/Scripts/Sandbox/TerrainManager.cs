@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class TerrainManager : Grid 
+    public class TerrainManager : GridComposite 
     {
         [SerializeField] private float height = default;
 
