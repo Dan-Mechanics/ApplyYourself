@@ -1,16 +1,24 @@
- # Dit is peak writing.
+ # This means this line is a comment.
 
+ # Name:
 Dave
+
+ # Sprite filename:
 happy_dave
+
+ # Dialogue. Make sure to use quotes.
 "Omg wat een peak dag !!"
 
 Dave
 unhappy_dave
-"Guys hoezo ben ik hella onderwater?"
+"Guys hoezo ben ik 
+hella onderwater?"
+# ^ you can keep writing across lines.
 
 Dave
 unhappy_dave
 "At least ben ik nu hydrated yalllllllll~#StayHydrated~#Swimming"
+ # Use ~ to indicate a newline ( even though it isn't on a new line.
 
 Dave
 happy_dave

@@ -52,5 +52,7 @@ namespace ApplyYourself
             message = string.Empty;
             builder.Clear();
         }
+
+        public void WriteTime(int mins, int secs) => text.text = $"{mins}:{secs}";
     }
 }

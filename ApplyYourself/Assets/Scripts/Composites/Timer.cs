@@ -11,11 +11,13 @@ namespace ApplyYourself
         [SerializeField] private float doneMinutes = default;
         [SerializeField] private float doneSeconds = default;
         [SerializeField] private float invokeInterval = default;
-        private DateTime startingPoint;
+        private DateTime doneTime;
 
         public void Begin()
         {
-            startingPoint = DateTime.Now;
+            doneTime = DateTime.Now;
+            doneTime = doneTime.AddSeconds(doneSeconds);
+            doneTime = doneTime.AddMinutes(doneMinutes);
             InvokeRepeating(nameof(Tick), 0f, invokeInterval);
         }
 
@@ -23,12 +25,12 @@ namespace ApplyYourself
 
         private void Tick()
         {
-            TimeSpan timeSpan = DateTime.Now - startingPoint;
-            int min = timeSpan.Minutes;
-            int sec = timeSpan.Seconds;
+            TimeSpan timeSpan = doneTime - DateTime.Now;
+            int mins = timeSpan.Minutes;
+            int secs = timeSpan.Seconds;
 
-            OnNewTime?.Invoke(min, sec);
-            if (min < doneMinutes || sec < doneSeconds)
+            OnNewTime?.Invoke(mins, secs);
+            if (mins > 0 || secs > 0)
                 return;
 
             OnDone?.Invoke();
