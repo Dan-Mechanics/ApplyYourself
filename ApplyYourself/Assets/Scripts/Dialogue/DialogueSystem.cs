@@ -13,6 +13,7 @@ namespace ApplyYourself
         private const char NEWLINE = '~';
         private const char COMMENT = '#';
         private const char QUOTE = '\"';
+        private const char SPACE = ' ';
         
         [SerializeField] private EasyBinding next = default;
         [SerializeField] private EasyBinding exit = default;
@@ -31,7 +32,16 @@ namespace ApplyYourself
         {
             base.OnUpdate();
             if (next.WasPressed && Time.time >= nextDialogueTime)
-                GoNextFrame();
+            {
+                if (dialogueWriter.IsDone)
+                {
+                    GoNextFrame();
+                }
+                else
+                {
+                    dialogueWriter.ForceComplete();
+                }
+            }
 
             if (exit.WasPressed)
                 YieldState();
@@ -73,7 +83,7 @@ namespace ApplyYourself
         private Queue<Frame> ParseDialogue(TextAsset dialogue)
         {
             Queue<Frame> result = new Queue<Frame>();
-            string[] lines = dialogue.text.Split(Environment.NewLine.ToCharArray()[0]);
+            string[] lines = dialogue.text.Split(Environment.NewLine.ToCharArray()[0], StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < lines.Length; i++)
             {
                 lines[i] = lines[i].Trim();
@@ -110,6 +120,8 @@ namespace ApplyYourself
                         if (newLine[^1] != QUOTE)
                         {
                             current.text += newLine;
+                            if (newLine[^1] != NEWLINE)
+                                current.text += SPACE;
                         }
                         else
                         {

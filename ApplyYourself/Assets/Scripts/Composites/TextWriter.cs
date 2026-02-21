@@ -8,12 +8,14 @@ namespace ApplyYourself
     [RequireComponent(typeof(TMP_Text))]
     public class TextWriter : MonoBehaviour
     {
-        public const float INTERVAL = 0.06f;
+        public bool IsDone => isDone;
+        private const float INTERVAL = 0.06f;
 
         private readonly StringBuilder builder = new StringBuilder();
         private WaitForSeconds delay;
         private TMP_Text text;
         private string message;
+        private bool isDone;
 
         private void Awake()
         {
@@ -27,6 +29,7 @@ namespace ApplyYourself
             if (!Utils.IsStringValid(message))
                 return;
 
+            isDone = false;
             this.message = message;
             gameObject.name = message;
             StartCoroutine(WriteDelayed());
@@ -43,14 +46,21 @@ namespace ApplyYourself
 
             text.text = message;
             builder.Clear();
+            isDone = true;
+        }
+
+        public void ForceComplete()
+        {
+            Clear();
+            text.text = message;
         }
 
         public void Clear()
         {
             StopAllCoroutines();
             text.text = string.Empty;
-            message = string.Empty;
             builder.Clear();
+            isDone = true;
         }
 
         public void WriteTime(int mins, int secs) => text.text = $"{mins}:{secs}";
