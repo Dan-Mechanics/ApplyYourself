@@ -7,11 +7,15 @@ namespace ApplyYourself
     {
         public GameObject prefab;
         public string tag;
+        // [Range(0f, 1f)] public float odds;
 
         public override void Apply(Collider[] colliders)
         {
             for (int i = 0; i < colliders.Length; i++)
             {
+                /*if (Random.value > odds)
+                    continue;*/
+
                 Transform parent = colliders[i].transform;
                 parent.tag = tag;
 

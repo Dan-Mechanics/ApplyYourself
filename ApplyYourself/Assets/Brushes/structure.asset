@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 10
   strength: 10
-  previewMaterial: {fileID: 2100000, guid: e68176c6a2eb5af4782c958f05be3ad9, type: 2}
+  previewMaterial: {fileID: 2100000, guid: e15b873c75f088e428b218a95004f11e, type: 2}
   prefab: {fileID: 3651032899792145243, guid: 49ce13c58e470e94a84bc9705beff6fb, type: 3}
   tag: Structure

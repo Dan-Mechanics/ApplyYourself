@@ -3129,7 +3129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doneMinutes: 1
-  doneSeconds: 30
+  doneSeconds: 0
   invokeInterval: 0.1
 --- !u!4 &1984330394
 Transform:

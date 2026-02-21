@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 10
   strength: 10
-  previewMaterial: {fileID: 2100000, guid: e68176c6a2eb5af4782c958f05be3ad9, type: 2}
+  previewMaterial: {fileID: 2100000, guid: fdd856f06b492a64eaa0ad669eb4b254, type: 2}
   prefab: {fileID: 4374208145866561662, guid: fb5eda7f7ca8125479050d96e1980f23, type: 3}
   tag: Nature
