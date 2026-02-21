@@ -154,6 +154,7 @@ MonoBehaviour:
   timerText: {fileID: 62909535}
   algorithm: {fileID: 2075519567}
   terraformer: {fileID: 369849031}
+  pivotController: {fileID: 376942858}
   waterManager: {fileID: 1422312195}
   terrainManager: {fileID: 28654548}
   canvasGroup: {fileID: 820655535}
@@ -846,6 +847,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 2063290156}
+  primaryFire: {fileID: 11400000, guid: c4334f1866f323a4b8ac94e0c1b9d0a3, type: 2}
+  rotate: {fileID: 11400000, guid: f2ce04258f935d14f9f50c4cc21a0b28, type: 2}
+  move: {fileID: 11400000, guid: dc5a86ced043faf4da9dd97ffde75519, type: 2}
   preview: {fileID: 1457942725}
   mask:
     serializedVersion: 2
@@ -900,6 +904,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 199471836}
+  primaryFire: {fileID: 11400000, guid: c4334f1866f323a4b8ac94e0c1b9d0a3, type: 2}
+  rotate: {fileID: 11400000, guid: f2ce04258f935d14f9f50c4cc21a0b28, type: 2}
+  move: {fileID: 11400000, guid: dc5a86ced043faf4da9dd97ffde75519, type: 2}
   rotation: {x: 45, y: 45, z: 0}
   sens: 0.6
   minAngle: 5

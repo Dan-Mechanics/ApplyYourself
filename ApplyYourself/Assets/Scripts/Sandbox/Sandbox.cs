@@ -8,11 +8,13 @@ namespace ApplyYourself
         [SerializeField] private TextWriter timerText = default;
         [SerializeField] private Algorithm algorithm = default;
         [SerializeField] private Terraformer terraformer = default;
+        [SerializeField] private PivotController pivotController = default;
         [SerializeField] private WaterManager waterManager = default;
         [SerializeField] private TerrainManager terrainManager = default;
         [SerializeField] private CanvasGroup canvasGroup = default;
         [SerializeField] private LerpFollow lerpFollow = default;
         [SerializeField] private Transform target = default;
+        private readonly FSM fsm = new FSM();
 
         public override void Setup()
         {
@@ -21,8 +23,14 @@ namespace ApplyYourself
             timer.OnNewTime += timerText.WriteTime;
 
             terraformer.Setup();
+            pivotController.Setup();
             waterManager.Setup();
             terrainManager.Setup();
+
+            fsm.AddTransition(new StateTransition(terraformer, pivotController));
+            fsm.AddTransition(new StateTransition(pivotController, terraformer));
+            fsm.AddState(terraformer);
+            fsm.AddState(pivotController);
         }
 
         public override void Enter()
@@ -37,7 +45,8 @@ namespace ApplyYourself
 
             waterManager.Enter();
             terrainManager.Enter();
-            terraformer.Enter();
+
+            fsm.Open(terraformer);
         }
 
         public override void Exit()
@@ -47,6 +56,7 @@ namespace ApplyYourself
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
             lerpFollow.SetTarget(null);
+            fsm.Open(null);
         }
 
         public override void OnFixedUpdate()
@@ -54,7 +64,7 @@ namespace ApplyYourself
             base.OnFixedUpdate();
             waterManager.OnFixedUpdate();
             terrainManager.OnFixedUpdate();
-            terraformer.OnFixedUpdate();
+            fsm.FixedUpdate();
         }
 
         public override void OnUpdate()
@@ -62,8 +72,7 @@ namespace ApplyYourself
             base.OnUpdate();
             waterManager.OnUpdate();
             terrainManager.OnUpdate();
-            terraformer.OnUpdate();
-
+            fsm.Update();
         }
     }
 }

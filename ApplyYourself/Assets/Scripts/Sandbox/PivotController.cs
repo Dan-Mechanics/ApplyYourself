@@ -2,12 +2,12 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    /// <summary>
-    /// TODOOD !!! Add state behaviour gag
-    /// </summary>
-    public class PivotController : MonoBehaviour
+    public class PivotController : StateBehaviour
     {
-        [SerializeField] private Transform target = null;
+        [SerializeField] private Transform target = default;
+        [SerializeField] private EasyBinding primaryFire = default;
+        [SerializeField] private EasyBinding rotate = default;
+        [SerializeField] private EasyBinding move = default;
 
         [Header("Rotation")]
         [SerializeField] private Vector3 rotation = default;
@@ -24,22 +24,38 @@ namespace ApplyYourself
         [Header("Position")]
         [SerializeField] private float movingSens = default;
 
-        private void Update()
+        public override void Exit()
         {
-            Cursor.visible = !Input.GetKey(KeyCode.Mouse1);
-            if (Input.GetKey(KeyCode.Mouse2))
+            base.Exit();
+            Cursor.visible = true;
+        }
+
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+            if (primaryFire.WasPressed || move.WasReleased || rotate.WasReleased)
             {
-                Move();
+                YieldState();
                 return;
             }
-
-            if (Input.GetKey(KeyCode.Mouse1))
+            
+            if (move.IsHeld)
+            {
+                Move();
+            }
+            else if (rotate.IsHeld)
             {
                 Rotate();
             }
 
+            /*Scroll();
+            Visualize();*/
+        }
+
+        private void Update()
+        {
             Scroll();
-            Refresh();
+            Visualize();
         }
 
         private void Scroll()
@@ -65,9 +81,9 @@ namespace ApplyYourself
             transform.Translate(movement * movingSens, Space.World);
         }
 
-        private void OnValidate() => Refresh();
+        private void OnValidate() => Visualize();
 
-        private void Refresh()
+        private void Visualize()
         {
             target.localPosition = position;
             transform.localRotation = Quaternion.Euler(rotation);
