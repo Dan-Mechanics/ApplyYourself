@@ -49,6 +49,7 @@ namespace ApplyYourself
             Instantiate(prefab,
                 prefab.transform.position, prefab.transform.rotation).name = prefab.name;
         }
+
         public void ShowPreview() => SetAs(previewEnding);
         public void HidePreview() => SetAs(Ending.Placeholder);
     }

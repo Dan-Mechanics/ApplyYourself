@@ -14,6 +14,8 @@ namespace ApplyYourself
 
             LerpFollow lerpFollow = cam.GetComponent<LerpFollow>();
             lerpFollow.SetTarget(target);
+
+            lerpFollow.transform.position = target.position;
             lerpFollow.transform.LookAt(transform);
 
             interactor.SetCamera(cam.GetComponent<Camera>());
