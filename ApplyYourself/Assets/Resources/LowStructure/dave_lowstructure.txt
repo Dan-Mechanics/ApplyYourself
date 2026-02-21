@@ -1,19 +1,15 @@
- # This means this line is a comment.
+# This means this line is a comment.
 
- # Name:
+# Name:
 Dave
-
- # Sprite filename:
+# Sprite filename:
 happy_dave
-
- # Dialogue. Make sure to use quotes.
+# Dialogue, make sure to use quotes:
 "Omg wat een peak dag !!"
 
 Peak Dave
 happy_dave
 "Alles is zo peak and ( peak mention ? )"
-
-  
 
 Dave
 unhappy_dave
@@ -21,11 +17,10 @@ unhappy_dave
 hella onderwater?        hold da bloody phone yall"
 # ^ you can keep writing across lines.
 
-
 Dave
 happy_dave
 "At least ben ik nu hydrated yalllllllll~#StayHydrated~#Swimming"
- # Use ~ to indicate a newline ( even though it isn't on a new line.
+# Use ~ to indicate a newline ( even though it isn't on a new line.
 
 Dave
 unhappy_dave
@@ -36,5 +31,9 @@ happy_dave
 "Aankomende dinsdag hebben alle groepen de eerste tussentijdse presentatie aan de~
 clienten. Deze zullen om 14.15 op HKU zijn. Ik ben nog even bezig met de roosteraar~
 om een extra lokaal te regelen, dat zal betekenen dat 1 klant in 0.01 zal zijn, 1 klant in de~
-GameSpace, en 1 klant in lokaal 1.23: zodra dat vaststaat post ik de definitieve indeling hier. We~
-starten in ieder geval met de hele groep in 0.01 om 14.15."
+GameSpace, en 1 klant in lokaal 1.23: zodra dat vaststaat post ik de definitieve indeling hier.~ 
+We starten in ieder geval met de hele groep in 0.01 om 14.15."
+
+Dave
+unhappy_dave
+"... ...    ~     ...... wat de sigma "
