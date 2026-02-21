@@ -24,7 +24,7 @@ namespace ApplyYourself
 
         private void DeregisterState(StateBehaviour state)
         {
-            Yield(state);
+           // Yield(state);
             state.OnYield -= Yield;
             state.OnClaim -= Open;
             state.OnDeregister -= DeregisterState;
@@ -35,6 +35,9 @@ namespace ApplyYourself
                 if (transitions[i].to == state || transitions[i].from == state)
                     transitions.RemoveAt(i);
             }
+
+            if (current == state)
+                current = null;
         }
 
         public void Update()
@@ -64,6 +67,9 @@ namespace ApplyYourself
 
         private void Yield(StateBehaviour from)
         {
+            if (from != current)
+                return;
+
             foreach (StateTransition transition in transitions)
             {
                 if (transition.from != from)

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1324226917868466087}
   - component: {fileID: 6153193392519832596}
   - component: {fileID: 995361857042159647}
+  - component: {fileID: 4838292689177963253}
   m_Layer: 0
   m_Name: placeholder_npc
   m_TagString: Untagged
@@ -140,12 +141,25 @@ MonoBehaviour:
   resourceName: npc
   endingOverrides:
   - from: 2
-    to: 1
+    to: 5
   - from: 3
-    to: 1
-  - from: 0
-    to: 0
+    to: 5
   - from: 4
-    to: 1
-  - from: 5
-    to: 1
+    to: 5
+  - from: 1
+    to: 5
+--- !u!114 &4838292689177963253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469776133321868868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8558ba22139ba0a48a3ae36248785175, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceName: 
+  endingOverrides: []
+  ending: 1

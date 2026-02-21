@@ -73,7 +73,7 @@ namespace ApplyYourself
         private Queue<Frame> ParseDialogue(TextAsset dialogue)
         {
             Queue<Frame> result = new Queue<Frame>();
-            string[] lines = dialogue.text.Split(new[] { Environment.NewLine.ToCharArray()[0] });
+            string[] lines = dialogue.text.Split(Environment.NewLine.ToCharArray()[0]);
             for (int i = 0; i < lines.Length; i++)
             {
                 lines[i] = lines[i].Trim();

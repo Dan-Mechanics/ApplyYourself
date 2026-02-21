@@ -22,8 +22,9 @@ namespace ApplyYourself
             return Mathf.PerlinNoise(worldX * scale, worldZ * scale) * height + offset;
         }
 
-        private void FixedUpdate()
+        public override void OnFixedUpdate()
         {
+            base.OnFixedUpdate();
             for (int i = 0; i < transforms.Length; i++)
             {
                 Vector3 pos = transforms[i].position;

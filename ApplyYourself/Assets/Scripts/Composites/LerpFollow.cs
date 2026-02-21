@@ -17,16 +17,7 @@ namespace ApplyYourself
                 transform.LookAt(lookAt);
         }
 
-        public void SetTarget(Transform target)
-        {
-            this.target = target;
-            transform.SetPositionAndRotation(target.position, target.rotation);
-        }
-
-        public void SetLookAt(Transform lookAt)
-        {
-            this.lookAt = lookAt;
-            transform.LookAt(lookAt);
-        }
+        public void SetTarget(Transform target) => this.target = target;
+        public void LookAt(Transform lookAt) => this.lookAt = lookAt;
     }
 }

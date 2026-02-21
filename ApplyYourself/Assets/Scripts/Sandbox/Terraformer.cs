@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class Terraformer : MonoBehaviour 
+    public class Terraformer : StateBehaviour 
     {
         [SerializeField] private Camera cam = default;
         [SerializeField] private Transform preview = default;
@@ -11,10 +11,9 @@ namespace ApplyYourself
         [SerializeField] private BaseBrush[] brushes = default;
         private BaseBrush brush;
 
-        private void Start() => Setup();
-
-        private void Setup()
+        public override void Setup()
         {
+            base.Setup();
             for (int i = 0; i < brushes.Length; i++)
             {
                 brushes[i].Setup();
@@ -23,10 +22,12 @@ namespace ApplyYourself
             SelectBrush(0);
         }
 
-        private void FixedUpdate()
+        public override void OnFixedUpdate()
         {
+            base.OnFixedUpdate();
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             bool hasHit = Physics.Raycast(ray, out RaycastHit hit, range, mask, QueryTriggerInteraction.Ignore);
+
             preview.gameObject.SetActive(hasHit);
             if (!hasHit)
                 return;
@@ -44,7 +45,6 @@ namespace ApplyYourself
             index = Mathf.Clamp(index, 0, brushes.Length - 1);
             brush = brushes[index];
             preview.localScale = 2f * brush.size * Vector3.one;
-            //preview.localScale = brush.size * Vector3.one;
             preview.GetComponent<Renderer>().material = brush.previewMaterial;
         }
     }

@@ -6,7 +6,7 @@ namespace ApplyYourself
     /// Todo: use composition over inhertience.
     /// Call it grid and make it a class.
     /// </summary>
-    public abstract class GridComposite : MonoBehaviour 
+    public abstract class GridComposite : StateBehaviour 
     {
         [SerializeField] private GameObject prefab = default;
         [SerializeField] protected Texture2D heightmap = default;
@@ -15,9 +15,10 @@ namespace ApplyYourself
         protected Transform[] transforms;
         protected int width;
 
-        private void Start() => Setup();
-
-        public void Setup()
+        /// <summary>
+        /// This needs to be an animation.
+        /// </summary>
+        private void SpawnGrid()
         {
             width = heightmap.width;
             transforms = new Transform[width * width];
@@ -37,6 +38,12 @@ namespace ApplyYourself
         }
 
         public abstract float GetHeight(int x, int z);
+
+        public override void Enter()
+        {
+            base.Enter();
+            SpawnGrid();
+        }
 
         public void ClearChunks()
         {
