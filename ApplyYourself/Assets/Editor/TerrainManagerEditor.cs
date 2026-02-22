@@ -12,7 +12,7 @@ namespace ApplyYourself
 
             TerrainManager terrainManager = target as TerrainManager;
             if (GUILayout.Button("Show Preview"))
-                terrainManager.Setup();
+                terrainManager.SpawnGrid();
 
             if (GUILayout.Button("Clear"))
                 terrainManager.ClearChunks();

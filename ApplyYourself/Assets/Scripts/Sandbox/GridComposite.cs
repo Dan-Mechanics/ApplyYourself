@@ -18,7 +18,7 @@ namespace ApplyYourself
         /// <summary>
         /// This needs to be an animation.
         /// </summary>
-        private void SpawnGrid()
+        public void SpawnGrid()
         {
             width = heightmap.width;
             transforms = new Transform[width * width];

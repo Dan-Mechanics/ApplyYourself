@@ -35,9 +35,15 @@ namespace ApplyYourself
             Destroy(gameObject);
         }
 
+        private void OnValidate()
+        {
+            if (previewEnding == Ending.Placeholder)
+                previewEnding = Ending.Underwater;
+        }
+
         public void SetAs(Ending ending)
         {
-            BasePlaceholder[] placeholders = FindObjectsByType<BasePlaceholder>(FindObjectsSortMode.None);
+            BasePlaceholder[] placeholders = FindObjectsByType<BasePlaceholder>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             for (int i = 0; i < placeholders.Length; i++)
             {
                 placeholders[i].SetAs(ending);

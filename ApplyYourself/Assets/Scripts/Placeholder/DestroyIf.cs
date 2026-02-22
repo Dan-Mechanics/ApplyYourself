@@ -9,7 +9,8 @@ namespace ApplyYourself
         public override void SetAs(Ending ending)
         {
             ending = Utils.Filter(ending, endingOverrides);
-            if (this.ending == ending)
+            gameObject.SetActive(this.ending != ending);
+            if (!gameObject.activeSelf)
                 Destroy(gameObject);
         }
     }

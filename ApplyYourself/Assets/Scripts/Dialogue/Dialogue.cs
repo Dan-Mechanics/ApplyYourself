@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace ApplyYourself
@@ -6,14 +5,15 @@ namespace ApplyYourself
     public class Dialogue : MonoBehaviour, IInteractable
     {
         [SerializeField] private TextAsset dialogue = default;
+        private DialogueSystem dialogueSystem;
 
         public void Interact()
         {
-            DialogueSystem dialogueSystem = FindAnyObjectByType<DialogueSystem>();
             if (dialogueSystem == null)
-                return;
+                dialogueSystem = FindAnyObjectByType<DialogueSystem>();
 
-            dialogueSystem.BeginDialogue(dialogue);
+            if (dialogueSystem != null)
+                dialogueSystem.BeginDialogue(dialogue);
         }
 
         public void SetDialogue(TextAsset dialogue) => this.dialogue = dialogue;
