@@ -1,10 +1,5 @@
-# This means this line is a comment.
-
-# Name:
 Dave
-# Sprite filename:
 happy_dave
-# Dialogue, make sure to use quotes:
 "Omg wat een peak dag !!"
 
 Peak Dave
@@ -15,12 +10,10 @@ Dave
 unhappy_dave
 "Guys hoezo ben ik 
 hella onderwater?        hold da bloody phone yall"
-# ^ you can keep writing across lines.
 
 Dave
 happy_dave
 "At least ben ik nu hydrated yalllllllll~#StayHydrated~#Swimming"
-# Use ~ to indicate a newline ( even though it isn't on a new line.
 
 Dave
 unhappy_dave

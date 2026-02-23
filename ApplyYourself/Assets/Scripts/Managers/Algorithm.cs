@@ -10,30 +10,14 @@ namespace ApplyYourself
         [SerializeField] private TerrainManager terrainManager = default;
         [SerializeField] private Object placeholderScene = default;
         [SerializeField] private string natureTag = default;
-        [SerializeField] private string structureTag = default;
-        [SerializeField] private float determineHigh = default;
-        [SerializeField] private float determineLow = default;
-        [SerializeField] private int determineNature = default;
-        [SerializeField] private int determineStructure = default;
-
-        /// <summary>
-        /// TODO: Make functional texture for this.
-        /// </summary>
-        [SerializeField] private PositionToEnding[] conversions = default;
+        [SerializeField] private float underwaterHeight = default;
+        [SerializeField] private int natureRequirement = default;
 
         private void Awake() => DontDestroyOnLoad(gameObject);
 
         public void CompleteSandboxPhase()
         {
-            int structureCount = GameObject.FindGameObjectsWithTag(structureTag).Length;
             int natureCount = GameObject.FindGameObjectsWithTag(natureTag).Length;
-
-            int structureBalance = structureCount - natureCount;
-            int x = 0;
-            if (structureBalance <= determineNature)
-                x = -1;
-            else if (structureBalance >= determineStructure)
-                x = 1;
 
             float[] heightmap = terrainManager.GetHeights();
             float highest = heightmap[0];
@@ -49,24 +33,20 @@ namespace ApplyYourself
             }
 
             float avHeight = (highest + lowest) * 0.5f;
-            int y = 0;
-            if (avHeight <= determineLow)
-                y = -1;
-            else if (avHeight >= determineHigh)
-                y = 1;
-
-            Vector2Int pos = new Vector2Int(x, y);
-            ending = Ending.Underwater;
-            for (int i = 0; i < conversions.Length; i++)
+            if (avHeight <= underwaterHeight)
             {
-                if (conversions[i].position != pos)
-                    continue;
-
-                ending = conversions[i].ending;
-                break;
+                ending = Ending.UnderwaterCity;
+            }
+            else if (natureCount >= natureRequirement)
+            {
+                ending = Ending.FloatingCity;
+            }
+            else
+            {
+                ending = Ending.FloatingCity;
             }
 
-            print($"OUTCOME: {ending}. avHeight {avHeight}, structureBalance {structureBalance}, pos {pos}.");
+            print($"OUTCOME: {ending}. avHeight {avHeight}, nature {natureCount}.");
             SceneManager.LoadScene(placeholderScene.name);
         }
 

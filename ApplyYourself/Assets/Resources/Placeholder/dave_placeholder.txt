@@ -1,5 +1,0 @@
-Dave
-
-dave_happy
-# this is a comment
-"placeholder"

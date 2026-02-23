@@ -38,7 +38,7 @@ namespace ApplyYourself
         private void OnValidate()
         {
             if (previewEnding == Ending.Placeholder)
-                previewEnding = Ending.Underwater;
+                previewEnding = Ending.UnderwaterCity;
         }
 
         public void SetAs(Ending ending)

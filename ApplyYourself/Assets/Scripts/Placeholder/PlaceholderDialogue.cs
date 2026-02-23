@@ -11,6 +11,12 @@ namespace ApplyYourself
 
         public override void SetAs(Ending ending)
         {
+            if (ending == Ending.Placeholder)
+            {
+                SetDialogue(null);
+                return;
+            }
+
             ending = Utils.Filter(ending, endingOverrides);
             SetDialogue(Resources.Load<TextAsset>($"{ending}/{resourceName}_{ending.ToString().ToLowerInvariant()}"));
         }
