@@ -13,14 +13,11 @@ namespace ApplyYourself
 
         private void Start()
         {
-            transform.localPosition = startingPos;
+            SetPosition(startingPos);
             SetTargetPos();
         }
 
-        private void FixedUpdate()
-        {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, lerpSpeed);
-        }
+        private void FixedUpdate() => SetPosition(Vector3.Lerp(transform.localPosition, targetPos, lerpSpeed));
 
         private void SetTargetPos()
         {
@@ -31,10 +28,8 @@ namespace ApplyYourself
 
             Invoke(nameof(SetTargetPos), Random.Range(minInterval, maxInterval));
         }
-
-        private void OnValidate()
-        {
-            transform.localPosition = startingPos;
-        }
+        
+        private void OnValidate() => SetPosition(startingPos);
+        private void SetPosition(Vector3 pos) => transform.localPosition = pos;
     }
 }
