@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 172396126}
   - component: {fileID: 172396127}
   m_Layer: 5
-  m_Name: cloud
+  m_Name: front_cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -577,7 +577,7 @@ GameObject:
   - component: {fileID: 230410880}
   - component: {fileID: 230410879}
   m_Layer: 5
-  m_Name: back
+  m_Name: img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -622,7 +622,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f9e6e23dc110bcc41ade0e8489d035e2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c5f5a02e929ccee4bb486f7e2018f570, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1151,8 +1151,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2182,7 +2182,7 @@ GameObject:
   - component: {fileID: 1054412648}
   - component: {fileID: 1054412649}
   m_Layer: 5
-  m_Name: cloud
+  m_Name: back_cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3036,7 +3036,7 @@ GameObject:
   - component: {fileID: 1819116320}
   - component: {fileID: 1819116319}
   m_Layer: 5
-  m_Name: front
+  m_Name: img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3081,7 +3081,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8ea9bfef5545bd946a262b3993cc5f43, type: 3}
+  m_Sprite: {fileID: 21300000, guid: df7255a4c43a77e4f9e0e15b41c59662, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

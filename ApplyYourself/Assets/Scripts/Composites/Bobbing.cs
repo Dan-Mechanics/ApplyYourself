@@ -13,13 +13,13 @@ namespace ApplyYourself
 
         private void Start()
         {
-            transform.position = startingPos;
+            transform.localPosition = startingPos;
             SetTargetPos();
         }
 
         private void FixedUpdate()
         {
-            transform.position = Vector3.Lerp(transform.position, targetPos, lerpSpeed);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, lerpSpeed);
         }
 
         private void SetTargetPos()
@@ -34,7 +34,7 @@ namespace ApplyYourself
 
         private void OnValidate()
         {
-            transform.position = startingPos;
+            transform.localPosition = startingPos;
         }
     }
 }
