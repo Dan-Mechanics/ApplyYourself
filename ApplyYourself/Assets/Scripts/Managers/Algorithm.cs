@@ -8,7 +8,7 @@ namespace ApplyYourself
         [HideInInspector] public Ending ending;
         
         [SerializeField] private TerrainManager terrainManager = default;
-        [SerializeField] private Object placeholderScene = default;
+        [SerializeField] private string nextSceneName = default;
         [SerializeField] private string natureTag = default;
         [SerializeField] private float underwaterHeight = default;
         [SerializeField] private int natureRequirement = default;
@@ -57,7 +57,7 @@ namespace ApplyYourself
             }
 
             print($"OUTCOME: {ending}. avHeight {avHeight}, nature {natureCount}.");
-            SceneManager.LoadScene(placeholderScene.name);
+            SceneManager.LoadScene(nextSceneName);
         }
 
         [System.Serializable]
