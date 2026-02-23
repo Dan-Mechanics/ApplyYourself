@@ -9,7 +9,7 @@ namespace ApplyYourself
     public class TextWriter : MonoBehaviour
     {
         public bool IsDone => isDone;
-        private const float INTERVAL = 0.06f;
+        private const float INTERVAL = 0.05f;
 
         private readonly StringBuilder builder = new StringBuilder();
         private WaitForSeconds delay;
