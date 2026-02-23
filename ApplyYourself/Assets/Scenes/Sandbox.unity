@@ -237,9 +237,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fa4f417138a9d6548a99185861316df8, type: 2}
-  texture: {fileID: 2800000, guid: afaed16cd5d1f6d4bb2bf0b8e7e8d1d8, type: 3}
-  worldFloorHeight: 1.47
-  worldCeilingHeight: 114.7
+  texture: {fileID: 2800000, guid: d63fae29e955fad4c9fad9f330383e41, type: 3}
+  worldFloorHeight: 1.5
+  worldCeilingHeight: 115
 --- !u!1 &62909531
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +532,7 @@ MonoBehaviour:
   lerpSpeed: 0.004
   minInterval: 1
   maxInterval: 2
-  startingPos: {x: 0, y: 0, z: 0}
+  startingPos: {x: -960, y: -540, z: 0}
   magnitude: {x: 45, y: 45, z: 45}
 --- !u!1 &199471835
 GameObject:
@@ -2223,7 +2223,7 @@ MonoBehaviour:
   lerpSpeed: 0.004
   minInterval: 1
   maxInterval: 2
-  startingPos: {x: 0, y: 0, z: 0}
+  startingPos: {x: -960, y: -540, z: 0}
   magnitude: {x: 45, y: 45, z: 45}
 --- !u!1 &1107113947
 GameObject:
@@ -3596,10 +3596,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ending: 0
   terrainManager: {fileID: 28654548}
-  placeholderScene: {fileID: 102900000, guid: 15ebba8eb4b0165418414b3bc694f47d, type: 3}
+  placeholderScene: {fileID: 102900000, guid: 50579f82fab0e6d4897e8394c6c53d1e, type: 3}
   natureTag: Nature
   underwaterHeight: 20
-  natureRequirement: 10
+  natureRequirement: 4
 --- !u!4 &2075519568
 Transform:
   m_ObjectHideFlags: 0

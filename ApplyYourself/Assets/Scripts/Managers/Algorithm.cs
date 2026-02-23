@@ -33,7 +33,7 @@ namespace ApplyYourself
             }
 
             float avHeight = (highest + lowest) * 0.5f;
-            if (avHeight <= underwaterHeight)
+            /*if (avHeight <= underwaterHeight)
             {
                 ending = Ending.UnderwaterCity;
             }
@@ -42,6 +42,16 @@ namespace ApplyYourself
                 ending = Ending.FloatingCity;
             }
             else
+            {
+                ending = Ending.FloatingCity;
+            }*/
+
+            ending = Ending.UnderwaterCity;
+            if (natureCount >= natureRequirement)
+            {
+                ending = Ending.FloatingCity;
+            }
+            else if (avHeight >= underwaterHeight)
             {
                 ending = Ending.FloatingCity;
             }

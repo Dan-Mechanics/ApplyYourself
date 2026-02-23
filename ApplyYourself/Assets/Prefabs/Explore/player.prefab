@@ -262,7 +262,7 @@ Transform:
   m_GameObject: {fileID: 8195046949362653098}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 3.36, y: 2.09, z: -9.48}
+  m_LocalPosition: {x: 1.3570675, y: 1, z: -24.355068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -341,8 +341,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 3647801561732012112}
+  fly: {fileID: 11400000, guid: eaca23abef3ef7c49b9e9306c19ff5cd, type: 2}
   graphic: {fileID: 2884527835457003309}
   heading: {fileID: 3666153390303725975}
+  flyVelocity: {x: 0, y: 5, z: 0}
   speed: 6
 --- !u!1 &8690821403552923551
 GameObject:

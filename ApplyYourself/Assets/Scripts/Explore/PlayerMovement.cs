@@ -5,8 +5,10 @@ namespace ApplyYourself
     public class PlayerMovement : StateBehaviour
     {
         [SerializeField] private CharacterController controller = default;
+        [SerializeField] private EasyBinding fly = default;
         [SerializeField] private Transform graphic = default;
         [SerializeField] private Transform heading = default;
+        [SerializeField] private Vector3 flyVelocity = default;
         [SerializeField] private float speed = default;
 
         public override void OnFixedUpdate()
@@ -24,7 +26,15 @@ namespace ApplyYourself
             }
 
             controller.Move(movement * Time.fixedDeltaTime);
-            controller.Move(Physics.gravity * Time.fixedDeltaTime);
+
+            if (fly.IsHeld)
+            {
+                controller.Move(flyVelocity * Time.fixedDeltaTime);
+            }
+            else
+            {
+                controller.Move(Physics.gravity * Time.fixedDeltaTime);
+            }
         }
     }
 }
