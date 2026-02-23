@@ -3596,7 +3596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ending: 0
   terrainManager: {fileID: 28654548}
-  placeholderScene: {fileID: 102900000, guid: 50579f82fab0e6d4897e8394c6c53d1e, type: 3}
+  placeholderScene: {fileID: 102900000, guid: cb9346f87ee7bfb45a95367a69a91359, type: 3}
   natureTag: Nature
   underwaterHeight: 20
   natureRequirement: 4
