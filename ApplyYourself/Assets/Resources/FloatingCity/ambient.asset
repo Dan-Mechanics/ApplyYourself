@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a3572235a28a842bc55a11b5c9de76, type: 3}
   m_Name: ambient
   m_EditorClassIdentifier: 
-  density: 0.055
-  color: {r: 0.7735849, g: 0.6503582, b: 0.5648629, a: 1}
+  density: 0.05
+  color: {r: 0.3009825, g: 0.44707632, b: 0.690566, a: 1}
