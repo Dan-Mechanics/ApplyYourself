@@ -12,6 +12,8 @@ namespace ApplyYourself
         [SerializeField] private Algorithm algorithm = default;
         [SerializeField] private Terraformer terraformer = default;
         [SerializeField] private PivotController pivotController = default;
+        [SerializeField] private WaterManager waterManager = default;
+        [SerializeField] private LandManager landManager= default;
         private readonly FSM fsm = new FSM();
 
         private void Start()
@@ -19,6 +21,8 @@ namespace ApplyYourself
             timer.OnNewTime += timerText.WriteTime;
             timer.OnDone += algorithm.CompleteSandboxPhase;
             timer.Begin();
+
+            waterManager.SetTypemap(landManager);
 
             terraformer.Setup();
             pivotController.Setup();

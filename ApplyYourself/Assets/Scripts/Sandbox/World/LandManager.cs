@@ -14,6 +14,7 @@ namespace ApplyYourself
         private ITypemap typemap;
         private UnitVisual[,] unitVisuals;
         private UnitType[,] unitTypes;
+        private Test[,] test;
         private float[,] unitHeights;
 
         private void Start() => Initialize();
@@ -60,6 +61,19 @@ namespace ApplyYourself
             }
         }
 
+        private void dwdw()
+        {
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < width; y++)
+                {
+                    Vector3 pos = unitVisuals[x, y].transform.position;
+                    pos.y = unitHeights[x, y];
+                    unitVisuals[x, y].transform.position = pos;
+                }
+            }
+        }
+
         private void UpdateAllTypes()
         {
             for (int x = 0; x < width; x++)
@@ -75,6 +89,15 @@ namespace ApplyYourself
         {
             GameObject.FindGameObjectsWithTag("Chunk").
                 ToList().ForEach(x => DestroyImmediate(x));
+        }
+
+        private struct Test
+        {
+            public bool IsWater => waterHeight > landHeight;
+            
+            public UnitType type;
+            public float landHeight;
+            public float waterHeight;
         }
     }
 }

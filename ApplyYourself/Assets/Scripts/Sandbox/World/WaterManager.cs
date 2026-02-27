@@ -7,14 +7,18 @@ namespace ApplyYourself
         [SerializeField] private int width = default;
         [SerializeField] private float minWaterHeight = default;
         [SerializeField] private float maxWaterHeight = default;
-        [SerializeField] private float raise = default;
+        [SerializeField] private float interval = default;
+        [SerializeField] private float visualShake = default;
         [SerializeField] private GridSpawner spawner = default;
         [SerializeField] private UnitType water = default;
 
+        private LandManager typemap;
         private UnitVisual[,] unitVisuals;
         private float[,] heightBufferA;
         private float[,] heightBufferB;
         private bool swap;
+
+        public void SetTypemap(LandManager typemap) => this.typemap = typemap;
 
         private void Start() => Initialize();
 
@@ -34,9 +38,19 @@ namespace ApplyYourself
                 }
             }
 
-            heightBufferA[0, 0] = maxWaterHeight;
+            SetHeight(0, width - 1, maxWaterHeight / 2f);
             UpdateAllHeights();
             UpdateAllTypes();
+
+            InvokeRepeating(nameof(Tick), 0f, interval);
+        }
+
+        private void Tick()
+        {
+            Compute(swap ? heightBufferB : heightBufferA, swap ? heightBufferA : heightBufferB);
+            swap = !swap;
+
+           // UpdateAllHeights();
         }
 
         private void UpdateAllHeights()
@@ -46,7 +60,7 @@ namespace ApplyYourself
                 for (int y = 0; y < width; y++)
                 {
                     Vector3 pos = unitVisuals[x, y].transform.position;
-                    pos.y = heightBufferA[x, y];
+                    pos.y = heightBufferA[x, y] + Random.value * visualShake;
                     unitVisuals[x, y].transform.position = pos;
                 }
             }
@@ -65,47 +79,39 @@ namespace ApplyYourself
             }
         }
 
-        private void FixedUpdate()
+        private void SetHeight(int x, int y, float height)
         {
-            Tick(swap ? heightBufferB : heightBufferA, swap ? heightBufferA : heightBufferB);
-            swap = !swap;
-
-            UpdateAllHeights();
+            heightBufferA[x, y] = height;
+            heightBufferB[x, y] = height;
         }
 
-        private void Tick(float[,] readBuffer, float[,] writeBuffer)
+        private void Compute(float[,] readBuffer, float[,] writeBuffer)
         {
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)
                 {
-                    RaiseNeighbours(x, y, readBuffer, writeBuffer);
+                    Raise(x, y + 1, readBuffer[x, y], writeBuffer);
+                    Raise(x, y - 1, readBuffer[x, y], writeBuffer);
+                    Raise(x - 1, y, readBuffer[x, y], writeBuffer);
+                    Raise(x + 1, y, readBuffer[x, y], writeBuffer);
                 }
             }
         }
 
-        private void RaiseNeighbours(int x, int y, float[,] readBuffer, float[,] writeBuffer)
+        private void Raise(int x, int y, float height, float[,] writeBuffer)
         {
-            float motion = readBuffer[x, y] * raise * Time.fixedDeltaTime;
-            
-            // get a radnom point around diag plus cardiinal and then move it towards it.
-            Raise(x + 1, y, motion, writeBuffer);
-            Raise(x - 1, y, motion, writeBuffer);
-            Raise(x, y + 1, motion, writeBuffer);
-            Raise(x, y - 1, motion, writeBuffer);
+            if (x < 0 || y < 0 || x >= width || y >= width)
+                return;
 
-            Raise(x - 1, y + 1, motion, writeBuffer);
+            if (height <= writeBuffer[x, y] || height <= typemap.GetHeightAt(x,y))
+                return;
 
-            Raise(x + 1, y + 1, motion, writeBuffer);
+            writeBuffer[x, y] = Mathf.Clamp(writeBuffer[x, y] + height * 0.5f, minWaterHeight, maxWaterHeight);
 
-            Raise(x  -1, y - 1, motion, writeBuffer);
-            Raise(x + 1, y - 1, motion, writeBuffer);
-        }
-
-        private void Raise(int x, int y, float motion, float[,] writerBuffer)
-        {
-            if (x >= 0 && y >= 0 && x < width && y < width)
-                writerBuffer[x, y] = Mathf.Clamp(writerBuffer[x, y] + motion, minWaterHeight, maxWaterHeight);
+            Vector3 pos = unitVisuals[x, y].transform.position;
+            pos.y = writeBuffer[x, y] + Random.value * visualShake;
+            unitVisuals[x, y].transform.position = pos;
         }
     }
 }
