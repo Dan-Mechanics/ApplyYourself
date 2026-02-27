@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class PlaceholderMaterial : BasePlaceholder
+    public class PlaceholderMaterial : Placeholder
     {
         private MeshRenderer rend;
 

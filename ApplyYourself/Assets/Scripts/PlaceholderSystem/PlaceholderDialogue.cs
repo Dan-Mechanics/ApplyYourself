@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class PlaceholderDialogue : BasePlaceholder
+    public class PlaceholderDialogue : Placeholder
     {
         private void SetDialogue(TextAsset dialogue)
         {

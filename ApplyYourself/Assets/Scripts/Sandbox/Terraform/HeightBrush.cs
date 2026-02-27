@@ -3,7 +3,7 @@ using UnityEngine;
 namespace ApplyYourself
 {
     [CreateAssetMenu(fileName = nameof(HeightBrush), menuName = nameof(HeightBrush))]
-    public class HeightBrush : BaseBrush
+    public class HeightBrush : Brush
     {
         public override void Apply(Collider[] colliders)
         {

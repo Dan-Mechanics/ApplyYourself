@@ -3,7 +3,7 @@ using UnityEngine;
 namespace ApplyYourself
 {
     [CreateAssetMenu(fileName = nameof(DecorationBrush), menuName = nameof(DecorationBrush))]
-    public class DecorationBrush : BaseBrush
+    public class DecorationBrush : Brush
     {
         public GameObject prefab;
         public string tag;

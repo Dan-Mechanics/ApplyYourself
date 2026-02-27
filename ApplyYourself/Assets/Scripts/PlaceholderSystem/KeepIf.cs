@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class KeepIf : BasePlaceholder
+    public class KeepIf : Placeholder
     {
         [SerializeField] private Ending ending = default;
 

@@ -150,16 +150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62bb093b660763245bad95fe8ff6f2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: {fileID: 0}
-  timerText: {fileID: 0}
-  algorithm: {fileID: 0}
+  timer: {fileID: 1984330393}
+  timerText: {fileID: 62909535}
+  algorithm: {fileID: 2075519567}
   terraformer: {fileID: 0}
   pivotController: {fileID: 0}
-  waterManager: {fileID: 0}
-  terrainManager: {fileID: 0}
-  canvasGroup: {fileID: 0}
-  lerpFollow: {fileID: 0}
-  target: {fileID: 0}
 --- !u!4 &17225716
 Transform:
   m_ObjectHideFlags: 0
@@ -622,9 +617,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 369849030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf6df0e50b7a8f948a1f5942603e28f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 2311d1115c4935047bf17eb6270b390b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  primaryFire: {fileID: 0}
+  rotate: {fileID: 0}
+  move: {fileID: 0}
+  preview: {fileID: 0}
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
+  range: 0
+  brushes: []
 --- !u!4 &369849032
 Transform:
   m_ObjectHideFlags: 0
@@ -666,9 +671,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 376942857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0796bcb8fb2f6084bb6ae4e47d70de0d, type: 3}
+  m_Script: {fileID: 11500000, guid: c5b547cf779dedb408c6841d0bad6a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  primaryFire: {fileID: 0}
+  rotate: {fileID: 0}
+  move: {fileID: 0}
+  rotation: {x: 0, y: 0, z: 0}
+  sens: 0
+  minAngle: 0
+  maxAngle: 0
+  position: {x: 0, y: 0, z: 0}
+  zoomSens: 0
+  minDistance: 0
+  maxDistance: 0
+  movingSens: 0
 --- !u!4 &376942859
 Transform:
   m_ObjectHideFlags: 0
@@ -1675,9 +1693,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1422312191}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 200a7e9ecc6eeca45a3900afdfd7d921, type: 3}
+  m_Script: {fileID: 11500000, guid: cb8b21d6031fa8d40b0557228c9db043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner:
+    prefab: {fileID: 0}
+    spacing: 0
+  width: 0
+  maxWaterHeight: 0
+  minWaterHeight: 0
+  raise: 0
 --- !u!1 &1457942721
 GameObject:
   m_ObjectHideFlags: 0

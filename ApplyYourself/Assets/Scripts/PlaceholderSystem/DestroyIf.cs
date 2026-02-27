@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class DestroyIf : BasePlaceholder
+    public class DestroyIf : Placeholder
     {
         [SerializeField] private Ending ending = default;
 

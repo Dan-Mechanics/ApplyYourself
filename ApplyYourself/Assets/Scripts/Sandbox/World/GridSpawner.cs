@@ -8,9 +8,6 @@ namespace ApplyYourself
         public GameObject prefab;
         public float spacing;
 
-        /// <summary>
-        /// Future: add animation + state.
-        /// </summary>
         public GameObject[,] SpawnGrid(int width)
         {
             GameObject[,] grid = new GameObject[width, width];

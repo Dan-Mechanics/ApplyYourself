@@ -43,7 +43,7 @@ namespace ApplyYourself
 
         public void SetAs(Ending ending)
         {
-            BasePlaceholder[] placeholders = FindObjectsByType<BasePlaceholder>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            Placeholder[] placeholders = FindObjectsByType<Placeholder>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             for (int i = 0; i < placeholders.Length; i++)
             {
                 placeholders[i].SetAs(ending);

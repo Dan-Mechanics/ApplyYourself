@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class LandManager : StateBehaviour 
+    public class LandManager : MonoBehaviour 
     {
         [SerializeField] private int width = default;
         [SerializeField] private float minHeight = default;
@@ -16,11 +16,7 @@ namespace ApplyYourself
         private UnitType[,] unitTypes;
         private float[,] unitHeights;
 
-        public override void Enter()
-        {
-            base.Enter();
-            Initialize();
-        }
+        private void Start() => Initialize();
 
         public void Initialize()
         {

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class WaterManager : StateBehaviour
+    public class WaterManager : MonoBehaviour
     {
         [SerializeField] private GridSpawner spawner = default;
         [SerializeField] private int width = default;
@@ -15,11 +15,7 @@ namespace ApplyYourself
         private float[,] heightBufferB;
         private bool swap;
 
-        public override void Enter()
-        {
-            base.Enter();
-            Initialize();
-        }
+        private void Start() => Initialize();
 
         public void Initialize()
         {
@@ -54,9 +50,8 @@ namespace ApplyYourself
             }
         }
 
-        public override void OnFixedUpdate()
+        private void FixedUpdate()
         {
-            base.OnFixedUpdate();
             Tick(swap ? heightBufferB : heightBufferA, swap ? heightBufferA : heightBufferB);
             swap = !swap;
 

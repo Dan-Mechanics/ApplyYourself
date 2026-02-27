@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ApplyYourself
@@ -8,27 +9,23 @@ namespace ApplyYourself
         [SerializeField] private EasyBinding primaryFire = default;
         [SerializeField] private EasyBinding rotate = default;
         [SerializeField] private EasyBinding move = default;
-        [SerializeField] private Transform preview = default;
+        [SerializeField] private GameObject preview = default;
         [SerializeField] private LayerMask mask = default;
         [SerializeField] private float range = default;
-        [SerializeField] private BaseBrush[] brushes = default;
-        private BaseBrush brush;
+        [SerializeField] private List<Brush> brushes = default;
+        private Brush brush;
 
         public override void Setup()
         {
             base.Setup();
-            for (int i = 0; i < brushes.Length; i++)
-            {
-                brushes[i].Setup();
-            }
-
+            brushes.ForEach(x => x.Setup());
             SelectBrush(0);
         }
 
         public override void Exit()
         {
             base.Exit();
-            preview.gameObject.SetActive(false);
+            preview.SetActive(false);
             Cursor.visible = false;
         }
 
@@ -39,22 +36,30 @@ namespace ApplyYourself
                 YieldState();
         }
 
+        /// <summary>
+        /// todo: make a layer of indirection here.
+        /// </summary>
         public override void OnFixedUpdate()
         {
             base.OnFixedUpdate();
+
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            bool hasHit = Physics.Raycast(ray, out RaycastHit hit, range, mask, QueryTriggerInteraction.Ignore);
+            bool rayHasHit = Physics.Raycast(ray, out RaycastHit hit, range, mask, QueryTriggerInteraction.Ignore);
 
-            preview.gameObject.SetActive(hasHit);
-            if (!hasHit)
-                return;
-
-            preview.position = hit.point;
-            if (!primaryFire.IsHeld)
-                return;
-
-            Collider[] colliders = Physics.OverlapSphere(hit.point, brush.size, mask, QueryTriggerInteraction.Ignore);
-            brush.Apply(colliders);
+            if (rayHasHit)
+            {
+                preview.SetActive(true);
+                preview.transform.position = hit.point;
+                if (primaryFire.IsHeld)
+                {
+                    Collider[] colliders = Physics.OverlapSphere(hit.point, brush.size, mask, QueryTriggerInteraction.Ignore);
+                    brush.Apply(colliders);
+                }
+            }
+            else
+            {
+                preview.SetActive(false);
+            }
         }
 
         /// <summary>
@@ -62,9 +67,9 @@ namespace ApplyYourself
         /// </summary>
         public void SelectBrush(int index)
         {
-            index = Mathf.Clamp(index, 0, brushes.Length - 1);
+            index = Mathf.Clamp(index, 0, brushes.Count - 1);
             brush = brushes[index];
-            preview.localScale = 2f * brush.size * Vector3.one;
+            preview.transform.localScale = 2f * brush.size * Vector3.one;
             preview.GetComponent<Renderer>().material = brush.previewMaterial;
         }
     }

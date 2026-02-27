@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public abstract class BasePlaceholder : MonoBehaviour
+    public abstract class Placeholder : MonoBehaviour
     {
         [SerializeField] protected string resourceName = default;
         [SerializeField] protected EndingOverride[] endingOverrides = default;

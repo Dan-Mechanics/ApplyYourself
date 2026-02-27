@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public abstract class BaseBrush : ScriptableObject
+    public abstract class Brush : ScriptableObject
     {
         public float size;
         public float strength;

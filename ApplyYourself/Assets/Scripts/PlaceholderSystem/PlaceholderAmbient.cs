@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class PlaceholderAmbient : BasePlaceholder
+    public class PlaceholderAmbient : Placeholder
     {
         private void SetAmbient(Ambient amb)
         {

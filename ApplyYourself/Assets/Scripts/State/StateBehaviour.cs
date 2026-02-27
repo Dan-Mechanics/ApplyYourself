@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class StateBehaviour : MonoBehaviour
+    public abstract class StateBehaviour : MonoBehaviour
     {
         public event Action<StateBehaviour> OnYield;
         public event Action<StateBehaviour> OnClaim;
