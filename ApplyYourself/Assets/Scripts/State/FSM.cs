@@ -24,7 +24,6 @@ namespace ApplyYourself
 
         private void DeregisterState(StateBehaviour state)
         {
-           // Yield(state);
             state.OnYield -= Yield;
             state.OnClaim -= Open;
             state.OnDeregister -= DeregisterState;

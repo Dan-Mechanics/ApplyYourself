@@ -3,19 +3,19 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    [CustomEditor(typeof(EndingSetup))]
-    public class EndingSetupEditor : Editor
+    [CustomEditor(typeof(LandManager))]
+    public class LandManagerEditor : Editor
     {
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
 
-            EndingSetup endingSetup = target as EndingSetup;
+            LandManager landManager = target as LandManager;
             if (GUILayout.Button("Show Preview"))
-                endingSetup.ShowPreview();
+                landManager.Initialize();
 
             if (GUILayout.Button("Clear"))
-                endingSetup.HidePreview();
+                landManager.Terminate();
 
         }
     }
