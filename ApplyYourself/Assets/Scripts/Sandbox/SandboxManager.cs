@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
+    /// <summary>
+    /// Put the sequence here. make everyhing work with heightmap and typemap to keep seperate
+    /// </summary>
     public class SandboxManager : MonoBehaviour 
     {
         [SerializeField] private Timer timer = default;

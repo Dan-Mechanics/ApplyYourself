@@ -32,8 +32,8 @@ namespace ApplyYourself
             {
                 for (int y = 0; y < width; y++)
                 {
-                    unitHeights[x, y] = Mathf.Clamp(heightmap.GetHeight(x, y), minHeight, maxHeight);
-                    unitTypes[x, y] = typemap.GetType(x, y);
+                    unitHeights[x, y] = Mathf.Clamp(heightmap.GetHeightAt(x, y), minHeight, maxHeight);
+                    unitTypes[x, y] = typemap.GetTypeAt(x, y);
 
                     Transform unit = grid[x, y].transform;
                     unitVisuals[x, y].Assign(unit, unit.GetChild(0).GetComponent<MeshRenderer>());
@@ -43,6 +43,9 @@ namespace ApplyYourself
             UpdateAllHeights();
             UpdateAllTypes();
         }
+
+        public float GetHeightAt(int x, int y) => unitHeights[x, y];
+        public UnitType GetTypeAt(int x, int y) => unitTypes[x, y];
 
         private void UpdateAllHeights()
         {

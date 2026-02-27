@@ -7,7 +7,7 @@ namespace ApplyYourself
         [SerializeField] private Texture2D heightmap = default;
         [SerializeField] private float height = default;
 
-        public float GetHeight(int x, int y)
+        public float GetHeightAt(int x, int y)
         {
             x = Mathf.Clamp(x, 0, heightmap.width - 1);
             y = Mathf.Clamp(y, 0, heightmap.height - 1);

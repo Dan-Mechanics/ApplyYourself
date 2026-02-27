@@ -7,7 +7,7 @@ namespace ApplyYourself
         [SerializeField] private Texture2D typemap = default;
         [SerializeField] private Conversion[] conversions = default;
 
-        public UnitType GetType(int x, int y)
+        public UnitType GetTypeAt(int x, int y)
         {
             x = Mathf.Clamp(x, 0, typemap.width - 1);
             y = Mathf.Clamp(y, 0, typemap.height - 1);

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10860e86182aa604b8a1565bb71c873c, type: 3}
-  m_Name: raise
+  m_Script: {fileID: 11500000, guid: 16ecd94d3c7db084c97cd0c0c290f1aa, type: 3}
+  m_Name: water
   m_EditorClassIdentifier: 
-  size: 12
-  strength: 40
-  previewMaterial: {fileID: 2100000, guid: 012b5bb81cae03245b8b2d7cb9c3a025, type: 2}
+  material: {fileID: 2100000, guid: 753022d5c02d0164784f782d9cd7c767, type: 2}
+  decoration: {fileID: 0}
+  waterPercentage: 1

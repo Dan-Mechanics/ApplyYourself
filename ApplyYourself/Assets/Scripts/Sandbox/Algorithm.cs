@@ -5,9 +5,9 @@ namespace ApplyYourself
 {
     public class Algorithm : MonoBehaviour
     {
-        [HideInInspector] public Ending ending;
+        [HideInInspector] public Ending ending = Ending.UnderwaterCity;
         
-        [SerializeField] private LandManager terrainManager = default;
+        [SerializeField] private LandManager landManager = default;
         [SerializeField] private string nextSceneName = default;
         [SerializeField] private string natureTag = default;
         [SerializeField] private float underwaterHeight = default;

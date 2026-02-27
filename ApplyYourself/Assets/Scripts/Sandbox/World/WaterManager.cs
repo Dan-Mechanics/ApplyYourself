@@ -4,11 +4,12 @@ namespace ApplyYourself
 {
     public class WaterManager : MonoBehaviour
     {
-        [SerializeField] private GridSpawner spawner = default;
         [SerializeField] private int width = default;
-        [SerializeField] private float maxWaterHeight = default;
         [SerializeField] private float minWaterHeight = default;
+        [SerializeField] private float maxWaterHeight = default;
         [SerializeField] private float raise = default;
+        [SerializeField] private GridSpawner spawner = default;
+        [SerializeField] private UnitType water = default;
 
         private UnitVisual[,] unitVisuals;
         private float[,] heightBufferA;
@@ -35,6 +36,7 @@ namespace ApplyYourself
 
             heightBufferA[0, 0] = maxWaterHeight;
             UpdateAllHeights();
+            UpdateAllTypes();
         }
 
         private void UpdateAllHeights()
@@ -46,6 +48,17 @@ namespace ApplyYourself
                     Vector3 pos = unitVisuals[x, y].transform.position;
                     pos.y = heightBufferA[x, y];
                     unitVisuals[x, y].transform.position = pos;
+                }
+            }
+        }
+
+        private void UpdateAllTypes()
+        {
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < width; y++)
+                {
+                    unitVisuals[x, y].SetAs(water);
                 }
             }
         }
@@ -71,11 +84,20 @@ namespace ApplyYourself
 
         private void RaiseNeighbours(int x, int y, float[,] readBuffer, float[,] writeBuffer)
         {
-            float motion = readBuffer[x, y] * raise;
+            float motion = readBuffer[x, y] * raise * Time.fixedDeltaTime;
+            
+            // get a radnom point around diag plus cardiinal and then move it towards it.
             Raise(x + 1, y, motion, writeBuffer);
             Raise(x - 1, y, motion, writeBuffer);
             Raise(x, y + 1, motion, writeBuffer);
             Raise(x, y - 1, motion, writeBuffer);
+
+            Raise(x - 1, y + 1, motion, writeBuffer);
+
+            Raise(x + 1, y + 1, motion, writeBuffer);
+
+            Raise(x  -1, y - 1, motion, writeBuffer);
+            Raise(x + 1, y - 1, motion, writeBuffer);
         }
 
         private void Raise(int x, int y, float motion, float[,] writerBuffer)

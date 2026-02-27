@@ -2,6 +2,6 @@ namespace ApplyYourself
 {
     public interface ITypemap 
     {
-        UnitType GetType(int x, int y);
+        UnitType GetTypeAt(int x, int y);
     }
 }

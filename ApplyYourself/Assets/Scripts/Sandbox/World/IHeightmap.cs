@@ -2,6 +2,6 @@ namespace ApplyYourself
 {
     public interface IHeightmap 
     {
-        float GetHeight(int x, int y);
+        float GetHeightAt(int x, int y);
     }
 }
