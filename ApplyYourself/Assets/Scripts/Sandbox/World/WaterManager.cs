@@ -52,6 +52,8 @@ namespace ApplyYourself
             }
         }
 
+        public float GetHeightAt(int x, int y) => heightBufferA[x, y];
+
         private void UpdateAllTypes()
         {
             for (int x = 0; x < width; x++)

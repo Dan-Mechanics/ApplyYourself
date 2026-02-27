@@ -4,6 +4,7 @@ namespace ApplyYourself
 {
     public class PivotController : StateBehaviour
     {
+        [Header("References")]
         [SerializeField] private Transform target = default;
         [SerializeField] private EasyBinding primaryFire = default;
         [SerializeField] private EasyBinding rotate = default;
@@ -39,7 +40,7 @@ namespace ApplyYourself
                 return;
             }
             
-            if (move.IsHeld)
+            if (move.IsHeld && movingSens > 0f)
             {
                 Move();
             }

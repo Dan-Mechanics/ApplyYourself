@@ -2,6 +2,9 @@
 
 namespace ApplyYourself
 {
+    /// <summary>
+    /// If water cover it, disable decoration, dont destroy.
+    /// </summary>
     public struct UnitVisual
     {
         public Transform transform;
