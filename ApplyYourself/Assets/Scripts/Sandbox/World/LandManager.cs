@@ -24,6 +24,7 @@ namespace ApplyYourself
 
         public void Initialize()
         {
+            // transform.Find("dwdw") here
             IHeightmap startupHeightmap = GetComponent<IHeightmap>();
             ITypemap startupTypemap = GetComponent<ITypemap>();
 
