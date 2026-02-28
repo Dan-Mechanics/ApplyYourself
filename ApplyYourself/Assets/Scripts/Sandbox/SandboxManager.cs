@@ -12,8 +12,10 @@ namespace ApplyYourself
         [SerializeField] private Algorithm algorithm = default;
         [SerializeField] private Terraformer terraformer = default;
         [SerializeField] private PivotController pivotController = default;
-        [SerializeField] private WaterManager waterManager = default;
+      //  [SerializeField] private WaterManager waterManager = default;
         [SerializeField] private LandManager landManager= default;
+        [SerializeField] private RaiseBrush raise = default;
+        [SerializeField] private DecorateBrush decorate = default;
         [SerializeField] private float interval = default;
         private readonly FSM fsm = new FSM();
 
@@ -22,6 +24,9 @@ namespace ApplyYourself
             timer.OnNewTime += timerText.WriteTime;
             timer.OnDone += algorithm.CompleteSandboxPhase;
             timer.Begin();
+
+            raise.OnRaise += landManager.RaiseArea;
+            decorate.OnDecorate += landManager.DecorateArea;
 
             //  waterManager.SetTypemap(landManager);
             InvokeRepeating(nameof(Tick), interval, interval);

@@ -155,9 +155,10 @@ MonoBehaviour:
   algorithm: {fileID: 383002006}
   terraformer: {fileID: 369849031}
   pivotController: {fileID: 376942858}
-  waterManager: {fileID: 1422312195}
   landManager: {fileID: 28654548}
-  interval: 0.5
+  raise: {fileID: 11400000, guid: f9c4c0f37f79d8a4cbfa5e1ebb235147, type: 2}
+  decorate: {fileID: 11400000, guid: c35b98994696f8a4b9b2ee22b7b617b7, type: 2}
+  interval: 0.25
 --- !u!4 &17225716
 Transform:
   m_ObjectHideFlags: 0

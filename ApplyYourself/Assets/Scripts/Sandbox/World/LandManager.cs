@@ -60,7 +60,7 @@ namespace ApplyYourself
             }
         }
 
-        public void SetAreaType(List<Vector2Int> positions, UnitType type)
+        public void DecorateArea(List<Vector2Int> positions, UnitType type)
         {
             if (type == null)
                 type = plains;
@@ -69,7 +69,9 @@ namespace ApplyYourself
             {
                 int x = positions[i].x;
                 int y = positions[i].y;
-                if (unitTypes[x, y] == type || unitTypes[x, y] == city)
+
+                // ??
+                if (unitHeights[x, y] < waterHeight || unitTypes[x, y] == type || unitTypes[x, y] == city)
                     continue;
 
                 unitTypes[x, y] = type;
@@ -90,7 +92,7 @@ namespace ApplyYourself
                 for (int y = 0; y < width; y++)
                 {
                     float landHeight = unitHeights[x, y];
-                    bool isLand = landHeight > waterHeight;
+                    bool isLand = landHeight >= waterHeight;
                     if (isLand)
                     {
                         // YOU COULD MAKE THIS ONE METHOD.

@@ -59,7 +59,9 @@ namespace ApplyYourself
                     Debug.Log(colliders.Length);
                     for (int i = 0; i < colliders.Length; i++)
                     {
-                        Vector3 pos = colliders[i].transform.position / spacing;
+                        Vector3 pos = colliders[i].transform.position;
+                        pos -= 0.5f * spacing * Vector3.one;
+                        pos /= spacing;
                         positions.Add(new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.z)));
                     }
 
