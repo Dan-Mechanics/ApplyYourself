@@ -1,3 +1,7 @@
+make it so that space also skips dialogue
+
+
+
 coding questions:
 how to architect state well ?
 how to arhcitect dialogue well ?

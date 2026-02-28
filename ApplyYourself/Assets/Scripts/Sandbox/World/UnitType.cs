@@ -7,8 +7,6 @@ namespace ApplyYourself
     {
         public Material material;
         public GameObject decoration;
-
-        // FIX NAME.
         [Range(0f, 1f)] public float waterPercentage;
     }
 }

@@ -47,7 +47,7 @@ namespace ApplyYourself
                 }
             }
 
-            Render();
+            //Render();
         }
 
         public void RaiseArea(List<Vector2Int> positions, float motion)
@@ -81,8 +81,8 @@ namespace ApplyYourself
             }
         }
 
-       //public float GetHeightAt(int x, int y) => unitHeights[x, y];
-       //public UnitType GetTypeAt(int x, int y) => unitTypes[x, y];
+        public float GetHeightAt(int x, int y) => unitHeights[x, y];
+        public UnitType GetTypeAt(int x, int y) => unitTypes[x, y];
 
         /// <summary>
         /// Called by SandboxManager.
