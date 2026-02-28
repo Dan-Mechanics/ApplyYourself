@@ -1,5 +1,8 @@
 make it so that space also skips dialogue
 make tags and layers called unit
+make it so all brush has settype and set height
+and make a dam brush that set hight to crazy shit, like a dam has waterpercentage = 0f;
+and also you have nobs and dials for water settings with random but its good like this.
 
 
 coding questions:

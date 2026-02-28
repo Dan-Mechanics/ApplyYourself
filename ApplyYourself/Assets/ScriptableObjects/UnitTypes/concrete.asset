@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ecd94d3c7db084c97cd0c0c290f1aa, type: 3}
   m_Name: concrete
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 57d0eb1e1059d8042b24f8975db573d1, type: 2}
+  material: {fileID: 2100000, guid: e1d6b1abc29d79e45989a7bc806d36d9, type: 2}
   decoration: {fileID: 0}
   waterPercentage: 1

@@ -15,9 +15,9 @@ namespace ApplyYourself
         [SerializeField] private PivotController pivotController = default;
         [SerializeField] private WaterManager waterManager = default;
         [SerializeField] private LandManager landManager = default;
-        [SerializeField] private List<RaiseBrush> raise = default;
-        [SerializeField] private List<DecorateBrush> decorate = default;
         [SerializeField] private float interval = default;
+        [SerializeField] private List<RaiseBrush> raises = default;
+        [SerializeField] private List<DecorateBrush> decorates = default;
         private readonly FSM fsm = new FSM();
 
         private void Start()
@@ -30,11 +30,11 @@ namespace ApplyYourself
             landManager.Initialize();
 
             // water always first here !!!
-            raise.ForEach(x => x.OnRaise += waterManager.RaiseArea);
-            raise.ForEach(x => x.OnRaise += landManager.RaiseArea);
+            raises.ForEach(x => x.OnRaise += waterManager.RaiseArea);
+            raises.ForEach(x => x.OnRaise += landManager.RaiseArea);
 
 
-            decorate.ForEach(x => x.OnDecorate += landManager.DecorateArea);
+            decorates.ForEach(x => x.OnDecorate += landManager.DecorateArea);
 
             //  waterManager.SetTypemap(landManager);
             InvokeRepeating(nameof(Tick), interval, interval);

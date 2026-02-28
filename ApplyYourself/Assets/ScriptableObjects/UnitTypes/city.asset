@@ -15,4 +15,4 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: e1d6b1abc29d79e45989a7bc806d36d9, type: 2}
   decoration: {fileID: 3300950976940298294, guid: 086350f0619769e4b940dec5a6c7d597,
     type: 3}
-  waterPercentage: 0.5
+  waterPercentage: 1
