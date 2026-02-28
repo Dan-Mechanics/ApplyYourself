@@ -48,7 +48,7 @@ namespace ApplyYourself
         private void Tick()
         {
             // first water.
-            landManager.Tick();
+            landManager.Render();
         }
     }
 }

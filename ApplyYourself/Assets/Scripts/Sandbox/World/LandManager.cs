@@ -14,6 +14,7 @@ namespace ApplyYourself
         [SerializeField] private UnitType city = default;
         [SerializeField] private UnitType plains = default;
         [SerializeField] private float waterHeight = default;
+        
 
         private IHeightmap heightmap;
         private ITypemap typemap;
@@ -47,7 +48,7 @@ namespace ApplyYourself
                 }
             }
 
-            Tick();
+            Render();
         }
 
         public void RaiseArea(List<Vector2Int> positions, float motion)
@@ -57,6 +58,7 @@ namespace ApplyYourself
                 int x = positions[i].x;
                 int y = positions[i].y;
                 unitHeights[x, y] = Mathf.Clamp(unitHeights[x, y] + motion, minHeight, maxHeight);
+                RenderUnit(x, y);
             }
         }
 
@@ -76,6 +78,7 @@ namespace ApplyYourself
 
                 unitTypes[x, y] = type;
                 unitVisuals[x, y].SetDecoration(type.decoration);
+                RenderUnit(x, y);
             }
         }
 
@@ -85,28 +88,33 @@ namespace ApplyYourself
         /// <summary>
         /// Called by SandboxManager.
         /// </summary>
-        public void Tick()
+        public void Render()
         {
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)
                 {
-                    float landHeight = unitHeights[x, y];
-                    bool isLand = landHeight >= waterHeight;
-                    if (isLand)
-                    {
-                        // YOU COULD MAKE THIS ONE METHOD.
-                        unitVisuals[x, y].SetMaterial(typemap.GetTypeAt(x, y).material);
-                        unitVisuals[x, y].EnableDecoration(true);
-                        unitVisuals[x, y].SetHeight(landHeight);
-                    }
-                    else 
-                    {
-                        unitVisuals[x, y].SetMaterial(water.material);
-                        unitVisuals[x, y].EnableDecoration(false);
-                        unitVisuals[x, y].SetHeight(waterHeight);
-                    }
+                    RenderUnit(x, y);
                 }
+            }
+        }
+
+        private void RenderUnit(int x, int y)
+        {
+            float landHeight = unitHeights[x, y];
+            bool isLand = landHeight >= waterHeight;
+            if (isLand)
+            {
+                // YOU COULD MAKE THIS ONE METHOD.
+                unitVisuals[x, y].SetMaterial(typemap.GetTypeAt(x, y).material);
+                unitVisuals[x, y].EnableDecoration(true);
+                unitVisuals[x, y].SetHeight(landHeight);
+            }
+            else
+            {
+                unitVisuals[x, y].SetMaterial(water.material);
+                unitVisuals[x, y].EnableDecoration(false);
+                unitVisuals[x, y].SetHeight(waterHeight + Random.value);
             }
         }
 
