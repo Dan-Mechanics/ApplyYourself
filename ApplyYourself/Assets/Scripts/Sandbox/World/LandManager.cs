@@ -9,7 +9,8 @@ namespace ApplyYourself
         [SerializeField] private int width = default;
         [SerializeField] private float minHeight = default;
         [SerializeField] private float maxHeight = default;
-        [SerializeField] private float waterHeight = default;
+       // [SerializeField] private float waterHeight = default;
+        [SerializeField] private WaterManager waterManager = default;
         [SerializeField] private UnitType water = default;
         [SerializeField] private UnitType city = default;
         [SerializeField] private UnitType plains = default;
@@ -19,7 +20,7 @@ namespace ApplyYourself
         private UnitType[,] unitTypes;
         private float[,] unitHeights;
 
-        private void Start() => Initialize();
+        //private void Start() => Initialize();
 
         public void Initialize()
         {
@@ -69,8 +70,8 @@ namespace ApplyYourself
                 int x = positions[i].x;
                 int y = positions[i].y;
 
-                // ??
-                if (unitHeights[x, y] < waterHeight || unitTypes[x, y] == type || unitTypes[x, y] == city)
+                // ?? !!
+                if (unitHeights[x, y] < waterManager.GetHeightAt(x, y)|| unitTypes[x, y] == type || unitTypes[x, y] == city)
                     continue;
 
                 unitTypes[x, y] = type;
@@ -99,7 +100,9 @@ namespace ApplyYourself
         private void RenderUnit(int x, int y)
         {
             float landHeight = unitHeights[x, y];
+            float waterHeight = waterManager.GetHeightAt(x, y);
             bool isLand = landHeight >= waterHeight;
+
             if (isLand)
             {
                 // YOU COULD MAKE THIS ONE METHOD.

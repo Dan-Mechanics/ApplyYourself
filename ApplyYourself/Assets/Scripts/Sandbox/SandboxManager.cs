@@ -12,8 +12,8 @@ namespace ApplyYourself
         [SerializeField] private Algorithm algorithm = default;
         [SerializeField] private Terraformer terraformer = default;
         [SerializeField] private PivotController pivotController = default;
-      //  [SerializeField] private WaterManager waterManager = default;
-        [SerializeField] private LandManager landManager= default;
+        [SerializeField] private WaterManager waterManager = default;
+        [SerializeField] private LandManager landManager = default;
         [SerializeField] private RaiseBrush raise = default;
         [SerializeField] private DecorateBrush decorate = default;
         [SerializeField] private float interval = default;
@@ -25,7 +25,13 @@ namespace ApplyYourself
             timer.OnDone += algorithm.CompleteSandboxPhase;
             timer.Begin();
 
+            waterManager.Initialize();
+            landManager.Initialize();
+
+            // water always first here !!!
+            raise.OnRaise += waterManager.RaiseArea;
             raise.OnRaise += landManager.RaiseArea;
+
             decorate.OnDecorate += landManager.DecorateArea;
 
             //  waterManager.SetTypemap(landManager);
@@ -47,7 +53,7 @@ namespace ApplyYourself
 
         private void Tick()
         {
-            // first water.
+            waterManager.Tick();
             landManager.Render();
         }
     }
