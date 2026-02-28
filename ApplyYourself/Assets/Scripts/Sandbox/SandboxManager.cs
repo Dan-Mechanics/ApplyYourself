@@ -14,6 +14,7 @@ namespace ApplyYourself
         [SerializeField] private PivotController pivotController = default;
         [SerializeField] private WaterManager waterManager = default;
         [SerializeField] private LandManager landManager= default;
+        [SerializeField] private float interval = default;
         private readonly FSM fsm = new FSM();
 
         private void Start()
@@ -22,7 +23,8 @@ namespace ApplyYourself
             timer.OnDone += algorithm.CompleteSandboxPhase;
             timer.Begin();
 
-            waterManager.SetTypemap(landManager);
+            //  waterManager.SetTypemap(landManager);
+            InvokeRepeating(nameof(Tick), interval, interval);
 
             terraformer.Setup();
             pivotController.Setup();
@@ -37,5 +39,11 @@ namespace ApplyYourself
 
         private void Update() => fsm.Update();
         private void FixedUpdate() => fsm.FixedUpdate();
+
+        private void Tick()
+        {
+            // first water.
+            landManager.Tick();
+        }
     }
 }

@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76566a4fd3dce594eb442ce825a99ff0, type: 3}
-  m_Name: height
+  m_Script: {fileID: 11500000, guid: 960c9ff3cfb0aa6468fee7e2c5e50c50, type: 3}
+  m_Name: shift
   m_EditorClassIdentifier: 
-  size: 10
-  strength: 40
-  previewMaterial: {fileID: 2100000, guid: 012b5bb81cae03245b8b2d7cb9c3a025, type: 2}
+  keyName: LeftShift
+  keyCode: 304

@@ -11,8 +11,11 @@ namespace ApplyYourself
         [SerializeField] private EasyBinding move = default;
         [SerializeField] private GameObject preview = default;
         [SerializeField] private LayerMask mask = default;
+
         [SerializeField] private float range = default;
+        [SerializeField] private float spacing = default;
         [SerializeField] private List<Brush> brushes = default;
+
         private Brush brush;
 
         public override void Setup()
@@ -36,9 +39,6 @@ namespace ApplyYourself
                 YieldState();
         }
 
-        /// <summary>
-        /// todo: make a layer of indirection here.
-        /// </summary>
         public override void OnFixedUpdate()
         {
             base.OnFixedUpdate();
@@ -52,8 +52,18 @@ namespace ApplyYourself
                 preview.transform.position = hit.point;
                 if (primaryFire.IsHeld)
                 {
+                    // TODO: NON-ALLOC HERE. !!
                     Collider[] colliders = Physics.OverlapSphere(hit.point, brush.size, mask, QueryTriggerInteraction.Ignore);
-                    brush.Apply(colliders);
+
+                    List<Vector2Int> positions = new List<Vector2Int>();
+                    Debug.Log(colliders.Length);
+                    for (int i = 0; i < colliders.Length; i++)
+                    {
+                        Vector3 pos = colliders[i].transform.position / spacing;
+                        positions.Add(new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.z)));
+                    }
+
+                    brush.Apply(positions);
                 }
             }
             else

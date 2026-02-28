@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -9,12 +10,15 @@ namespace ApplyYourself
         [SerializeField] private float minHeight = default;
         [SerializeField] private float maxHeight = default;
         [SerializeField] private GridSpawner spawner = default;
+        [SerializeField] private UnitType water = default;
+        [SerializeField] private UnitType city = default;
+        [SerializeField] private UnitType plains = default;
+        [SerializeField] private float waterHeight = default;
 
         private IHeightmap heightmap;
         private ITypemap typemap;
         private UnitVisual[,] unitVisuals;
         private UnitType[,] unitTypes;
-        private Test[,] test;
         private float[,] unitHeights;
 
         private void Start() => Initialize();
@@ -33,54 +37,73 @@ namespace ApplyYourself
             {
                 for (int y = 0; y < width; y++)
                 {
-                    unitHeights[x, y] = Mathf.Clamp(heightmap.GetHeightAt(x, y), minHeight, maxHeight);
+                    // IMPORTANT: CLAMP WHEN CHANGEN NOT JUST ALL THE TIME.
+                    unitHeights[x, y] = heightmap.GetHeightAt(x, y);
                     unitTypes[x, y] = typemap.GetTypeAt(x, y);
 
                     Transform unit = grid[x, y].transform;
                     unitVisuals[x, y].Assign(unit, unit.GetChild(0).GetComponent<MeshRenderer>());
+                    unitVisuals[x, y].SetDecoration(unitTypes[x, y].decoration);
                 }
             }
 
-            UpdateAllHeights();
-            UpdateAllTypes();
+            Tick();
         }
 
-        public float GetHeightAt(int x, int y) => unitHeights[x, y];
-        public UnitType GetTypeAt(int x, int y) => unitTypes[x, y];
+        public void RaiseArea(List<Vector2Int> positions, float motion)
+        {
+            for (int i = 0; i < positions.Count; i++)
+            {
+                int x = positions[i].x;
+                int y = positions[i].y;
+                unitHeights[x, y] = Mathf.Clamp(unitHeights[x, y] + motion, minHeight, maxHeight);
+            }
+        }
 
-        private void UpdateAllHeights()
+        public void SetAreaType(List<Vector2Int> positions, UnitType type)
+        {
+            if (type == null)
+                type = plains;
+
+            for (int i = 0; i < positions.Count; i++)
+            {
+                int x = positions[i].x;
+                int y = positions[i].y;
+                if (unitTypes[x, y] == type || unitTypes[x, y] == city)
+                    continue;
+
+                unitTypes[x, y] = type;
+                unitVisuals[x, y].SetDecoration(type.decoration);
+            }
+        }
+
+       //public float GetHeightAt(int x, int y) => unitHeights[x, y];
+       //public UnitType GetTypeAt(int x, int y) => unitTypes[x, y];
+
+        /// <summary>
+        /// Called by SandboxManager.
+        /// </summary>
+        public void Tick()
         {
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)
                 {
-                    Vector3 pos = unitVisuals[x, y].transform.position;
-                    pos.y = unitHeights[x, y];
-                    unitVisuals[x, y].transform.position = pos;
-                }
-            }
-        }
-
-        private void dwdw()
-        {
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < width; y++)
-                {
-                    Vector3 pos = unitVisuals[x, y].transform.position;
-                    pos.y = unitHeights[x, y];
-                    unitVisuals[x, y].transform.position = pos;
-                }
-            }
-        }
-
-        private void UpdateAllTypes()
-        {
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < width; y++)
-                {
-                    unitVisuals[x, y].SetAs(unitTypes[x, y]);
+                    float landHeight = unitHeights[x, y];
+                    bool isLand = landHeight > waterHeight;
+                    if (isLand)
+                    {
+                        // YOU COULD MAKE THIS ONE METHOD.
+                        unitVisuals[x, y].SetMaterial(typemap.GetTypeAt(x, y).material);
+                        unitVisuals[x, y].EnableDecoration(true);
+                        unitVisuals[x, y].SetHeight(landHeight);
+                    }
+                    else 
+                    {
+                        unitVisuals[x, y].SetMaterial(water.material);
+                        unitVisuals[x, y].EnableDecoration(false);
+                        unitVisuals[x, y].SetHeight(waterHeight);
+                    }
                 }
             }
         }
@@ -89,15 +112,6 @@ namespace ApplyYourself
         {
             GameObject.FindGameObjectsWithTag("Chunk").
                 ToList().ForEach(x => DestroyImmediate(x));
-        }
-
-        private struct Test
-        {
-            public bool IsWater => waterHeight > landHeight;
-            
-            public UnitType type;
-            public float landHeight;
-            public float waterHeight;
         }
     }
 }

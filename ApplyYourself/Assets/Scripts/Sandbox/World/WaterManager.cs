@@ -4,16 +4,14 @@ namespace ApplyYourself
 {
     public class WaterManager : MonoBehaviour
     {
-        [SerializeField] private int width = default;
+        /*[SerializeField] private int width = default;
         [SerializeField] private float minWaterHeight = default;
         [SerializeField] private float maxWaterHeight = default;
         [SerializeField] private float interval = default;
         [SerializeField] private float visualShake = default;
-        [SerializeField] private GridSpawner spawner = default;
         [SerializeField] private UnitType water = default;
 
         private LandManager typemap;
-        private UnitVisual[,] unitVisuals;
         private float[,] heightBufferA;
         private float[,] heightBufferB;
         private bool swap;
@@ -112,6 +110,6 @@ namespace ApplyYourself
             Vector3 pos = unitVisuals[x, y].transform.position;
             pos.y = writeBuffer[x, y] + Random.value * visualShake;
             unitVisuals[x, y].transform.position = pos;
-        }
+        }*/
     }
 }

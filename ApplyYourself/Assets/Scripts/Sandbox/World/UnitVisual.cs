@@ -17,23 +17,36 @@ namespace ApplyYourself
             this.renderer = renderer;
         }
 
-        public void SetAs(UnitType type)
+        public void EnableDecoration(bool value)
         {
-            renderer.material = type.material;
+            if (decoration != null)
+                decoration.gameObject.SetActive(value);
+        }
+
+        public void SetHeight(float height)
+        {
+            Vector3 pos = transform.position;
+            pos.y = height;
+            transform.position = pos;   
+        }
+
+        public void SetMaterial(Material material) => renderer.material = material;
+        public void SetDecoration(GameObject prefab)
+        {
             if (decoration != null)
             {
                 Object.Destroy(decoration.gameObject);
                 decoration = null;
             }
 
-            if (type.decoration == null)
+            if (prefab == null)
                 return;
 
-            decoration = Object.Instantiate(type.decoration).transform;
+            decoration = Object.Instantiate(prefab).transform;
             decoration.SetParent(transform);
             decoration.localPosition = Vector3.zero;
             decoration.localRotation = Quaternion.identity;
-            decoration.name = type.decoration.name;
+            decoration.name = prefab.name;
         }
     }
 }

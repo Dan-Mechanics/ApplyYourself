@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ApplyYourself
@@ -9,6 +10,6 @@ namespace ApplyYourself
         public Material previewMaterial;
 
         public virtual void Setup() { }
-        public abstract void Apply(Collider[] colliders);
+        public abstract void Apply(List<Vector2Int> positions);
     }
 }
