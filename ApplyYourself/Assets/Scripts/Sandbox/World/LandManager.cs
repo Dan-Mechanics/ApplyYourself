@@ -9,15 +9,12 @@ namespace ApplyYourself
         [SerializeField] private int width = default;
         [SerializeField] private float minHeight = default;
         [SerializeField] private float maxHeight = default;
-        [SerializeField] private GridSpawner spawner = default;
+        [SerializeField] private float waterHeight = default;
         [SerializeField] private UnitType water = default;
         [SerializeField] private UnitType city = default;
         [SerializeField] private UnitType plains = default;
-        [SerializeField] private float waterHeight = default;
-        
+        [SerializeField] private GridSpawner spawner = default;
 
-        private IHeightmap heightmap;
-        private ITypemap typemap;
         private UnitVisual[,] unitVisuals;
         private UnitType[,] unitTypes;
         private float[,] unitHeights;
@@ -26,8 +23,8 @@ namespace ApplyYourself
 
         public void Initialize()
         {
-            heightmap = GetComponent<IHeightmap>();
-            typemap = GetComponent<ITypemap>();
+            IHeightmap startupHeightmap = GetComponent<IHeightmap>();
+            ITypemap startupTypemap = GetComponent<ITypemap>();
 
             GameObject[,] grid = spawner.SpawnGrid(width);
             unitHeights = new float[width, width];
@@ -39,8 +36,8 @@ namespace ApplyYourself
                 for (int y = 0; y < width; y++)
                 {
                     // IMPORTANT: CLAMP WHEN CHANGEN NOT JUST ALL THE TIME.
-                    unitHeights[x, y] = heightmap.GetHeightAt(x, y);
-                    unitTypes[x, y] = typemap.GetTypeAt(x, y);
+                    unitHeights[x, y] = startupHeightmap.GetHeightAt(x, y);
+                    unitTypes[x, y] = startupTypemap.GetTypeAt(x, y);
 
                     Transform unit = grid[x, y].transform;
                     unitVisuals[x, y].Assign(unit, unit.GetChild(0).GetComponent<MeshRenderer>());
@@ -106,7 +103,7 @@ namespace ApplyYourself
             if (isLand)
             {
                 // YOU COULD MAKE THIS ONE METHOD.
-                unitVisuals[x, y].SetMaterial(typemap.GetTypeAt(x, y).material);
+                unitVisuals[x, y].SetMaterial(unitTypes[x, y].material);
                 unitVisuals[x, y].EnableDecoration(true);
                 unitVisuals[x, y].SetHeight(landHeight);
             }
