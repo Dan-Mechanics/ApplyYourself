@@ -33,7 +33,7 @@ namespace ApplyYourself
 
         public void RaiseArea(List<Vector2Int> positions, float motion)
         {
-            if (motion <= 0f)
+            if (motion == 0f)
                 return;
 
             for (int i = 0; i < positions.Count; i++)
