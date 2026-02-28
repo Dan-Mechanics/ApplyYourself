@@ -12,7 +12,7 @@ namespace ApplyYourself
 
             LandManager landManager = target as LandManager;
             if (GUILayout.Button("Show Preview"))
-                landManager.Initialize();
+                landManager.InitializeDebug();
 
             if (GUILayout.Button("Clear"))
                 landManager.Terminate();

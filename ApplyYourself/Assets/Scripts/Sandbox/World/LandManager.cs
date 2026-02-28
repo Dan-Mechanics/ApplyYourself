@@ -46,8 +46,27 @@ namespace ApplyYourself
                     unitVisuals[x, y].SetDecoration(unitTypes[x, y].decoration);
                 }
             }
+        }
 
-            //Render();
+        public void InitializeDebug()
+        {
+            Initialize();
+            waterManager.InitializeDebug();
+            Render();
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    for (int y = 0; y < width; y++)
+                    {
+                        unitHeights[x,y] = minHeight;
+                    }
+                }
+            }
         }
 
         public void RaiseArea(List<Vector2Int> positions, float motion)
@@ -115,7 +134,7 @@ namespace ApplyYourself
             {
                 unitVisuals[x, y].SetMaterial(water.material);
                 unitVisuals[x, y].EnableDecoration(false);
-                unitVisuals[x, y].SetHeight(waterHeight + Random.value);
+                unitVisuals[x, y].SetHeight(waterHeight);
             }
         }
 

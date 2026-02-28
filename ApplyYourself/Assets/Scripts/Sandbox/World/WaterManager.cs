@@ -13,24 +13,34 @@ namespace ApplyYourself
         [SerializeField] private float waterHeight = default;
         [SerializeField] private float shake = default;
         [SerializeField] private int width = default;
+        [SerializeField, Range(0f, 1f)] private float odds = default;
+        [SerializeField] private int deadzone = default;
 
         [SerializeField] private LandManager landManager = default;
         private float[,] waterHeights;
         private bool[,] hasChanged;
-        private bool done;
-
-       // private void Start() => Initialize();
 
         public void Initialize()
         {
             waterHeights = new float[width, width];
             hasChanged = new bool[width, width];
-            //Tick();
-
-            waterHeights[0, width - 1] = maxWaterHeight / 2f;
+            waterHeights[0, width - 1] = waterHeight;
         }
 
-        public float GetHeightAt(int x, int y) => waterHeights[x, y];
+        public void InitializeDebug()
+        {
+            Initialize();
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < width; y++)
+                {
+                    waterHeights[x, y] = waterHeight;
+                }
+            }
+        }
+
+        public float GetHeightAt(int x, int y) => waterHeights[x, y] + Random.value * shake;
+        //public float GetHeightAt(int x, int y) => waterHeights[x, y];
 
         public void RaiseArea(List<Vector2Int> positions, float motion)
         {
@@ -41,19 +51,20 @@ namespace ApplyYourself
             {
                 int x = positions[i].x;
                 int y = positions[i].y;
-                waterHeights[x, y] = minWaterHeight;
+                if (x >= deadzone || y <= width - deadzone - 1)
+                    waterHeights[x, y] = minWaterHeight;
             }
         }
 
         public void Tick()
         {
-            if (done && !Input.GetKey(KeyCode.Space))
-                return;
-            
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)
                 {
+                    if (hasChanged[x, y])
+                        continue;
+
                     float parentHeight = waterHeights[x, y];
                     Raise(x - 1, y, parentHeight);
                     Raise(x + 1, y, parentHeight);
@@ -69,8 +80,6 @@ namespace ApplyYourself
                     hasChanged[x, y] = false;
                 }
             }
-
-            done = true;
         }
 
         private void Raise(int x, int y, float parentHeight)
@@ -78,25 +87,24 @@ namespace ApplyYourself
             if (x < 0 || y < 0 || x >= width || y >= width)
                 return;
 
-            if (hasChanged[x, y])
-                return;
+            /*if (Random.value > odds || hasChanged[x,y])
+                return;*/
 
-            // make is so that if there is terrain there, make it zero
+            // YOU COULD ALSO MAKE IT SO THAT
+            // THIS IS ON THE THING ITSELF, LESS RANDOMN CALLS.
+           /* if (Random.value > odds)
+                return;*/
+
             float height = waterHeights[x, y];
-            if (height <= landManager.GetHeightAt(x, y))
+            if (height < parentHeight && landManager.GetHeightAt(x, y) < parentHeight)
             {
-                waterHeights[x, y] = minWaterHeight;
-                return;
-            }
-
-            if (height < parentHeight)
-            {
-                height = Mathf.Clamp(minWaterHeight, maxWaterHeight, height + parentHeight * landManager.GetTypeAt(x, y).waterPercentage);
-                if (height == waterHeights[x, y])
-                    return;
-
-                hasChanged[x, y] = true;
-                waterHeights[x, y] = height;
+                 height = Mathf.Clamp(height + parentHeight * landManager.GetTypeAt(x, y).waterPercentage, minWaterHeight, parentHeight);
+                //height = Mathf.Clamp(minWaterHeight, maxWaterHeight, height + 0.1f);
+                if (height != waterHeights[x, y])
+                {
+                    hasChanged[x, y] = true;
+                    waterHeights[x, y] = height;
+                }
             }
         }
     }

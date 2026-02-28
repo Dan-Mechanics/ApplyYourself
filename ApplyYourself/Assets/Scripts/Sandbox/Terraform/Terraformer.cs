@@ -56,7 +56,7 @@ namespace ApplyYourself
                     Collider[] colliders = Physics.OverlapSphere(hit.point, brush.size, mask, QueryTriggerInteraction.Ignore);
 
                     List<Vector2Int> positions = new List<Vector2Int>();
-                    Debug.Log(colliders.Length);
+                  //  Debug.Log(colliders.Length);
                     for (int i = 0; i < colliders.Length; i++)
                     {
                         Vector3 pos = colliders[i].transform.position;

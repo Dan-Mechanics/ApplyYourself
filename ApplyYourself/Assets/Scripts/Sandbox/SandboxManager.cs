@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ApplyYourself
@@ -14,8 +15,8 @@ namespace ApplyYourself
         [SerializeField] private PivotController pivotController = default;
         [SerializeField] private WaterManager waterManager = default;
         [SerializeField] private LandManager landManager = default;
-        [SerializeField] private RaiseBrush raise = default;
-        [SerializeField] private DecorateBrush decorate = default;
+        [SerializeField] private List<RaiseBrush> raise = default;
+        [SerializeField] private List<DecorateBrush> decorate = default;
         [SerializeField] private float interval = default;
         private readonly FSM fsm = new FSM();
 
@@ -29,10 +30,11 @@ namespace ApplyYourself
             landManager.Initialize();
 
             // water always first here !!!
-            raise.OnRaise += waterManager.RaiseArea;
-            raise.OnRaise += landManager.RaiseArea;
+            raise.ForEach(x => x.OnRaise += waterManager.RaiseArea);
+            raise.ForEach(x => x.OnRaise += landManager.RaiseArea);
 
-            decorate.OnDecorate += landManager.DecorateArea;
+
+            decorate.ForEach(x => x.OnDecorate += landManager.DecorateArea);
 
             //  waterManager.SetTypemap(landManager);
             InvokeRepeating(nameof(Tick), interval, interval);
