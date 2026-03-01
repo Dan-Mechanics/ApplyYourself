@@ -160,7 +160,7 @@ MonoBehaviour:
   interval: 0.25
   brushes:
   - {fileID: 11400000, guid: f9c4c0f37f79d8a4cbfa5e1ebb235147, type: 2}
-  - {fileID: 11400000, guid: 5998c86bcdd3b88448a5bcb10e4f6416, type: 2}
+  - {fileID: 11400000, guid: d99274f9b1e9df343af8619a48c0a92d, type: 2}
   - {fileID: 11400000, guid: c35b98994696f8a4b9b2ee22b7b617b7, type: 2}
 --- !u!4 &17225716
 Transform:
@@ -519,6 +519,7 @@ GameObject:
   - component: {fileID: 193189753}
   - component: {fileID: 193189752}
   - component: {fileID: 193189755}
+  - component: {fileID: 193189756}
   m_Layer: 0
   m_Name: gradient_material
   m_TagString: Untagged
@@ -589,6 +590,22 @@ MonoBehaviour:
   texture: {fileID: 2800000, guid: 9b4f10e1e51cf4844971c3b68d05524b, type: 3}
   worldFloorHeight: 8.01
   worldCeilingHeight: 13.8
+--- !u!114 &193189756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193189751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d87ce2e88d8080a4b90df1d1cad48b30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 278910c231189fb49b5cf42b2ba20eae, type: 2}
+  texture: {fileID: 2800000, guid: d7370c7765131b44d87f9a9497cee629, type: 3}
+  worldFloorHeight: 0
+  worldCeilingHeight: 15
 --- !u!1 &199471835
 GameObject:
   m_ObjectHideFlags: 0
@@ -1975,7 +1992,6 @@ MonoBehaviour:
   landManager: {fileID: 28654548}
   minWaterHeight: 0
   waterHeight: 10
-  maxWaterHeight: 15
   width: 50
   deadzone: 5
 --- !u!1 &1457942721

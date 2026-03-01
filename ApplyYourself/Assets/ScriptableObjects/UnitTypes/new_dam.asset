@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16ecd94d3c7db084c97cd0c0c290f1aa, type: 3}
-  m_Name: dam
+  m_Name: new_dam
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 278910c231189fb49b5cf42b2ba20eae, type: 2}
-  decoration: {fileID: 6488699492921774815, guid: 8da0cf91629a5254b93c3069b94852d3,
-    type: 3}
-  waterPercentage: 0
+  decoration: {fileID: 0}
+  waterPercentage: 1
