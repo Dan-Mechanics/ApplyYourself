@@ -14,14 +14,15 @@ namespace ApplyYourself
 
         [SerializeField] private float range = default;
         [SerializeField] private float spacing = default;
-        [SerializeField] private List<Brush> brushes = default;
 
+        private List<Brush> brushes;
         private Brush brush;
+
+        public void SetBrushes(List<Brush> brushes) => this.brushes = brushes;
 
         public override void Setup()
         {
             base.Setup();
-            brushes.ForEach(x => x.Setup());
             SelectBrush(0);
         }
 

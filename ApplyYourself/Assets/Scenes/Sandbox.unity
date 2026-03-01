@@ -158,11 +158,10 @@ MonoBehaviour:
   waterManager: {fileID: 1422312195}
   landManager: {fileID: 28654548}
   interval: 0.25
-  raises:
+  brushes:
   - {fileID: 11400000, guid: f9c4c0f37f79d8a4cbfa5e1ebb235147, type: 2}
-  decorates:
+  - {fileID: 11400000, guid: 5998c86bcdd3b88448a5bcb10e4f6416, type: 2}
   - {fileID: 11400000, guid: c35b98994696f8a4b9b2ee22b7b617b7, type: 2}
-  - {fileID: 11400000, guid: f7418f87d8861634db05d215ae0cec27, type: 2}
 --- !u!4 &17225716
 Transform:
   m_ObjectHideFlags: 0
@@ -212,6 +211,7 @@ MonoBehaviour:
   width: 50
   minHeight: 0
   maxHeight: 40
+  visualWaterShake: 1.25
   waterManager: {fileID: 1422312195}
   water: {fileID: 11400000, guid: 6f22bf932d97b3342b63bdab892b103d, type: 2}
   city: {fileID: 11400000, guid: 49b09ac93070eee4995a6a62c28b03c2, type: 2}
@@ -734,10 +734,6 @@ MonoBehaviour:
     m_Bits: 8
   range: 2000
   spacing: 10
-  brushes:
-  - {fileID: 11400000, guid: f9c4c0f37f79d8a4cbfa5e1ebb235147, type: 2}
-  - {fileID: 11400000, guid: f7418f87d8861634db05d215ae0cec27, type: 2}
-  - {fileID: 11400000, guid: c35b98994696f8a4b9b2ee22b7b617b7, type: 2}
 --- !u!4 &369849032
 Transform:
   m_ObjectHideFlags: 0
@@ -1976,14 +1972,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8b21d6031fa8d40b0557228c9db043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minWaterHeight: 0
-  maxWaterHeight: 15
-  waterHeight: 12
-  shake: 1
-  width: 50
-  odds: 1
-  deadzone: 5
   landManager: {fileID: 28654548}
+  minWaterHeight: 0
+  waterHeight: 10
+  maxWaterHeight: 15
+  width: 50
+  deadzone: 5
 --- !u!1 &1457942721
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ namespace ApplyYourself
         [SerializeField] private int width = default;
         [SerializeField] private float minHeight = default;
         [SerializeField] private float maxHeight = default;
+        [SerializeField] private float visualWaterShake = default;
        // [SerializeField] private float waterHeight = default;
         [SerializeField] private WaterManager waterManager = default;
         [SerializeField] private UnitType water = default;
@@ -134,7 +135,7 @@ namespace ApplyYourself
             {
                 unitVisuals[x, y].SetMaterial(water.material);
                 unitVisuals[x, y].EnableDecoration(false);
-                unitVisuals[x, y].SetHeight(waterHeight);
+                unitVisuals[x, y].SetHeight(waterHeight + Random.value * visualWaterShake);
             }
         }
 

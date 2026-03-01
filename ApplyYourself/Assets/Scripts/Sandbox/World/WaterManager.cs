@@ -8,15 +8,13 @@ namespace ApplyYourself
     /// </summary>
     public class WaterManager : MonoBehaviour
     {
+        [SerializeField] private LandManager landManager = default;
         [SerializeField] private float minWaterHeight = default;
-        [SerializeField] private float maxWaterHeight = default;
         [SerializeField] private float waterHeight = default;
-        [SerializeField] private float shake = default;
+        // [SerializeField] private float maxWaterHeight = default;
         [SerializeField] private int width = default;
-        [SerializeField, Range(0f, 1f)] private float odds = default;
         [SerializeField] private int deadzone = default;
 
-        [SerializeField] private LandManager landManager = default;
         private float[,] waterHeights;
         private bool[,] hasChanged;
 
@@ -39,8 +37,7 @@ namespace ApplyYourself
             }
         }
 
-        public float GetHeightAt(int x, int y) => waterHeights[x, y] + Random.value * shake;
-        //public float GetHeightAt(int x, int y) => waterHeights[x, y];
+        public float GetHeightAt(int x, int y) => waterHeights[x, y];
 
         public void RaiseArea(List<Vector2Int> positions, float motion)
         {
@@ -87,25 +84,20 @@ namespace ApplyYourself
             if (x < 0 || y < 0 || x >= width || y >= width)
                 return;
 
-            /*if (Random.value > odds || hasChanged[x,y])
-                return;*/
-
-            // YOU COULD ALSO MAKE IT SO THAT
-            // THIS IS ON THE THING ITSELF, LESS RANDOMN CALLS.
-           /* if (Random.value > odds)
-                return;*/
-
             float height = waterHeights[x, y];
-            if (height < parentHeight && landManager.GetHeightAt(x, y) < parentHeight)
-            {
-                 height = Mathf.Clamp(height + parentHeight * landManager.GetTypeAt(x, y).waterPercentage, minWaterHeight, parentHeight);
-                //height = Mathf.Clamp(minWaterHeight, maxWaterHeight, height + 0.1f);
-                if (height != waterHeights[x, y])
-                {
-                    hasChanged[x, y] = true;
-                    waterHeights[x, y] = height;
-                }
-            }
+            if (height >= parentHeight || landManager.GetHeightAt(x, y) >= parentHeight)
+                return;
+
+            height = Mathf.Clamp(
+                height + parentHeight * landManager.GetTypeAt(x, y).waterPercentage, minWaterHeight,
+                parentHeight); 
+                //Mathf.Min(parentHeight, maxWaterHeight)); 
+
+            if (height == waterHeights[x, y])
+                return;
+
+            hasChanged[x, y] = true;
+            waterHeights[x, y] = height;
         }
     }
 }

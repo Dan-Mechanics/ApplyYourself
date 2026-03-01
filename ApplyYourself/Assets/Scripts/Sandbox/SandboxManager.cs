@@ -4,7 +4,8 @@ using UnityEngine;
 namespace ApplyYourself
 {
     /// <summary>
-    /// Put the sequence here. make everyhing work with heightmap and typemap to keep seperate
+    /// Put the sequence here. Potentially make everyhing
+    /// work with heightmap and typemap to keep seperate
     /// </summary>
     public class SandboxManager : MonoBehaviour 
     {
@@ -16,8 +17,7 @@ namespace ApplyYourself
         [SerializeField] private WaterManager waterManager = default;
         [SerializeField] private LandManager landManager = default;
         [SerializeField] private float interval = default;
-        [SerializeField] private List<RaiseBrush> raises = default;
-        [SerializeField] private List<DecorateBrush> decorates = default;
+        [SerializeField] private List<Brush> brushes = default;
         private readonly FSM fsm = new FSM();
 
         private void Start()
@@ -29,14 +29,11 @@ namespace ApplyYourself
             waterManager.Initialize();
             landManager.Initialize();
 
-            // water always first here !!!
-            raises.ForEach(x => x.OnRaise += waterManager.RaiseArea);
-            raises.ForEach(x => x.OnRaise += landManager.RaiseArea);
+            brushes.ForEach(x => x.OnRaise += landManager.RaiseArea);
+            brushes.ForEach(x => x.OnRaise += waterManager.RaiseArea);
+            brushes.ForEach(x => x.OnDecorate += landManager.DecorateArea);
+            terraformer.SetBrushes(brushes);
 
-
-            decorates.ForEach(x => x.OnDecorate += landManager.DecorateArea);
-
-            //  waterManager.SetTypemap(landManager);
             InvokeRepeating(nameof(Tick), interval, interval);
 
             terraformer.Setup();
