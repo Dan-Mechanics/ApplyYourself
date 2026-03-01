@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16ecd94d3c7db084c97cd0c0c290f1aa, type: 3}
-  m_Name: dam
+  m_Name: city_type
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 278910c231189fb49b5cf42b2ba20eae, type: 2}
-  decoration: {fileID: 6488699492921774815, guid: 8da0cf91629a5254b93c3069b94852d3,
+  material: {fileID: 2100000, guid: e1d6b1abc29d79e45989a7bc806d36d9, type: 2}
+  decoration: {fileID: 3300950976940298294, guid: 086350f0619769e4b940dec5a6c7d597,
     type: 3}
-  waterPercentage: 0
+  waterPercentage: 1

@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ecd94d3c7db084c97cd0c0c290f1aa, type: 3}
-  m_Name: mangrove
+  m_Script: {fileID: 11500000, guid: 960c9ff3cfb0aa6468fee7e2c5e50c50, type: 3}
+  m_Name: escape
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 6ad02dca551c71445a638c5fb3028940, type: 2}
-  decoration: {fileID: 0}
-  waterPercentage: 0.05
+  keyName: Escape
+  keyCode: 27

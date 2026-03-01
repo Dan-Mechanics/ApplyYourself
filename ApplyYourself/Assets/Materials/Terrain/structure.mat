@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: city
+  m_Name: structure
   m_Shader: {fileID: -6465566751694194690, guid: 8c6e7ef65d670da4b9fe96ac6b4f2d58,
     type: 3}
   m_Parent: {fileID: 0}

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16ecd94d3c7db084c97cd0c0c290f1aa, type: 3}
-  m_Name: water
+  m_Name: mangrove_type
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 753022d5c02d0164784f782d9cd7c767, type: 2}
+  material: {fileID: 2100000, guid: 6ad02dca551c71445a638c5fb3028940, type: 2}
   decoration: {fileID: 0}
-  waterPercentage: 0.5
+  waterPercentage: 0.05

@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 960c9ff3cfb0aa6468fee7e2c5e50c50, type: 3}
-  m_Name: fly
+  m_Script: {fileID: 11500000, guid: 16ecd94d3c7db084c97cd0c0c290f1aa, type: 3}
+  m_Name: concrete_type
   m_EditorClassIdentifier: 
-  keyName: Space
-  keyCode: 32
+  material: {fileID: 2100000, guid: e1d6b1abc29d79e45989a7bc806d36d9, type: 2}
+  decoration: {fileID: 0}
+  waterPercentage: 1

@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af415d48699b78945af225a280efce06, type: 3}
-  m_Name: mangrove
+  m_Script: {fileID: 11500000, guid: 6cc875333fe2c2042824bcdd2df75dda, type: 3}
+  m_Name: dam_brush
   m_EditorClassIdentifier: 
-  size: 10
-  strength: 40
-  previewMaterial: {fileID: 2100000, guid: fdd856f06b492a64eaa0ad669eb4b254, type: 2}
+  size: 2
+  strength: 10000
+  previewMaterial: {fileID: 2100000, guid: e15b873c75f088e428b218a95004f11e, type: 2}
   invert: {fileID: 11400000, guid: 0ad6dca8024d7f040afcac273e3f1e7c, type: 2}
-  type: {fileID: 11400000, guid: 7aba05f7576ad9b4cb5ec9549b6caf41, type: 2}
+  type: {fileID: 11400000, guid: 28068dd81c650bc41b2e977fe3d2e751, type: 2}

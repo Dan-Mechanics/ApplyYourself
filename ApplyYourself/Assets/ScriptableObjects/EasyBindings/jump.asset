@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 960c9ff3cfb0aa6468fee7e2c5e50c50, type: 3}
-  m_Name: exit
+  m_Name: jump
   m_EditorClassIdentifier: 
-  keyName: Escape
-  keyCode: 27
+  keyName: Space
+  keyCode: 32
