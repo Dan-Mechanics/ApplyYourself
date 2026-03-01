@@ -35,6 +35,8 @@ namespace ApplyYourself
                         natureUnits++;
                 }
             }
+
+            print($"wetCityUnits{wetCityUnits}, structureUnits{structureUnits}, natureUnits{natureUnits}.");
         }
     }
 }

@@ -632,7 +632,7 @@ Transform:
   m_GameObject: {fileID: 199471835}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -200}
+  m_LocalPosition: {x: 0, y: 0, z: -300}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -804,11 +804,11 @@ MonoBehaviour:
   sens: 0.6
   minAngle: 5
   maxAngle: 85
-  position: {x: 0, y: 0, z: -200}
+  position: {x: 0, y: 0, z: -300}
   zoomSens: 20
   minDistance: 25
   maxDistance: 1000
-  movingSens: 0.65
+  movingSens: 0.6
 --- !u!4 &376942859
 Transform:
   m_ObjectHideFlags: 0
@@ -1909,7 +1909,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 383002006}
         m_TargetAssemblyTypeName: ApplyYourself.Algorithm, Assembly-CSharp
         m_MethodName: CompleteSandboxPhase
         m_Mode: 1
@@ -2005,7 +2005,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitManager: {fileID: 28654548}
   minWaterHeight: 0
-  waterHeight: 10
+  waterHeight: 12
   width: 50
   deadzone: 5
 --- !u!1 &1457942721

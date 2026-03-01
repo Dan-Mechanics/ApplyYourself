@@ -11,10 +11,10 @@ namespace ApplyYourself
         [SerializeField] private int dryThreshold = default;
         [SerializeField] private int minCombinedUnitsChanged = default;
 
-        private void Awake() => DontDestroyOnLoad(gameObject);
-
         public void CompleteSandboxPhase()
         {
+            DontDestroyOnLoad(gameObject);
+
             ending = GetEnding();
             print(ending);
             portal.Interact();

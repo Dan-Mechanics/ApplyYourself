@@ -50,6 +50,13 @@ namespace ApplyYourself
         private void Update() => fsm.Update();
         private void FixedUpdate() => fsm.FixedUpdate();
 
+        private void OnDestroy()
+        {
+            brushes.ForEach(x => x.OnRaise -= unitManager.RaiseArea);
+            brushes.ForEach(x => x.OnRaise -= waterManager.RaiseArea);
+            brushes.ForEach(x => x.OnDecorate -= unitManager.DecorateArea);
+        }
+
         private void Tick()
         {
             waterManager.Tick();

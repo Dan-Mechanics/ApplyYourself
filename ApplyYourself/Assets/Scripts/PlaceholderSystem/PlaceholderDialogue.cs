@@ -18,7 +18,8 @@ namespace ApplyYourself
             }
 
             ending = Utils.Filter(ending, endingOverrides);
-            SetDialogue(Resources.Load<TextAsset>($"{ending}/{resourceName}_{ending.ToString().ToLowerInvariant()}"));
+            SetDialogue(Resources.Load<TextAsset>($"{ending}/{resourceName}"));
+            //SetDialogue(Resources.Load<TextAsset>($"{ending}/{resourceName}_{ending.ToString().ToLowerInvariant()}"));
         }
     }
 }

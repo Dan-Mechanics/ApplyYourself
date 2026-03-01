@@ -122,4 +122,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50276155f1c002499310cf9c7ca1e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: Sandbox
+  scene: Sandbox
