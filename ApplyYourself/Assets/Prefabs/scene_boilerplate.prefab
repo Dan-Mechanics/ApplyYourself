@@ -44,5 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4df137dfb621c942a806405a0c094a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reload: {fileID: 11400000, guid: 6c1b2cf8594091d48a14229605c10329, type: 2}
+  escape: {fileID: 11400000, guid: 44e3e83df6457964fa441af7425bf722, type: 2}
+  shift: {fileID: 11400000, guid: 0ad6dca8024d7f040afcac273e3f1e7c, type: 2}
+  ctrl: {fileID: 11400000, guid: ea10c0919c581b34e91669935580cf96, type: 2}
   fps: 300
   physicsTicksPerSecond: 50

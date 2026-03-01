@@ -15,8 +15,9 @@ namespace ApplyYourself
         private const char QUOTE = '\"';
         private const char SPACE = ' ';
         
-        [SerializeField] private EasyBinding next = default;
-        [SerializeField] private EasyBinding exit = default;
+        [SerializeField] private EasyBinding primaryFire = default;
+        [SerializeField] private EasyBinding jump = default;
+        [SerializeField] private EasyBinding escape = default;
         [SerializeField] private CanvasGroup canvasGroup = default;
         [SerializeField] private TextWriter dialogueWriter = default;
         [SerializeField] private TMP_Text nameText = default;
@@ -31,7 +32,13 @@ namespace ApplyYourself
         public override void OnUpdate()
         {
             base.OnUpdate();
-            if (next.WasPressed && Time.time >= nextDialogueTime)
+            if (escape.WasPressed)
+            {
+                YieldState();
+                return;
+            }
+
+            if ((primaryFire.WasPressed || jump.WasPressed) && Time.time >= nextDialogueTime)
             {
                 if (dialogueWriter.IsDone)
                 {
@@ -42,9 +49,6 @@ namespace ApplyYourself
                     dialogueWriter.ForceComplete();
                 }
             }
-
-            if (exit.WasPressed)
-                YieldState();
         }
 
         public void BeginDialogue(TextAsset dialogue)

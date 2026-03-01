@@ -130,8 +130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eafc8ef367ef7c44496e7f3f66a32f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  next: {fileID: 11400000, guid: c4334f1866f323a4b8ac94e0c1b9d0a3, type: 2}
-  exit: {fileID: 11400000, guid: 44e3e83df6457964fa441af7425bf722, type: 2}
+  primaryFire: {fileID: 11400000, guid: c4334f1866f323a4b8ac94e0c1b9d0a3, type: 2}
+  jump: {fileID: 11400000, guid: eaca23abef3ef7c49b9e9306c19ff5cd, type: 2}
+  escape: {fileID: 11400000, guid: 44e3e83df6457964fa441af7425bf722, type: 2}
   canvasGroup: {fileID: 8644798032585943955}
   dialogueWriter: {fileID: 2984032341671475597}
   nameText: {fileID: 6424514390226710862}
