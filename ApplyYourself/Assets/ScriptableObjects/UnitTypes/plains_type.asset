@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fa4f417138a9d6548a99185861316df8, type: 2}
   decoration: {fileID: 0}
-  waterPercentage: 0.5
+  waterPercentage: 0.3

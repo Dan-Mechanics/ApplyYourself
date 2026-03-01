@@ -4,13 +4,16 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
+    /// <summary>
+    /// You could split this into unitmanager.
+    /// </summary>
     public class LandManager : MonoBehaviour 
     {
         [SerializeField] private int width = default;
         [SerializeField] private float minHeight = default;
         [SerializeField] private float maxHeight = default;
         [SerializeField] private float visualWaterShake = default;
-       // [SerializeField] private float waterHeight = default;
+        [SerializeField] private EasyBinding jump = default;
         [SerializeField] private WaterManager waterManager = default;
         [SerializeField] private UnitType water = default;
         [SerializeField] private UnitType city = default;
@@ -21,11 +24,8 @@ namespace ApplyYourself
         private UnitType[,] unitTypes;
         private float[,] unitHeights;
 
-        //private void Start() => Initialize();
-
         public void Initialize()
         {
-            // transform.Find("dwdw") here
             IHeightmap startupHeightmap = GetComponent<IHeightmap>();
             ITypemap startupTypemap = GetComponent<ITypemap>();
 
@@ -38,7 +38,6 @@ namespace ApplyYourself
             {
                 for (int y = 0; y < width; y++)
                 {
-                    // IMPORTANT: CLAMP WHEN CHANGEN NOT JUST ALL THE TIME.
                     unitHeights[x, y] = startupHeightmap.GetHeightAt(x, y);
                     unitTypes[x, y] = startupTypemap.GetTypeAt(x, y);
 
@@ -58,14 +57,14 @@ namespace ApplyYourself
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (!jump.WasPressed)
+                return;
+
+            for (int x = 0; x < width; x++)
             {
-                for (int x = 0; x < width; x++)
+                for (int y = 0; y < width; y++)
                 {
-                    for (int y = 0; y < width; y++)
-                    {
-                        unitHeights[x,y] = minHeight;
-                    }
+                    unitHeights[x, y] = minHeight;
                 }
             }
         }
@@ -91,8 +90,8 @@ namespace ApplyYourself
                 int x = positions[i].x;
                 int y = positions[i].y;
 
-                // ?? !!
-                if (unitHeights[x, y] < waterManager.GetHeightAt(x, y)|| unitTypes[x, y] == type || unitTypes[x, y] == city)
+                if (unitHeights[x, y] < waterManager.GetHeightAt(x, y) ||
+                    unitTypes[x, y] == type || unitTypes[x, y] == city)
                     continue;
 
                 unitTypes[x, y] = type;

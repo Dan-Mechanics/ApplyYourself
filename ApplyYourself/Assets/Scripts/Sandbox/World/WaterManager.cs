@@ -11,17 +11,16 @@ namespace ApplyYourself
         [SerializeField] private LandManager landManager = default;
         [SerializeField] private float minWaterHeight = default;
         [SerializeField] private float waterHeight = default;
-        // [SerializeField] private float maxWaterHeight = default;
         [SerializeField] private int width = default;
         [SerializeField] private int deadzone = default;
 
         private float[,] waterHeights;
-        private bool[,] hasChanged;
+        private bool[,] changeGrid;
 
         public void Initialize()
         {
             waterHeights = new float[width, width];
-            hasChanged = new bool[width, width];
+            changeGrid = new bool[width, width];
             waterHeights[0, width - 1] = waterHeight;
         }
 
@@ -59,7 +58,7 @@ namespace ApplyYourself
             {
                 for (int y = 0; y < width; y++)
                 {
-                    if (hasChanged[x, y])
+                    if (changeGrid[x, y])
                         continue;
 
                     float parentHeight = waterHeights[x, y];
@@ -70,11 +69,12 @@ namespace ApplyYourself
                 }
             }
 
+            // THIS DOES NEED TO BE HERE LIKE THIS.
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)
                 {
-                    hasChanged[x, y] = false;
+                    changeGrid[x, y] = false;
                 }
             }
         }
@@ -88,15 +88,13 @@ namespace ApplyYourself
             if (height >= parentHeight || landManager.GetHeightAt(x, y) >= parentHeight)
                 return;
 
-            height = Mathf.Clamp(
-                height + parentHeight * landManager.GetTypeAt(x, y).waterPercentage, minWaterHeight,
-                parentHeight); 
-                //Mathf.Min(parentHeight, maxWaterHeight)); 
+            height = Mathf.Clamp(height + parentHeight * landManager.GetTypeAt(x, y).waterPercentage,
+                minWaterHeight, parentHeight); 
 
             if (height == waterHeights[x, y])
                 return;
 
-            hasChanged[x, y] = true;
+            changeGrid[x, y] = true;
             waterHeights[x, y] = height;
         }
     }

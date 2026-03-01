@@ -212,6 +212,7 @@ MonoBehaviour:
   minHeight: 0
   maxHeight: 40
   visualWaterShake: 1.25
+  jump: {fileID: 11400000, guid: eaca23abef3ef7c49b9e9306c19ff5cd, type: 2}
   waterManager: {fileID: 1422312195}
   water: {fileID: 11400000, guid: 6f22bf932d97b3342b63bdab892b103d, type: 2}
   city: {fileID: 11400000, guid: 49b09ac93070eee4995a6a62c28b03c2, type: 2}
@@ -1991,7 +1992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   landManager: {fileID: 28654548}
   minWaterHeight: 0
-  waterHeight: 10
+  waterHeight: 30
   width: 50
   deadzone: 5
 --- !u!1 &1457942721
