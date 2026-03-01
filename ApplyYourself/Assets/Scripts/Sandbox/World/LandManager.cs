@@ -26,8 +26,8 @@ namespace ApplyYourself
 
         public void Initialize()
         {
-            IHeightmap startupHeightmap = GetComponent<IHeightmap>();
-            ITypemap startupTypemap = GetComponent<ITypemap>();
+            IHeightmap heightmap = GetComponent<IHeightmap>();
+            ITypemap typemap = GetComponent<ITypemap>();
 
             GameObject[,] grid = spawner.SpawnGrid(width);
             unitHeights = new float[width, width];
@@ -38,8 +38,8 @@ namespace ApplyYourself
             {
                 for (int y = 0; y < width; y++)
                 {
-                    unitHeights[x, y] = startupHeightmap.GetHeightAt(x, y);
-                    unitTypes[x, y] = startupTypemap.GetTypeAt(x, y);
+                    unitHeights[x, y] = heightmap.GetHeightAt(x, y);
+                    unitTypes[x, y] = typemap.GetTypeAt(x, y);
 
                     Transform unit = grid[x, y].transform;
                     unitVisuals[x, y].Assign(unit, unit.GetChild(0).GetComponent<MeshRenderer>());
@@ -55,6 +55,9 @@ namespace ApplyYourself
             Render();
         }
 
+        /// <summary>
+        /// DEBUG.
+        /// </summary>
         private void Update()
         {
             if (!jump.WasPressed)
@@ -134,13 +137,13 @@ namespace ApplyYourself
             {
                 unitVisuals[x, y].SetMaterial(water.material);
                 unitVisuals[x, y].EnableDecoration(false);
-                unitVisuals[x, y].SetHeight(waterHeight + Random.value * visualWaterShake);
+                unitVisuals[x, y].SetHeight(waterHeight + (Random.value - 0.5f) * visualWaterShake);
             }
         }
 
         public void Terminate()
         {
-            GameObject.FindGameObjectsWithTag("Chunk").
+            GameObject.FindGameObjectsWithTag("Unit").
                 ToList().ForEach(x => DestroyImmediate(x));
         }
     }

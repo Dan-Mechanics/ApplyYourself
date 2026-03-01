@@ -1,17 +1,13 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace ApplyYourself
 {
     public class Algorithm : MonoBehaviour
     {
-        [HideInInspector] public Ending ending = Ending.UnderwaterCity;
+        [HideInInspector] public Ending ending;
         
-        [SerializeField] private LandManager landManager = default;
-        [SerializeField] private string nextSceneName = default;
-        [SerializeField] private string natureTag = default;
-        [SerializeField] private float underwaterHeight = default;
-        [SerializeField] private int natureRequirement = default;
+        [SerializeField, Range(0f, 1f)] private float dryThreshold = default;
+        [SerializeField] private float natureThreshold = default;
 
         private void Awake() => DontDestroyOnLoad(gameObject);
 
@@ -46,13 +42,21 @@ namespace ApplyYourself
 
             print($"OUTCOME: {ending}. avHeight {avHeight}, nature {natureCount}.");
             SceneManager.LoadScene(nextSceneName);*/
+
+            ending = GetEnding(GetComponent<Evaluator>());
+            print($"OUTCOME: {ending}.");
+
+            GetComponent<Portal>().Interact();
         }
 
-        [System.Serializable]
-        private struct PositionToEnding
+        private Ending GetEnding(Evaluator evaluator)
         {
-            public Vector2Int position;
-            public Ending ending;
+            Ending result = Ending.Placeholder;
+
+            evaluator.Evaluate(out int dryUnits, out int wetUnits, out int structureUnits, out int natureUnits);
+
+
+            return result;
         }
     }
 }

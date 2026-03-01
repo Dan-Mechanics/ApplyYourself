@@ -189,8 +189,9 @@ GameObject:
   - component: {fileID: 28654548}
   - component: {fileID: 28654552}
   - component: {fileID: 28654551}
+  - component: {fileID: 28654553}
   m_Layer: 0
-  m_Name: land_manager
+  m_Name: unit_manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,7 +268,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heightmap: {fileID: 2800000, guid: 65c1cc38f32bc414cad5c68a679f80a0, type: 3}
-  height: 35
+  height: 38
+--- !u!114 &28654553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28654547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 137177a7121d15747bc291d0d309bfe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  landManager: {fileID: 0}
+  waterManager: {fileID: 0}
+  city: {fileID: 0}
+  width: 0
+  structureTypes: []
+  natureTypes: []
 --- !u!1 &62909531
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,11 +874,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ending: 1
-  landManager: {fileID: 0}
-  nextSceneName: 
-  natureTag: 
-  underwaterHeight: 0
-  natureRequirement: 0
+  dryThreshold: 0
+  natureThreshold: 0
 --- !u!4 &383002007
 Transform:
   m_ObjectHideFlags: 0

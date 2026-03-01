@@ -1,4 +1,5 @@
 wil je dialogue in de menu voor tutorial??/
+perform,ance wise it could handle 100x100 units but whatever.
 
 
 make it so that space also skips dialogue
