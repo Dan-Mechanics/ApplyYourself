@@ -10,7 +10,8 @@ namespace ApplyYourself
         public event Action<StateBehaviour> OnDeregister;
 
         public virtual void Setup() { }
-        public virtual void Enter() { print(GetType().ToString().ToLowerInvariant()); }
+        //public virtual void Enter() { print(GetType().ToString().ToLowerInvariant()); }
+        public virtual void Enter() { }
         public virtual void Exit() { }
         public virtual void OnUpdate() { }
         public virtual void OnFixedUpdate() { }

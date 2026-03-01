@@ -120,7 +120,7 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _WorldCeilingHeight: 13.8
-    - _WorldFloorHeight: 8.01
+    - _WorldFloorHeight: 10.82
     - _ZWrite: 1
     - _bottom: 0
     - _metallic: 0

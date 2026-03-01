@@ -26,6 +26,8 @@ namespace ApplyYourself
 
         public void Initialize()
         {
+            Terminate();
+
             IHeightmap heightmap = GetComponent<IHeightmap>();
             ITypemap typemap = GetComponent<ITypemap>();
 
@@ -78,6 +80,9 @@ namespace ApplyYourself
             {
                 int x = positions[i].x;
                 int y = positions[i].y;
+                if (unitTypes[x, y] == city)
+                    continue;
+
                 unitHeights[x, y] = Mathf.Clamp(unitHeights[x, y] + motion, minHeight, maxHeight);
                 RenderUnit(x, y);
             }
