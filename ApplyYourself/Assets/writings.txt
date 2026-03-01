@@ -1,3 +1,6 @@
+wil je dialogue in de menu voor tutorial??/
+
+
 make it so that space also skips dialogue
 make tags and layers called unit
 make it so all brush has settype and set height

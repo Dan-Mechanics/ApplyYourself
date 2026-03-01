@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class SceneSetup : MonoBehaviour
+    public class SceneBoilerplate : MonoBehaviour
     {
-        [SerializeField, Min(1)] private int fps = default;
-        [SerializeField, Min(1f)] private float physicsTicksPerSecond = default;
+        [SerializeField] private int fps = default;
+        [SerializeField] private float physicsTicksPerSecond = default;
 
         private void Start()
         {
