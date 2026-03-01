@@ -7,7 +7,7 @@ namespace ApplyYourself
     /// <summary>
     /// You could split this into unitmanager.
     /// </summary>
-    public class LandManager : MonoBehaviour 
+    public class UnitManager : MonoBehaviour 
     {
         [SerializeField] private int width = default;
         [SerializeField] private float minHeight = default;

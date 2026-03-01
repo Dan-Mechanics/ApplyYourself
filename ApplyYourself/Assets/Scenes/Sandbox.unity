@@ -156,7 +156,7 @@ MonoBehaviour:
   terraformer: {fileID: 369849031}
   pivotController: {fileID: 376942858}
   waterManager: {fileID: 1422312195}
-  landManager: {fileID: 28654548}
+  unitManager: {fileID: 28654548}
   interval: 0.25
   brushes:
   - {fileID: 11400000, guid: f9c4c0f37f79d8a4cbfa5e1ebb235147, type: 2}
@@ -2003,7 +2003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8b21d6031fa8d40b0557228c9db043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  landManager: {fileID: 28654548}
+  unitManager: {fileID: 28654548}
   minWaterHeight: 0
   waterHeight: 10
   width: 50
@@ -2889,12 +2889,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 137177a7121d15747bc291d0d309bfe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  landManager: {fileID: 0}
-  waterManager: {fileID: 0}
-  city: {fileID: 0}
-  width: 0
-  structureTypes: []
-  natureTypes: []
+  unitManager: {fileID: 28654548}
+  waterManager: {fileID: 1422312195}
+  city: {fileID: 11400000, guid: 49b09ac93070eee4995a6a62c28b03c2, type: 2}
+  width: 50
+  structureTypes:
+  - {fileID: 11400000, guid: 166ff11365285324b80d6ee2117e0739, type: 2}
+  - {fileID: 11400000, guid: 28068dd81c650bc41b2e977fe3d2e751, type: 2}
+  natureTypes:
+  - {fileID: 11400000, guid: 7aba05f7576ad9b4cb5ec9549b6caf41, type: 2}
 --- !u!4 &2119161307
 Transform:
   m_ObjectHideFlags: 0

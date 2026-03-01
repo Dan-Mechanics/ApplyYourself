@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    [CustomEditor(typeof(LandManager))]
+    [CustomEditor(typeof(UnitManager))]
     public class LandManagerEditor : Editor
     {
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
 
-            LandManager landManager = target as LandManager;
+            UnitManager landManager = target as UnitManager;
             if (GUILayout.Button("Show Preview"))
                 landManager.InitializeDebug();
 

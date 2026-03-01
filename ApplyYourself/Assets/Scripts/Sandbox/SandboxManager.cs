@@ -15,7 +15,7 @@ namespace ApplyYourself
         [SerializeField] private Terraformer terraformer = default;
         [SerializeField] private PivotController pivotController = default;
         [SerializeField] private WaterManager waterManager = default;
-        [SerializeField] private LandManager landManager = default;
+        [SerializeField] private UnitManager unitManager = default;
         [SerializeField] private float interval = default;
         [SerializeField] private List<Brush> brushes = default;
         private readonly FSM fsm = new FSM();
@@ -27,11 +27,11 @@ namespace ApplyYourself
             timer.Begin();
 
             waterManager.Initialize();
-            landManager.Initialize();
+            unitManager.Initialize();
 
-            brushes.ForEach(x => x.OnRaise += landManager.RaiseArea);
+            brushes.ForEach(x => x.OnRaise += unitManager.RaiseArea);
             brushes.ForEach(x => x.OnRaise += waterManager.RaiseArea);
-            brushes.ForEach(x => x.OnDecorate += landManager.DecorateArea);
+            brushes.ForEach(x => x.OnDecorate += unitManager.DecorateArea);
             terraformer.SetBrushes(brushes);
 
             InvokeRepeating(nameof(Tick), interval, interval);
@@ -53,7 +53,7 @@ namespace ApplyYourself
         private void Tick()
         {
             waterManager.Tick();
-            landManager.Render();
+            unitManager.Render();
         }
     }
 }

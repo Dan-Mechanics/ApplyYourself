@@ -8,7 +8,7 @@ namespace ApplyYourself
     /// </summary>
     public class WaterManager : MonoBehaviour
     {
-        [SerializeField] private LandManager landManager = default;
+        [SerializeField] private UnitManager unitManager = default;
         [SerializeField] private float minWaterHeight = default;
         [SerializeField] private float waterHeight = default;
         [SerializeField] private int width = default;
@@ -85,10 +85,10 @@ namespace ApplyYourself
                 return;
 
             float height = waterHeights[x, y];
-            if (height >= parentHeight || landManager.GetHeightAt(x, y) >= parentHeight)
+            if (height >= parentHeight || unitManager.GetHeightAt(x, y) >= parentHeight)
                 return;
 
-            height = Mathf.Clamp(height + parentHeight * landManager.GetTypeAt(x, y).waterPercentage,
+            height = Mathf.Clamp(height + parentHeight * unitManager.GetTypeAt(x, y).waterPercentage,
                 minWaterHeight, parentHeight); 
 
             if (height == waterHeights[x, y])

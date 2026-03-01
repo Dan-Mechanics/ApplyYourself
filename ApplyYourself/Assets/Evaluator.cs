@@ -5,7 +5,7 @@ namespace ApplyYourself
 {
     public class Evaluator : MonoBehaviour
     {
-        [SerializeField] private LandManager landManager = default;
+        [SerializeField] private UnitManager unitManager = default;
         [SerializeField] private WaterManager waterManager = default;
         [SerializeField] private UnitType city = default;
         [SerializeField] private int width = default;
@@ -19,26 +19,20 @@ namespace ApplyYourself
             {
                 for (int y = 0; y < width; y++)
                 {
-                    UnitType type = landManager.GetTypeAt(x, y);
-                    float landHeight = landManager.GetHeightAt(x, y);
-                    float waterHeight = waterManager.GetHeightAt(x, y);
-                    bool isLand = landHeight >= waterHeight;
+                    UnitType type = unitManager.GetTypeAt(x, y);
+                    if (unitManager.GetHeightAt(x, y) < waterManager.GetHeightAt(x, y))
+                    {
+                        if (type == city)
+                            wetCityUnits++;
 
-                    if (type == city && !isLand)
-                    {
-                        wetCityUnits++;
+                        continue;
                     }
-                    else if (isLand)
-                    {
-                        if (structureTypes.Contains(type))
-                        {
-                            structureUnits++;
-                        }
-                        else if (natureTypes.Contains(type))
-                        {
-                            natureUnits++;
-                        }
-                    }
+
+                    if (structureTypes.Contains(type))
+                        structureUnits++;
+
+                    if (natureTypes.Contains(type))
+                        natureUnits++;
                 }
             }
         }
