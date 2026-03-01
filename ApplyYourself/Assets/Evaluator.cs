@@ -12,9 +12,9 @@ namespace ApplyYourself
         [SerializeField] private List<UnitType> structureTypes = default;
         [SerializeField] private List<UnitType> natureTypes = default;
 
-        public void Evaluate(out int dryUnits, out int wetUnits, out int structureUnits, out int natureUnits)
+        public void Evaluate(out int wetCityUnits, out int structureUnits, out int natureUnits)
         {
-            dryUnits = wetUnits = structureUnits = natureUnits = 0;
+            wetCityUnits = structureUnits = natureUnits = 0;
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)
@@ -24,16 +24,9 @@ namespace ApplyYourself
                     float waterHeight = waterManager.GetHeightAt(x, y);
                     bool isLand = landHeight >= waterHeight;
 
-                    if (type == city)
+                    if (type == city && !isLand)
                     {
-                        if (isLand)
-                        {
-                            dryUnits++;
-                        }
-                        else
-                        {
-                            wetUnits++;
-                        }
+                        wetCityUnits++;
                     }
                     else if (isLand)
                     {

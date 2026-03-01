@@ -5,8 +5,8 @@ namespace ApplyYourself
 {
     public class Portal : MonoBehaviour, IInteractable
     {
-        [SerializeField] private string nextSceneName = default;
+        [SerializeField] private string scene = default;
 
-        public void Interact() => SceneManager.LoadScene(nextSceneName);
+        public void Interact() => SceneManager.LoadScene(scene);
     }
 }

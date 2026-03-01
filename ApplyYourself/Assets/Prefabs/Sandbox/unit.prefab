@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8649889318344717992}
   m_Layer: 3
   m_Name: unit
-  m_TagString: Chunk
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 8038499254755457808}
   - component: {fileID: 8595751712998442317}
   - component: {fileID: 1894762297891146855}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}

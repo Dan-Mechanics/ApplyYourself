@@ -189,7 +189,6 @@ GameObject:
   - component: {fileID: 28654548}
   - component: {fileID: 28654552}
   - component: {fileID: 28654551}
-  - component: {fileID: 28654553}
   m_Layer: 0
   m_Name: unit_manager
   m_TagString: Untagged
@@ -269,24 +268,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heightmap: {fileID: 2800000, guid: 65c1cc38f32bc414cad5c68a679f80a0, type: 3}
   height: 38
---- !u!114 &28654553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 28654547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 137177a7121d15747bc291d0d309bfe0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  landManager: {fileID: 0}
-  waterManager: {fileID: 0}
-  city: {fileID: 0}
-  width: 0
-  structureTypes: []
-  natureTypes: []
 --- !u!1 &62909531
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,7 +750,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 8
-  range: 2000
+  range: 1500
   spacing: 10
 --- !u!4 &369849032
 Transform:
@@ -854,6 +835,7 @@ GameObject:
   m_Component:
   - component: {fileID: 383002007}
   - component: {fileID: 383002006}
+  - component: {fileID: 383002008}
   m_Layer: 0
   m_Name: algorithm
   m_TagString: Untagged
@@ -874,8 +856,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ending: 1
-  dryThreshold: 0
-  natureThreshold: 0
+  evaluator: {fileID: 2119161306}
+  portal: {fileID: 383002008}
+  dryThreshold: 2
+  minCombinedUnitsChanged: 10
 --- !u!4 &383002007
 Transform:
   m_ObjectHideFlags: 0
@@ -891,6 +875,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &383002008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383002005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a50276155f1c002499310cf9c7ca1e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: Explore
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2863,6 +2860,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 56.277, y: 45, z: 0}
+--- !u!1 &2119161305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2119161307}
+  - component: {fileID: 2119161306}
+  m_Layer: 0
+  m_Name: evaluator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2119161306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119161305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 137177a7121d15747bc291d0d309bfe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  landManager: {fileID: 0}
+  waterManager: {fileID: 0}
+  city: {fileID: 0}
+  width: 0
+  structureTypes: []
+  natureTypes: []
+--- !u!4 &2119161307
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119161305}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2140655945
 GameObject:
   m_ObjectHideFlags: 0
@@ -2943,11 +2990,12 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 17225716}
+  - {fileID: 383002007}
+  - {fileID: 2119161307}
   - {fileID: 935798424}
   - {fileID: 28654549}
   - {fileID: 1422312194}
   - {fileID: 193189754}
-  - {fileID: 383002007}
   - {fileID: 369849032}
   - {fileID: 1984330394}
   - {fileID: 376942859}
