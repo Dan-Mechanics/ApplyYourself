@@ -64,25 +64,25 @@ namespace ApplyYourself
                 for (int y = 0; y < width; y++)
                 {
                     float parentHeight = readBuffer[x, y];
-                    Raise(x - 1, y, parentHeight, writeBuffer);
-                    Raise(x + 1, y, parentHeight, writeBuffer);
-                    Raise(x, y - 1, parentHeight, writeBuffer);
-                    Raise(x, y + 1, parentHeight, writeBuffer);
+                    Raise(x - 1, y, parentHeight, readBuffer, writeBuffer);
+                    Raise(x + 1, y, parentHeight, readBuffer, writeBuffer);
+                    Raise(x, y - 1, parentHeight, readBuffer, writeBuffer);
+                    Raise(x, y + 1, parentHeight, readBuffer, writeBuffer);
                 }
             }
         }
 
-        private void Raise(int x, int y, float parentHeight, float[,] writeBuffer)
+        private void Raise(int x, int y, float parentHeight, float[,] readBuffer, float[,] writeBuffer)
         {
             if (x < 0 || y < 0 || x >= width || y >= width)
                 return;
 
-            float neighbourHeight = writeBuffer[x, y];
-            if (neighbourHeight < parentHeight && unitManager.GetHeightAt(x, y) < parentHeight)
-            {
-                writeBuffer[x, y] = Mathf.Clamp(neighbourHeight + parentHeight * unitManager.GetTypeAt(x, y).waterPercentage,
-                    minWaterHeight, parentHeight);
-            }
+            float height = readBuffer[x, y];
+            if (height >= parentHeight || unitManager.GetHeightAt(x, y) >= parentHeight)
+                return;
+
+            height += parentHeight * unitManager.GetTypeAt(x, y).waterPercentage;
+            writeBuffer[x, y] = Mathf.Clamp(height, minWaterHeight, parentHeight);
         }
     }
 }
