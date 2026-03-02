@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -54,7 +55,7 @@ namespace ApplyYourself
         public void BeginDialogue(TextAsset dialogue)
         {
             ClaimState();
-            pending = ParseDialogue(dialogue);
+            pending = ParseDialogue(dialogue.text);
             GoNextFrame();
         }
 
@@ -74,7 +75,7 @@ namespace ApplyYourself
         private void ShowFrame(Frame frame)
         {
             nameText.text = frame.name;
-            dialogueWriter.Write(frame.text);
+            dialogueWriter.Write(frame.dialogue);
 
             if (!sprites.ContainsKey(frame.sprite))
                 sprites[frame.sprite] = Resources.Load<Sprite>(charactersPath + "/" + frame.sprite);
@@ -84,26 +85,23 @@ namespace ApplyYourself
                 Debug.LogError($"{frame.sprite}.png does not exist in resources.");
         }
 
-        private Queue<Frame> ParseDialogue(TextAsset dialogue)
+        private Queue<Frame> ParseDialogue(string dialogue)
         {
             Queue<Frame> result = new Queue<Frame>();
-            string[] lines = dialogue.text.Split(Environment.NewLine.ToCharArray()[0], StringSplitOptions.RemoveEmptyEntries);
-            for (int i = 0; i < lines.Length; i++)
-            {
-                lines[i] = lines[i].Trim();
-            }
+            List<string> lines = dialogue.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToList();
 
-            ParsingMode parsingMode = ParsingMode.Name;
             Frame current = default;
-            foreach (string line in lines)
+            ParsingMode parsingMode = ParsingMode.Name;
+            for (int i = 0; i < lines.Count; i++)
             {
+                string line = lines[i].Trim();
                 if (!Utils.IsStringValid(line))
                     continue;
 
                 if (line[0] == COMMENT)
                     continue;
 
-                if (line.Length > 2 && line[1] == COMMENT)
+                if (line.Length >= 2 && line[1] == COMMENT)
                     continue;
 
                 switch (parsingMode)
@@ -117,20 +115,19 @@ namespace ApplyYourself
                         parsingMode = ParsingMode.Dialogue;
                         break;
                     case ParsingMode.Dialogue:
-                        string newLine = line;
-                        if (newLine[0] == QUOTE)
-                            newLine = newLine.Remove(0, 1);
+                        if (line[0] == QUOTE)
+                            line = line.Remove(0, 1);
 
-                        if (newLine[^1] != QUOTE)
+                        if (line[^1] != QUOTE)
                         {
-                            current.text += newLine;
-                            if (newLine[^1] != NEWLINE)
-                                current.text += SPACE;
+                            current.dialogue += line;
+                            if (line[^1] != NEWLINE)
+                                current.dialogue += SPACE;
                         }
                         else
                         {
-                            current.text += newLine.Remove(newLine.Length - 1);
-                            current.text = current.text.Replace(NEWLINE, '\n');
+                            current.dialogue += line.Remove(line.Length - 1);
+                            current.dialogue = current.dialogue.Replace(NEWLINE, '\n');
 
                             // NEW ITERATION.
                             result.Enqueue(current);
@@ -166,7 +163,7 @@ namespace ApplyYourself
         {
             public string name;
             public string sprite;
-            public string text;
+            public string dialogue;
         }
     }
 }

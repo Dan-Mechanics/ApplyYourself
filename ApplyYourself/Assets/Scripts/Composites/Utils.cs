@@ -1,4 +1,6 @@
-﻿namespace ApplyYourself
+﻿using System;
+
+namespace ApplyYourself
 {
     public static class Utils
     {
