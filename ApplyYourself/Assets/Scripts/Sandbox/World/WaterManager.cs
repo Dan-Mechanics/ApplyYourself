@@ -11,14 +11,14 @@ namespace ApplyYourself
         [SerializeField] private int width = default;
         [SerializeField] private int deadzone = default;
 
-        private float[,] bufferA;
-        private float[,] bufferB;
-        private bool swap;
+        private float[,] readBuffer;
+        private float[,] writeBuffer;
+    //    private bool swap;
 
         public void Initialize()
         {
-            bufferA = new float[width, width];
-            bufferB = new float[width, width];
+            readBuffer = new float[width, width];
+            writeBuffer = new float[width, width];
             SetHeight(0, width - 1, waterHeight);
         }
 
@@ -34,8 +34,8 @@ namespace ApplyYourself
             }
         }
 
-        public float GetHeightAt(int x, int y) => (swap ? bufferB : bufferA)[x, y];
-        private void SetHeight(int x, int y, float height) => bufferA[x, y] = bufferB[x, y] = height;
+        public float GetHeightAt(int x, int y) => readBuffer[x, y];
+        private void SetHeight(int x, int y, float height) => readBuffer[x, y] = height;
 
         public void RaiseArea(List<Vector2Int> positions, float motion)
         {
@@ -53,26 +53,35 @@ namespace ApplyYourself
 
         public void Tick() 
         {
-            ComputeWater(swap ? bufferB : bufferA, swap ? bufferA : bufferB);
-            swap = !swap;
+            ComputeWater();
+            //swap = !swap;
         }
 
-        private void ComputeWater(float[,] readBuffer, float[,] writeBuffer)
+        private void ComputeWater()
         {
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)
                 {
                     float parentHeight = readBuffer[x, y];
-                    Raise(x - 1, y, parentHeight, readBuffer, writeBuffer);
-                    Raise(x + 1, y, parentHeight, readBuffer, writeBuffer);
-                    Raise(x, y - 1, parentHeight, readBuffer, writeBuffer);
-                    Raise(x, y + 1, parentHeight, readBuffer, writeBuffer);
+                    Raise(x - 1, y, parentHeight);
+                    Raise(x + 1, y, parentHeight);
+                    Raise(x, y - 1, parentHeight);
+                    Raise(x, y + 1, parentHeight);
+                }
+            }
+
+            // SWAP.
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < width; y++)
+                {
+                    readBuffer[x, y] = writeBuffer[x, y];
                 }
             }
         }
 
-        private void Raise(int x, int y, float parentHeight, float[,] readBuffer, float[,] writeBuffer)
+        private void Raise(int x, int y, float parentHeight)
         {
             if (x < 0 || y < 0 || x >= width || y >= width)
                 return;
