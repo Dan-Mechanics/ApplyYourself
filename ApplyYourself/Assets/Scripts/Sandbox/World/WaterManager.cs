@@ -35,7 +35,12 @@ namespace ApplyYourself
         }
 
         public float GetHeightAt(int x, int y) => readBuffer[x, y];
-        private void SetHeight(int x, int y, float height) => readBuffer[x, y] = height;
+
+        private void SetHeight(int x, int y, float height)
+        {
+            writeBuffer[x, y] = height;
+            readBuffer[x, y] = height;
+        }
 
         public void RaiseArea(List<Vector2Int> positions, float motion)
         {
