@@ -13,7 +13,6 @@ namespace ApplyYourself
 
         private float[,] readBuffer;
         private float[,] writeBuffer;
-    //    private bool swap;
 
         public void Initialize()
         {
@@ -56,13 +55,7 @@ namespace ApplyYourself
             }
         }
 
-        public void Tick() 
-        {
-            ComputeWater();
-            //swap = !swap;
-        }
-
-        private void ComputeWater()
+        public void Tick()
         {
             for (int x = 0; x < width; x++)
             {
