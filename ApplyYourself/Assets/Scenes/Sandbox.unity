@@ -590,8 +590,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 753022d5c02d0164784f782d9cd7c767, type: 2}
   texture: {fileID: 2800000, guid: 9b4f10e1e51cf4844971c3b68d05524b, type: 3}
-  worldFloorHeight: 10.82
-  worldCeilingHeight: 13.8
+  worldFloorHeight: 5
+  worldCeilingHeight: 12.5
 --- !u!114 &193189756
 MonoBehaviour:
   m_ObjectHideFlags: 0
