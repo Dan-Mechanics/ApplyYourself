@@ -11,7 +11,7 @@ namespace ApplyYourself
     {
         public enum ParsingMode { Name, Sprite, Dialogue }
         
-        private const char NEWLINE = '~';
+        private const char NEWLINE_INDICATOR = '~';
         private const char COMMENT = '#';
         private const char QUOTE = '\"';
         private const char SPACE = ' ';
@@ -121,13 +121,13 @@ namespace ApplyYourself
                         if (line[^1] != QUOTE)
                         {
                             current.dialogue += line;
-                            if (line[^1] != NEWLINE)
+                            if (line[^1] != NEWLINE_INDICATOR)
                                 current.dialogue += SPACE;
                         }
                         else
                         {
                             current.dialogue += line.Remove(line.Length - 1);
-                            current.dialogue = current.dialogue.Replace(NEWLINE, '\n');
+                            current.dialogue = current.dialogue.Replace(NEWLINE_INDICATOR, '\n');
 
                             // NEW ITERATION.
                             result.Enqueue(current);
