@@ -211,7 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 50
   minHeight: 0
-  maxHeight: 45
+  maxHeight: 48
   visualWaterShake: 3
   jump: {fileID: 11400000, guid: eaca23abef3ef7c49b9e9306c19ff5cd, type: 2}
   waterManager: {fileID: 1422312195}
@@ -2025,6 +2025,8 @@ MonoBehaviour:
   waterHeight: 15
   width: 50
   deadzone: 3
+  waterHeightPerTick: 0
+  interval: 30
 --- !u!1 &1457942721
 GameObject:
   m_ObjectHideFlags: 0

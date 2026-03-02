@@ -10,6 +10,8 @@ namespace ApplyYourself
         [SerializeField] private float waterHeight = default;
         [SerializeField] private int width = default;
         [SerializeField] private int deadzone = default;
+        [SerializeField] private float waterHeightPerTick = default;
+        [SerializeField] private float interval = default;
 
         private float[,] readBuffer;
         private float[,] writeBuffer;
@@ -19,6 +21,7 @@ namespace ApplyYourself
             readBuffer = new float[width, width];
             writeBuffer = new float[width, width];
             SetHeight(0, width - 1, waterHeight);
+            InvokeRepeating(nameof(RaiseWaterLevel), interval, interval);
         }
 
         public void InitializeDebug()
@@ -77,6 +80,12 @@ namespace ApplyYourself
                     readBuffer[x, y] = writeBuffer[x, y];
                 }
             }
+        }
+
+        private void RaiseWaterLevel()
+        {
+            waterHeight += waterHeightPerTick;
+            SetHeight(0, width - 1, waterHeight);
         }
 
         private void Raise(int x, int y, float parentHeight)

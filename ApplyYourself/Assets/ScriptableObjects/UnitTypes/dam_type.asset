@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ecd94d3c7db084c97cd0c0c290f1aa, type: 3}
   m_Name: dam_type
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 278910c231189fb49b5cf42b2ba20eae, type: 2}
-  decoration: {fileID: 3300950976940298294, guid: ea00d42414c5baa45adf99da362017ce,
-    type: 3}
+  material: {fileID: 2100000, guid: fa4f417138a9d6548a99185861316df8, type: 2}
+  decoration: {fileID: 0}
   waterPercentage: 0

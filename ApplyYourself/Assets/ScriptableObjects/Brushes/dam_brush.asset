@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: dam_brush
   m_EditorClassIdentifier: 
   size: 2
-  strength: 0
+  strength: 10000
   previewMaterial: {fileID: 2100000, guid: e15b873c75f088e428b218a95004f11e, type: 2}
   invert: {fileID: 11400000, guid: 0ad6dca8024d7f040afcac273e3f1e7c, type: 2}
   type: {fileID: 11400000, guid: 28068dd81c650bc41b2e977fe3d2e751, type: 2}
