@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6977009746638327538}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: dam_decoration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1182847827414202996}
   - component: {fileID: 6703651046365193484}
   - component: {fileID: 3955258579392427018}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
