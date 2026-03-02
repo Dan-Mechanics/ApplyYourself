@@ -157,7 +157,7 @@ MonoBehaviour:
   pivotController: {fileID: 376942858}
   waterManager: {fileID: 1422312195}
   unitManager: {fileID: 28654548}
-  interval: 0.225
+  interval: 0.2
   brushes:
   - {fileID: 11400000, guid: f9c4c0f37f79d8a4cbfa5e1ebb235147, type: 2}
   - {fileID: 11400000, guid: d99274f9b1e9df343af8619a48c0a92d, type: 2}
@@ -590,8 +590,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 753022d5c02d0164784f782d9cd7c767, type: 2}
   texture: {fileID: 2800000, guid: 9b4f10e1e51cf4844971c3b68d05524b, type: 3}
-  worldFloorHeight: 5
-  worldCeilingHeight: 12.5
+  worldFloorHeight: 6
+  worldCeilingHeight: 12
 --- !u!114 &193189756
 MonoBehaviour:
   m_ObjectHideFlags: 0

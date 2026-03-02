@@ -3,9 +3,6 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    /// <summary>
-    /// You could make difference SOLIDS with this.
-    /// </summary>
     public class WaterManager : MonoBehaviour
     {
         [SerializeField] private UnitManager unitManager = default;
@@ -14,14 +11,15 @@ namespace ApplyYourself
         [SerializeField] private int width = default;
         [SerializeField] private int deadzone = default;
 
-        private float[,] waterHeights;
-        private bool[,] changeGrid;
+        private float[,] bufferA;
+        private float[,] bufferB;
+        private bool swap;
 
         public void Initialize()
         {
-            waterHeights = new float[width, width];
-            changeGrid = new bool[width, width];
-            waterHeights[0, width - 1] = waterHeight;
+            bufferA = new float[width, width];
+            bufferB = new float[width, width];
+            SetHeight(0, width - 1, waterHeight);
         }
 
         public void InitializeDebug()
@@ -31,12 +29,13 @@ namespace ApplyYourself
             {
                 for (int y = 0; y < width; y++)
                 {
-                    waterHeights[x, y] = waterHeight;
+                    SetHeight(x, y, waterHeight);
                 }
             }
         }
 
-        public float GetHeightAt(int x, int y) => waterHeights[x, y];
+        public float GetHeightAt(int x, int y) => (swap ? bufferB : bufferA)[x, y];
+        private void SetHeight(int x, int y, float height) => bufferA[x, y] = bufferB[x, y] = height;
 
         public void RaiseArea(List<Vector2Int> positions, float motion)
         {
@@ -48,54 +47,42 @@ namespace ApplyYourself
                 int x = positions[i].x;
                 int y = positions[i].y;
                 if (x >= deadzone || y <= width - deadzone - 1)
-                    waterHeights[x, y] = minWaterHeight;
+                    SetHeight(x, y, minWaterHeight);
             }
         }
 
-        public void Tick()
+        public void Tick() 
+        {
+            ComputeWater(swap ? bufferB : bufferA, swap ? bufferA : bufferB);
+            swap = !swap;
+        }
+
+        private void ComputeWater(float[,] readBuffer, float[,] writeBuffer)
         {
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)
                 {
-                    if (changeGrid[x, y])
-                        continue;
-
-                    float parentHeight = waterHeights[x, y];
-                    Raise(x - 1, y, parentHeight);
-                    Raise(x + 1, y, parentHeight);
-                    Raise(x, y - 1, parentHeight);
-                    Raise(x, y + 1, parentHeight);
-                }
-            }
-
-            // THIS DOES NEED TO BE HERE LIKE THIS.
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < width; y++)
-                {
-                    changeGrid[x, y] = false;
+                    float parentHeight = readBuffer[x, y];
+                    Raise(x - 1, y, parentHeight, writeBuffer);
+                    Raise(x + 1, y, parentHeight, writeBuffer);
+                    Raise(x, y - 1, parentHeight, writeBuffer);
+                    Raise(x, y + 1, parentHeight, writeBuffer);
                 }
             }
         }
 
-        private void Raise(int x, int y, float parentHeight)
+        private void Raise(int x, int y, float parentHeight, float[,] writeBuffer)
         {
             if (x < 0 || y < 0 || x >= width || y >= width)
                 return;
 
-            float height = waterHeights[x, y];
-            if (height >= parentHeight || unitManager.GetHeightAt(x, y) >= parentHeight)
-                return;
-
-            height = Mathf.Clamp(height + parentHeight * unitManager.GetTypeAt(x, y).waterPercentage,
-                minWaterHeight, parentHeight); 
-
-            if (height == waterHeights[x, y])
-                return;
-
-            changeGrid[x, y] = true;
-            waterHeights[x, y] = height;
+            float neighbourHeight = writeBuffer[x, y];
+            if (neighbourHeight < parentHeight && unitManager.GetHeightAt(x, y) < parentHeight)
+            {
+                writeBuffer[x, y] = Mathf.Clamp(neighbourHeight + parentHeight * unitManager.GetTypeAt(x, y).waterPercentage,
+                    minWaterHeight, parentHeight);
+            }
         }
     }
 }
