@@ -2022,11 +2022,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitManager: {fileID: 28654548}
   minWaterHeight: 0
-  waterHeight: 15
+  waterHeight: 5
   width: 50
   deadzone: 3
-  waterHeightPerTick: 0
-  interval: 30
+  waterHeightPerTick: 0.5
+  interval: 1
 --- !u!1 &1457942721
 GameObject:
   m_ObjectHideFlags: 0
