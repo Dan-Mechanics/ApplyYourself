@@ -88,11 +88,11 @@ namespace ApplyYourself
         private Queue<Frame> ParseDialogue(string dialogue)
         {
             Queue<Frame> result = new Queue<Frame>();
-            List<string> lines = dialogue.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToList();
+            string[] lines = dialogue.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
             Frame current = default;
             ParsingMode parsingMode = ParsingMode.Name;
-            for (int i = 0; i < lines.Count; i++)
+            for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i].Trim();
                 if (!Utils.IsStringValid(line))
