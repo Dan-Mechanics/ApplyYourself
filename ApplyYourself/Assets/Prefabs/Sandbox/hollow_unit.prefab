@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4531286221657214447}
   - component: {fileID: 8649889318344717992}
   m_Layer: 3
-  m_Name: test_unot
+  m_Name: hollow_unit
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
