@@ -419,6 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27180edb944ca9442aaca67f85e6f992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 62909533}
 --- !u!1 &128797298
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,14 +803,14 @@ MonoBehaviour:
   rotate: {fileID: 11400000, guid: f2ce04258f935d14f9f50c4cc21a0b28, type: 2}
   move: {fileID: 11400000, guid: dc5a86ced043faf4da9dd97ffde75519, type: 2}
   rotation: {x: 45, y: 45, z: 0}
-  sens: 0.6
+  sensitivity: 0.6
   minAngle: 5
   maxAngle: 85
   position: {x: 0, y: 0, z: -300}
-  zoomSens: 20
+  zoomSensitivity: 20
   minDistance: 25
   maxDistance: 1000
-  movingSens: 0.6
+  moveSensitivity: 0.6
 --- !u!4 &376942859
 Transform:
   m_ObjectHideFlags: 0

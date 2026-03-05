@@ -5,26 +5,20 @@ namespace ApplyYourself
     public class PlayerMovement : StateBehaviour
     {
         [SerializeField] private CharacterController controller = default;
-        [SerializeField] private Transform graphic = default;
-        [SerializeField] private Transform heading = default;
+        [SerializeField] private Transform leftRightPivot = default;
         [SerializeField] private float speed = default;
 
-        public override void OnFixedUpdate()
+        public override void OnUpdate()
         {
-            base.OnFixedUpdate();
+            base.OnUpdate();
+            Vector3 movement = (Input.GetAxisRaw("Horizontal") * leftRightPivot.right) +
+                (Input.GetAxisRaw("Vertical") * leftRightPivot.forward);
 
-            Vector3 movement = (Input.GetAxisRaw("Horizontal") * transform.right) + (Input.GetAxisRaw("Vertical") * transform.forward);
             movement.Normalize();
             movement *= speed;
 
-            if (movement != Vector3.zero)
-            {
-                heading.position = transform.position + movement;
-                graphic.LookAt(heading);
-            }
-
-            controller.Move(movement * Time.fixedDeltaTime);
-            controller.Move(Physics.gravity * Time.fixedDeltaTime);
+            controller.Move(movement * Time.deltaTime);
+            controller.Move(Physics.gravity * Time.deltaTime);
         }
     }
 }

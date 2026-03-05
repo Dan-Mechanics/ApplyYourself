@@ -7,6 +7,9 @@ namespace ApplyYourself
     {
         [SerializeField] private string scene = default;
 
+        public string GetHighlight() => $"Go through {nameof(Portal)}";
+        public Vector3 GetPosition() => transform.position;
+
         public void Interact() => SceneManager.LoadScene(scene);
     }
 }
