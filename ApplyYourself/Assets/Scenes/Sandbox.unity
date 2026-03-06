@@ -215,6 +215,7 @@ MonoBehaviour:
   visualWaterShake: 3
   jump: {fileID: 11400000, guid: eaca23abef3ef7c49b9e9306c19ff5cd, type: 2}
   waterManager: {fileID: 1422312195}
+  adaptiveGradient: {fileID: 193189757}
   water: {fileID: 11400000, guid: 6f22bf932d97b3342b63bdab892b103d, type: 2}
   city: {fileID: 11400000, guid: 49b09ac93070eee4995a6a62c28b03c2, type: 2}
   plains: {fileID: 11400000, guid: f3aa692e0bcca94479a7b82d14effbff, type: 2}
@@ -267,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1346682bbf826d341b5e5e79e592048c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heightmap: {fileID: 2800000, guid: 2dce8c1e22326c14987be06ff82d3257, type: 3}
+  heightmap: {fileID: 2800000, guid: ee27e8aee438b4045b0c1dc9dc4397d4, type: 3}
   height: 25
 --- !u!1 &62909531
 GameObject:
@@ -521,8 +522,8 @@ GameObject:
   - component: {fileID: 193189754}
   - component: {fileID: 193189753}
   - component: {fileID: 193189752}
-  - component: {fileID: 193189755}
   - component: {fileID: 193189756}
+  - component: {fileID: 193189757}
   m_Layer: 0
   m_Name: gradient_material
   m_TagString: Untagged
@@ -577,22 +578,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &193189755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 193189751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d87ce2e88d8080a4b90df1d1cad48b30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 753022d5c02d0164784f782d9cd7c767, type: 2}
-  texture: {fileID: 2800000, guid: 8c68d7be2ad8ab64fb12abc24399f444, type: 3}
-  worldFloorHeight: 1
-  worldCeilingHeight: 6.8
 --- !u!114 &193189756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,6 +594,22 @@ MonoBehaviour:
   texture: {fileID: 2800000, guid: d7370c7765131b44d87f9a9497cee629, type: 3}
   worldFloorHeight: 0
   worldCeilingHeight: 15
+--- !u!114 &193189757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193189751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa1a359f939d344a9b8c7013141432c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 753022d5c02d0164784f782d9cd7c767, type: 2}
+  texture: {fileID: 2800000, guid: 8c68d7be2ad8ab64fb12abc24399f444, type: 3}
+  worldFloorHeight: 0
+  worldCeilingHeight: 0
 --- !u!1 &199471835
 GameObject:
   m_ObjectHideFlags: 0
@@ -2022,6 +2023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitManager: {fileID: 28654548}
+  adaptiveGradient: {fileID: 0}
   minWaterHeight: 0
   waterHeight: 11.5
   width: 50
@@ -3148,7 +3150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e44dc6638ec7e04085aa54c95d198ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sun: {fileID: 1842730862}
 --- !u!1 &2119161305
 GameObject:
   m_ObjectHideFlags: 0

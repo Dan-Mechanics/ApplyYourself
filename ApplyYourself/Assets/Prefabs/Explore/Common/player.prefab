@@ -193,7 +193,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 1
-  radius: 5
+  radius: 3
   interactCooldown: 0.3
 --- !u!114 &3553187694032682028
 MonoBehaviour:
@@ -210,6 +210,7 @@ MonoBehaviour:
   controller: {fileID: 3647801561732012112}
   leftRightPivot: {fileID: 1905645038698360357}
   speed: 6
+  fallingSpeed: 5
 --- !u!114 &7582943016857370818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +220,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8195046949362653098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f686a1a4f9f02f4493478ebcacccd6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 36fc179205205e144b441bd3181bbe73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   leftRightPivot: {fileID: 1905645038698360357}
@@ -231,7 +232,7 @@ MonoBehaviour:
   rotation: {x: 0, y: 0}
   sensitivity: 0.33
   maxAngle: 90
-  distance: 4
+  distance: 4.5
   offset: 1
 --- !u!114 &8189917674282299612
 MonoBehaviour:
@@ -242,7 +243,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8195046949362653098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d6df7f47e22b614a91d4389108caad1, type: 3}
+  m_Script: {fileID: 11500000, guid: ed06fcee4b73d744a94d12de063d2c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   leftRightPivot: {fileID: 1905645038698360357}

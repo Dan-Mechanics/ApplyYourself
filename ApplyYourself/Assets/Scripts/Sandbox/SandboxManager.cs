@@ -60,7 +60,7 @@ namespace ApplyYourself
         private void Tick()
         {
             waterManager.Tick();
-            unitManager.Render();
+            unitManager.RenderAll();
         }
     }
 }

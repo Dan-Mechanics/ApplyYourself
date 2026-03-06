@@ -7,6 +7,7 @@ namespace ApplyYourself
         [SerializeField] private CharacterController controller = default;
         [SerializeField] private Transform leftRightPivot = default;
         [SerializeField] private float speed = default;
+        [SerializeField] private float fallingSpeed = default;
 
         public override void OnUpdate()
         {
@@ -18,7 +19,7 @@ namespace ApplyYourself
             movement *= speed;
 
             controller.Move(movement * Time.deltaTime);
-            controller.Move(Physics.gravity * Time.deltaTime);
+            controller.Move(fallingSpeed * Time.deltaTime * Vector3.down);
         }
     }
 }

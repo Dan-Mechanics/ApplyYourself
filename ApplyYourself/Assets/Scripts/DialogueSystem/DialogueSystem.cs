@@ -18,6 +18,8 @@ namespace ApplyYourself
         
         [SerializeField] private EasyBinding primaryFire = default;
         [SerializeField] private EasyBinding jump = default;
+        [SerializeField] private EasyBinding interact = default;
+
         [SerializeField] private EasyBinding escape = default;
         [SerializeField] private CanvasGroup canvasGroup = default;
         [SerializeField] private TextWriter dialogueWriter = default;
@@ -29,6 +31,13 @@ namespace ApplyYourself
         private readonly Dictionary<string, Sprite> sprites = new Dictionary<string, Sprite>();
         private Queue<Frame> pending = new Queue<Frame>();
         private float nextDialogueTime;
+        private InputComposite composite;
+
+        public override void Setup()
+        {
+            base.Setup();
+            composite = new InputComposite(primaryFire, jump, interact);
+        }
 
         public override void OnUpdate()
         {
@@ -39,7 +48,7 @@ namespace ApplyYourself
                 return;
             }
 
-            if ((primaryFire.WasPressed || jump.WasPressed) && Time.time >= nextDialogueTime)
+            if (composite.WasPressed() && Time.time >= nextDialogueTime)
             {
                 if (dialogueWriter.IsDone)
                 {

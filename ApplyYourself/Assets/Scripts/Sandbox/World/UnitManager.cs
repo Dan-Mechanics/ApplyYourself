@@ -15,6 +15,7 @@ namespace ApplyYourself
         [SerializeField] private float visualWaterShake = default;
         [SerializeField] private EasyBinding jump = default;
         [SerializeField] private WaterManager waterManager = default;
+        [SerializeField] private AdaptiveGradient adaptiveGradient = default;
         [SerializeField] private UnitType water = default;
         [SerializeField] private UnitType city = default;
         [SerializeField] private UnitType plains = default;
@@ -23,6 +24,8 @@ namespace ApplyYourself
         private UnitVisual[,] unitVisuals;
         private UnitType[,] unitTypes;
         private float[,] unitHeights;
+        private float lowestWater;
+        private float highestWater;
 
         public void Initialize()
         {
@@ -54,7 +57,7 @@ namespace ApplyYourself
         {
             Initialize();
             waterManager.InitializeDebug();
-            Render();
+            RenderAll();
         }
 
         /// <summary>
@@ -114,8 +117,9 @@ namespace ApplyYourself
         /// <summary>
         /// Called by SandboxManager.
         /// </summary>
-        public void Render()
+        public void RenderAll()
         {
+            highestWater = lowestWater = waterManager.GetHeightAt(0, 0);
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)
@@ -123,6 +127,8 @@ namespace ApplyYourself
                     RenderUnit(x, y);
                 }
             }
+
+            adaptiveGradient.SetRange(lowestWater, highestWater);
         }
 
         private void RenderUnit(int x, int y)
@@ -143,6 +149,10 @@ namespace ApplyYourself
                 unitVisuals[x, y].SetMaterial(water.material);
                 unitVisuals[x, y].EnableDecoration(false);
                 unitVisuals[x, y].SetHeight(waterHeight + (Random.value - 0.5f) * visualWaterShake);
+                if (waterHeight < lowestWater)
+                    lowestWater = waterHeight;
+                else if (waterHeight > highestWater)
+                    highestWater = waterHeight;
             }
         }
 
