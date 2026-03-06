@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960c9ff3cfb0aa6468fee7e2c5e50c50, type: 3}
   m_Name: previous
   m_EditorClassIdentifier: 
-  keyName: Mouse4
-  keyCode: 327
+  keyName: Mouse3
+  keyCode: 326

@@ -6,7 +6,6 @@ namespace ApplyYourself
     {
         [SerializeField] private EasyBinding next = default;
         [SerializeField] private EasyBinding previous = default;
-        [SerializeField] private float sensitivity = default;
         [SerializeField] private float min = default;
         [SerializeField] private float max = default;
         [SerializeField] private float sensitivityPerClick = default;
@@ -19,6 +18,9 @@ namespace ApplyYourself
         [SerializeField] private int width = default;
         [SerializeField] private int height = default;
 
+        private float sensitivity = 1f;
+        private float scrollSensitivity = 1f;
+
         private void Update()
         {
             if (next.WasPressed)
@@ -26,11 +28,25 @@ namespace ApplyYourself
 
             if (previous.WasPressed)
                 sensitivity = Mathf.Clamp(sensitivity - sensitivityPerClick, min, max);
+
+            if (!previous.IsHeld && !next.IsHeld)
+                return;
+
+            float scroll = GetScroll();
+            if (scroll > 0f)
+            {
+                scrollSensitivity = Mathf.Clamp(scrollSensitivity + sensitivityPerClick, min, max);
+            }
+            else if (scroll < 0f)
+            {
+                scrollSensitivity = Mathf.Clamp(scrollSensitivity - sensitivityPerClick, min, max);
+            }
         }
 
         public Vector2 GetLook() => new Vector2(-GetY(), GetX());
         public float GetX() => Input.GetAxisRaw("Mouse X") * sensitivity;
         public float GetY() => Input.GetAxisRaw("Mouse Y") * sensitivity;
+        public float GetScroll() => Input.mouseScrollDelta.y * scrollSensitivity;
 
         private void OnGUI()
         {
@@ -40,7 +56,10 @@ namespace ApplyYourself
             style.fontSize = fontSize;
 
             style.alignment = TextAnchor.LowerRight;
-            GUI.Label(rect, $"sens: {System.Math.Round(sensitivity, decimalPlaces)}\nUse alt mouse buttons to raise / lower", style);
+            GUI.Label(rect, $"sens: {System.Math.Round(sensitivity, decimalPlaces)}\n" +
+                $"scroll: {System.Math.Round(scrollSensitivity, decimalPlaces)}\n" +
+                $"Use alt mouse buttons to raise / lower.", style);
+
             GUI.color = Color.white;
         }
     }

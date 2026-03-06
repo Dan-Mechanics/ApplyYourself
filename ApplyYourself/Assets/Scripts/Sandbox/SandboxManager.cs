@@ -34,10 +34,9 @@ namespace ApplyYourself
             brushes.ForEach(x => x.OnDecorate += unitManager.DecorateArea);
             terraformer.SetBrushes(brushes);
 
+            unitManager.OnNewWaterRange += FindAnyObjectByType<AdaptiveGradient>().SetRange;
             InvokeRepeating(nameof(Tick), interval, interval);
-
-            terraformer.Setup();
-            pivotController.Setup();
+            pivotController.Assign(FindAnyObjectByType<SensitivityMouse>());
 
             fsm.AddTransition(new StateTransition(terraformer, pivotController));
             fsm.AddTransition(new StateTransition(pivotController, terraformer));

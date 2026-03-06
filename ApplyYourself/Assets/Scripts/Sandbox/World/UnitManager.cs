@@ -1,21 +1,20 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace ApplyYourself
 {
-    /// <summary>
-    /// You could split this into unitmanager.
-    /// </summary>
     public class UnitManager : MonoBehaviour 
     {
+        public event Action<float, float> OnNewWaterRange; 
+        
         [SerializeField] private int width = default;
         [SerializeField] private float minHeight = default;
         [SerializeField] private float maxHeight = default;
         [SerializeField] private float visualWaterShake = default;
-        [SerializeField] private EasyBinding jump = default;
+        [SerializeField] private EasyBinding debugRemoveTerrain = default;
         [SerializeField] private WaterManager waterManager = default;
-        [SerializeField] private AdaptiveGradient adaptiveGradient = default;
         [SerializeField] private UnitType water = default;
         [SerializeField] private UnitType city = default;
         [SerializeField] private UnitType plains = default;
@@ -65,7 +64,7 @@ namespace ApplyYourself
         /// </summary>
         private void Update()
         {
-            if (!jump.WasPressed)
+            if (!debugRemoveTerrain.WasPressed)
                 return;
 
             for (int x = 0; x < width; x++)
@@ -128,7 +127,7 @@ namespace ApplyYourself
                 }
             }
 
-            adaptiveGradient.SetRange(lowestWater, highestWater);
+            OnNewWaterRange?.Invoke(lowestWater, highestWater);
         }
 
         private void RenderUnit(int x, int y)
@@ -148,7 +147,8 @@ namespace ApplyYourself
             {
                 unitVisuals[x, y].SetMaterial(water.material);
                 unitVisuals[x, y].EnableDecoration(false);
-                unitVisuals[x, y].SetHeight(waterHeight + (Random.value - 0.5f) * visualWaterShake);
+                unitVisuals[x, y].SetHeight(waterHeight + (UnityEngine.Random.value - 0.5f) * visualWaterShake);
+
                 if (waterHeight < lowestWater)
                     lowestWater = waterHeight;
                 else if (waterHeight > highestWater)

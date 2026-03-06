@@ -7,5 +7,6 @@ namespace ApplyYourself
         Vector2 GetLook();
         float GetX();
         float GetY();
+        float GetScroll();
     }
 }

@@ -213,9 +213,8 @@ MonoBehaviour:
   minHeight: 0
   maxHeight: 48
   visualWaterShake: 3
-  jump: {fileID: 11400000, guid: eaca23abef3ef7c49b9e9306c19ff5cd, type: 2}
+  debugRemoveTerrain: {fileID: 11400000, guid: eaca23abef3ef7c49b9e9306c19ff5cd, type: 2}
   waterManager: {fileID: 1422312195}
-  adaptiveGradient: {fileID: 193189757}
   water: {fileID: 11400000, guid: 6f22bf932d97b3342b63bdab892b103d, type: 2}
   city: {fileID: 11400000, guid: 49b09ac93070eee4995a6a62c28b03c2, type: 2}
   plains: {fileID: 11400000, guid: f3aa692e0bcca94479a7b82d14effbff, type: 2}
@@ -1881,7 +1880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 110.5}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1132676122
@@ -2996,7 +2995,6 @@ GameObject:
   - component: {fileID: 2063290155}
   - component: {fileID: 2063290154}
   - component: {fileID: 2063290153}
-  - component: {fileID: 2063290158}
   m_Layer: 0
   m_Name: cam
   m_TagString: MainCamera
@@ -3137,18 +3135,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 56.277, y: 45, z: 0}
---- !u!114 &2063290158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063290152}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e44dc6638ec7e04085aa54c95d198ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2119161305
 GameObject:
   m_ObjectHideFlags: 0
@@ -3285,6 +3271,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 355000815456384762, guid: e0ce183d5ab776c448156e1c51976613,
+        type: 3}
+      propertyPath: color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 355000815456384762, guid: e0ce183d5ab776c448156e1c51976613,
+        type: 3}
+      propertyPath: color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 355000815456384762, guid: e0ce183d5ab776c448156e1c51976613,
+        type: 3}
+      propertyPath: color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6139263957948575892, guid: e0ce183d5ab776c448156e1c51976613,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3350,6 +3351,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 935798424}
+  - {fileID: 7493035046675945833}
   - {fileID: 17225716}
   - {fileID: 383002007}
   - {fileID: 2119161307}
@@ -3364,4 +3366,3 @@ SceneRoots:
   - {fileID: 1842730862}
   - {fileID: 128797301}
   - {fileID: 1483412119}
-  - {fileID: 7493035046675945833}

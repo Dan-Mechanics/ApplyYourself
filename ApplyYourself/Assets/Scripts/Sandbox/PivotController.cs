@@ -24,10 +24,10 @@ namespace ApplyYourself
 
         [Header("Position")]
         [SerializeField] private float moveSensitivity = default;
-
         private ILookInput lookInput;
 
         public void Assign(ILookInput lookInput) => this.lookInput = lookInput;
+        private void OnValidate() => Visualize();
 
         public override void Exit()
         {
@@ -63,28 +63,24 @@ namespace ApplyYourself
 
         private void Scroll()
         {
-            position.z += Input.mouseScrollDelta.y * zoomSensitivity;
+            position.z += lookInput.GetScroll() * zoomSensitivity;
             position.z = Mathf.Clamp(position.z, -maxDistance, -minDistance);
         }
 
         private void Rotate()
         {
-            rotation.y += sensitivity * Input.GetAxisRaw("Mouse X");
-            rotation.x -= sensitivity * Input.GetAxisRaw("Mouse Y");
+            // rotation.y += sensitivity * Input.GetAxisRaw("Mouse X");
+            // rotation.x -= sensitivity * Input.GetAxisRaw("Mouse Y");
+            rotation = Utils.Add(rotation, lookInput.GetLook() * sensitivity);
             rotation.x = Mathf.Clamp(rotation.x, minAngle, maxAngle);
         }
 
         private void Move()
         {
-            float y = -Input.GetAxisRaw("Mouse Y");
-            float x = -Input.GetAxisRaw("Mouse X");
-
-            Vector3 movement = target.up * y;
-            movement += target.right * x;
+            Vector3 movement = target.up * -lookInput.GetY();
+            movement += target.right * -lookInput.GetX();
             transform.Translate(movement * moveSensitivity, Space.World);
         }
-
-        private void OnValidate() => Visualize();
 
         private void Visualize()
         {
