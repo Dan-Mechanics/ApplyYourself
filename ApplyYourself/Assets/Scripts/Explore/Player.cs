@@ -1,24 +1,30 @@
+using System.Linq;
 using UnityEngine;
 
 namespace ApplyYourself
 {
     public class Player : StateBehaviour
     {
-        [SerializeField] private Transform target = default;
         [SerializeField] private Interactor interactor = default;
         [SerializeField] private PlayerMovement playerMovement = default;
+        [SerializeField] private ThirdPersonLook thirdPersonLook = default;
+        [SerializeField] private PlayerGraphicRotator graphicRotator = default;
+        [SerializeField] private string interactFeedbackName = default; 
 
         public override void Setup()
         {
-            Transform cam = GameObject.FindWithTag("MainCamera").transform;
+            base.Setup();
+            interactor.OnFeedback += FindObjectsByType<EasyText>(FindObjectsSortMode.None).
+                ToList().Where(x => x.name == interactFeedbackName).First().Write;
 
-            LerpFollow lerpFollow = cam.GetComponent<LerpFollow>();
-            lerpFollow.SetTarget(target);
+            WASD wasd = new WASD();
+            playerMovement.Assign(wasd);
+            graphicRotator.Assign(wasd);
+            thirdPersonLook.Assign(FindAnyObjectByType<SensitivityMouse>());
 
-            lerpFollow.transform.position = target.position;
-            lerpFollow.transform.LookAt(transform);
-
-            interactor.SetCamera(cam.GetComponent<Camera>());
+            interactor.Setup();
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         public override void OnFixedUpdate()
@@ -26,6 +32,7 @@ namespace ApplyYourself
             base.OnFixedUpdate();
             interactor.OnFixedUpdate();
             playerMovement.OnFixedUpdate();
+            thirdPersonLook.OnFixedUpdate();
         }
 
         public override void OnUpdate()
@@ -33,6 +40,8 @@ namespace ApplyYourself
             base.OnUpdate();
             interactor.OnUpdate();
             playerMovement.OnUpdate();
+            thirdPersonLook.OnUpdate();
+            graphicRotator.OnUpdate();
         }
     }
 }

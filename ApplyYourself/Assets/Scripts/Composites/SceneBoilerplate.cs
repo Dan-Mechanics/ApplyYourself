@@ -18,8 +18,10 @@ namespace ApplyYourself
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             Application.targetFrameRate = fps;
-            QualitySettings.vSyncCount = 0;
             Time.fixedDeltaTime = 1f / physicsTicksPerSecond;
+
+            QualitySettings.SetQualityLevel(0);
+            QualitySettings.vSyncCount = 0;
         }
 
         private void Update()

@@ -7,6 +7,9 @@ namespace ApplyYourself
         [SerializeField] private TextAsset dialogue = default;
         private DialogueSystem dialogueSystem;
 
+        public string GetHighlight() => $"Talk to {dialogue.name}";
+        public Vector3 GetPosition() => transform.position;
+
         public void Interact()
         {
             if (dialogueSystem == null)

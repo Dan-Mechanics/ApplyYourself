@@ -11,17 +11,11 @@ namespace ApplyYourself
         public bool IsDone => isDone;
         private const float INTERVAL = 0.045f;
 
+        [SerializeField] private TMP_Text text = default;
         private readonly StringBuilder builder = new StringBuilder();
         private WaitForSeconds delay;
-        private TMP_Text text;
         private string message;
         private bool isDone;
-
-        private void Awake()
-        {
-            text = GetComponent<TMP_Text>();
-            delay = new WaitForSeconds(INTERVAL);
-        }
 
         public void Write(string message)
         {
@@ -32,11 +26,14 @@ namespace ApplyYourself
             isDone = false;
             this.message = message;
             gameObject.name = message;
+
+            delay = new WaitForSeconds(INTERVAL);
             StartCoroutine(WriteDelayed());
         }
 
         private IEnumerator WriteDelayed()
         {
+            delay = new WaitForSeconds(INTERVAL);
             for (int i = 0; i < message.Length; i++)
             {
                 yield return delay;
@@ -63,6 +60,7 @@ namespace ApplyYourself
             isDone = true;
         }
 
+        private void OnValidate() => text = GetComponent<TMP_Text>();
         public void WriteTime(int mins, int secs) => text.text = $"{mins}:{secs}";
     }
 }

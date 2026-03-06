@@ -31,6 +31,7 @@ namespace ApplyYourself
             base.Exit();
             preview.SetActive(false);
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.None;
         }
 
         public override void OnUpdate()

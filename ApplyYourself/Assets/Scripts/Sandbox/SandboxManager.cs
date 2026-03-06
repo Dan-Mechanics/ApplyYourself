@@ -15,10 +15,15 @@ namespace ApplyYourself
         [SerializeField] private Terraformer terraformer = default;
         [SerializeField] private PivotController pivotController = default;
         [SerializeField] private WaterManager waterManager = default;
+        [SerializeField] private LandManager landManager = default;
         [SerializeField] private UnitManager unitManager = default;
-        [SerializeField] private float interval = default;
+        [SerializeField] private TextureHeightmap heightmap = default;
+        [SerializeField] private TextureTypemap typemap = default;
+        [SerializeField] private float tickInterval = default;
         [SerializeField] private List<Brush> brushes = default;
+
         private readonly FSM fsm = new FSM();
+        private float next;
 
         private void Start()
         {
@@ -26,18 +31,23 @@ namespace ApplyYourself
             timer.OnDone += algorithm.CompleteSandboxPhase;
             timer.Begin();
 
-            waterManager.Initialize();
-            unitManager.Initialize();
+            landManager.Initialize(heightmap, typemap, waterManager);
+            waterManager.Initialize(landManager, landManager);
+            unitManager.Initialize(landManager, landManager, waterManager);
 
-            brushes.ForEach(x => x.OnRaise += unitManager.RaiseArea);
-            brushes.ForEach(x => x.OnRaise += waterManager.RaiseArea);
-            brushes.ForEach(x => x.OnDecorate += unitManager.DecorateArea);
+            foreach (Brush brush in brushes)
+            {
+                brush.OnRaise += waterManager.RaiseArea;
+                brush.OnRaise += landManager.RaiseArea;
+                brush.OnDecorate += landManager.DecorateArea;
+            }
+
+            landManager.OnRender += unitManager.RenderArea;
+            landManager.OnRedecorate += unitManager.RedecorateArea;
+
             terraformer.SetBrushes(brushes);
-
-            InvokeRepeating(nameof(Tick), interval, interval);
-
-            terraformer.Setup();
-            pivotController.Setup();
+            unitManager.OnNewWaterRange += FindAnyObjectByType<AdaptiveGradient>().SetRange;
+            pivotController.Assign(FindAnyObjectByType<SensitivityMouse>());
 
             fsm.AddTransition(new StateTransition(terraformer, pivotController));
             fsm.AddTransition(new StateTransition(pivotController, terraformer));
@@ -48,19 +58,31 @@ namespace ApplyYourself
         }
 
         private void Update() => fsm.Update();
-        private void FixedUpdate() => fsm.FixedUpdate();
+        private void FixedUpdate()
+        {
+            fsm.FixedUpdate();
+
+            if (Time.time < next)
+                return;
+
+            next = Time.time + tickInterval;
+            Tick();
+        }
 
         private void OnDestroy()
         {
-            brushes.ForEach(x => x.OnRaise -= unitManager.RaiseArea);
-            brushes.ForEach(x => x.OnRaise -= waterManager.RaiseArea);
-            brushes.ForEach(x => x.OnDecorate -= unitManager.DecorateArea);
+            foreach (Brush brush in brushes)
+            {
+                brush.OnRaise -= waterManager.RaiseArea;
+                brush.OnRaise -= landManager.RaiseArea;
+                brush.OnDecorate -= landManager.DecorateArea;
+            }
         }
 
         private void Tick()
         {
             waterManager.Tick();
-            unitManager.Render();
+            unitManager.RenderAll();
         }
     }
 }
