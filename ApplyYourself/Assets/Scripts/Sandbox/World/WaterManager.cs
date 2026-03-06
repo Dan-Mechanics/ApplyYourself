@@ -59,15 +59,16 @@ namespace ApplyYourself
 
         public void Tick()
         {
+            float[,] landBulk = landManager.GetBulk();
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)
                 {
                     float parentHeight = readBuffer[x, y];
-                    Raise(x - 1, y, parentHeight);
-                    Raise(x + 1, y, parentHeight);
-                    Raise(x, y - 1, parentHeight);
-                    Raise(x, y + 1, parentHeight);
+                    Raise(x - 1, y, parentHeight, landBulk);
+                    Raise(x + 1, y, parentHeight, landBulk);
+                    Raise(x, y - 1, parentHeight, landBulk);
+                    Raise(x, y + 1, parentHeight, landBulk);
                 }
             }
 
@@ -87,13 +88,13 @@ namespace ApplyYourself
             SetHeight(0, width - 1, waterHeight);
         }
 
-        private void Raise(int x, int y, float parentHeight)
+        private void Raise(int x, int y, float parentHeight, float[,] landBulk)
         {
             if (x < 0 || y < 0 || x >= width || y >= width)
                 return;
 
             float height = readBuffer[x, y];
-            if (height >= parentHeight || landManager.GetHeightAt(x, y) >= parentHeight)
+            if (height >= parentHeight || landBulk[x, y] >= parentHeight)
                 return;
 
             height += parentHeight * typemap.GetTypeAt(x, y).waterPercentage;
