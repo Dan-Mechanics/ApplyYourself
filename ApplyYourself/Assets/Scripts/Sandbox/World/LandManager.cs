@@ -25,13 +25,15 @@ namespace ApplyYourself
             this.waterManager = waterManager;
             heightmap = new float[width, width];
             typemap = new UnitType[width, width];
+            UnitType[,] typeBulk = typemapStartup.GetBulk();
+            float[,] heightBulk = heightmapStartup.GetBulk();
 
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)
                 {
-                    heightmap[x, y] = heightmapStartup.GetHeightAt(x, y);
-                    typemap[x, y] = typemapStartup.GetTypeAt(x, y);
+                    heightmap[x, y] = heightBulk[x, y];
+                    typemap[x, y] = typeBulk[x, y];
                 }
             }
         }
@@ -99,5 +101,7 @@ namespace ApplyYourself
 
         public float GetHeightAt(int x, int y) => heightmap[x, y];
         public UnitType GetTypeAt(int x, int y) => typemap[x, y];
+        public float[,] GetBulk() => heightmap;
+        UnitType[,] ITypemap.GetBulk() => typemap;
     }
 }

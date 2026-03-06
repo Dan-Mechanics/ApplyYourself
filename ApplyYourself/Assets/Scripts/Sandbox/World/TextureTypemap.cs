@@ -7,6 +7,20 @@ namespace ApplyYourself
         [SerializeField] private Texture2D typemap = default;
         [SerializeField] private Conversion[] conversions = default;
 
+        public UnitType[,] GetBulk()
+        {
+            UnitType[,] grid = new UnitType[typemap.width, typemap.height];
+            for (int x = 0; x < grid.GetLength(0); x++)
+            {
+                for (int y = 0; y < grid.GetLength(1); y++)
+                {
+                    grid[x, y] = GetTypeAt(x, y);
+                }
+            }
+
+            return grid;
+        }
+
         public UnitType GetTypeAt(int x, int y)
         {
             x = Mathf.Clamp(x, 0, typemap.width - 1);

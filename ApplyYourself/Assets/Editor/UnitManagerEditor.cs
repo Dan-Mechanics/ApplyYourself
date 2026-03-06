@@ -14,7 +14,7 @@ namespace ApplyYourself
             if (GUILayout.Button("Show Preview"))
             {
                 LandManager landManager = FindAnyObjectByType<LandManager>();
-                WaterManager waterManager = FindAnyObjectByType<WaterManager>();
+                WaterManager waterManager = FindAnyObjectByType<WaterManager>(); 
                 landManager.Initialize(FindAnyObjectByType<TextureHeightmap>(), FindAnyObjectByType<TextureTypemap>(), waterManager);
                 waterManager.Initialize(landManager, landManager);
                 unitManager.Initialize(landManager, landManager, waterManager);

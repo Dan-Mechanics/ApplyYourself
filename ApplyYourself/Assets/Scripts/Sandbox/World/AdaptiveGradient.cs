@@ -10,14 +10,7 @@ namespace ApplyYourself
         [SerializeField] private float worldCeilingHeight = default;
 
         private void Start() => Setup();
-        private void OnValidate() => Setup();
-
-        private void Setup()
-        {
-            material.SetFloat("_WorldFloorHeight", worldFloorHeight);
-            material.SetFloat("_WorldCeilingHeight", worldCeilingHeight);
-            material.SetTexture("_Texture", texture);
-        }
+        private void Setup() => material.SetTexture("_Texture", texture);
 
         public void SetRange(float min, float max) 
         {
@@ -26,5 +19,7 @@ namespace ApplyYourself
             material.SetFloat("_WorldFloorHeight", worldFloorHeight);
             material.SetFloat("_WorldCeilingHeight", worldCeilingHeight);
         }
+
+        private void OnValidate() => Setup();
     }
 }

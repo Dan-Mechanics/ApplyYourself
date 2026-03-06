@@ -10,12 +10,13 @@ namespace ApplyYourself
         [SerializeField] private int width = default;
         [SerializeField] private int deadzone = default;
         [SerializeField] private float waterHeightPerTick = default;
-        [SerializeField] private float interval = default;
+        [SerializeField] private float raiseInterval = default;
 
         private IHeightmap landManager;
         private ITypemap typemap;
         private float[,] readBuffer;
         private float[,] writeBuffer;
+        private float next;
 
         public void Initialize(IHeightmap landManager, ITypemap typemap)
         {
@@ -25,10 +26,16 @@ namespace ApplyYourself
             readBuffer = new float[width, width];
             writeBuffer = new float[width, width];
             SetHeight(0, width - 1, waterHeight);
-            InvokeRepeating(nameof(RaiseWaterLevel), interval, interval);
         }
 
-        public float GetHeightAt(int x, int y) => readBuffer[x, y];
+        private void FixedUpdate()
+        {
+            if (Time.time < next)
+                return;
+
+            RaiseWaterLevel();
+            next = Time.time + raiseInterval;
+        }
 
         private void SetHeight(int x, int y, float height)
         {
@@ -92,5 +99,8 @@ namespace ApplyYourself
             height += parentHeight * typemap.GetTypeAt(x, y).waterPercentage;
             writeBuffer[x, y] = Mathf.Clamp(height, minWaterHeight, parentHeight);
         }
+
+        public float GetHeightAt(int x, int y) => readBuffer[x, y];
+        public float[,] GetBulk() => readBuffer;
     }
 }

@@ -19,9 +19,11 @@ namespace ApplyYourself
         [SerializeField] private UnitManager unitManager = default;
         [SerializeField] private TextureHeightmap heightmap = default;
         [SerializeField] private TextureTypemap typemap = default;
-        [SerializeField] private float interval = default;
+        [SerializeField] private float tickInterval = default;
         [SerializeField] private List<Brush> brushes = default;
+
         private readonly FSM fsm = new FSM();
+        private float next;
 
         private void Start()
         {
@@ -45,7 +47,6 @@ namespace ApplyYourself
 
             terraformer.SetBrushes(brushes);
             unitManager.OnNewWaterRange += FindAnyObjectByType<AdaptiveGradient>().SetRange;
-            InvokeRepeating(nameof(Tick), interval, interval);
             pivotController.Assign(FindAnyObjectByType<SensitivityMouse>());
 
             fsm.AddTransition(new StateTransition(terraformer, pivotController));
@@ -57,7 +58,16 @@ namespace ApplyYourself
         }
 
         private void Update() => fsm.Update();
-        private void FixedUpdate() => fsm.FixedUpdate();
+        private void FixedUpdate()
+        {
+            fsm.FixedUpdate();
+
+            if (Time.time < next)
+                return;
+
+            next = Time.time + tickInterval;
+            Tick();
+        }
 
         private void OnDestroy()
         {

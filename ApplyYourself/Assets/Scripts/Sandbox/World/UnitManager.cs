@@ -11,6 +11,7 @@ namespace ApplyYourself
         
         [SerializeField] private int width = default;
         [SerializeField] private float visualWaterShake = default;
+        [SerializeField] private float waterGradientInterval = default;
         [SerializeField] private UnitType water = default;
         [SerializeField] private GridSpawner spawner = default;
 
@@ -18,8 +19,7 @@ namespace ApplyYourself
         private IHeightmap landManager;
         private IHeightmap waterManager;
         private UnitVisual[,] units;
-        private float lowestWater;
-        private float highestWater;
+        private float next;
 
         public void Initialize(ITypemap typemap, IHeightmap landManager, IHeightmap waterManager)
         {
@@ -31,7 +31,6 @@ namespace ApplyYourself
 
             GameObject[,] grid = spawner.SpawnGrid(width);
             units = new UnitVisual[width, width];
-
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)
@@ -41,6 +40,15 @@ namespace ApplyYourself
                     units[x, y].SetDecoration(typemap.GetTypeAt(x, y).decoration);
                 }
             }
+        }
+
+        private void FixedUpdate()
+        {
+            if (Time.time < next)
+                return;
+
+            next = Time.time + waterGradientInterval;
+            RecalculateWaterGradient();
         }
 
         public void RenderArea(List<Vector2Int> positions)
@@ -65,17 +73,46 @@ namespace ApplyYourself
             }
         }
 
-        /// <summary>
-        /// Called by InvokeRepeating.
-        /// </summary>
         public void RenderAll()
         {
-            highestWater = lowestWater = waterManager.GetHeightAt(0, 0);
+            // IF THIS MAKES A COPY, COMPUTER EXPLODES.
+            float[,] landBulk = landManager.GetBulk();
+            float[,] waterBulk = waterManager.GetBulk(); 
+            UnitType[,] typeBulk = typemap.GetBulk();
+
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)
                 {
-                    RenderUnit(x, y);
+                    // RenderUnit(x, y);
+                    // IDK WHAT IS FASTER HERE.
+                    RenderUnit(x, y, landBulk, waterBulk, typeBulk);
+                }
+            }
+        }
+
+        private void RecalculateWaterGradient()
+        {
+            float highestWater = waterManager.GetHeightAt(0, 0);
+            float lowestWater = highestWater;
+
+            bool skip = false;
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < width; y++)
+                {
+                    skip = !skip;
+                    if (skip)
+                        continue;
+
+                    float waterHeight = waterManager.GetHeightAt(x, y);
+                    if (landManager.GetHeightAt(x, y) >= waterHeight)
+                        continue;
+
+                    if (waterHeight < lowestWater)
+                        lowestWater = waterHeight;
+                    else if (waterHeight > highestWater)
+                        highestWater = waterHeight;
                 }
             }
 
@@ -87,31 +124,28 @@ namespace ApplyYourself
             float landHeight = landManager.GetHeightAt(x, y);
             float waterHeight = waterManager.GetHeightAt(x, y);
             bool isLand = landHeight >= waterHeight;
-
             if (isLand)
             {
-                /*units[x, y].SetMaterial(typemap.GetTypeAt(x, y).material);
-                units[x, y].EnableDecoration(true);
-                units[x, y].SetHeight(landHeight);*/
-                units[x, y].Set(
-                    typemap.GetTypeAt(x, y).material,
-                    true,
-                    landHeight);
+                units[x, y].Set(typemap.GetTypeAt(x, y).material, isLand, landHeight);
             }
             else
             {
-                /*units[x, y].SetMaterial(water.material);
-                units[x, y].EnableDecoration(false);
-                units[x, y].SetHeight(waterHeight + (UnityEngine.Random.value - 0.5f) * visualWaterShake);*/
-                units[x, y].Set(
-                    water.material,
-                    false,
-                    waterHeight + (UnityEngine.Random.value - 0.5f) * visualWaterShake);
+                units[x, y].Set(water.material, isLand, waterHeight + (UnityEngine.Random.value - 0.5f) * visualWaterShake);
+            }
+        }
 
-                if (waterHeight < lowestWater)
-                    lowestWater = waterHeight;
-                else if (waterHeight > highestWater)
-                    highestWater = waterHeight;
+        private void RenderUnit(int x, int y, float[,] landBulk, float[,] waterBulk, UnitType[,] typeBulk)
+        {
+            float landHeight = landBulk[x, y];
+            float waterHeight = waterBulk[x, y];
+            bool isLand = landHeight >= waterHeight;
+            if (isLand)
+            {
+                units[x, y].Set(typeBulk[x, y].material, isLand, landHeight);
+            }
+            else
+            {
+                units[x, y].Set(water.material, isLand, waterHeight + (UnityEngine.Random.value - 0.5f) * visualWaterShake);
             }
         }
 
