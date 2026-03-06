@@ -17,6 +17,13 @@ namespace ApplyYourself
             this.renderer = renderer;
         }
 
+        public void Set(Material material, bool enableDecoration, float height)
+        {
+            SetMaterial(material);
+            EnableDecoration(enableDecoration);
+            SetHeight(height);
+        }
+
         public void EnableDecoration(bool value)
         {
             if (decoration != null)

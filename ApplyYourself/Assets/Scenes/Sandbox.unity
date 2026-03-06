@@ -156,7 +156,10 @@ MonoBehaviour:
   terraformer: {fileID: 369849031}
   pivotController: {fileID: 376942858}
   waterManager: {fileID: 1422312195}
+  landManager: {fileID: 1825502553}
   unitManager: {fileID: 28654548}
+  heightmap: {fileID: 740984494}
+  typemap: {fileID: 740984493}
   interval: 0.2
   brushes:
   - {fileID: 11400000, guid: f9c4c0f37f79d8a4cbfa5e1ebb235147, type: 2}
@@ -188,8 +191,6 @@ GameObject:
   m_Component:
   - component: {fileID: 28654549}
   - component: {fileID: 28654548}
-  - component: {fileID: 28654552}
-  - component: {fileID: 28654551}
   m_Layer: 0
   m_Name: unit_manager
   m_TagString: Untagged
@@ -210,14 +211,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   width: 50
-  minHeight: 0
-  maxHeight: 48
   visualWaterShake: 3
-  debugRemoveTerrain: {fileID: 11400000, guid: eaca23abef3ef7c49b9e9306c19ff5cd, type: 2}
-  waterManager: {fileID: 1422312195}
   water: {fileID: 11400000, guid: 6f22bf932d97b3342b63bdab892b103d, type: 2}
-  city: {fileID: 11400000, guid: 49b09ac93070eee4995a6a62c28b03c2, type: 2}
-  plains: {fileID: 11400000, guid: f3aa692e0bcca94479a7b82d14effbff, type: 2}
   spawner:
     prefab: {fileID: 3526021976004239255, guid: 19e5a5994a1570f4caa5820a6be0ee25,
       type: 3}
@@ -237,38 +232,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &28654551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 28654547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2221ea73fea67be4385516b65777ba57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typemap: {fileID: 2800000, guid: f7791b93598ac514b87a7bf944d88e37, type: 3}
-  conversions:
-  - color: {r: 0, g: 1, b: 0, a: 1}
-    type: {fileID: 11400000, guid: f3aa692e0bcca94479a7b82d14effbff, type: 2}
-  - color: {r: 0, g: 0, b: 0, a: 1}
-    type: {fileID: 11400000, guid: 49b09ac93070eee4995a6a62c28b03c2, type: 2}
---- !u!114 &28654552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 28654547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1346682bbf826d341b5e5e79e592048c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heightmap: {fileID: 2800000, guid: ee27e8aee438b4045b0c1dc9dc4397d4, type: 3}
-  height: 25
 --- !u!1 &62909531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,6 +1058,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638259889}
   m_CullTransparentMesh: 1
+--- !u!1 &740984492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 740984496}
+  - component: {fileID: 740984494}
+  - component: {fileID: 740984493}
+  m_Layer: 0
+  m_Name: startups
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &740984493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740984492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2221ea73fea67be4385516b65777ba57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typemap: {fileID: 2800000, guid: f7791b93598ac514b87a7bf944d88e37, type: 3}
+  conversions:
+  - color: {r: 0, g: 1, b: 0, a: 1}
+    type: {fileID: 11400000, guid: f3aa692e0bcca94479a7b82d14effbff, type: 2}
+  - color: {r: 0, g: 0, b: 0, a: 1}
+    type: {fileID: 11400000, guid: 49b09ac93070eee4995a6a62c28b03c2, type: 2}
+--- !u!114 &740984494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740984492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1346682bbf826d341b5e5e79e592048c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightmap: {fileID: 2800000, guid: ee27e8aee438b4045b0c1dc9dc4397d4, type: 3}
+  height: 25
+--- !u!4 &740984496
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740984492}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &760523102
 GameObject:
   m_ObjectHideFlags: 0
@@ -2021,9 +2049,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8b21d6031fa8d40b0557228c9db043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitManager: {fileID: 28654548}
   minWaterHeight: 0
-  waterHeight: 11.5
+  waterHeight: 5
   width: 50
   deadzone: 3
   waterHeightPerTick: 0.5
@@ -2548,6 +2575,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1657270389}
   m_CullTransparentMesh: 1
+--- !u!1 &1825502550
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1825502552}
+  - component: {fileID: 1825502553}
+  m_Layer: 0
+  m_Name: land_manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1825502552
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825502550}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1825502553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825502550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59730a0d2d0391b4d9eaf50df95a1337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 50
+  minHeight: 0
+  maxHeight: 45
+  removeLand: {fileID: 11400000, guid: eaca23abef3ef7c49b9e9306c19ff5cd, type: 2}
+  city: {fileID: 11400000, guid: 49b09ac93070eee4995a6a62c28b03c2, type: 2}
+  plains: {fileID: 11400000, guid: f3aa692e0bcca94479a7b82d14effbff, type: 2}
 --- !u!1 &1842730859
 GameObject:
   m_ObjectHideFlags: 0
@@ -3164,7 +3241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 137177a7121d15747bc291d0d309bfe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitManager: {fileID: 28654548}
+  landManager: {fileID: 0}
   waterManager: {fileID: 1422312195}
   city: {fileID: 11400000, guid: 49b09ac93070eee4995a6a62c28b03c2, type: 2}
   width: 50
@@ -3357,6 +3434,8 @@ SceneRoots:
   - {fileID: 2119161307}
   - {fileID: 28654549}
   - {fileID: 1422312194}
+  - {fileID: 1825502552}
+  - {fileID: 740984496}
   - {fileID: 193189754}
   - {fileID: 369849032}
   - {fileID: 1984330394}
