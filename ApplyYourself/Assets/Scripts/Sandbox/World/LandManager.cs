@@ -23,21 +23,10 @@ namespace ApplyYourself
         public void Initialize(IHeightmap heightmapStartup, ITypemap typemapStartup, IHeightmap waterManager)
         {
             this.waterManager = waterManager;
-            heightmap = new float[width, width];
-            typemap = new UnitType[width, width];
-            UnitType[,] typeBulk = typemapStartup.GetBulk();
-            float[,] heightBulk = heightmapStartup.GetBulk();
-
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < width; y++)
-                {
-                    heightmap[x, y] = heightBulk[x, y];
-                    typemap[x, y] = typeBulk[x, y];
-                }
-            }
+            heightmap = nheightmapStartup.GetBulk();
+            typemap = typemapStartup.GetBulk();
         }
-
+        
         private void Update()
         {
             if (removeLand.WasPressed)
