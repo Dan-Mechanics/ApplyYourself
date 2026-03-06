@@ -8,14 +8,15 @@ namespace ApplyYourself
         [SerializeField] private Transform leftRightPivot = default;
         [SerializeField] private float speed = default;
         [SerializeField] private float fallingSpeed = default;
+        private IMoveInput moveInput;
+
+        public void Assign(IMoveInput moveInput) => this.moveInput = moveInput;
 
         public override void OnUpdate()
         {
             base.OnUpdate();
-            Vector3 movement = (Input.GetAxisRaw("Horizontal") * leftRightPivot.right) +
-                (Input.GetAxisRaw("Vertical") * leftRightPivot.forward);
-
-            movement.Normalize();
+            Vector3 movement = moveInput.GetMove();
+            movement = leftRightPivot.TransformDirection(movement);
             movement *= speed;
 
             controller.Move(movement * Time.deltaTime);

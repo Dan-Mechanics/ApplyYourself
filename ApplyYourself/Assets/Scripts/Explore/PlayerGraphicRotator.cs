@@ -6,11 +6,12 @@ namespace ApplyYourself
     {
         [SerializeField] private Transform leftRightPivot = default;
         [SerializeField] private Transform graphic = default;
+        private IMoveInput moveInput;
         private Transform heading;
 
-        public override void Setup()
+        public void Assign(IMoveInput moveInput)
         {
-            base.Setup();
+            this.moveInput = moveInput;
             heading = new GameObject(nameof(heading)).transform;
         }
 
@@ -18,12 +19,8 @@ namespace ApplyYourself
         {
             base.OnUpdate();
 
-            // USEI NTERFACE !!
-            Vector3 movement = (Input.GetAxisRaw("Horizontal") * leftRightPivot.right) +
-                (Input.GetAxisRaw("Vertical") * leftRightPivot.forward);
-
-            movement.Normalize();
-
+            Vector3 movement = moveInput.GetMove();
+            movement = leftRightPivot.TransformDirection(movement);
             if (movement == Vector3.zero)
                 return;
 

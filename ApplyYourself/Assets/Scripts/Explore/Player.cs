@@ -17,7 +17,11 @@ namespace ApplyYourself
             interactor.OnFeedback += FindObjectsByType<EasyText>(FindObjectsSortMode.None).
                 ToList().Where(x => x.name == interactFeedbackName).First().Write;
 
-            graphicRotator.Setup();
+            WASD wasd = new WASD();
+            playerMovement.Assign(wasd);
+            graphicRotator.Assign(wasd);
+            thirdPersonLook.Assign(FindAnyObjectByType<SensitivityMouse>());
+
             interactor.Setup();
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -37,7 +41,6 @@ namespace ApplyYourself
             interactor.OnUpdate();
             playerMovement.OnUpdate();
             thirdPersonLook.OnUpdate();
-
             graphicRotator.OnUpdate();
         }
     }

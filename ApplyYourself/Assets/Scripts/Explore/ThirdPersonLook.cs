@@ -14,6 +14,9 @@ namespace ApplyYourself
         [SerializeField] private float maxAngle = default;
         [SerializeField] private float distance = default;
         [SerializeField, Min(0f)] private float offset = default;
+        private ILookInput lookInput;
+
+        public void Assign(ILookInput lookInput) => this.lookInput = lookInput;
 
         public override void OnUpdate()
         {
@@ -24,8 +27,7 @@ namespace ApplyYourself
 
         private void UpdatePivot()
         {
-            Vector2 look = new Vector2(-Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X"));
-            rotation += look * sensitivity;
+            rotation += lookInput.GetLook() * sensitivity;
             rotation.x = Mathf.Clamp(rotation.x, -maxAngle, maxAngle);
 
             upDownPivot.localRotation = Quaternion.AngleAxis(rotation.x, Vector3.right);

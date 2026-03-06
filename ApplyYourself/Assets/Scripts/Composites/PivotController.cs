@@ -25,6 +25,10 @@ namespace ApplyYourself
         [Header("Position")]
         [SerializeField] private float moveSensitivity = default;
 
+        private ILookInput lookInput;
+
+        public void Assign(ILookInput lookInput) => this.lookInput = lookInput;
+
         public override void Exit()
         {
             base.Exit();
