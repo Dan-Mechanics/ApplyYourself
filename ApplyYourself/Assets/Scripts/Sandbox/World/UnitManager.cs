@@ -86,7 +86,7 @@ namespace ApplyYourself
                 {
                     // RenderUnit(x, y);
                     // IDK WHAT IS FASTER HERE.
-                    RenderUnit(x, y, landBulk, waterBulk, typeBulk);
+                    RenderUnitBulk(x, y, landBulk, waterBulk, typeBulk);
                 }
             }
         }
@@ -134,7 +134,7 @@ namespace ApplyYourself
             }
         }
 
-        private void RenderUnit(int x, int y, float[,] landBulk, float[,] waterBulk, UnitType[,] typeBulk)
+        private void RenderUnitBulk(int x, int y, float[,] landBulk, float[,] waterBulk, UnitType[,] typeBulk)
         {
             float landHeight = landBulk[x, y];
             float waterHeight = waterBulk[x, y];
