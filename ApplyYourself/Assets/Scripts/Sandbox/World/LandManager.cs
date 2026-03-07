@@ -23,7 +23,7 @@ namespace ApplyYourself
         public void Initialize(IHeightmap heightmapStartup, ITypemap typemapStartup, IHeightmap waterManager)
         {
             this.waterManager = waterManager;
-            heightmap = nheightmapStartup.GetBulk();
+            heightmap = heightmapStartup.GetBulk();
             typemap = typemapStartup.GetBulk();
         }
         
