@@ -10,7 +10,8 @@ namespace ApplyYourself
     public class DialogueSystem : StateBehaviour
     {
         public enum ParsingMode { Name, Sprite, Dialogue }
-        
+        public event Action<TextAsset> OnDialogue;
+
         private const char NEWLINE_INDICATOR = '~';
         private const char COMMENT = '#';
         private const char QUOTE = '\"';
@@ -63,6 +64,8 @@ namespace ApplyYourself
 
         public void BeginDialogue(TextAsset dialogue)
         {
+            OnDialogue?.Invoke(dialogue);
+
             ClaimState();
             pending = ParseDialogue(dialogue.text);
             GoNextFrame();
