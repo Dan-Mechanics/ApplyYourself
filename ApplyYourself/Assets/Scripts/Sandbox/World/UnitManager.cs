@@ -69,7 +69,7 @@ namespace ApplyYourself
                 int y = positions[i].y;
 
                 units[x, y].SetDecoration(typemap.GetTypeAt(x, y).decoration);
-                //RenderUnit(x, y);
+                RenderUnit(x, y);
             }
         }
 

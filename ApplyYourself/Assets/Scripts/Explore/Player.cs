@@ -12,7 +12,7 @@ namespace ApplyYourself
         [SerializeField] private string interactFeedbackName = default;
         private CanvasGroup canvasGroup;
 
-        public void Assign(CanvasGroup canvasGroup, GoToQuest goToQuest)
+        public void Assign(CanvasGroup canvasGroup)
         {
             this.canvasGroup = canvasGroup;
         }
