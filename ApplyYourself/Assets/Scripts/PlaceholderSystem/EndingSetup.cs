@@ -21,7 +21,7 @@ namespace ApplyYourself
 
             // ===
 
-            Algorithm algorithm = FindAnyObjectByType<Algorithm>();
+            Bridge algorithm = FindAnyObjectByType<Bridge>();
             if (algorithm != null)
             {
                 SetAs(algorithm.ending);

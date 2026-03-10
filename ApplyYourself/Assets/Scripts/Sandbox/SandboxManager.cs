@@ -11,7 +11,7 @@ namespace ApplyYourself
     {
         [SerializeField] private Timer timer = default;
         [SerializeField] private TextWriter timerText = default;
-        [SerializeField] private Algorithm algorithm = default;
+        [SerializeField] private Bridge algorithm = default;
         [SerializeField] private Terraformer terraformer = default;
         [SerializeField] private PivotController pivotController = default;
         [SerializeField] private WaterManager waterManager = default;
@@ -42,7 +42,7 @@ namespace ApplyYourself
                 brush.OnDecorate += landManager.DecorateArea;
             }
 
-            landManager.OnRender += unitManager.RenderArea;
+            landManager.OnAreaUpdated += unitManager.RenderArea;
             landManager.OnRedecorate += unitManager.RedecorateArea;
 
             terraformer.SetBrushes(brushes);

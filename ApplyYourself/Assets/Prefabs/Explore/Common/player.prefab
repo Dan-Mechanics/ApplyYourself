@@ -232,7 +232,10 @@ MonoBehaviour:
   rotation: {x: 0, y: 0}
   sensitivity: 0.33
   maxAngle: 90
-  distance: 4.5
+  distance: 4
+  minDistance: 2
+  maxDistance: 5
+  zoomSensitivity: 0.5
   offset: 1
 --- !u!114 &8189917674282299612
 MonoBehaviour:

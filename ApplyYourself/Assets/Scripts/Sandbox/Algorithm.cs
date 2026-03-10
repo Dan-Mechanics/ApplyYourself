@@ -1,40 +1,55 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ApplyYourself
 {
     public class Algorithm : MonoBehaviour
     {
-        [HideInInspector] public Ending ending;
+        [SerializeField] private LandManager landManager = default;
+        [SerializeField] private WaterManager waterManager = default;
+        [SerializeField] private UnitType city = default;
+        [SerializeField] private int width = default;
+        [SerializeField] private List<UnitType> structureTypes = default;
+        [SerializeField] private List<UnitType> natureTypes = default;
 
-        [SerializeField] private Evaluator evaluator = default;
-        [SerializeField] private Portal portal = default;
-        [SerializeField] private int dryThreshold = default;
-        [SerializeField] private int minCombinedUnitsChanged = default;
+        public int natureCount;
+        public int strucutreCount;
 
-        public void CompleteSandboxPhase()
+        public void TallyBrushUsage(UnitType type)
         {
-            DontDestroyOnLoad(gameObject);
 
-            ending = GetEnding();
-            print(ending);
-            portal.Interact();
         }
 
-        private Ending GetEnding()
+        public Ending GetEnding()
         {
-            evaluator.Evaluate(out int wetCityUnits, out int structureUnits, out int natureUnits);
-            if (wetCityUnits <= dryThreshold)
-            {
-                if (structureUnits >= natureUnits)
-                    return Ending.IndustrialCity;
+            return Ending.Placeholder;
+        }
 
-                return Ending.NatureCity;
+        /*public void Evaluate(out int wetCityUnits, out int structureUnits, out int natureUnits)
+        {
+            wetCityUnits = structureUnits = natureUnits = 0;
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < width; y++)
+                {
+                    UnitType type = landManager.GetTypeAt(x, y);
+                    if (landManager.GetHeightAt(x, y) < waterManager.GetHeightAt(x, y))
+                    {
+                        if (type == city)
+                            wetCityUnits++;
+
+                        continue;
+                    }
+
+                    if (structureTypes.Contains(type))
+                        structureUnits++;
+
+                    if (natureTypes.Contains(type))
+                        natureUnits++;
+                }
             }
 
-            if (structureUnits + natureUnits > minCombinedUnitsChanged)
-                return Ending.FloatingCity;
-
-            return Ending.UnderwaterCity;
-        }
+            print($"wetCityUnits{wetCityUnits}, structureUnits{structureUnits}, natureUnits{natureUnits}.");
+        }*/
     }
 }

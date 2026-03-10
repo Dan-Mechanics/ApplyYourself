@@ -6,9 +6,8 @@ namespace ApplyYourself
 {
     public class LandManager : MonoBehaviour, IHeightmap, ITypemap
     {
-        public event Action<List<Vector2Int>> OnRender; 
-        public event Action<List<Vector2Int>> OnRedecorate; 
-        
+        public event Action<List<Vector2Int>> OnAreaUpdated; 
+
         [SerializeField] private int width = default;
         [SerializeField] private float minHeight = default;
         [SerializeField] private float maxHeight = default;
@@ -58,7 +57,7 @@ namespace ApplyYourself
                 heightmap[pos.x, pos.y] = Mathf.Clamp(heightmap[pos.x, pos.y] + meters, minHeight, maxHeight);
             }
 
-            OnRender?.Invoke(positions);
+            OnAreaUpdated?.Invoke(positions);
         }
 
         public void DecorateArea(List<Vector2Int> positions, UnitType type)
@@ -78,7 +77,7 @@ namespace ApplyYourself
                 typemap[pos.x, pos.y] = type;
             }
 
-            OnRedecorate?.Invoke(positions);
+            OnAreaUpdated?.Invoke(positions);
         }
 
         private bool CanChangeTypeAtPos(Vector2Int pos, UnitType type)

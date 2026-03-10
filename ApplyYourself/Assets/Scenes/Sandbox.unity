@@ -818,14 +818,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 383002005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77dfe27971ab29947a08d722b1e7d233, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c461261b920010458283a323caea04a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ending: 1
-  evaluator: {fileID: 2119161306}
-  portal: {fileID: 383002008}
-  dryThreshold: 5
-  minCombinedUnitsChanged: 50
+  ending: 0
+  algorithm: {fileID: 0}
+  portal: {fileID: 0}
+  dryThreshold: 0
+  minCombinedUnitsChanged: 0
 --- !u!4 &383002007
 Transform:
   m_ObjectHideFlags: 0
