@@ -64,6 +64,9 @@ namespace ApplyYourself
 
         public void BeginDialogue(TextAsset dialogue)
         {
+            if (Time.time < nextDialogueTime)
+                return;
+
             OnDialogue?.Invoke(dialogue);
 
             ClaimState();

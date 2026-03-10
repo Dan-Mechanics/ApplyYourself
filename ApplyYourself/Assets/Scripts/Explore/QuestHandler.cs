@@ -12,26 +12,23 @@ namespace ApplyYourself
 
         public void AddQuest(IQuest quest) => quests.Enqueue(quest);
 
-        public void Assign()
+        public void BeginQuest()
         {
-            Display(string.Empty);
-            BeginQuest(quests.Dequeue());
-        }
+            if (quests.Count <= 0)
+                return;
 
-        private void BeginQuest(IQuest quest)
-        {
-            current = quest;
-            quest.OnDone += EndQuest;
-            quest.OnFeedback += Display;
-            quest.Setup();
+            Display(string.Empty);
+            current = quests.Dequeue();
+            current.OnDone += EndQuest;
+            current.OnFeedback += Display;
+            current.Setup();
         }
 
         private void EndQuest(IQuest quest) 
         {
             quest.OnDone -= EndQuest;
             quest.OnFeedback -= Display;
-            if (quests.Count > 0)
-                BeginQuest(quests.Dequeue());
+            BeginQuest();
         }
 
         public override void OnFixedUpdate()

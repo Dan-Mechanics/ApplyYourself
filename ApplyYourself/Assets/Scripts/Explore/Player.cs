@@ -10,11 +10,11 @@ namespace ApplyYourself
         [SerializeField] private ThirdPersonLook thirdPersonLook = default;
         [SerializeField] private PlayerGraphicRotator graphicRotator = default;
         [SerializeField] private string interactFeedbackName = default;
-        private CanvasGroup canvasGroup;
+        private CanvasGroup questCanvasGroup;
 
-        public void Assign(CanvasGroup canvasGroup)
+        public void Assign(CanvasGroup questCanvasGroup)
         {
-            this.canvasGroup = canvasGroup;
+            this.questCanvasGroup = questCanvasGroup;
         }
 
         public override void Setup()
@@ -36,13 +36,13 @@ namespace ApplyYourself
         public override void Exit()
         {
             base.Exit();
-            canvasGroup.alpha = 0f;
+            questCanvasGroup.alpha = 0f;
         }
         
         public override void Enter()
         {
             base.Enter();
-            canvasGroup.alpha = 1f;
+            questCanvasGroup.alpha = 1f;
         }
 
         public override void OnFixedUpdate()

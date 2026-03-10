@@ -7,6 +7,7 @@ TagManager:
   - Structure
   - Nature
   - Unit
+  - Portal
   layers:
   - Default
   - TransparentFX
