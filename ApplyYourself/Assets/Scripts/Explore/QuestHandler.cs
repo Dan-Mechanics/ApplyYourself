@@ -20,15 +20,15 @@ namespace ApplyYourself
 
             Display(string.Empty);
             current = quests.Dequeue();
-            current.OnDone += EndQuest;
-            current.OnFeedback += Display;
+            current.OnQuestFinished += EndQuest;
+            current.OnDisplayString += Display;
             current.Setup();
         }
 
         private void EndQuest(IQuest quest) 
         {
-            quest.OnDone -= EndQuest;
-            quest.OnFeedback -= Display;
+            quest.OnQuestFinished -= EndQuest;
+            quest.OnDisplayString -= Display;
             BeginQuest();
         }
 

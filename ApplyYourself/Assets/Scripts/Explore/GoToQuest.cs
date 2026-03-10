@@ -11,8 +11,8 @@ namespace ApplyYourself
         public string targetTag;
         public float minDistance;
         
-        public event Action<IQuest> OnDone;
-        public event Action<string> OnFeedback;
+        public event Action<IQuest> OnQuestFinished;
+        public event Action<string> OnDisplayString;
 
         private readonly StringBuilder builder = new StringBuilder();
         private readonly Transform player;
@@ -32,7 +32,7 @@ namespace ApplyYourself
             ShowFeedback(dist);
             Debug.Log("og" + dist.ToString());
             if (dist < minDistance)
-                OnDone?.Invoke(this);
+                OnQuestFinished?.Invoke(this);
         }
 
         private void ShowFeedback(float dist)
@@ -41,7 +41,7 @@ namespace ApplyYourself
             Debug.Log(dist);
             builder.AppendLine($"Go to {point.name} ( {dist}m left ... )");
             builder.Append(IQuest.LINE);
-            OnFeedback?.Invoke(builder.ToString());
+            OnDisplayString?.Invoke(builder.ToString());
             builder.Clear();
         }
     }

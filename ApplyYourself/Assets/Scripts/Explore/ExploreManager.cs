@@ -33,7 +33,7 @@ namespace ApplyYourself
             fsm.AddState(dialogueSystem);
 
             dialogueSystem.OnDialogue += talkQuest.OnDialogue;
-            talkQuest.OnDone += DeregisterTalkQuest;
+            talkQuest.OnQuestFinished += DeregisterTalkQuest;
 
             questHandler.AddQuest(talkQuest);
             questHandler.AddQuest(goToPortal);
@@ -45,7 +45,7 @@ namespace ApplyYourself
         private void DeregisterTalkQuest(IQuest quest)
         {
             dialogueSystem.OnDialogue -= talkQuest.OnDialogue;
-            quest.OnDone -= DeregisterTalkQuest;
+            quest.OnQuestFinished -= DeregisterTalkQuest;
         }
 
         private void Update() => fsm.Update();

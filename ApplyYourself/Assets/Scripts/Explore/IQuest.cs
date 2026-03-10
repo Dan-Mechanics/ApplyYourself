@@ -7,8 +7,9 @@ namespace ApplyYourself
     {
         public const string LINE = "===============";
         
-        event Action<IQuest> OnDone;
-        event Action<string> OnFeedback;
+        event Action<IQuest> OnQuestFinished;
+        event Action<string> OnDisplayString;
+
         void Setup();
         void FixedUpdate() { }
     }

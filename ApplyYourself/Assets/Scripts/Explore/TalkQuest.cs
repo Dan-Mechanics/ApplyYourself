@@ -10,8 +10,8 @@ namespace ApplyYourself
     {
         public int doneCount;
         
-        public event Action<IQuest> OnDone;
-        public event Action<string> OnFeedback;
+        public event Action<IQuest> OnQuestFinished;
+        public event Action<string> OnDisplayString;
 
         private readonly StringBuilder builder = new StringBuilder();
         private readonly HashSet<TextAsset> seenDialogue = new HashSet<TextAsset>();
@@ -23,7 +23,7 @@ namespace ApplyYourself
             seenDialogue.Add(dialogue);
             ShowFeedback();
             if (seenDialogue.Count >= doneCount)
-                OnDone?.Invoke(this);
+                OnQuestFinished?.Invoke(this);
         }
 
         private void ShowFeedback()
@@ -31,7 +31,7 @@ namespace ApplyYourself
             builder.AppendLine(IQuest.LINE);
             builder.AppendLine($"Talk to ( {seenDialogue.Count} / {doneCount} ) ...");
             builder.Append(IQuest.LINE);
-            OnFeedback?.Invoke(builder.ToString());
+            OnDisplayString?.Invoke(builder.ToString());
             builder.Clear();
         }
 
