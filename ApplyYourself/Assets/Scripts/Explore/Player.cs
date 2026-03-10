@@ -10,12 +10,10 @@ namespace ApplyYourself
         [SerializeField] private ThirdPersonLook thirdPersonLook = default;
         [SerializeField] private PlayerGraphicRotator graphicRotator = default;
         [SerializeField] private string interactFeedbackName = default;
-        private CanvasGroup questCanvasGroup;
 
-        public void Assign(CanvasGroup questCanvasGroup)
-        {
-            this.questCanvasGroup = questCanvasGroup;
-        }
+        private QuestHandler questHandler;
+
+        public void Assign(QuestHandler questHandler) => this.questHandler = questHandler;
 
         public override void Setup()
         {
@@ -36,13 +34,13 @@ namespace ApplyYourself
         public override void Exit()
         {
             base.Exit();
-            questCanvasGroup.alpha = 0f;
+            questHandler.Exit();
         }
         
         public override void Enter()
         {
             base.Enter();
-            questCanvasGroup.alpha = 1f;
+            questHandler.Enter();
         }
 
         public override void OnFixedUpdate()
@@ -51,6 +49,7 @@ namespace ApplyYourself
             interactor.OnFixedUpdate();
             playerMovement.OnFixedUpdate();
             thirdPersonLook.OnFixedUpdate();
+            questHandler.OnFixedUpdate();
         }
 
         public override void OnUpdate()
@@ -60,6 +59,7 @@ namespace ApplyYourself
             playerMovement.OnUpdate();
             thirdPersonLook.OnUpdate();
             graphicRotator.OnUpdate();
+            questHandler.OnFixedUpdate();
         }
     }
 }

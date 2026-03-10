@@ -26,7 +26,7 @@ namespace ApplyYourself
 
         private void Start()
         {
-            player.Assign(questHandler.GetComponent<CanvasGroup>());
+            player.Assign(questHandler);
 
             fsm.AddTransition(new StateTransition(dialogueSystem, player));
             fsm.AddState(player);

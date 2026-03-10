@@ -7,6 +7,7 @@ namespace ApplyYourself
     public class QuestHandler : StateBehaviour
     {
         [SerializeField] private TMP_Text text = default;
+        [SerializeField] private CanvasGroup canvasGroup = default;
         private readonly Queue<IQuest> quests = new Queue<IQuest>();
         private IQuest current;
 
@@ -29,6 +30,18 @@ namespace ApplyYourself
             quest.OnDone -= EndQuest;
             quest.OnFeedback -= Display;
             BeginQuest();
+        }
+
+        public override void Enter()
+        {
+            base.Enter();
+            canvasGroup.alpha = 1f;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            canvasGroup.alpha = 0f;
         }
 
         public override void OnFixedUpdate()
