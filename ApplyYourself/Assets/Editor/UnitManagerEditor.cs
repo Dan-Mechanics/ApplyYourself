@@ -15,8 +15,12 @@ namespace ApplyYourself
             {
                 LandManager landManager = FindAnyObjectByType<LandManager>();
                 WaterManager waterManager = FindAnyObjectByType<WaterManager>();
-                landManager.Setup(FindAnyObjectByType<TextureHeightmap>(), FindAnyObjectByType<TextureTypemap>(), waterManager.Heightmap);
+                waterManager.Initialize();
+                landManager.Initialize(FindAnyObjectByType<TextureHeightmap>(), FindAnyObjectByType<TextureTypemap>());
+
                 waterManager.Setup(landManager.Heightmap, landManager.Typemap);
+                landManager.Setup(waterManager.Heightmap);
+
                 unitManager.Setup(landManager.Typemap, landManager.Heightmap, waterManager.Heightmap);
                 unitManager.RenderAll();
             }

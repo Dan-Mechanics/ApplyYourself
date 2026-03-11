@@ -23,11 +23,15 @@ namespace ApplyYourself
         private UnitType[,] typemap;
         private float[,] heightmap;
 
-        public void Setup(IHeightmap heightmapStartup, ITypemap typemapStartup, float[,] waterHeightmap)
+        public void Initialize(IHeightmap heightmapStartup, ITypemap typemapStartup)
         {
-            this.waterHeightmap = waterHeightmap;
             heightmap = heightmapStartup.GetBulk();
             typemap = typemapStartup.GetBulk();
+        }
+
+        public void Setup(float[,] waterHeightmap)
+        {
+            this.waterHeightmap = waterHeightmap;
         }
         
         private void Update()
@@ -86,6 +90,8 @@ namespace ApplyYourself
 
         private bool CanChangeTypeAtPos(Vector2Int pos, UnitType type)
         {
+            Debug.Log(heightmap);
+            Debug.Log(waterHeightmap);
             bool isLand = heightmap[pos.x, pos.y] >= waterHeightmap[pos.x, pos.y];
             bool validType = typemap[pos.x, pos.y] != type && typemap[pos.x, pos.y] != city;
 

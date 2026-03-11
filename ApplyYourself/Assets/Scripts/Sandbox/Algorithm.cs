@@ -39,7 +39,7 @@ namespace ApplyYourself
                 pair.bar.fillAmount = (float)pair.count / threshold;
             }
 
-            floodedBar.fillAmount = floodedPercentage;
+            floodedBar.fillAmount = floodedPercentage / floodedThreshold;
             icon.sprite = Resources.Load<Sprite>($"{ending}/icon");
         }
 
@@ -74,6 +74,8 @@ namespace ApplyYourself
                 totalCityCount = 1;
 
             floodedPercentage = (float)floodedCityCount / totalCityCount;
+            Debug.Log(floodedPercentage);
+
         }
 
         private void FindAndIncrement(UnitType type)
@@ -106,10 +108,10 @@ namespace ApplyYourself
         [System.Serializable]
         private class Pair
         {
-            [HideInInspector] public int count;
             public Image bar;
             public UnitType type;
             public Ending ending;
+            public int count;
 
             public void SetToDefault() => count = 0;
         }

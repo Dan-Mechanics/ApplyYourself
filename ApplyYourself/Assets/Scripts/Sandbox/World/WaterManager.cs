@@ -21,14 +21,17 @@ namespace ApplyYourself
         private float[,] writeBuffer;
         private float next;
 
+        public void Initialize()
+        {
+            readBuffer = new float[width, width];
+            writeBuffer = new float[width, width];
+            SetHeight(0, width - 1, waterHeight);
+        }
+
         public void Setup(float[,] landHeightmap, UnitType[,] landTypemap)
         {
             this.landHeightmap = landHeightmap;
             this.landTypemap = landTypemap;
-
-            readBuffer = new float[width, width];
-            writeBuffer = new float[width, width];
-            SetHeight(0, width - 1, waterHeight);
         }
 
         private void FixedUpdate()
@@ -67,10 +70,10 @@ namespace ApplyYourself
                 for (int y = 0; y < width; y++)
                 {
                     float parentHeight = readBuffer[x, y];
-                    Raise(x - 1, y, parentHeight, landHeightmap, landTypemap);
-                    Raise(x + 1, y, parentHeight, landHeightmap, landTypemap);
-                    Raise(x, y - 1, parentHeight, landHeightmap, landTypemap);
-                    Raise(x, y + 1, parentHeight, landHeightmap, landTypemap);
+                    Raise(x - 1, y, parentHeight);
+                    Raise(x + 1, y, parentHeight);
+                    Raise(x, y - 1, parentHeight);
+                    Raise(x, y + 1, parentHeight);
                 }
             }
 
@@ -90,16 +93,16 @@ namespace ApplyYourself
             SetHeight(0, width - 1, waterHeight);
         }
 
-        private void Raise(int x, int y, float parentHeight, float[,] landBulk, UnitType[,] typeBulk)
+        private void Raise(int x, int y, float parentHeight)
         {
             if (x < 0 || y < 0 || x >= width || y >= width)
                 return;
 
             float height = readBuffer[x, y];
-            if (height >= parentHeight || landBulk[x, y] >= parentHeight)
+            if (height >= parentHeight || landHeightmap[x, y] >= parentHeight)
                 return;
 
-            height += parentHeight * typeBulk[x, y].waterPercentage;
+            height += parentHeight * landTypemap[x, y].waterPercentage;
             writeBuffer[x, y] = Mathf.Clamp(height, minWaterHeight, parentHeight);
         }
     }

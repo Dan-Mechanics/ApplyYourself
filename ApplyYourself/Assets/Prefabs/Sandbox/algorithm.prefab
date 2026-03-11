@@ -54,19 +54,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   threshold: 30
   floodedThreshold: 0.5
-  floodedBar: {fileID: 6834343608491708567}
+  floodedBar: {fileID: 7736496740911784235}
   icon: {fileID: 7265525474621276099}
-  interval: 1
+  interval: 1.1
   city: {fileID: 11400000, guid: 49b09ac93070eee4995a6a62c28b03c2, type: 2}
   pairs:
-  - count: 0
-    bar: {fileID: 6355050792986797605}
+  - bar: {fileID: 6355050792986797605}
     type: {fileID: 11400000, guid: 7aba05f7576ad9b4cb5ec9549b6caf41, type: 2}
     ending: 3
-  - count: 0
-    bar: {fileID: 2134396702143897427}
+    count: 0
+  - bar: {fileID: 2134396702143897427}
     type: {fileID: 11400000, guid: 28068dd81c650bc41b2e977fe3d2e751, type: 2}
     ending: 4
+    count: 0
 --- !u!1 &7065316027919474349
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,9 +281,9 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 233168949519418054}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6834343608491708567 stripped
+--- !u!114 &7736496740911784235 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6765557424349614673, guid: 8e9284b5a464691409a4b15d0d5b83cf,
+  m_CorrespondingSourceObject: {fileID: 7521555804688884717, guid: 8e9284b5a464691409a4b15d0d5b83cf,
     type: 3}
   m_PrefabInstance: {fileID: 233168949519418054}
   m_PrefabAsset: {fileID: 0}

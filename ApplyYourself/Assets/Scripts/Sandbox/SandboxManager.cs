@@ -37,9 +37,17 @@ namespace ApplyYourself
             timer.OnDone += bridge.GoNextPhase;
             timer.Begin();
 
-            landManager.Setup(heightmapStartup, typemapStartup, waterManager.Heightmap);
+            // ===
+
+            waterManager.Initialize();
+            landManager.Initialize(heightmapStartup, typemapStartup);
+
             waterManager.Setup(landManager.Heightmap, landManager.Typemap);
+            landManager.Setup(waterManager.Heightmap);
+
             unitManager.Setup(landManager.Typemap, landManager.Heightmap, waterManager.Heightmap);
+
+            // ===
 
             foreach (Brush brush in brushes)
             {
