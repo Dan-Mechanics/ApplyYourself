@@ -70,7 +70,7 @@ MonoBehaviour:
   - bar: {fileID: 2134396702143897427}
     type: {fileID: 11400000, guid: 28068dd81c650bc41b2e977fe3d2e751, type: 2}
     ending: 4
-    threshold: 50
+    threshold: 40
     count: 0
 --- !u!1 &7065316027919474349
 GameObject:

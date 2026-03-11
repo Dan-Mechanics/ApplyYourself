@@ -37,7 +37,7 @@ namespace ApplyYourself
                 pair.bar.fillAmount = (float)pair.count / pair.threshold;
             }
 
-            flooded.bar.fillAmount = (float)flooded.count / flooded.threshold;
+            flooded.bar.fillAmount = GetFloodedPercentage() / floodedThreshold;
             icon.sprite = Resources.Load<Sprite>($"{ending}/icon");
         }
 

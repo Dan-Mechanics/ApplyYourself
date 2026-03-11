@@ -57,7 +57,7 @@ namespace ApplyYourself
 
         private void Select()
         {
-            if (isSelected)
+            if (isSelected || !interactable)
                 return;
 
             isSelected = true;

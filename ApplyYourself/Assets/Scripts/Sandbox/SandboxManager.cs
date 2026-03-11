@@ -91,8 +91,8 @@ namespace ApplyYourself
 
             algorithm.Setup(landManager.Heightmap, waterManager.Heightmap, landManager.Typemap);
 
-            lerpFollow.SetTarget(pivotController.transform);
-            lerpFollow.SetLookTarget(pivotController.transform.GetChild(0));
+            lerpFollow.SetTarget(pivotController.transform.GetChild(0));
+            lerpFollow.SetLookTarget(pivotController.transform);
 
             // ===
 

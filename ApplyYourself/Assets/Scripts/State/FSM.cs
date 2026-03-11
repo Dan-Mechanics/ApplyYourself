@@ -58,7 +58,7 @@ namespace ApplyYourself
             current = state;
             if (current != null)
             {
-                Debug.Log(state.gameObject.name.ToLowerInvariant() + Time.time.ToString());
+                Debug.Log($"{state.gameObject.name}_{Time.time}");
                 current.Enter();
             }
         }
