@@ -2,29 +2,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ApplyYourself
 {
     public class ButtonHandler : MonoBehaviour
     {
         public event Action<int> OnClick;
-        private List<Button> buttons;
+
+        [SerializeField] private List<int> disableInteraction = default;
+        private List<BetterButton> buttons;
 
         public void Setup()
         {
-            buttons = GetComponentsInChildren<Button>().ToList();
+            buttons = GetComponentsInChildren<BetterButton>().ToList();
             for (int i = 0; i < buttons.Count; i++)
             {
-                buttons[i].onClick.AddListener(() => { ClickCallback(i); });
+                buttons[i].Setup(i);
+                buttons[i].OnClickIndex += ClickCallback;
             }
+
+            disableInteraction.ForEach(x => buttons[x].SetInteractable(false));
         }
 
         private void ClickCallback(int index)
         {
             for (int i = 0; i < buttons.Count; i++)
             {
-                buttons[i].interactable = i != index;
+                buttons[i].SetInteractable(i != index);
             }
 
             OnClick?.Invoke(index);

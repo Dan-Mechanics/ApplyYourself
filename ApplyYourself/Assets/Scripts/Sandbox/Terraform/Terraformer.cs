@@ -18,7 +18,7 @@ namespace ApplyYourself
         private List<Brush> brushes;
         private Brush brush;
 
-        public void SetBrushes(List<Brush> brushes) => this.brushes = brushes;
+        public void Setup(List<Brush> brushes) => this.brushes = brushes;
 
         public override void Setup()
         {

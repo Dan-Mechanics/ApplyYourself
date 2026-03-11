@@ -90,8 +90,6 @@ namespace ApplyYourself
 
         private bool CanChangeTypeAtPos(Vector2Int pos, UnitType type)
         {
-            Debug.Log(heightmap);
-            Debug.Log(waterHeightmap);
             bool isLand = heightmap[pos.x, pos.y] >= waterHeightmap[pos.x, pos.y];
             bool validType = typemap[pos.x, pos.y] != type && typemap[pos.x, pos.y] != city;
 

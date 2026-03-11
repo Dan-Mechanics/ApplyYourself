@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1727140567858161718}
   - component: {fileID: 2343315227028830568}
   m_Layer: 5
-  m_Name: buttons
+  m_Name: button_handler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a615fa9f90060449d13a54d5defee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableInteraction: 00000000
 --- !u!1001 &1547546524456143296
 PrefabInstance:
   m_ObjectHideFlags: 0

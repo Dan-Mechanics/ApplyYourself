@@ -5,26 +5,37 @@ namespace ApplyYourself
 {
     public class SandboxManager : MonoBehaviour 
     {
-        [SerializeField] private TextWriter timerText = default;
-        [SerializeField] private Terraformer terraformer = default;
-        [SerializeField] private PivotController pivotController = default;
-        [SerializeField] private WaterManager waterManager = default;
-        [SerializeField] private LandManager landManager = default;
-        [SerializeField] private UnitManager unitManager = default;
         [SerializeField] private float interval = default;
         [SerializeField] private List<Brush> brushes = default;
-
         private readonly FSM fsm = new FSM();
-        private float next;
-        private Timer timer;
+        private float nextTickTime;
+
+        private AdaptiveGradient adaptiveGradient;
+        private SensitivityMouse sensitivityMouse;
+        private TextWriter textWriter;
+        private Terraformer terraformer;
+        private PivotController pivotController;
+        private WaterManager waterManager;
+        private LandManager landManager;
+        private UnitManager unitManager;
         private ButtonHandler buttonHandler;
         private TextureHeightmap heightmapStartup;
         private TextureTypemap typemapStartup;
         private Algorithm algorithm;
         private Bridge bridge;
+        private Timer timer;
 
         private void Awake()
         {
+            textWriter = FindAnyObjectByType<TextWriter>();
+            terraformer = FindAnyObjectByType<Terraformer>();
+            pivotController = FindAnyObjectByType<PivotController>();
+            waterManager = FindAnyObjectByType<WaterManager>();
+            landManager = FindAnyObjectByType<LandManager>();
+            unitManager = FindAnyObjectByType<UnitManager>();
+            adaptiveGradient = FindAnyObjectByType<AdaptiveGradient>();
+            sensitivityMouse = FindAnyObjectByType<SensitivityMouse>();
+
             timer = FindAnyObjectByType<Timer>();
             algorithm = FindAnyObjectByType<Algorithm>();
             bridge = FindAnyObjectByType<Bridge>();
@@ -35,7 +46,7 @@ namespace ApplyYourself
 
         private void Start()
         {
-            timer.OnNewTime += timerText.WriteTime;
+            timer.OnNewTime += textWriter.WriteTime;
             timer.OnDone += bridge.GoNextPhase;
             timer.Begin();
 
@@ -61,11 +72,13 @@ namespace ApplyYourself
             landManager.OnRaiseArea += unitManager.RenderArea;
             landManager.OnDecorateArea += unitManager.RenderAreaDecoration;
 
-            terraformer.SetBrushes(brushes);
+            terraformer.Setup(brushes);
+
+            buttonHandler.Setup();
             buttonHandler.OnClick += terraformer.SelectBrush;
             
-            unitManager.OnNewWaterRange += FindAnyObjectByType<AdaptiveGradient>().SetRange;
-            pivotController.Assign(FindAnyObjectByType<SensitivityMouse>());
+            unitManager.OnNewWaterRange += adaptiveGradient.SetRange;
+            pivotController.Setup(sensitivityMouse);
 
             algorithm.Setup(landManager.Heightmap, waterManager.Heightmap, landManager.Typemap);
 
@@ -81,12 +94,12 @@ namespace ApplyYourself
         private void FixedUpdate()
         {
             fsm.FixedUpdate();
-
-            if (Time.time < next)
+            if (Time.time < nextTickTime)
                 return;
 
-            next = Time.time + interval;
-            Tick();
+            nextTickTime = Time.time + interval;
+            waterManager.Tick();
+            unitManager.RenderAll();
         }
 
         private void OnDestroy()
@@ -97,12 +110,6 @@ namespace ApplyYourself
                 brush.OnRaise -= landManager.RaiseArea;
                 brush.OnDecorate -= landManager.DecorateArea;
             }
-        }
-
-        private void Tick()
-        {
-            waterManager.Tick();
-            unitManager.RenderAll();
         }
     }
 }

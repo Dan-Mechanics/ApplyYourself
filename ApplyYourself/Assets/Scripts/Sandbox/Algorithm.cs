@@ -31,7 +31,7 @@ namespace ApplyYourself
         private void Display()
         {
             Ending ending = GetEnding();
-            print(ending);
+          //  print(ending);
 
             for (int i = 0; i < pairs.Count; i++)
             {
@@ -73,8 +73,8 @@ namespace ApplyYourself
             if (totalCityCount <= 0)
                 totalCityCount = 1;
 
-            Debug.Log(floodedCityCount);
-            Debug.Log(totalCityCount);
+          //  Debug.Log(floodedCityCount);
+            //Debug.Log(totalCityCount);
             floodedPercentage = (float)floodedCityCount / totalCityCount;
 
         }

@@ -26,7 +26,7 @@ namespace ApplyYourself
         [SerializeField] private float moveSensitivity = default;
         private ILookInput lookInput;
 
-        public void Assign(ILookInput lookInput) => this.lookInput = lookInput;
+        public void Setup(ILookInput lookInput) => this.lookInput = lookInput;
         private void OnValidate() => Visualize();
 
         public override void Exit()
