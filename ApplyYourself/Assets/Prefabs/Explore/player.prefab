@@ -224,7 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftRightPivot: {fileID: 1905645038698360357}
   upDownPivot: {fileID: 4002684525616709806}
-  eyes: {fileID: 0}
+  eyes: {fileID: 4751876457270845103}
   mask:
     serializedVersion: 2
     m_Bits: 1
@@ -317,7 +317,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 100
+  field of view: 85
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
