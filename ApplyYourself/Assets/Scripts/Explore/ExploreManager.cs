@@ -4,8 +4,6 @@ namespace ApplyYourself
 {
     public class ExploreManager : MonoBehaviour
     {
-       //[SerializeField] private int talkQuestCount = default;
-       //[SerializeField] private float goToQuestDist = default;
         [SerializeField] private TalkQuest talkQuest = default;
         [SerializeField] private GoToQuest goToPortal = default;
 
@@ -26,7 +24,8 @@ namespace ApplyYourself
 
         private void Start()
         {
-            player.Assign(questHandler);
+            player.Setup(questHandler);
+            dialogueSystem.Setup();
 
             fsm.AddTransition(new StateTransition(dialogueSystem, player));
             fsm.AddState(player);

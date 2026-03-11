@@ -18,11 +18,9 @@ namespace ApplyYourself
         private List<Brush> brushes;
         private Brush brush;
 
-        public void Setup(List<Brush> brushes) => this.brushes = brushes;
-
-        public override void Setup()
+        public void Setup(List<Brush> brushes)
         {
-            base.Setup();
+            this.brushes = brushes;
             SelectBrush(0);
         }
 
@@ -56,9 +54,7 @@ namespace ApplyYourself
                 {
                     // TODO: NON-ALLOC HERE. !!
                     Collider[] colliders = Physics.OverlapSphere(hit.point, brush.size, mask, QueryTriggerInteraction.Ignore);
-
                     List<Vector2Int> positions = new List<Vector2Int>();
-                  //  Debug.Log(colliders.Length);
                     for (int i = 0; i < colliders.Length; i++)
                     {
                         Vector3 pos = colliders[i].transform.position;
@@ -76,13 +72,11 @@ namespace ApplyYourself
             }
         }
 
-        /// <summary>
-        /// Called by button.
-        /// </summary>
         public void SelectBrush(int index)
         {
             index = Mathf.Clamp(index, 0, brushes.Count - 1);
             brush = brushes[index];
+
             preview.transform.localScale = 2f * brush.size * Vector3.one;
             preview.GetComponent<Renderer>().material = brush.previewMaterial;
         }

@@ -9,10 +9,6 @@ namespace ApplyYourself
         public event Action<StateBehaviour> OnClaim;
         public event Action<StateBehaviour> OnDeregister;
 
-        /// <summary>
-        /// TODO: REMOVE THIS, THIS NEEDS TO BE EXPLITICT.
-        /// </summary>
-        public virtual void Setup() { }
         public virtual void Enter() { }
         public virtual void Exit() { }
         public virtual void OnUpdate() { }

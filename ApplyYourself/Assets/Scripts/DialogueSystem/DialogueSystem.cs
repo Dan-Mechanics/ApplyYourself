@@ -34,11 +34,7 @@ namespace ApplyYourself
         private float nextDialogueTime;
         private InputComposite composite;
 
-        public override void Setup()
-        {
-            base.Setup();
-            composite = new InputComposite(primaryFire, jump, interact);
-        }
+        public void Setup() => composite = new InputComposite(primaryFire, jump, interact);
 
         public override void OnUpdate()
         {

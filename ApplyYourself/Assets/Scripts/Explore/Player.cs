@@ -10,14 +10,11 @@ namespace ApplyYourself
         [SerializeField] private ThirdPersonLook thirdPersonLook = default;
         [SerializeField] private PlayerGraphicRotator graphicRotator = default;
         [SerializeField] private string interactFeedbackName = default;
-
         private QuestHandler questHandler;
 
-        public void Assign(QuestHandler questHandler) => this.questHandler = questHandler;
-
-        public override void Setup()
+        public void Setup(QuestHandler questHandler)
         {
-            base.Setup();
+            this.questHandler = questHandler;
             interactor.OnFeedback += FindObjectsByType<EasyText>(FindObjectsSortMode.None).
                 ToList().Where(x => x.name == interactFeedbackName).First().Write;
 

@@ -7,6 +7,7 @@ namespace ApplyYourself
     {
         [SerializeField] private float interval = default;
         [SerializeField] private List<Brush> brushes = default;
+
         private readonly FSM fsm = new FSM();
         private float nextTickTime;
 
@@ -81,6 +82,8 @@ namespace ApplyYourself
             pivotController.Setup(sensitivityMouse);
 
             algorithm.Setup(landManager.Heightmap, waterManager.Heightmap, landManager.Typemap);
+
+            // ===
 
             fsm.AddTransition(new StateTransition(terraformer, pivotController));
             fsm.AddTransition(new StateTransition(pivotController, terraformer));

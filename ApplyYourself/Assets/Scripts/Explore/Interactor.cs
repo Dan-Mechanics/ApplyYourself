@@ -17,11 +17,7 @@ namespace ApplyYourself
         private readonly List<IInteractable> interactables = new List<IInteractable>();
         private float nextInteract;
 
-        public override void Setup()
-        {
-            base.Setup();
-            Clear();
-        }
+        public void Setup() => Clear();
 
         public override void OnFixedUpdate()
         {
