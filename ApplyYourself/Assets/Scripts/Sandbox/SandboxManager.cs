@@ -17,6 +17,7 @@ namespace ApplyYourself
         private readonly FSM fsm = new FSM();
         private float next;
         private Timer timer;
+        private ButtonHandler buttonHandler;
         private TextureHeightmap heightmapStartup;
         private TextureTypemap typemapStartup;
         private Algorithm algorithm;
@@ -29,6 +30,7 @@ namespace ApplyYourself
             bridge = FindAnyObjectByType<Bridge>();
             heightmapStartup = FindAnyObjectByType<TextureHeightmap>();
             typemapStartup = FindAnyObjectByType<TextureTypemap>();
+            buttonHandler = FindAnyObjectByType<ButtonHandler>();
         }
 
         private void Start()
@@ -60,6 +62,8 @@ namespace ApplyYourself
             landManager.OnDecorateArea += unitManager.RenderAreaDecoration;
 
             terraformer.SetBrushes(brushes);
+            buttonHandler.OnClick += terraformer.SelectBrush;
+            
             unitManager.OnNewWaterRange += FindAnyObjectByType<AdaptiveGradient>().SetRange;
             pivotController.Assign(FindAnyObjectByType<SensitivityMouse>());
 

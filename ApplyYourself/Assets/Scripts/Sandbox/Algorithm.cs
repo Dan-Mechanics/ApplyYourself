@@ -61,7 +61,7 @@ namespace ApplyYourself
 
                     if (landHeightmap[x, y] >= waterHeightmap[x, y])
                     {
-                        FindAndIncrement(type);
+                        IncrementOfType(type);
                     }
                     else if (type == city)
                     {
@@ -73,12 +73,13 @@ namespace ApplyYourself
             if (totalCityCount <= 0)
                 totalCityCount = 1;
 
+            Debug.Log(floodedCityCount);
+            Debug.Log(totalCityCount);
             floodedPercentage = (float)floodedCityCount / totalCityCount;
-            Debug.Log(floodedPercentage);
 
         }
 
-        private void FindAndIncrement(UnitType type)
+        private void IncrementOfType(UnitType type)
         {
             for (int i = 0; i < pairs.Count; i++)
             {

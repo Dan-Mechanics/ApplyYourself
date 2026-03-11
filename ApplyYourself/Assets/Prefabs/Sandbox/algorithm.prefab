@@ -52,11 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77dfe27971ab29947a08d722b1e7d233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  threshold: 30
+  threshold: 45
   floodedThreshold: 0.5
   floodedBar: {fileID: 7736496740911784235}
   icon: {fileID: 7265525474621276099}
-  interval: 1.1
+  interval: 0.8
   city: {fileID: 11400000, guid: 49b09ac93070eee4995a6a62c28b03c2, type: 2}
   pairs:
   - bar: {fileID: 6355050792986797605}

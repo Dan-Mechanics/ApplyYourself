@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 50
   visualWaterShake: 3
-  waterGradientInterval: 0.9
+  waterGradientInterval: 1
   water: {fileID: 11400000, guid: 6f22bf932d97b3342b63bdab892b103d, type: 2}
   spawner:
     prefab: {fileID: 3526021976004239255, guid: 19e5a5994a1570f4caa5820a6be0ee25,
