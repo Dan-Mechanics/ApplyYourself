@@ -3,10 +3,6 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    /// <summary>
-    /// Put the sequence here. Potentially make everyhing
-    /// work with heightmap and typemap to keep seperate
-    /// </summary>
     public class SandboxManager : MonoBehaviour 
     {
         [SerializeField] private TextWriter timerText = default;
