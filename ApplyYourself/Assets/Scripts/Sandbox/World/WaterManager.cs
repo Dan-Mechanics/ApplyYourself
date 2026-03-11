@@ -43,9 +43,9 @@ namespace ApplyYourself
             readBuffer[x, y] = height;
         }
 
-        public void RaiseArea(List<Vector2Int> positions, float meters)
+        public void RaiseArea(List<Vector2Int> positions, float meters, bool updateVisual)
         {
-            if (meters == 0f)
+            if (meters == 0f || !updateVisual)
                 return;
 
             for (int i = 0; i < positions.Count; i++)
@@ -73,7 +73,7 @@ namespace ApplyYourself
                 }
             }
 
-            // SWAP.
+            // SWAP. ===
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)

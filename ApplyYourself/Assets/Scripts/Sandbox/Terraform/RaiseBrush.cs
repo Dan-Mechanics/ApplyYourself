@@ -13,7 +13,7 @@ namespace ApplyYourself
         {
             float direction = invert.IsHeld ? -1f : 1f;
             float motion = direction * strength * Time.fixedDeltaTime;
-            Raise(positions, motion);
+            Raise(positions, motion, true);
         }
     }
 }

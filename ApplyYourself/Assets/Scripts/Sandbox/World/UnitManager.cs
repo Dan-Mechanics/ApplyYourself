@@ -61,7 +61,7 @@ namespace ApplyYourself
             }
         }
 
-        public void RedecorateArea(List<Vector2Int> positions)
+        public void UpdateAreaDecoration(List<Vector2Int> positions)
         {
             for (int i = 0; i < positions.Count; i++)
             {

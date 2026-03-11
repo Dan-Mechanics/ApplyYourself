@@ -42,8 +42,8 @@ namespace ApplyYourself
                 brush.OnDecorate += landManager.DecorateArea;
             }
 
-            landManager.OnAreaUpdated += unitManager.RenderArea;
-            landManager.OnRedecorate += unitManager.RedecorateArea;
+            landManager.OnRaiseArea += unitManager.RenderArea;
+            landManager.OnDecorateArea += unitManager.UpdateAreaDecoration;
 
             terraformer.SetBrushes(brushes);
             unitManager.OnNewWaterRange += FindAnyObjectByType<AdaptiveGradient>().SetRange;
