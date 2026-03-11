@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,15 +8,12 @@ namespace ApplyYourself
 {
     public class Algorithm : MonoBehaviour
     {
-        [SerializeField] private int threshold = default;
-        [SerializeField, Range(0f, 1f)] private float floodedThreshold = default;
-        [SerializeField] private Image floodedBar = default;
         [SerializeField] private Image icon = default;
         [SerializeField] private float interval = default;
-        [SerializeField] private UnitType city = default;
+        [SerializeField, Range(0f, 1f)] private float floodedThreshold = default;
+        [SerializeField] private Pair flooded = default;
         [SerializeField] private List<Pair> pairs = default;
 
-        private float floodedPercentage;
         private float[,] landHeightmap;
         private float[,] waterHeightmap;
         private UnitType[,] landTypemap;
@@ -25,29 +23,28 @@ namespace ApplyYourself
             this.landHeightmap = landHeightmap;
             this.waterHeightmap = waterHeightmap;
             this.landTypemap = landTypemap;
+
+            pairs.ForEach(x => x.SetToDefault());
             InvokeRepeating(nameof(Display), interval, interval);
         }
 
         private void Display()
         {
             Ending ending = GetEnding();
-          //  print(ending);
-
             for (int i = 0; i < pairs.Count; i++)
             {
                 Pair pair = pairs[i];
-                pair.bar.fillAmount = (float)pair.count / threshold;
+                pair.bar.fillAmount = (float)pair.count / pair.threshold;
             }
 
-            floodedBar.fillAmount = floodedPercentage / floodedThreshold;
+            flooded.bar.fillAmount = (float)flooded.count / flooded.threshold;
             icon.sprite = Resources.Load<Sprite>($"{ending}/icon");
         }
 
         private void Tick()
         {
+            flooded.SetToDefault();
             pairs.ForEach(x => x.SetToDefault());
-            int totalCityCount = 0;
-            int floodedCityCount = 0;
 
             int width = landHeightmap.GetLength(0);
             int height = landHeightmap.GetLength(1);
@@ -56,51 +53,36 @@ namespace ApplyYourself
                 for (int y = 0; y < height; y++)
                 {
                     UnitType type = landTypemap[x, y];
-                    if(type == city)
-                        totalCityCount++;
-
                     if (landHeightmap[x, y] >= waterHeightmap[x, y])
                     {
-                        IncrementOfType(type);
+                        pairs.Find(x => x.type == type)?.Increment();
                     }
-                    else if (type == city)
+                    else if (type == flooded.type)
                     {
-                        floodedCityCount++;
+                        flooded.Increment();
                     }
                 }
             }
-
-            if (totalCityCount <= 0)
-                totalCityCount = 1;
-
-          //  Debug.Log(floodedCityCount);
-            //Debug.Log(totalCityCount);
-            floodedPercentage = (float)floodedCityCount / totalCityCount;
-
         }
 
-        private void IncrementOfType(UnitType type)
-        {
-            for (int i = 0; i < pairs.Count; i++)
-            {
-                if (pairs[i].type != type)
-                    continue;
-
-                pairs[i].count++;
-                return;
-            }
-        }
+        private float GetFloodedPercentage() => (float)flooded.count / flooded.threshold;
 
         public Ending GetEnding()
         {
             Tick();
-            bool isFlooded = floodedPercentage > floodedThreshold;
+            bool isFlooded = GetFloodedPercentage() >= floodedThreshold;
             if (isFlooded)
-                return Ending.UnderwaterCity;
+                return flooded.ending;
 
-            Pair pair = pairs.OrderBy(x => x.count).First();
-            if (pair.count >= threshold)
-                return pair.ending;
+            // SORT.
+            pairs = pairs.OrderByDescending(x => x.count).ToList();
+            for (int i = 0; i < pairs.Count; i++)
+            {
+                // IF IT FAILS, WE GO TO THE NEXT.
+                Pair pair = pairs[i];
+                if (pair.count >= pair.threshold)
+                    return pair.ending;
+            }
 
             // ELSE. 
             return Ending.FloatingCity;
@@ -112,9 +94,21 @@ namespace ApplyYourself
             public Image bar;
             public UnitType type;
             public Ending ending;
+            public int threshold;
             public int count;
 
+            public void Increment() => count++;
             public void SetToDefault() => count = 0;
+
+            public void Log()
+            {
+                StringBuilder builder = new StringBuilder();
+                char splitter = '_';
+                builder.Append(ending).Append(splitter);
+                builder.Append(count).Append(splitter);
+                builder.Append(threshold).Append(splitter);
+                print(builder.ToString());
+            }
         }
     }
 }

@@ -46,7 +46,7 @@ namespace ApplyYourself
             isDone = true;
         }
 
-        public void ForceComplete()
+        public void Skip()
         {
             Clear();
             text.text = message;
@@ -61,6 +61,5 @@ namespace ApplyYourself
         }
 
         private void OnValidate() => text = GetComponent<TMP_Text>();
-        public void WriteTime(int mins, int secs) => text.text = $"{mins}:{secs}";
     }
 }

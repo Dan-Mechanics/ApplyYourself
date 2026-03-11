@@ -7,9 +7,12 @@ namespace ApplyYourself
         [SerializeField] private TalkQuest talkQuest = default;
         [SerializeField] private GoToQuest goToPortal = default;
 
+        private readonly WASD wasd = new WASD();
         private readonly FSM fsm = new FSM();
+        private SensitivityMouse sensitivityMouse;
         private DialogueSystem dialogueSystem;
         private QuestHandler questHandler;
+        private EasyText easyText;
         private Player player;
 
         private void Awake()
@@ -17,6 +20,8 @@ namespace ApplyYourself
             questHandler = FindAnyObjectByType<QuestHandler>();
             dialogueSystem = FindAnyObjectByType<DialogueSystem>();
             player = FindAnyObjectByType<Player>();
+            sensitivityMouse = FindAnyObjectByType<SensitivityMouse>();
+            easyText = FindAnyObjectByType<EasyText>();
 
             goToPortal = new GoToQuest(GameObject.FindWithTag(goToPortal.playerTag)?.transform,
                 GameObject.FindWithTag(goToPortal.targetTag)?.transform);
@@ -24,7 +29,7 @@ namespace ApplyYourself
 
         private void Start()
         {
-            player.Setup(questHandler);
+            player.Setup(questHandler, easyText, sensitivityMouse, wasd);
             dialogueSystem.Setup();
 
             fsm.AddTransition(new StateTransition(dialogueSystem, player));

@@ -5,17 +5,19 @@ namespace ApplyYourself
     public class Bridge : MonoBehaviour
     {
         [HideInInspector] public Ending ending;
+        private Algorithm algorithm;
+        private Portal portal;
 
-        [SerializeField] private Algorithm algorithm = default;
-        [SerializeField] private Portal portal = default;
+        public void Setup(Algorithm algorithm, Portal portal)
+        {
+            this.algorithm = algorithm;
+            this.portal = portal;
+        }
 
         public void GoNextPhase()
         {
             DontDestroyOnLoad(gameObject);
-
             ending = algorithm.GetEnding();
-            algorithm = null;
-
             print(ending);
             portal.Interact();
         }

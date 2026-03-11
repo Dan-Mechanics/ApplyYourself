@@ -21,11 +21,11 @@ namespace ApplyYourself
 
             // ===
 
-            Bridge algorithm = FindAnyObjectByType<Bridge>();
-            if (algorithm != null)
+            Bridge bridge = FindAnyObjectByType<Bridge>();
+            if (bridge != null)
             {
-                SetAs(algorithm.ending);
-                Destroy(algorithm.gameObject);
+                SetAs(bridge.ending);
+                Destroy(bridge.gameObject);
             }
             else
             {

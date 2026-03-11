@@ -13,7 +13,7 @@ namespace ApplyYourself
 
         private AdaptiveGradient adaptiveGradient;
         private SensitivityMouse sensitivityMouse;
-        private TextWriter textWriter;
+        private EasyText easyText;
         private Terraformer terraformer;
         private PivotController pivotController;
         private WaterManager waterManager;
@@ -22,13 +22,20 @@ namespace ApplyYourself
         private ButtonHandler buttonHandler;
         private TextureHeightmap heightmapStartup;
         private TextureTypemap typemapStartup;
+        private LerpFollow lerpFollow;
         private Algorithm algorithm;
+        private Portal portal;
         private Bridge bridge;
         private Timer timer;
+        private Camera cam;
 
         private void Awake()
         {
-            textWriter = FindAnyObjectByType<TextWriter>();
+            cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+
+            lerpFollow = FindAnyObjectByType<LerpFollow>();
+            portal = FindAnyObjectByType<Portal>();
+            easyText = FindAnyObjectByType<EasyText>();
             terraformer = FindAnyObjectByType<Terraformer>();
             pivotController = FindAnyObjectByType<PivotController>();
             waterManager = FindAnyObjectByType<WaterManager>();
@@ -47,7 +54,8 @@ namespace ApplyYourself
 
         private void Start()
         {
-            timer.OnNewTime += textWriter.WriteTime;
+            bridge.Setup(algorithm, portal);
+            timer.OnNewTime += easyText.WriteTime;
             timer.OnDone += bridge.GoNextPhase;
             timer.Begin();
 
@@ -73,7 +81,7 @@ namespace ApplyYourself
             landManager.OnRaiseArea += unitManager.RenderArea;
             landManager.OnDecorateArea += unitManager.RenderAreaDecoration;
 
-            terraformer.Setup(brushes);
+            terraformer.Setup(brushes, cam);
 
             buttonHandler.Setup();
             buttonHandler.OnClick += terraformer.SelectBrush;
@@ -82,6 +90,9 @@ namespace ApplyYourself
             pivotController.Setup(sensitivityMouse);
 
             algorithm.Setup(landManager.Heightmap, waterManager.Heightmap, landManager.Typemap);
+
+            lerpFollow.SetTarget(pivotController.transform);
+            lerpFollow.SetLookTarget(pivotController.transform.GetChild(0));
 
             // ===
 

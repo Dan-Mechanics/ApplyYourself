@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1346682bbf826d341b5e5e79e592048c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heightmap: {fileID: 2800000, guid: ee27e8aee438b4045b0c1dc9dc4397d4, type: 3}
+  heightmap: {fileID: 2800000, guid: 43433be3bee3174429c43587925503f8, type: 3}
   height: 25
 --- !u!114 &5486283571649061294
 MonoBehaviour:
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2221ea73fea67be4385516b65777ba57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typemap: {fileID: 2800000, guid: f7791b93598ac514b87a7bf944d88e37, type: 3}
+  typemap: {fileID: 2800000, guid: 973d45c56f39acd43a1713eaff18f233, type: 3}
   conversions:
   - color: {r: 0, g: 1, b: 0, a: 1}
     type: {fileID: 11400000, guid: f3aa692e0bcca94479a7b82d14effbff, type: 2}

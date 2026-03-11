@@ -18,6 +18,6 @@ namespace ApplyYourself
         }
 
         public void SetTarget(Transform target) => this.target = target;
-        public void LookAt(Transform lookAt) => this.lookAt = lookAt;
+        public void SetLookTarget(Transform lookAt) => this.lookAt = lookAt;
     }
 }

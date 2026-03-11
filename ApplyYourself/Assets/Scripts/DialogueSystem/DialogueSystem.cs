@@ -34,7 +34,10 @@ namespace ApplyYourself
         private float nextDialogueTime;
         private InputComposite composite;
 
-        public void Setup() => composite = new InputComposite(primaryFire, jump, interact);
+        public void Setup()
+        {
+            composite = new InputComposite(primaryFire, jump, interact);
+        }
 
         public override void OnUpdate()
         {
@@ -53,7 +56,7 @@ namespace ApplyYourself
                 }
                 else
                 {
-                    dialogueWriter.ForceComplete();
+                    dialogueWriter.Skip();
                 }
             }
         }
@@ -85,15 +88,21 @@ namespace ApplyYourself
 
         private void ShowFrame(Frame frame)
         {
-            nameText.text = frame.name;
+            nameText.text = frame.characerName;
             dialogueWriter.Write(frame.dialogue);
 
-            if (!sprites.ContainsKey(frame.sprite))
-                sprites[frame.sprite] = Resources.Load<Sprite>(charactersPath + "/" + frame.sprite);
+            if (!sprites.ContainsKey(frame.spriteName))
+                sprites[frame.spriteName] = Resources.Load<Sprite>(charactersPath + "/" + frame.spriteName);
 
-            icon.sprite = sprites[frame.sprite];
-            if (icon.sprite == null)
-                Debug.LogError($"{frame.sprite}.png does not exist in resources.");
+            Sprite sprite = sprites[frame.spriteName];
+            if (sprite == null)
+            {
+                Debug.LogError($"{frame.spriteName}.png does not exist in resources.");
+                return;
+            }
+
+            icon.sprite = sprite;
+            icon.SetNativeSize();
         }
 
         private Queue<Frame> ParseDialogue(string dialogue)
@@ -118,11 +127,11 @@ namespace ApplyYourself
                 switch (parsingMode)
                 {
                     case ParsingMode.Name:
-                        current.name = line;
+                        current.characerName = line;
                         parsingMode = ParsingMode.Sprite;
                         break;
                     case ParsingMode.Sprite:
-                        current.sprite = line.ToLowerInvariant();
+                        current.spriteName = line.ToLowerInvariant();
                         parsingMode = ParsingMode.Dialogue;
                         break;
                     case ParsingMode.Dialogue:
@@ -172,8 +181,8 @@ namespace ApplyYourself
 
         private struct Frame
         {
-            public string name;
-            public string sprite;
+            public string characerName;
+            public string spriteName;
             public string dialogue;
         }
     }

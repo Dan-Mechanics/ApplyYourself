@@ -52,20 +52,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77dfe27971ab29947a08d722b1e7d233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  threshold: 45
-  floodedThreshold: 0.5
-  floodedBar: {fileID: 7736496740911784235}
   icon: {fileID: 7265525474621276099}
-  interval: 0.8
-  city: {fileID: 11400000, guid: 49b09ac93070eee4995a6a62c28b03c2, type: 2}
+  interval: 0.75
+  floodedThreshold: 0.5
+  flooded:
+    bar: {fileID: 7736496740911784235}
+    type: {fileID: 11400000, guid: 49b09ac93070eee4995a6a62c28b03c2, type: 2}
+    ending: 1
+    threshold: 50
+    count: 0
   pairs:
   - bar: {fileID: 6355050792986797605}
     type: {fileID: 11400000, guid: 7aba05f7576ad9b4cb5ec9549b6caf41, type: 2}
     ending: 3
+    threshold: 300
     count: 0
   - bar: {fileID: 2134396702143897427}
     type: {fileID: 11400000, guid: 28068dd81c650bc41b2e977fe3d2e751, type: 2}
     ending: 4
+    threshold: 50
     count: 0
 --- !u!1 &7065316027919474349
 GameObject:
@@ -132,7 +137,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 98216b2c02391d94ba125f0892ae5ff1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

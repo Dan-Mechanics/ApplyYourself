@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4671121615273283792
+--- !u!1 &3728781084775967213
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5277458853771904575}
-  - component: {fileID: 2168702374535922066}
+  - component: {fileID: 5411659553932993724}
+  - component: {fileID: 7216422202412820394}
+  - component: {fileID: 6850805172053987291}
   m_Layer: 0
-  m_Name: terraformer
+  m_Name: bridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5277458853771904575
+--- !u!4 &5411659553932993724
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4671121615273283792}
+  m_GameObject: {fileID: 3728781084775967213}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,25 +33,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2168702374535922066
+--- !u!114 &7216422202412820394
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4671121615273283792}
+  m_GameObject: {fileID: 3728781084775967213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2311d1115c4935047bf17eb6270b390b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c461261b920010458283a323caea04a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  primaryFire: {fileID: 11400000, guid: c4334f1866f323a4b8ac94e0c1b9d0a3, type: 2}
-  rotate: {fileID: 11400000, guid: f2ce04258f935d14f9f50c4cc21a0b28, type: 2}
-  move: {fileID: 11400000, guid: dc5a86ced043faf4da9dd97ffde75519, type: 2}
-  previewPrefab: {fileID: 8146446964798727863, guid: 8797f9043da943d4eb4139cff4bbadd5,
-    type: 3}
-  mask:
-    serializedVersion: 2
-    m_Bits: 8
-  range: 1500
-  spacing: 10
+  ending: 0
+  algorithm: {fileID: 0}
+  portal: {fileID: 6850805172053987291}
+--- !u!114 &6850805172053987291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3728781084775967213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a50276155f1c002499310cf9c7ca1e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: Explore

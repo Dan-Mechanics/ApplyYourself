@@ -9,19 +9,16 @@ namespace ApplyYourself
         [SerializeField] private PlayerMovement playerMovement = default;
         [SerializeField] private ThirdPersonLook thirdPersonLook = default;
         [SerializeField] private PlayerGraphicRotator graphicRotator = default;
-        [SerializeField] private string interactFeedbackName = default;
         private QuestHandler questHandler;
-
-        public void Setup(QuestHandler questHandler)
+        
+        public void Setup(QuestHandler questHandler, EasyText easyText, ILookInput lookInput, IMoveInput moveInput)
         {
             this.questHandler = questHandler;
-            interactor.OnFeedback += FindObjectsByType<EasyText>(FindObjectsSortMode.None).
-                ToList().Where(x => x.name == interactFeedbackName).First().Write;
+            interactor.OnFeedback += easyText.Write;
 
-            WASD wasd = new WASD();
-            playerMovement.Assign(wasd);
-            graphicRotator.Assign(wasd);
-            thirdPersonLook.Assign(FindAnyObjectByType<SensitivityMouse>());
+            playerMovement.Assign(moveInput);
+            graphicRotator.Assign(moveInput);
+            thirdPersonLook.Assign(lookInput);
 
             interactor.Setup();
             Cursor.visible = false;

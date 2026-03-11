@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: structure
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: e1d6b1abc29d79e45989a7bc806d36d9, type: 2}
-  decoration: {fileID: 0}
+  decoration: {fileID: 3300950976940298294, guid: ea00d42414c5baa45adf99da362017ce,
+    type: 3}
   waterPercentage: 1

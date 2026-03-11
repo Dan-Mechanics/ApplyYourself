@@ -5,22 +5,24 @@ namespace ApplyYourself
 {
     public class Terraformer : StateBehaviour 
     {
-        [SerializeField] private Camera cam = default;
         [SerializeField] private EasyBinding primaryFire = default;
         [SerializeField] private EasyBinding rotate = default;
         [SerializeField] private EasyBinding move = default;
-        [SerializeField] private GameObject preview = default;
+        [SerializeField] private GameObject previewPrefab = default;
         [SerializeField] private LayerMask mask = default;
-
         [SerializeField] private float range = default;
         [SerializeField] private float spacing = default;
 
+        private GameObject preview;
         private List<Brush> brushes;
         private Brush brush;
+        private Camera cam;
 
-        public void Setup(List<Brush> brushes)
+        public void Setup(List<Brush> brushes, Camera cam)
         {
             this.brushes = brushes;
+            this.cam = cam;
+            preview = Instantiate(previewPrefab);
             SelectBrush(0);
         }
 
