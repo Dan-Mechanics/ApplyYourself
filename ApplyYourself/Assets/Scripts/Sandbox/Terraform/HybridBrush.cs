@@ -14,8 +14,8 @@ namespace ApplyYourself
             float direction = invert.IsHeld ? -1f : 1f;
             float motion = direction * strength * Time.fixedDeltaTime;
 
-            Decorate(positions, invert.IsHeld ? null : type, false);
-            Raise(positions, motion, true);
+            Decorate(positions, invert.IsHeld ? null : type);
+            Raise(positions, motion);
         }
     }
 }

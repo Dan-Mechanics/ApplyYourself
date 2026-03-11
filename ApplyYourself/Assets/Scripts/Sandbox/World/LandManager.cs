@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class LandManager : MonoBehaviour, IHeightmap, ITypemap
+    public class LandManager : MonoBehaviour
     {
+        public float[,] Heightmap => heightmap;
+        public UnitType[,] Typemap => typemap;
+        
         public event Action<List<Vector2Int>> OnRaiseArea; 
         public event Action<List<Vector2Int>> OnDecorateArea; 
 
@@ -16,13 +19,13 @@ namespace ApplyYourself
         [SerializeField] private UnitType city = default;
         [SerializeField] private UnitType plains = default;
 
-        private IHeightmap waterManager;
+        private float[,] waterHeightmap;
         private UnitType[,] typemap;
         private float[,] heightmap;
 
-        public void Initialize(IHeightmap heightmapStartup, ITypemap typemapStartup, IHeightmap waterManager)
+        public void Setup(IHeightmap heightmapStartup, ITypemap typemapStartup, float[,] waterHeightmap)
         {
-            this.waterManager = waterManager;
+            this.waterHeightmap = waterHeightmap;
             heightmap = heightmapStartup.GetBulk();
             typemap = typemapStartup.GetBulk();
         }
@@ -44,7 +47,7 @@ namespace ApplyYourself
             }
         }
 
-        public void RaiseArea(List<Vector2Int> positions, float meters, bool updateVisual)
+        public void RaiseArea(List<Vector2Int> positions, float meters)
         {
             for (int i = positions.Count - 1; i >= 0; i--)
             {
@@ -58,11 +61,10 @@ namespace ApplyYourself
                 heightmap[pos.x, pos.y] = Mathf.Clamp(heightmap[pos.x, pos.y] + meters, minHeight, maxHeight);
             }
 
-            if (updateVisual)
-                OnRaiseArea?.Invoke(positions);
+            OnRaiseArea?.Invoke(positions);
         }
 
-        public void DecorateArea(List<Vector2Int> positions, UnitType type, bool updateVisual)
+        public void DecorateArea(List<Vector2Int> positions, UnitType type)
         {
             if (type == null)
                 type = plains;
@@ -79,20 +81,15 @@ namespace ApplyYourself
                 typemap[pos.x, pos.y] = type;
             }
 
-            if (updateVisual)
-                OnDecorateArea?.Invoke(positions);
+            OnDecorateArea?.Invoke(positions);
         }
 
         private bool CanChangeTypeAtPos(Vector2Int pos, UnitType type)
         {
-            bool isLand = heightmap[pos.x, pos.y] >= waterManager.GetHeightAt(pos.x, pos.y);
+            bool isLand = heightmap[pos.x, pos.y] >= waterHeightmap[pos.x, pos.y];
             bool validType = typemap[pos.x, pos.y] != type && typemap[pos.x, pos.y] != city;
+
             return isLand && validType;
         }
-
-        public float GetHeightAt(int x, int y) => heightmap[x, y];
-        public UnitType GetTypeAt(int x, int y) => typemap[x, y];
-        public float[,] GetBulk() => heightmap;
-        UnitType[,] ITypemap.GetBulk() => typemap;
     }
 }

@@ -9,7 +9,7 @@ namespace ApplyYourself
         [SerializeField] private Algorithm algorithm = default;
         [SerializeField] private Portal portal = default;
 
-        public void CompleteSandboxPhase()
+        public void GoNextPhase()
         {
             DontDestroyOnLoad(gameObject);
 

@@ -6,8 +6,8 @@ namespace ApplyYourself
 {
     public abstract class Brush : ScriptableObject
     {
-        public event Action<List<Vector2Int>, float, bool> OnRaise;
-        public event Action<List<Vector2Int>, UnitType, bool> OnDecorate;
+        public event Action<List<Vector2Int>, float> OnRaise;
+        public event Action<List<Vector2Int>, UnitType> OnDecorate;
 
         public float size;
         public float strength;
@@ -15,14 +15,14 @@ namespace ApplyYourself
 
         public abstract void Apply(List<Vector2Int> positions);
 
-        protected void Raise(List<Vector2Int> positions, float motion, bool updateVisual)
+        protected void Raise(List<Vector2Int> positions, float motion)
         {
-            OnRaise?.Invoke(positions, motion, updateVisual);
+            OnRaise?.Invoke(positions, motion);
         }
 
-        protected void Decorate(List<Vector2Int> positions, UnitType type, bool updateVisual)
+        protected void Decorate(List<Vector2Int> positions, UnitType type)
         {
-            OnDecorate?.Invoke(positions, type, updateVisual);
+            OnDecorate?.Invoke(positions, type);
         }
     }
 }

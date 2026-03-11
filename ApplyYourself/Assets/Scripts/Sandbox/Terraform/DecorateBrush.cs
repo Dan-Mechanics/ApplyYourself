@@ -13,7 +13,7 @@ namespace ApplyYourself
         public override void Apply(List<Vector2Int> positions)
         {
             // IDEA: DO SOMETHING WITH STRENGTH HERE.
-            Decorate(positions, invert.IsHeld ? null : type, true);
+            Decorate(positions, invert.IsHeld ? null : type);
         }
     }
 }

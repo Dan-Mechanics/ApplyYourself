@@ -9,31 +9,41 @@ namespace ApplyYourself
     /// </summary>
     public class SandboxManager : MonoBehaviour 
     {
-        [SerializeField] private Timer timer = default;
         [SerializeField] private TextWriter timerText = default;
-        [SerializeField] private Bridge algorithm = default;
         [SerializeField] private Terraformer terraformer = default;
         [SerializeField] private PivotController pivotController = default;
         [SerializeField] private WaterManager waterManager = default;
         [SerializeField] private LandManager landManager = default;
         [SerializeField] private UnitManager unitManager = default;
-        [SerializeField] private TextureHeightmap heightmap = default;
-        [SerializeField] private TextureTypemap typemap = default;
-        [SerializeField] private float tickInterval = default;
+        [SerializeField] private float interval = default;
         [SerializeField] private List<Brush> brushes = default;
 
         private readonly FSM fsm = new FSM();
         private float next;
+        private Timer timer;
+        private TextureHeightmap heightmapStartup;
+        private TextureTypemap typemapStartup;
+        private Algorithm algorithm;
+        private Bridge bridge;
+
+        private void Awake()
+        {
+            timer = FindAnyObjectByType<Timer>();
+            algorithm = FindAnyObjectByType<Algorithm>();
+            bridge = FindAnyObjectByType<Bridge>();
+            heightmapStartup = FindAnyObjectByType<TextureHeightmap>();
+            typemapStartup = FindAnyObjectByType<TextureTypemap>();
+        }
 
         private void Start()
         {
             timer.OnNewTime += timerText.WriteTime;
-            timer.OnDone += algorithm.CompleteSandboxPhase;
+            timer.OnDone += bridge.GoNextPhase;
             timer.Begin();
 
-            landManager.Initialize(heightmap, typemap, waterManager);
-            waterManager.Initialize(landManager, landManager);
-            unitManager.Initialize(landManager, landManager, waterManager);
+            landManager.Setup(heightmapStartup, typemapStartup, waterManager.Heightmap);
+            waterManager.Setup(landManager.Heightmap, landManager.Typemap);
+            unitManager.Setup(landManager.Typemap, landManager.Heightmap, waterManager.Heightmap);
 
             foreach (Brush brush in brushes)
             {
@@ -43,11 +53,13 @@ namespace ApplyYourself
             }
 
             landManager.OnRaiseArea += unitManager.RenderArea;
-            landManager.OnDecorateArea += unitManager.UpdateAreaDecoration;
+            landManager.OnDecorateArea += unitManager.RenderAreaDecoration;
 
             terraformer.SetBrushes(brushes);
             unitManager.OnNewWaterRange += FindAnyObjectByType<AdaptiveGradient>().SetRange;
             pivotController.Assign(FindAnyObjectByType<SensitivityMouse>());
+
+            algorithm.Setup(landManager.Heightmap, waterManager.Heightmap, landManager.Typemap);
 
             fsm.AddTransition(new StateTransition(terraformer, pivotController));
             fsm.AddTransition(new StateTransition(pivotController, terraformer));
@@ -65,7 +77,7 @@ namespace ApplyYourself
             if (Time.time < next)
                 return;
 
-            next = Time.time + tickInterval;
+            next = Time.time + interval;
             Tick();
         }
 
