@@ -95,7 +95,7 @@ namespace ApplyYourself
             public UnitType type;
             public Ending ending;
             public int threshold;
-            public int count;
+            [HideInInspector] public int count;
 
             public void Increment() => count++;
             public void SetToDefault() => count = 0;
