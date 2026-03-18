@@ -21,5 +21,15 @@ namespace ApplyYourself
             print(ending);
             portal.Interact();
         }
+
+        public void GoNextPhaseSimple()
+        {
+         //   DontDestroyOnLoad(gameObject);
+            ending = algorithm.GetEnding();
+            print(ending);
+
+            portal.SetScene(ending.ToString());
+            portal.Interact();
+        }
     }
 }

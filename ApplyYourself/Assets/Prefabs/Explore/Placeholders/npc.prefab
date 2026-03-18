@@ -10,10 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9160662711135310375}
   - component: {fileID: 6153193392519832596}
-  - component: {fileID: 995361857042159647}
   - component: {fileID: 1324226917868466087}
   m_Layer: 0
-  m_Name: placeholder_npc
+  m_Name: npc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,20 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue: {fileID: 0}
---- !u!114 &995361857042159647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469776133321868868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b61685f527610ea47ba274b90578ce85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceName: dave
-  endingOverrides: []
 --- !u!136 &1324226917868466087
 CapsuleCollider:
   m_ObjectHideFlags: 0

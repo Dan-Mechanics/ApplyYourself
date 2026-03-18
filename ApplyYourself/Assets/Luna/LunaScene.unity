@@ -150,17 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62bb093b660763245bad95fe8ff6f2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: {fileID: 1984330393}
-  timerText: {fileID: 62909535}
-  algorithm: {fileID: 383002006}
-  terraformer: {fileID: 369849031}
-  pivotController: {fileID: 376942858}
-  waterManager: {fileID: 1422312195}
-  landManager: {fileID: 1825502553}
-  unitManager: {fileID: 28654548}
-  heightmap: {fileID: 740984494}
-  typemap: {fileID: 740984493}
-  tickInterval: 0.2
+  interval: 0
   brushes:
   - {fileID: 11400000, guid: f9c4c0f37f79d8a4cbfa5e1ebb235147, type: 2}
   - {fileID: 11400000, guid: d99274f9b1e9df343af8619a48c0a92d, type: 2}
@@ -708,11 +698,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2311d1115c4935047bf17eb6270b390b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 2063290156}
   primaryFire: {fileID: 11400000, guid: c4334f1866f323a4b8ac94e0c1b9d0a3, type: 2}
   rotate: {fileID: 11400000, guid: f2ce04258f935d14f9f50c4cc21a0b28, type: 2}
   move: {fileID: 11400000, guid: dc5a86ced043faf4da9dd97ffde75519, type: 2}
-  preview: {fileID: 1457942721}
+  previewPrefab: {fileID: 0}
   mask:
     serializedVersion: 2
     m_Bits: 8
@@ -3242,15 +3231,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 137177a7121d15747bc291d0d309bfe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  landManager: {fileID: 0}
-  waterManager: {fileID: 1422312195}
-  city: {fileID: 11400000, guid: 49b09ac93070eee4995a6a62c28b03c2, type: 2}
-  width: 50
-  structureTypes:
-  - {fileID: 11400000, guid: 166ff11365285324b80d6ee2117e0739, type: 2}
-  - {fileID: 11400000, guid: 28068dd81c650bc41b2e977fe3d2e751, type: 2}
-  natureTypes:
-  - {fileID: 11400000, guid: 7aba05f7576ad9b4cb5ec9549b6caf41, type: 2}
+  icon: {fileID: 0}
+  interval: 0
+  floodedThreshold: 0
+  flooded:
+    bar: {fileID: 0}
+    type: {fileID: 0}
+    ending: 0
+    threshold: 0
+    count: 0
+  pairs: []
 --- !u!4 &2119161307
 Transform:
   m_ObjectHideFlags: 0
