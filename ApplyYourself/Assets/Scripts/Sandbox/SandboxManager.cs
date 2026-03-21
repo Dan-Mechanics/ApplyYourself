@@ -102,16 +102,14 @@ namespace ApplyYourself
             fsm.AddState(pivotController);
 
             fsm.Open(terraformer);
+            InvokeRepeating(nameof(Tick), interval, interval);
         }
 
         private void Update() => fsm.Update();
-        private void FixedUpdate()
-        {
-            fsm.FixedUpdate();
-            if (Time.time < nextTickTime)
-                return;
+        private void FixedUpdate() => fsm.FixedUpdate();
 
-            nextTickTime = Time.time + interval;
+        private void Tick()
+        {
             waterManager.Tick();
             unitManager.RenderAll();
         }
