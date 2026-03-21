@@ -6,22 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
+    path: Assets/Scenes/Menu/Menu.unity
     guid: 2eaddc205f39c6a4f972b97c43444cb6
   - enabled: 1
-    path: Assets/Scenes/Sandbox.unity
+    path: Assets/Scenes/Sandbox/Sandbox.unity
     guid: 31da22a679e5adc4e88ed840f53f5fb1
   - enabled: 1
-    path: Assets/Scenes/Futures/FloatingCity.unity
+    path: Assets/Scenes/FloatingCity/FloatingCity.unity
     guid: f517a6084fc3df240a3d32cab310e3f2
   - enabled: 1
-    path: Assets/Scenes/Futures/IndustrialCity.unity
+    path: Assets/Scenes/IndustrialCity/IndustrialCity.unity
     guid: deda32d7dafd1e44781e4b3d7676007e
   - enabled: 1
-    path: Assets/Scenes/Futures/UnderwaterCity.unity
+    path: Assets/Scenes/UnderwaterCity/UnderwaterCity.unity
     guid: 5c339f722190545478a1aef53c258b43
   - enabled: 1
-    path: Assets/Scenes/Futures/NatureCity.unity
+    path: Assets/Scenes/NatureCity/NatureCity.unity
     guid: 9ecd4485aa42f494fa6b9c96af710357
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3d3c0576d1b773045b91d663092bd17c,

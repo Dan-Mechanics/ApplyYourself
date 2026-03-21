@@ -234,7 +234,7 @@ MonoBehaviour:
   distance: 4
   minDistance: 2
   maxDistance: 6
-  zoomSensitivity: 0.4
+  zoomSensitivity: 0.36
   offset: 1
 --- !u!114 &8189917674282299612
 MonoBehaviour:
