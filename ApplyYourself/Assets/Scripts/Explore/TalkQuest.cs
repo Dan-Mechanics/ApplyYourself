@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-   [Serializable]
+    [Serializable]
     public class TalkQuest : IQuest
     {
         public int doneCount;
@@ -28,9 +28,7 @@ namespace ApplyYourself
 
         private void ShowFeedback()
         {
-           // builder.AppendLine(IQuest.LINE);
             builder.AppendLine($"Talk to ( {seenDialogue.Count} / {doneCount} ) ...");
-            //builder.Append(IQuest.LINE);
             OnDisplayString?.Invoke(builder.ToString());
             builder.Clear();
         }

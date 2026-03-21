@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1423992855582927039}
   - component: {fileID: 5411576269077164682}
   m_Layer: 0
-  m_Name: future_setup
+  m_Name: ending_setup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

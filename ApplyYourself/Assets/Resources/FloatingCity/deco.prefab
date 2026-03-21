@@ -49,7 +49,7 @@ MonoBehaviour:
   minInterval: 0.8
   maxInterval: 1.2
   startingPos: {x: 0, y: 0, z: 0}
-  magnitude: {x: 0, y: 1, z: 0}
+  magnitude: {x: 0, y: 0.3, z: 0}
 --- !u!1001 &5198957695632209376
 PrefabInstance:
   m_ObjectHideFlags: 0

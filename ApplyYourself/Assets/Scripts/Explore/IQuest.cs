@@ -5,8 +5,6 @@ namespace ApplyYourself
 {
     public interface IQuest
     {
-        public const string LINE = "===============";
-        
         event Action<IQuest> OnQuestFinished;
         event Action<string> OnDisplayString;
 

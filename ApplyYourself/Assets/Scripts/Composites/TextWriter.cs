@@ -23,10 +23,8 @@ namespace ApplyYourself
             if (!Utils.IsStringValid(message))
                 return;
 
-            isDone = false;
             this.message = message;
-            gameObject.name = message;
-
+            isDone = false;
             delay = new WaitForSeconds(INTERVAL);
             StartCoroutine(WriteDelayed());
         }

@@ -22,6 +22,8 @@ namespace ApplyYourself
         {
             this.player = player;
             this.point = point;
+            if (!point)
+                Debug.LogError("There is no GoToQuest transform found.");
         }
 
         public void Setup() => ShowFeedback(0f);
@@ -30,17 +32,13 @@ namespace ApplyYourself
         {
             float dist = Vector3.Distance(player.position, point.position);
             ShowFeedback(dist);
-            Debug.Log("og" + dist.ToString());
             if (dist < minDistance)
                 OnQuestFinished?.Invoke(this);
         }
 
         private void ShowFeedback(float dist)
         {
-           // builder.AppendLine(IQuest.LINE);
-            Debug.Log(dist);
-            builder.AppendLine($"Go to {point.name} ( {dist}m left ... )");
-          //  builder.Append(IQuest.LINE);
+            builder.AppendLine($"Go to {point.name} ( {dist}m )");
             OnDisplayString?.Invoke(builder.ToString());
             builder.Clear();
         }
