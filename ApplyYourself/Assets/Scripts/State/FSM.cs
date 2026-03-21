@@ -56,11 +56,11 @@ namespace ApplyYourself
                 current.Exit();
 
             current = state;
-            if (current != null)
-            {
-                Debug.Log(state.gameObject.name + "_" + state.GetType().Name);
-                current.Enter();
-            }
+            if (current == null)
+                return;
+
+            Debug.Log($"{state.gameObject.name}_{state.GetType().Name}");
+            current.Enter();
         }
 
         private void Yield(StateBehaviour from)
