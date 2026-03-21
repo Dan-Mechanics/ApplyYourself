@@ -891,33 +891,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: timer
       objectReference: {fileID: 0}
-    - target: {fileID: 4201380739047556145, guid: d7e6724a83d69c741ae13129eded0c5d,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: cafcb4e1d722f494584407f37f665d0b,
-        type: 2}
-    - target: {fileID: 4201380739047556145, guid: d7e6724a83d69c741ae13129eded0c5d,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 3275195998646242066, guid: cafcb4e1d722f494584407f37f665d0b,
-        type: 2}
-    - target: {fileID: 4201380739047556145, guid: d7e6724a83d69c741ae13129eded0c5d,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5537345969050056952, guid: d7e6724a83d69c741ae13129eded0c5d,
-        type: 3}
-      propertyPath: doneMinutes
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5537345969050056952, guid: d7e6724a83d69c741ae13129eded0c5d,
-        type: 3}
-      propertyPath: doneSeconds
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 9000965494018335457, guid: d7e6724a83d69c741ae13129eded0c5d,
         type: 3}
       propertyPath: m_Pivot.x
