@@ -19,8 +19,6 @@ namespace ApplyYourself
 
             prefabs.ForEach(x => Spawn(x));
 
-            // ===
-
             Bridge bridge = FindAnyObjectByType<Bridge>();
             if (bridge != null)
             {
