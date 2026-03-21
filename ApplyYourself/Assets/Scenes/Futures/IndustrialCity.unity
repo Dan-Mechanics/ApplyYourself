@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 1b9dfe91d2067074392cde86e6053af3,
+  m_LightingDataAsset: {fileID: 112000000, guid: a907d3150da1ece468b573471560b1b5,
     type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 9067ad51de4ffc844ae099e50d16e70e,
     type: 2}
@@ -4011,34 +4011,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5411576269077164682, guid: 93d59980694eea14ea75e4f46d54d7ca,
-        type: 3}
-      propertyPath: previewEnding
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411576269077164682, guid: 93d59980694eea14ea75e4f46d54d7ca,
-        type: 3}
-      propertyPath: prefabs.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411576269077164682, guid: 93d59980694eea14ea75e4f46d54d7ca,
-        type: 3}
-      propertyPath: 'prefabs.Array.data[3]'
-      value: 
-      objectReference: {fileID: 8195046949362653098, guid: b00998ca2a7f6184bb4ef598b9112f5d,
-        type: 3}
-    - target: {fileID: 5411576269077164682, guid: 93d59980694eea14ea75e4f46d54d7ca,
-        type: 3}
-      propertyPath: 'prefabs.Array.data[4]'
-      value: 
-      objectReference: {fileID: 6440503155941090606, guid: 0f00687a1c8cbc543b08c7d90b4d25c5,
-        type: 3}
-    - target: {fileID: 5411576269077164682, guid: 93d59980694eea14ea75e4f46d54d7ca,
-        type: 3}
-      propertyPath: 'prefabs.Array.data[5]'
-      value: 
-      objectReference: {fileID: 2039762781800562159, guid: 7781f6ec582c70940aa949833b414ee5,
-        type: 3}
     - target: {fileID: 5872886806524772376, guid: 93d59980694eea14ea75e4f46d54d7ca,
         type: 3}
       propertyPath: m_Name
