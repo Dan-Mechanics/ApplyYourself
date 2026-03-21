@@ -23,7 +23,7 @@ namespace ApplyYourself
             this.player = player;
             this.point = point;
             if (!point)
-                Debug.LogError("There is no GoToQuest transform found.");
+                Debug.LogError($"There is no {nameof(GoToQuest)} {nameof(point)} found.");
         }
 
         public void Setup() => ShowFeedback(0f);
