@@ -208,7 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 3647801561732012112}
   leftRightPivot: {fileID: 1905645038698360357}
-  speed: 6.25
+  speed: 6.2
   fallingSpeed: 5
 --- !u!114 &7582943016857370818
 MonoBehaviour:
@@ -234,7 +234,7 @@ MonoBehaviour:
   distance: 4
   minDistance: 2
   maxDistance: 6
-  zoomSensitivity: 0.36
+  zoomSensitivity: 0.4
   offset: 1
 --- !u!114 &8189917674282299612
 MonoBehaviour:
