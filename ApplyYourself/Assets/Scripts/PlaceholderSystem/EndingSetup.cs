@@ -19,13 +19,11 @@ namespace ApplyYourself
 
             prefabs.ForEach(x => Spawn(x));
 
-            // ===
-
-            Algorithm algorithm = FindAnyObjectByType<Algorithm>();
-            if (algorithm != null)
+            Bridge bridge = FindAnyObjectByType<Bridge>();
+            if (bridge != null)
             {
-                SetAs(algorithm.ending);
-                Destroy(algorithm.gameObject);
+                SetAs(bridge.ending);
+                Destroy(bridge.gameObject);
             }
             else
             {

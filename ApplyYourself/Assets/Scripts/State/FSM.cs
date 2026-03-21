@@ -16,9 +16,8 @@ namespace ApplyYourself
             state.OnYield += Yield;
             state.OnClaim += Open;
             state.OnDeregister += DeregisterState;
-            states.Add(state);
 
-            state.Setup();
+            states.Add(state);
             state.Exit();
         }
 
@@ -57,11 +56,11 @@ namespace ApplyYourself
                 current.Exit();
 
             current = state;
-            if (current != null)
-            {
-                Debug.Log(state.gameObject.name.ToUpperInvariant());
-                current.Enter();
-            }
+            if (current == null)
+                return;
+
+            Debug.Log($"{state.gameObject.name}_{state.GetType().Name}");
+            current.Enter();
         }
 
         private void Yield(StateBehaviour from)

@@ -6,19 +6,28 @@ namespace ApplyYourself
     {
         [SerializeField] private TextAsset dialogue = default;
         private DialogueSystem dialogueSystem;
+        private string highlight;
 
-        public string GetHighlight() => $"Talk to {dialogue.name}";
+        private void Start() => SetDialogue(dialogue);
+        public string GetHighlight() => highlight;
         public Vector3 GetPosition() => transform.position;
 
         public void Interact()
         {
-            if (dialogueSystem == null)
+            if (!dialogueSystem)
                 dialogueSystem = FindAnyObjectByType<DialogueSystem>();
 
-            if (dialogueSystem != null)
-                dialogueSystem.BeginDialogue(dialogue);
+            dialogueSystem.BeginDialogue(dialogue);
         }
 
-        public void SetDialogue(TextAsset dialogue) => this.dialogue = dialogue;
+        public void SetDialogue(TextAsset dialogue)
+        {
+            this.dialogue = dialogue;
+            highlight = dialogue.name;
+            if (highlight.Contains('_'))
+                highlight = highlight.Split('_')[0];
+
+            highlight = $"Talk to {highlight}";
+        }
     }
 }

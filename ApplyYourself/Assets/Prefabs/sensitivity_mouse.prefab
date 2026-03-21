@@ -46,12 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   next: {fileID: 11400000, guid: 16e5a7d1cf48a7842b45182a55100f82, type: 2}
   previous: {fileID: 11400000, guid: cf79d0b742d550b43bf5ed48168ca231, type: 2}
-  sensitivity: 1
   min: 0.2
   max: 5
   sensitivityPerClick: 0.1
   decimalPlaces: 3
-  color: {r: 1, g: 1, b: 1, a: 1}
+  color: {r: 0, g: 0, b: 0, a: 1}
   fontSize: 18
   padding: 0
   width: 500

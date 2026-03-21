@@ -14,7 +14,15 @@ namespace ApplyYourself
         public Material previewMaterial;
 
         public abstract void Apply(List<Vector2Int> positions);
-        protected void Raise(List<Vector2Int> positions, float motion) => OnRaise?.Invoke(positions, motion);
-        protected void Decorate(List<Vector2Int> positions, UnitType type) => OnDecorate?.Invoke(positions, type);
+
+        protected void Raise(List<Vector2Int> positions, float motion)
+        {
+            OnRaise?.Invoke(positions, motion);
+        }
+
+        protected void Decorate(List<Vector2Int> positions, UnitType type)
+        {
+            OnDecorate?.Invoke(positions, type);
+        }
     }
 }

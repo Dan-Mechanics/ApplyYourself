@@ -29,10 +29,7 @@ namespace ApplyYourself
             if (reload.WasPressed)
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-            if (!shift.IsHeld && !ctrl.IsHeld)
-                return;
-
-            if (escape.WasPressed)
+            if ((shift.IsHeld || ctrl.IsHeld) && escape.WasPressed)
                 Application.Quit();
         }
     }

@@ -3,8 +3,10 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    public class WaterManager : MonoBehaviour, IHeightmap
+    public class WaterManager : MonoBehaviour
     {
+        public float[,] Heightmap => readBuffer;
+        
         [SerializeField] private float minWaterHeight = default;
         [SerializeField] private float waterHeight = default;
         [SerializeField] private int width = default;
@@ -12,20 +14,24 @@ namespace ApplyYourself
         [SerializeField] private float waterHeightPerTick = default;
         [SerializeField] private float raiseInterval = default;
 
-        private IHeightmap landManager;
-        private ITypemap typemap;
+        private float[,] landHeightmap;
+        private UnitType[,] landTypemap;
+
         private float[,] readBuffer;
         private float[,] writeBuffer;
         private float next;
 
-        public void Initialize(IHeightmap landManager, ITypemap typemap)
+        public void Initialize()
         {
-            this.landManager = landManager;
-            this.typemap = typemap;
-
             readBuffer = new float[width, width];
             writeBuffer = new float[width, width];
             SetHeight(0, width - 1, waterHeight);
+        }
+
+        public void Setup(float[,] landHeightmap, UnitType[,] landTypemap)
+        {
+            this.landHeightmap = landHeightmap;
+            this.landTypemap = landTypemap;
         }
 
         private void FixedUpdate()
@@ -71,7 +77,7 @@ namespace ApplyYourself
                 }
             }
 
-            // SWAP.
+            // SWAP. ===
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)
@@ -93,14 +99,11 @@ namespace ApplyYourself
                 return;
 
             float height = readBuffer[x, y];
-            if (height >= parentHeight || landManager.GetHeightAt(x, y) >= parentHeight)
+            if (height >= parentHeight || landHeightmap[x, y] >= parentHeight)
                 return;
 
-            height += parentHeight * typemap.GetTypeAt(x, y).waterPercentage;
+            height += parentHeight * landTypemap[x, y].waterPercentage;
             writeBuffer[x, y] = Mathf.Clamp(height, minWaterHeight, parentHeight);
         }
-
-        public float GetHeightAt(int x, int y) => readBuffer[x, y];
-        public float[,] GetBulk() => readBuffer;
     }
 }

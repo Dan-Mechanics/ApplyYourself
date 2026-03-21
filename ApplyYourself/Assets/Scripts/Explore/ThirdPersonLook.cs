@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace ApplyYourself
 {
@@ -13,6 +14,9 @@ namespace ApplyYourself
         [SerializeField] private float sensitivity = default;
         [SerializeField] private float maxAngle = default;
         [SerializeField] private float distance = default;
+        [SerializeField] private float minDistance = default;
+        [SerializeField] private float maxDistance = default;
+        [SerializeField] private float zoomSensitivity = default;
         [SerializeField, Min(0f)] private float offset = default;
         private ILookInput lookInput;
 
@@ -23,6 +27,13 @@ namespace ApplyYourself
             base.OnUpdate();
             UpdatePivot();
             UpdateEyesDistance();
+            Scroll();
+        }
+
+        private void Scroll()
+        {
+            distance -= lookInput.GetScroll() * zoomSensitivity;
+            distance = Mathf.Clamp(distance, minDistance, maxDistance);
         }
 
         private void UpdatePivot()

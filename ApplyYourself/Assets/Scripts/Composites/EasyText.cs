@@ -9,6 +9,7 @@ namespace ApplyYourself
         [SerializeField] private TMP_Text text = default;
 
         public void Write(string str) => text.text = str;
+        public void WriteTime(int mins, int secs) => text.text = $"{mins}:{secs}";
         private void OnValidate() => text = GetComponent<TMP_Text>();
     }
 }

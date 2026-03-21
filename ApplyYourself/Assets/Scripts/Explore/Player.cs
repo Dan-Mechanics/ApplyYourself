@@ -9,22 +9,32 @@ namespace ApplyYourself
         [SerializeField] private PlayerMovement playerMovement = default;
         [SerializeField] private ThirdPersonLook thirdPersonLook = default;
         [SerializeField] private PlayerGraphicRotator graphicRotator = default;
-        [SerializeField] private string interactFeedbackName = default; 
-
-        public override void Setup()
+        private QuestHandler questHandler;
+        
+        public void Setup(QuestHandler questHandler, EasyText easyText, ILookInput lookInput, IMoveInput moveInput)
         {
-            base.Setup();
-            interactor.OnFeedback += FindObjectsByType<EasyText>(FindObjectsSortMode.None).
-                ToList().Where(x => x.name == interactFeedbackName).First().Write;
+            this.questHandler = questHandler;
+            interactor.OnFeedback += easyText.Write;
 
-            WASD wasd = new WASD();
-            playerMovement.Assign(wasd);
-            graphicRotator.Assign(wasd);
-            thirdPersonLook.Assign(FindAnyObjectByType<SensitivityMouse>());
+            playerMovement.Assign(moveInput);
+            graphicRotator.Assign(moveInput);
+            thirdPersonLook.Assign(lookInput);
 
             interactor.Setup();
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            questHandler.Exit();
+        }
+        
+        public override void Enter()
+        {
+            base.Enter();
+            questHandler.Enter();
         }
 
         public override void OnFixedUpdate()
@@ -33,6 +43,7 @@ namespace ApplyYourself
             interactor.OnFixedUpdate();
             playerMovement.OnFixedUpdate();
             thirdPersonLook.OnFixedUpdate();
+            questHandler.OnFixedUpdate();
         }
 
         public override void OnUpdate()
@@ -42,6 +53,7 @@ namespace ApplyYourself
             playerMovement.OnUpdate();
             thirdPersonLook.OnUpdate();
             graphicRotator.OnUpdate();
+            questHandler.OnFixedUpdate();
         }
     }
 }

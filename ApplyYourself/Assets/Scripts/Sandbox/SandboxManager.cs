@@ -3,37 +3,73 @@ using UnityEngine;
 
 namespace ApplyYourself
 {
-    /// <summary>
-    /// Put the sequence here. Potentially make everyhing
-    /// work with heightmap and typemap to keep seperate
-    /// </summary>
     public class SandboxManager : MonoBehaviour 
     {
-        [SerializeField] private Timer timer = default;
-        [SerializeField] private TextWriter timerText = default;
-        [SerializeField] private Algorithm algorithm = default;
-        [SerializeField] private Terraformer terraformer = default;
-        [SerializeField] private PivotController pivotController = default;
-        [SerializeField] private WaterManager waterManager = default;
-        [SerializeField] private LandManager landManager = default;
-        [SerializeField] private UnitManager unitManager = default;
-        [SerializeField] private TextureHeightmap heightmap = default;
-        [SerializeField] private TextureTypemap typemap = default;
-        [SerializeField] private float tickInterval = default;
+        [SerializeField] private float interval = default;
         [SerializeField] private List<Brush> brushes = default;
 
         private readonly FSM fsm = new FSM();
-        private float next;
+        private float nextTickTime;
+
+        private AdaptiveGradient adaptiveGradient;
+        private SensitivityMouse sensitivityMouse;
+        private EasyText easyText;
+        private Terraformer terraformer;
+        private PivotController pivotController;
+        private WaterManager waterManager;
+        private LandManager landManager;
+        private UnitManager unitManager;
+        private ButtonHandler buttonHandler;
+        private TextureHeightmap heightmapStartup;
+        private TextureTypemap typemapStartup;
+        private LerpFollow lerpFollow;
+        private Algorithm algorithm;
+        private Portal portal;
+        private Bridge bridge;
+        private Timer timer;
+        private Camera cam;
+
+        private void Awake()
+        {
+            cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+
+            lerpFollow = FindAnyObjectByType<LerpFollow>();
+            portal = FindAnyObjectByType<Portal>();
+            easyText = FindAnyObjectByType<EasyText>();
+            terraformer = FindAnyObjectByType<Terraformer>();
+            pivotController = FindAnyObjectByType<PivotController>();
+            waterManager = FindAnyObjectByType<WaterManager>();
+            landManager = FindAnyObjectByType<LandManager>();
+            unitManager = FindAnyObjectByType<UnitManager>();
+            adaptiveGradient = FindAnyObjectByType<AdaptiveGradient>();
+            sensitivityMouse = FindAnyObjectByType<SensitivityMouse>();
+
+            timer = FindAnyObjectByType<Timer>();
+            algorithm = FindAnyObjectByType<Algorithm>();
+            bridge = FindAnyObjectByType<Bridge>();
+            heightmapStartup = FindAnyObjectByType<TextureHeightmap>();
+            typemapStartup = FindAnyObjectByType<TextureTypemap>();
+            buttonHandler = FindAnyObjectByType<ButtonHandler>();
+        }
 
         private void Start()
         {
-            timer.OnNewTime += timerText.WriteTime;
-            timer.OnDone += algorithm.CompleteSandboxPhase;
+            bridge.Setup(algorithm, portal);
+            timer.OnNewTime += easyText.WriteTime;
+            timer.OnDone += bridge.GoNextPhase;
             timer.Begin();
 
-            landManager.Initialize(heightmap, typemap, waterManager);
-            waterManager.Initialize(landManager, landManager);
-            unitManager.Initialize(landManager, landManager, waterManager);
+            // ===
+
+            waterManager.Initialize();
+            landManager.Initialize(heightmapStartup, typemapStartup);
+
+            waterManager.Setup(landManager.Heightmap, landManager.Typemap);
+            landManager.Setup(waterManager.Heightmap);
+
+            unitManager.Setup(landManager.Typemap, landManager.Heightmap, waterManager.Heightmap);
+
+            // ===
 
             foreach (Brush brush in brushes)
             {
@@ -42,12 +78,23 @@ namespace ApplyYourself
                 brush.OnDecorate += landManager.DecorateArea;
             }
 
-            landManager.OnRender += unitManager.RenderArea;
-            landManager.OnRedecorate += unitManager.RedecorateArea;
+            landManager.OnRaiseArea += unitManager.RenderArea;
+            landManager.OnDecorateArea += unitManager.RenderAreaDecoration;
 
-            terraformer.SetBrushes(brushes);
-            unitManager.OnNewWaterRange += FindAnyObjectByType<AdaptiveGradient>().SetRange;
-            pivotController.Assign(FindAnyObjectByType<SensitivityMouse>());
+            terraformer.Setup(brushes, cam);
+
+            buttonHandler.Setup();
+            buttonHandler.OnClick += terraformer.SelectBrush;
+            
+            unitManager.OnNewWaterRange += adaptiveGradient.SetRange;
+            pivotController.Setup(sensitivityMouse);
+
+            algorithm.Setup(landManager.Heightmap, waterManager.Heightmap, landManager.Typemap);
+
+            lerpFollow.SetTarget(pivotController.transform.GetChild(0));
+            lerpFollow.SetLookTarget(pivotController.transform);
+
+            // ===
 
             fsm.AddTransition(new StateTransition(terraformer, pivotController));
             fsm.AddTransition(new StateTransition(pivotController, terraformer));
@@ -55,18 +102,16 @@ namespace ApplyYourself
             fsm.AddState(pivotController);
 
             fsm.Open(terraformer);
+            InvokeRepeating(nameof(Tick), interval, interval);
         }
 
         private void Update() => fsm.Update();
-        private void FixedUpdate()
+        private void FixedUpdate() => fsm.FixedUpdate();
+
+        private void Tick()
         {
-            fsm.FixedUpdate();
-
-            if (Time.time < next)
-                return;
-
-            next = Time.time + tickInterval;
-            Tick();
+            waterManager.Tick();
+            unitManager.RenderAll();
         }
 
         private void OnDestroy()
@@ -77,12 +122,6 @@ namespace ApplyYourself
                 brush.OnRaise -= landManager.RaiseArea;
                 brush.OnDecorate -= landManager.DecorateArea;
             }
-        }
-
-        private void Tick()
-        {
-            waterManager.Tick();
-            unitManager.RenderAll();
         }
     }
 }
