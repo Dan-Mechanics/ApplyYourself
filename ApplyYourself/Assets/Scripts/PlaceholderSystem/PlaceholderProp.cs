@@ -9,6 +9,7 @@ namespace ApplyYourself
             if (prefab == null)
                 return;
 
+            gameObject.name = $"placeholder_{resourceName}";
             Transform graphic = transform.Find("graphic");
             if (graphic != null)
                 DestroyImmediate(graphic.gameObject);
