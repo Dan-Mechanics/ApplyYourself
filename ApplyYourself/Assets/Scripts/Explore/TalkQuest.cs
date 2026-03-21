@@ -28,9 +28,9 @@ namespace ApplyYourself
 
         private void ShowFeedback()
         {
-            builder.AppendLine(IQuest.LINE);
+           // builder.AppendLine(IQuest.LINE);
             builder.AppendLine($"Talk to ( {seenDialogue.Count} / {doneCount} ) ...");
-            builder.Append(IQuest.LINE);
+            //builder.Append(IQuest.LINE);
             OnDisplayString?.Invoke(builder.ToString());
             builder.Clear();
         }

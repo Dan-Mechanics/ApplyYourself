@@ -37,10 +37,10 @@ namespace ApplyYourself
 
         private void ShowFeedback(float dist)
         {
-            builder.AppendLine(IQuest.LINE);
+           // builder.AppendLine(IQuest.LINE);
             Debug.Log(dist);
             builder.AppendLine($"Go to {point.name} ( {dist}m left ... )");
-            builder.Append(IQuest.LINE);
+          //  builder.Append(IQuest.LINE);
             OnDisplayString?.Invoke(builder.ToString());
             builder.Clear();
         }
