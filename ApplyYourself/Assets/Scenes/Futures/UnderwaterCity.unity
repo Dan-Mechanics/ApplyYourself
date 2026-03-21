@@ -1970,6 +1970,11 @@ PrefabInstance:
       propertyPath: resourceName
       value: dave
       objectReference: {fileID: 0}
+    - target: {fileID: 6153193392519832596, guid: 85b2444fd5e7957409b8d1caa93db931,
+        type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 4900000, guid: 8787204cac0ad0e4ebe3a753da9a1a6b, type: 3}
     - target: {fileID: 9160662711135310375, guid: 85b2444fd5e7957409b8d1caa93db931,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4883,6 +4888,11 @@ PrefabInstance:
       propertyPath: resourceName
       value: sasha
       objectReference: {fileID: 0}
+    - target: {fileID: 6153193392519832596, guid: 85b2444fd5e7957409b8d1caa93db931,
+        type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 4900000, guid: 18d98b42d178bf048886a80dcb35d483, type: 3}
     - target: {fileID: 9160662711135310375, guid: 85b2444fd5e7957409b8d1caa93db931,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5500,6 +5510,11 @@ PrefabInstance:
       propertyPath: resourceName
       value: marianne
       objectReference: {fileID: 0}
+    - target: {fileID: 6153193392519832596, guid: 85b2444fd5e7957409b8d1caa93db931,
+        type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 4900000, guid: 804d742526013394aa75774eedf8af69, type: 3}
     - target: {fileID: 9160662711135310375, guid: 85b2444fd5e7957409b8d1caa93db931,
         type: 3}
       propertyPath: m_LocalPosition.x
