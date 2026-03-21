@@ -27,7 +27,7 @@ namespace ApplyYourself
             interactables.Clear();
             for (int i = 0; i < colliders.Length; i++)
             {
-                IInteractable interactable = colliders[i].GetComponent<IInteractable>();
+                IInteractable interactable = colliders[i].transform.root.GetComponent<IInteractable>();
                 if (interactable != null)
                     interactables.Add(interactable);
             }

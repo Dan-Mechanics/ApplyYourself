@@ -6,6 +6,9 @@ namespace ApplyYourself
     {
         private void SetGraphic(GameObject prefab)
         {
+            if (prefab == null)
+                return;
+
             Transform graphic = transform.Find("graphic");
             if (graphic != null)
                 DestroyImmediate(graphic.gameObject);
