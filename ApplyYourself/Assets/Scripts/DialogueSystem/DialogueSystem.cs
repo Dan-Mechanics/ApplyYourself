@@ -68,7 +68,7 @@ namespace ApplyYourself
             OnDialogue?.Invoke(dialogue);
 
             ClaimState();
-            pending = ParseDialogue(dialogue.text);
+            pending = Parse(dialogue.text);
             GoNextFrame();
         }
 
@@ -104,63 +104,90 @@ namespace ApplyYourself
             icon.SetNativeSize();
         }
 
-        private Queue<Frame> ParseDialogue(string dialogue)
+        private Queue<Frame> Parse(string dialogue)
         {
-            Queue<Frame> result = new Queue<Frame>();
-            string[] lines = dialogue.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+            Queue<Frame> frames = new Queue<Frame>();
+            if (!Utils.IsStringValid(dialogue))
+                return frames;
 
             Frame current = default;
             ParsingMode parsingMode = ParsingMode.Name;
-            for (int i = 0; i < lines.Length; i++)
+            foreach (string line in SplitToLines(dialogue))
             {
-                string line = lines[i].Trim();
-                if (!Utils.IsStringValid(line))
-                    continue;
-
-                if (line[0] == COMMENT)
-                    continue;
-
-                if (line.Length >= 2 && line[1] == COMMENT)
-                    continue;
-
-                switch (parsingMode)
+                try
                 {
-                    case ParsingMode.Name:
-                        current.characerName = line;
-                        parsingMode = ParsingMode.Sprite;
-                        break;
-                    case ParsingMode.Sprite:
-                        current.spriteName = line.ToLowerInvariant();
-                        parsingMode = ParsingMode.Dialogue;
-                        break;
-                    case ParsingMode.Dialogue:
-                        if (line[0] == QUOTE)
-                            line = line.Remove(0, 1);
-
-                        if (line[^1] != QUOTE)
-                        {
-                            current.dialogue += line;
-                            if (line[^1] != NEWLINE_INDICATOR)
-                                current.dialogue += SPACE;
-                        }
-                        else
-                        {
-                            current.dialogue += line.Remove(line.Length - 1);
-                            current.dialogue = current.dialogue.Replace(NEWLINE_INDICATOR, '\n');
-
-                            // NEW ITERATION.
-                            result.Enqueue(current);
-                            parsingMode = ParsingMode.Name;
-                            current = default;
-                        }
-
-                        break;
-                    default:
-                        break;
+                    ParseLine(line, frames, ref current, ref parsingMode);
+                }
+                catch (Exception exception)
+                {
+                    Debug.LogWarning(exception.Message);
                 }
             }
 
-            return result;
+            return frames;
+        }
+
+        /// <summary>
+        /// https://stackoverflow.com/questions/1547476/split-a-string-on-newlines-in-net
+        /// </summary>
+        private IEnumerable<string> SplitToLines(string str)
+        {
+            if (!Utils.IsStringValid(str))
+                yield break;
+
+            using System.IO.StringReader reader = new System.IO.StringReader(str);
+            string line;
+            while ((line = reader.ReadLine()) != null)
+                yield return line;
+        }
+
+        private void ParseLine(string line, Queue<Frame> frames, ref Frame current, ref ParsingMode parsingMode)
+        {
+            line = line.Trim();
+            if (!Utils.IsStringValid(line))
+                return;
+
+            if (line[0] == COMMENT)
+                return;
+
+            if (line.Length >= 2 && line[1] == COMMENT)
+                return;
+
+            switch (parsingMode)
+            {
+                case ParsingMode.Name:
+                    current.characerName = line;
+                    parsingMode = ParsingMode.Sprite;
+                    break;
+                case ParsingMode.Sprite:
+                    current.spriteName = line.ToLowerInvariant();
+                    parsingMode = ParsingMode.Dialogue;
+                    break;
+                case ParsingMode.Dialogue:
+                    if (line[0] == QUOTE)
+                        line = line.Remove(0, 1);
+
+                    if (line[^1] != QUOTE)
+                    {
+                        current.dialogue += line;
+                        if (line[^1] != NEWLINE_INDICATOR)
+                            current.dialogue += SPACE;
+                    }
+                    else
+                    {
+                        current.dialogue += line.Remove(line.Length - 1);
+                        current.dialogue = current.dialogue.Replace(NEWLINE_INDICATOR, '\n');
+
+                        // NEW ITERATION.
+                        frames.Enqueue(current);
+                        parsingMode = ParsingMode.Name;
+                        current = default;
+                    }
+
+                    break;
+                default:
+                    break;
+            }
         }
 
         public override void Enter()
