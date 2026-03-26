@@ -31,7 +31,7 @@ namespace ApplyYourself
             fadeIn = fades[0];
             fadeOut = fades[1];
 
-            goToPortal = new GoToQuest(player.transform, portal.transform);
+            goToPortal = new GoToQuest(player.transform, GameObject.FindWithTag("Portal").transform);
         }
 
         private void Start()

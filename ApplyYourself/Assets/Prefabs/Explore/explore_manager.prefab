@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7918511158610329801}
   - component: {fileID: 4558599795765171166}
   m_Layer: 0
-  m_Name: explore_phase_manager
+  m_Name: explore_manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,6 +47,4 @@ MonoBehaviour:
   talkQuest:
     doneCount: 3
   goToPortal:
-    playerTag: Player
-    targetTag: Portal
     minDistance: 2
