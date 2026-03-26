@@ -5,13 +5,13 @@ namespace ApplyYourself
     public class Bridge : MonoBehaviour
     {
         [HideInInspector] public Ending ending;
-        private Algorithm algorithm;
+        private TerrainEvaluator terrainEvaluator;
         private Fade fadeOut;
         private Portal portal;
 
-        public void Setup(Algorithm algorithm, Portal portal, Fade fadeOut)
+        public void Setup(TerrainEvaluator terrainEvaluator, Portal portal, Fade fadeOut)
         {
-            this.algorithm = algorithm;
+            this.terrainEvaluator = terrainEvaluator;
             this.portal = portal;
             this.fadeOut = fadeOut;
             fadeOut.OnYield += SwitchScenes;
@@ -28,7 +28,7 @@ namespace ApplyYourself
         public void GoNextPhase()
         {
             DontDestroyOnLoad(gameObject);
-            ending = algorithm.GetEnding();
+            ending = terrainEvaluator.GetEnding();
             portal.SetScene(ending.ToString());
             fadeOut.BeginFade(false);
         }

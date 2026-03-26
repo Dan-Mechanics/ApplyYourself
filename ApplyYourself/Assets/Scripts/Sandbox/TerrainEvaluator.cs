@@ -6,11 +6,10 @@ using UnityEngine.UI;
 
 namespace ApplyYourself
 {
-    public class Algorithm : MonoBehaviour
+    public class TerrainEvaluator : MonoBehaviour
     {
         [SerializeField] private Image icon = default;
         [SerializeField] private float interval = default;
-        [SerializeField, Range(0f, 1f)] private float floodedThreshold = default;
         [SerializeField] private Pair flooded = default;
         [SerializeField] private List<Pair> pairs = default;
 
@@ -68,7 +67,7 @@ namespace ApplyYourself
         public Ending GetEnding()
         {
             Tick();
-            bool isFlooded = flooded.count >= floodedThreshold;
+            bool isFlooded = flooded.count >= flooded.threshold;
             if (isFlooded)
                 return flooded.ending;
 
