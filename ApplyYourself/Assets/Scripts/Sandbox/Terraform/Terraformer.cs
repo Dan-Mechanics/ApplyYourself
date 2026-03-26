@@ -44,7 +44,14 @@ namespace ApplyYourself
         public override void OnFixedUpdate()
         {
             base.OnFixedUpdate();
+            preview.transform.LookAt(cam.transform);
+            preview.transform.eulerAngles = Vector3.up * preview.transform.eulerAngles.y;
 
+            DoRaycast();
+        }
+
+        private void DoRaycast()
+        {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             bool rayHasHit = Physics.Raycast(ray, out RaycastHit hit, range, mask, QueryTriggerInteraction.Ignore);
 
@@ -80,7 +87,7 @@ namespace ApplyYourself
             brush = brushes[index];
 
             preview.transform.localScale = 2f * brush.size * Vector3.one;
-            preview.GetComponent<Renderer>().material = brush.previewMaterial;
+            //preview.GetComponent<Renderer>().material = brush.previewMaterial;
         }
     }
 }
