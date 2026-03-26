@@ -23,11 +23,13 @@ namespace ApplyYourself
         private TextureHeightmap heightmapStartup;
         private TextureTypemap typemapStartup;
         private LerpFollow lerpFollow;
-        private Algorithm algorithm;
+        private TerrainEvaluator terrainEvaluator;
         private Portal portal;
         private Bridge bridge;
         private Timer timer;
         private Camera cam;
+        private Fade fadeIn;
+        private Fade fadeOut;
 
         private void Awake()
         {
@@ -43,9 +45,12 @@ namespace ApplyYourself
             unitManager = FindAnyObjectByType<UnitManager>();
             adaptiveGradient = FindAnyObjectByType<AdaptiveGradient>();
             sensitivityMouse = FindAnyObjectByType<SensitivityMouse>();
+            Fade[] fades = FindObjectsByType<Fade>(FindObjectsSortMode.None);
+            fadeIn = fades[0];
+            fadeOut = fades[1];
 
             timer = FindAnyObjectByType<Timer>();
-            algorithm = FindAnyObjectByType<Algorithm>();
+            terrainEvaluator = FindAnyObjectByType<TerrainEvaluator>();
             bridge = FindAnyObjectByType<Bridge>();
             heightmapStartup = FindAnyObjectByType<TextureHeightmap>();
             typemapStartup = FindAnyObjectByType<TextureTypemap>();
@@ -54,7 +59,7 @@ namespace ApplyYourself
 
         private void Start()
         {
-            bridge.Setup(algorithm, portal);
+            bridge.Setup(terrainEvaluator, portal, fadeOut);
             timer.OnNewTime += easyText.WriteTime;
             timer.OnDone += bridge.GoNextPhase;
             timer.Begin();
@@ -89,7 +94,7 @@ namespace ApplyYourself
             unitManager.OnNewWaterRange += adaptiveGradient.SetRange;
             pivotController.Setup(sensitivityMouse);
 
-            algorithm.Setup(landManager.Heightmap, waterManager.Heightmap, landManager.Typemap);
+            terrainEvaluator.Setup(landManager.Heightmap, waterManager.Heightmap, landManager.Typemap);
 
             lerpFollow.SetTarget(pivotController.transform.GetChild(0));
             lerpFollow.SetLookTarget(pivotController.transform);
@@ -98,10 +103,14 @@ namespace ApplyYourself
 
             fsm.AddTransition(new StateTransition(terraformer, pivotController));
             fsm.AddTransition(new StateTransition(pivotController, terraformer));
+          // fsm.AddTransition(new StateTransition(fadeIn, terraformer));
             fsm.AddState(terraformer);
             fsm.AddState(pivotController);
+            fsm.AddState(fadeOut);
+           // fsm.AddState(fadeIn);
 
             fsm.Open(terraformer);
+            fadeIn.BeginFade(true);
             InvokeRepeating(nameof(Tick), interval, interval);
         }
 

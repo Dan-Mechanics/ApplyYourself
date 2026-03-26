@@ -7,8 +7,8 @@ namespace ApplyYourself
     [Serializable]
     public class GoToQuest : IQuest
     {
-        public string playerTag;
-        public string targetTag;
+       // public string playerTag;
+       // public string targetTag;
         public float minDistance;
         
         public event Action<IQuest> OnQuestFinished;
@@ -22,8 +22,6 @@ namespace ApplyYourself
         {
             this.player = player;
             this.point = point;
-            if (!point)
-                Debug.LogError($"There is no {nameof(GoToQuest)} {nameof(point)} found.");
         }
 
         public void Setup() => ShowFeedback(0f);
