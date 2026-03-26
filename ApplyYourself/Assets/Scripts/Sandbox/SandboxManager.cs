@@ -28,6 +28,8 @@ namespace ApplyYourself
         private Bridge bridge;
         private Timer timer;
         private Camera cam;
+        private Fade fadeIn;
+        private Fade fadeOut;
 
         private void Awake()
         {
@@ -43,6 +45,9 @@ namespace ApplyYourself
             unitManager = FindAnyObjectByType<UnitManager>();
             adaptiveGradient = FindAnyObjectByType<AdaptiveGradient>();
             sensitivityMouse = FindAnyObjectByType<SensitivityMouse>();
+            Fade[] fades = FindObjectsByType<Fade>(FindObjectsSortMode.None);
+            fadeIn = fades[0];
+            fadeOut = fades[1];
 
             timer = FindAnyObjectByType<Timer>();
             algorithm = FindAnyObjectByType<Algorithm>();
@@ -54,7 +59,7 @@ namespace ApplyYourself
 
         private void Start()
         {
-            bridge.Setup(algorithm, portal);
+            bridge.Setup(algorithm, portal, fadeOut);
             timer.OnNewTime += easyText.WriteTime;
             timer.OnDone += bridge.GoNextPhase;
             timer.Begin();
@@ -98,10 +103,14 @@ namespace ApplyYourself
 
             fsm.AddTransition(new StateTransition(terraformer, pivotController));
             fsm.AddTransition(new StateTransition(pivotController, terraformer));
+            fsm.AddTransition(new StateTransition(fadeIn, terraformer));
             fsm.AddState(terraformer);
             fsm.AddState(pivotController);
+            fsm.AddState(fadeOut);
+            fsm.AddState(fadeIn);
 
-            fsm.Open(terraformer);
+            // fsm.Open(terraformer);
+            fadeIn.BeginFade(true);
             InvokeRepeating(nameof(Tick), interval, interval);
         }
 

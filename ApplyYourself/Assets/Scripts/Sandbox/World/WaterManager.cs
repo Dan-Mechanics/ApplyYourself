@@ -32,6 +32,7 @@ namespace ApplyYourself
         {
             this.landHeightmap = landHeightmap;
             this.landTypemap = landTypemap;
+            next = Time.time + raiseInterval;
         }
 
         private void FixedUpdate()

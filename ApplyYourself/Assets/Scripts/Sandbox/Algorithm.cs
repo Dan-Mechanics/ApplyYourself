@@ -37,7 +37,7 @@ namespace ApplyYourself
                 pair.bar.fillAmount = (float)pair.count / pair.threshold;
             }
 
-            flooded.bar.fillAmount = GetFloodedPercentage() / floodedThreshold;
+            flooded.bar.fillAmount = (float)flooded.count / flooded.threshold;
             icon.sprite = Resources.Load<Sprite>($"{ending}/icon");
         }
 
@@ -65,12 +65,10 @@ namespace ApplyYourself
             }
         }
 
-        private float GetFloodedPercentage() => (float)flooded.count / flooded.threshold;
-
         public Ending GetEnding()
         {
             Tick();
-            bool isFlooded = GetFloodedPercentage() >= floodedThreshold;
+            bool isFlooded = flooded.count >= floodedThreshold;
             if (isFlooded)
                 return flooded.ending;
 

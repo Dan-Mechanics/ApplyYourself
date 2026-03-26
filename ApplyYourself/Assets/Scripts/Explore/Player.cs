@@ -19,6 +19,7 @@ namespace ApplyYourself
             playerMovement.Assign(moveInput);
             graphicRotator.Assign(moveInput);
             thirdPersonLook.Assign(lookInput);
+            thirdPersonLook.OnUpdate();
 
             interactor.Setup();
             Cursor.visible = false;

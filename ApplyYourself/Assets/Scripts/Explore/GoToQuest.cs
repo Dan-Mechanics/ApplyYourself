@@ -7,8 +7,8 @@ namespace ApplyYourself
     [Serializable]
     public class GoToQuest : IQuest
     {
-        public string playerTag;
-        public string targetTag;
+       // public string playerTag;
+       // public string targetTag;
         public float minDistance;
         
         public event Action<IQuest> OnQuestFinished;

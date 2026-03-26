@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doneMinutes: 0
-  doneSeconds: 48
+  doneSeconds: 45
   invokeInterval: 0.1
 --- !u!114 &4201380739047556145
 MonoBehaviour:

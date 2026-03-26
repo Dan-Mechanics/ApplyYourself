@@ -14,6 +14,10 @@ namespace ApplyYourself
         private QuestHandler questHandler;
         private EasyText easyText;
         private Player player;
+        private Fade fadeIn;
+        private Portal portal;
+        private Fade fadeOut;
+
 
         private void Awake()
         {
@@ -22,9 +26,13 @@ namespace ApplyYourself
             player = FindAnyObjectByType<Player>();
             sensitivityMouse = FindAnyObjectByType<SensitivityMouse>();
             easyText = FindAnyObjectByType<EasyText>();
+            portal = FindAnyObjectByType<Portal>();
 
-            goToPortal = new GoToQuest(GameObject.FindWithTag(goToPortal.playerTag)?.transform,
-                GameObject.FindWithTag(goToPortal.targetTag)?.transform);
+            Fade[] fades = FindObjectsByType<Fade>(FindObjectsSortMode.None);
+            fadeIn = fades[0];
+            fadeOut = fades[1];
+
+            goToPortal = new GoToQuest(player.transform, portal.transform);
         }
 
         private void Start()
@@ -33,7 +41,10 @@ namespace ApplyYourself
             dialogueSystem.Setup();
 
             fsm.AddTransition(new StateTransition(dialogueSystem, player));
+            fsm.AddTransition(new StateTransition(fadeIn, player));
             fsm.AddState(player);
+            fsm.AddState(fadeOut);
+            fsm.AddState(fadeIn);
             fsm.AddState(dialogueSystem);
 
             dialogueSystem.OnDialogue += talkQuest.OnDialogue;
@@ -43,7 +54,24 @@ namespace ApplyYourself
             questHandler.AddQuest(goToPortal);
             questHandler.BeginQuest();
 
-            fsm.Open(player);
+            portal.OnRequestFade += BeginGoToNextScene;
+            fadeOut.OnYield += SwitchScenes;
+
+            //fsm.Open(player);
+            fadeIn.BeginFade(true);
+        }
+
+        private void SwitchScenes(StateBehaviour state)
+        {
+            print(state.name);
+            print("SwitchScenes");
+            portal.Interact();
+        }
+
+        private void BeginGoToNextScene()
+        {
+            fadeOut.BeginFade(false);
+            print("BeginGoToNextScene");
         }
 
         private void DeregisterTalkQuest(IQuest quest)
