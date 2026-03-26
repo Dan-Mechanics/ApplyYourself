@@ -18,7 +18,6 @@ namespace ApplyYourself
         private Portal portal;
         private Fade fadeOut;
 
-
         private void Awake()
         {
             questHandler = FindAnyObjectByType<QuestHandler>();
@@ -41,10 +40,10 @@ namespace ApplyYourself
             dialogueSystem.Setup();
 
             fsm.AddTransition(new StateTransition(dialogueSystem, player));
-            fsm.AddTransition(new StateTransition(fadeIn, player));
+            //fsm.AddTransition(new StateTransition(fadeIn, player));
             fsm.AddState(player);
             fsm.AddState(fadeOut);
-            fsm.AddState(fadeIn);
+        //    fsm.AddState(fadeIn);
             fsm.AddState(dialogueSystem);
 
             dialogueSystem.OnDialogue += talkQuest.OnDialogue;
@@ -57,21 +56,20 @@ namespace ApplyYourself
             portal.OnRequestFade += BeginGoToNextScene;
             fadeOut.OnYield += SwitchScenes;
 
-            //fsm.Open(player);
+            fsm.Open(player);
             fadeIn.BeginFade(true);
         }
 
         private void SwitchScenes(StateBehaviour state)
         {
-            print(state.name);
-            print("SwitchScenes");
+            print($"{nameof(SwitchScenes)} {state.name}");
             portal.Interact();
         }
 
         private void BeginGoToNextScene()
         {
+            print(nameof(BeginGoToNextScene));
             fadeOut.BeginFade(false);
-            print("BeginGoToNextScene");
         }
 
         private void DeregisterTalkQuest(IQuest quest)

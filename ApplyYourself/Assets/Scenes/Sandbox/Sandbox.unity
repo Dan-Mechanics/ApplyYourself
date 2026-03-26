@@ -334,7 +334,7 @@ PrefabInstance:
     - target: {fileID: 3534991672996366167, guid: 62aa1e407a4e06449805dc7322cbfd14,
         type: 3}
       propertyPath: fadeTime
-      value: 0.01
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5819148608158743594, guid: 62aa1e407a4e06449805dc7322cbfd14,
         type: 3}
@@ -1438,6 +1438,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3534991672996366167, guid: 62aa1e407a4e06449805dc7322cbfd14,
+        type: 3}
+      propertyPath: fadeTime
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5819148608158743594, guid: 62aa1e407a4e06449805dc7322cbfd14,
         type: 3}
