@@ -3654,6 +3654,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2368264795286887979, guid: c5432702846d7ae4e85be34f97f9952b,
+        type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 4900000, guid: 1537153b21dd5524cb082a7c33c1b779, type: 3}
     - target: {fileID: 8303993836151307387, guid: c5432702846d7ae4e85be34f97f9952b,
         type: 3}
       propertyPath: m_Name
@@ -20368,6 +20373,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7891790917620175293, guid: 59b00aa0e6bfaef4cbc6cead10c030fd,
+        type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 4900000, guid: ba6bd5acc0f4c804cbfbba70fd941917, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -66568,6 +66578,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: marianne
       objectReference: {fileID: 0}
+    - target: {fileID: 6627183751498024620, guid: 88f856733f7ff8c4292747cf0fe55d5b,
+        type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 4900000, guid: d07fd7c64dbb8204c8f27ade26b11d22, type: 3}
     - target: {fileID: 8195920731331637407, guid: 88f856733f7ff8c4292747cf0fe55d5b,
         type: 3}
       propertyPath: m_LocalPosition.x

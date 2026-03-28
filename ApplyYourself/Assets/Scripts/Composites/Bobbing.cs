@@ -19,7 +19,11 @@ namespace ApplyYourself
                 minInterval = maxInterval;
                 maxInterval = temp;
             }
-            
+
+            magnitude.x = Mathf.Abs(magnitude.x);
+            magnitude.y = Mathf.Abs(magnitude.y);
+            magnitude.z = Mathf.Abs(magnitude.z);
+
             startingPos = transform.localPosition;
             UpdateTargetPosition();
         }
