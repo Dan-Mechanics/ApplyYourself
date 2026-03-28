@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 namespace ApplyYourself
@@ -18,7 +17,24 @@ namespace ApplyYourself
 
             playerMovement.Assign(moveInput);
             graphicRotator.Assign(moveInput);
-            thirdPersonLook.Assign(lookInput);
+
+            GameObject spawnpoint = GameObject.FindWithTag("Spawnpoint");
+            if(spawnpoint == null)
+            {
+                Debug.LogError("There is no transform tagged with 'Spawnpoint'.");
+                return;
+            }
+
+            playerMovement.Teleport(spawnpoint.transform.position);
+
+            GameObject camGameObject = GameObject.FindWithTag("MainCamera");
+            if(camGameObject == null)
+            {
+                Debug.LogError("There is no camera tagged with 'MainCamera'.");
+                return;
+            }
+
+            thirdPersonLook.Setup(lookInput, camGameObject.transform);
             thirdPersonLook.OnUpdate();
 
             interactor.Setup();

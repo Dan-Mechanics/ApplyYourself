@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace ApplyYourself
 {
@@ -8,7 +7,6 @@ namespace ApplyYourself
 
         [SerializeField] private Transform leftRightPivot = default;
         [SerializeField] private Transform upDownPivot = default;
-        [SerializeField] private Transform eyes = default;
         [SerializeField] private LayerMask mask = default;
         [SerializeField] private Vector2 rotation = default;
         [SerializeField] private float sensitivity = default;
@@ -19,8 +17,17 @@ namespace ApplyYourself
         [SerializeField] private float zoomSensitivity = default;
         [SerializeField, Min(0f)] private float offset = default;
         private ILookInput lookInput;
+        private Transform eyes;
 
-        public void Assign(ILookInput lookInput) => this.lookInput = lookInput;
+        public void Setup(ILookInput lookInput, Transform eyes)
+        {
+            this.lookInput = lookInput;
+            this.eyes = eyes;
+            eyes.SetParent(upDownPivot);
+            eyes.localPosition = Vector3.zero;
+            eyes.localRotation = Quaternion.identity;
+            eyes.localScale = Vector3.one;
+        }
 
         public override void OnUpdate()
         {

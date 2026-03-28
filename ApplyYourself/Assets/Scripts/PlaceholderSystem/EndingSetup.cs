@@ -10,13 +10,6 @@ namespace ApplyYourself
 
         private void Start()
         {
-            GameObject[] cameras = GameObject.FindGameObjectsWithTag("MainCamera");
-            for (int i = 0; i < cameras.Length; i++)
-            {
-                cameras[i].tag = "Untagged";
-                Destroy(cameras[i]);
-            }
-
             prefabs.ForEach(x => Spawn(x));
 
             Bridge bridge = FindAnyObjectByType<Bridge>();

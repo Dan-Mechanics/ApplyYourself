@@ -37,5 +37,12 @@ namespace ApplyYourself
             controller.Move(fallingSpeed * Time.deltaTime * Vector3.down);
             prevMovement = movement;
         }
+
+        public void Teleport(Vector3 position)
+        {
+            controller.enabled = false;
+            transform.position = position;
+            controller.enabled = true;
+        }
     }
 }

@@ -31,7 +31,15 @@ namespace ApplyYourself
             fadeIn = fades[0];
             fadeOut = fades[1];
 
-            goToPortal = new GoToQuest(player.transform, GameObject.FindWithTag("Portal").transform);
+            GameObject portalGameObject = GameObject.FindWithTag("Portal");
+            if(portalGameObject == null)
+            {
+                Debug.LogError("Please have a portal with the 'Portal' tag in the scene.");
+                return;
+            }
+
+            portal = portalGameObject.GetComponent<Portal>();
+            goToPortal = new GoToQuest(player.transform, portalGameObject.transform);
         }
 
         private void Start()
@@ -40,10 +48,8 @@ namespace ApplyYourself
             dialogueSystem.Setup();
 
             fsm.AddTransition(new StateTransition(dialogueSystem, player));
-            //fsm.AddTransition(new StateTransition(fadeIn, player));
             fsm.AddState(player);
             fsm.AddState(fadeOut);
-        //    fsm.AddState(fadeIn);
             fsm.AddState(dialogueSystem);
 
             dialogueSystem.OnDialogue += talkQuest.OnDialogue;
