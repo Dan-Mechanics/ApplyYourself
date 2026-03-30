@@ -952,7 +952,7 @@ PrefabInstance:
     - target: {fileID: 4898207485941934761, guid: ee088a92d152f6342b31a1eb26c6719a,
         type: 3}
       propertyPath: m_Name
-      value: follow_cam
+      value: cam
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1021,11 +1021,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8478534356577123904, guid: a52b36e06dbcc5f488ecb27dbeecb1b6,
-        type: 3}
-      propertyPath: interval
-      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

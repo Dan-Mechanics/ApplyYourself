@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: Sandbox
-  fade: 1
+  fadeOut: 1
 --- !u!1 &665055167864620873
 GameObject:
   m_ObjectHideFlags: 0

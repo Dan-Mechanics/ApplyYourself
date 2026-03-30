@@ -4,10 +4,10 @@ namespace ApplyYourself
 {
     public class Bridge : MonoBehaviour
     {
-        [HideInInspector] public Ending ending;
         private TerrainEvaluator terrainEvaluator;
         private Fade fadeOut;
         private Portal portal;
+        private Ending ending;
 
         public void Setup(TerrainEvaluator terrainEvaluator, Portal portal, Fade fadeOut)
         {
@@ -17,20 +17,18 @@ namespace ApplyYourself
             fadeOut.OnYield += SwitchScenes;
         }
 
-        private void SwitchScenes(StateBehaviour state)
-        {
-            fadeOut.OnYield -= SwitchScenes;
-            print(ending);
-            print(state.name);
-            portal.Interact();
-        }
-
         public void GoNextPhase()
         {
-            DontDestroyOnLoad(gameObject);
             ending = terrainEvaluator.GetEnding();
             portal.SetScene(ending.ToString());
             fadeOut.BeginFade(false);
+        }
+
+        private void SwitchScenes(StateBehaviour state)
+        {
+            print($"{state.name} --> {ending}");
+            fadeOut.OnYield -= SwitchScenes;
+            portal.Interact();
         }
     }
 }

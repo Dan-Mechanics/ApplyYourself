@@ -10,7 +10,7 @@ namespace ApplyYourself
         [SerializeField] private PlayerGraphicRotator graphicRotator = default;
         private QuestHandler questHandler;
         
-        public void Setup(QuestHandler questHandler, EasyText easyText, ILookInput lookInput, IMoveInput moveInput)
+        public void Setup(QuestHandler questHandler, EasyText easyText, Vector3 spawnpoint, Transform cam, ILookInput lookInput, IMoveInput moveInput)
         {
             this.questHandler = questHandler;
             interactor.OnFeedback += easyText.Write;
@@ -18,14 +18,7 @@ namespace ApplyYourself
             playerMovement.Assign(moveInput);
             graphicRotator.Assign(moveInput);
 
-            GameObject spawnpoint = GameObject.FindWithTag("Spawnpoint");
-            if(spawnpoint == null)
-            {
-                Debug.LogError("There is no transform tagged with 'Spawnpoint'.");
-                return;
-            }
-
-            playerMovement.Teleport(spawnpoint.transform.position);
+            playerMovement.Teleport(spawnpoint);
 
             GameObject camGameObject = GameObject.FindWithTag("MainCamera");
             if(camGameObject == null)
@@ -34,7 +27,7 @@ namespace ApplyYourself
                 return;
             }
 
-            thirdPersonLook.Setup(lookInput, camGameObject.transform);
+            thirdPersonLook.Setup(lookInput, cam);
             thirdPersonLook.OnUpdate();
 
             interactor.Setup();

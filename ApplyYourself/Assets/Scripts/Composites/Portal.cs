@@ -9,7 +9,7 @@ namespace ApplyYourself
         public event Action OnRequestFade;
         
         [SerializeField] private string scene = default;
-        [SerializeField] private bool fade = default;
+        [SerializeField] private bool fadeOut = default;
 
         public string GetHighlight() => $"Go through {nameof(Portal)}";
         public Vector3 GetPosition() => transform.position;
@@ -17,10 +17,10 @@ namespace ApplyYourself
 
         public void Interact()
         {
-            if (fade)
+            if (fadeOut)
             {
                 OnRequestFade?.Invoke();
-                fade = false;
+                fadeOut = false;
                 return;
             }
             
