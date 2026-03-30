@@ -6,7 +6,7 @@ namespace ApplyYourself
 {
     public class Portal : MonoBehaviour, IInteractable
     {
-        public event Action OnRequestFade;
+        public event Action OnRequestFadeOut;
         
         [SerializeField] private string scene = default;
         [SerializeField] private bool fadeOut = default;
@@ -19,7 +19,7 @@ namespace ApplyYourself
         {
             if (fadeOut)
             {
-                OnRequestFade?.Invoke();
+                OnRequestFadeOut?.Invoke();
                 fadeOut = false;
                 return;
             }

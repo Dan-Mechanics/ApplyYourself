@@ -107,7 +107,7 @@ namespace ApplyYourself
             questHandler.AddQuest(goToPortal);
             questHandler.BeginQuest();
 
-            portal.OnRequestFade += BeginGoToNextScene;
+            portal.OnRequestFadeOut += BeginGoToNextScene;
             fadeOut.OnYield += SwitchScenes;
 
             fsm.Open(player);

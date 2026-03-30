@@ -22,7 +22,7 @@ namespace ApplyYourself
             //fsm.AddTransition(new StateTransition(dialogueSystem, player));
             //fsm.AddTransition(new StateTransition(fadeIn, player));
             fsm.AddState(fadeOut);
-            portal.OnRequestFade += BeginGoToNextScene;
+            portal.OnRequestFadeOut += BeginGoToNextScene;
             fadeOut.OnYield += SwitchScenes;
 
             fsm.Open(null);
