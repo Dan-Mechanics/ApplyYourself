@@ -24,7 +24,7 @@ namespace ApplyYourself
 
         public void Setup(UnitType[,] landTypemap, float[,] landHeightmap, float[,] waterHeightmap)
         {
-            Terminate();
+            Clear();
 
             this.landTypemap = landTypemap;
             this.landHeightmap = landHeightmap;
@@ -128,7 +128,7 @@ namespace ApplyYourself
             }
         }
 
-        public void Terminate()
+        public void Clear()
         {
             GameObject.FindGameObjectsWithTag("Unit").
                 ToList().ForEach(x => DestroyImmediate(x));
