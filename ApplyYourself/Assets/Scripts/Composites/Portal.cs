@@ -6,10 +6,10 @@ namespace ApplyYourself
 {
     public class Portal : MonoBehaviour, IInteractable
     {
-        public event Action OnRequestFade;
+        public event Action OnRequestFadeOut;
         
         [SerializeField] private string scene = default;
-        [SerializeField] private bool fade = default;
+        [SerializeField] private bool fadeOut = default;
 
         public string GetHighlight() => $"Go through {nameof(Portal)}";
         public Vector3 GetPosition() => transform.position;
@@ -17,10 +17,10 @@ namespace ApplyYourself
 
         public void Interact()
         {
-            if (fade)
+            if (fadeOut)
             {
-                OnRequestFade?.Invoke();
-                fade = false;
+                OnRequestFadeOut?.Invoke();
+                fadeOut = false;
                 return;
             }
             

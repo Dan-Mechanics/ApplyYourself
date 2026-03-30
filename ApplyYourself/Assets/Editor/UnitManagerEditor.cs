@@ -26,7 +26,7 @@ namespace ApplyYourself
             }
 
             if (GUILayout.Button("Clear"))
-                unitManager.Terminate();
+                unitManager.Clear();
 
         }
     }

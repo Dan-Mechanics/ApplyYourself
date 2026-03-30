@@ -208,7 +208,7 @@ MonoBehaviour:
   controller: {fileID: 3647801561732012112}
   leftRightPivot: {fileID: 1905645038698360357}
   speed: 5.75
-  fallingSpeed: 5
+  fallingSpeed: 7.5
   onWalk:
     m_PersistentCalls:
       m_Calls:
@@ -256,7 +256,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 1
-  rotation: {x: 0, y: 0}
+  rotation: {x: 0, y: 232}
   sensitivity: 0.33
   maxAngle: 90
   distance: 4

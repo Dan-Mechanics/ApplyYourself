@@ -7,8 +7,8 @@ TagManager:
   - Structure
   - Nature
   - Unit
-  - Portal
   - Spawnpoint
+  - Portal
   layers:
   - Default
   - TransparentFX

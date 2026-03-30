@@ -38,6 +38,12 @@ namespace ApplyYourself
             prevMovement = movement;
         }
 
+        public override void Exit()
+        {
+            base.Exit();
+            onIdle?.Invoke();
+        }
+
         public void Teleport(Vector3 position)
         {
             controller.enabled = false;

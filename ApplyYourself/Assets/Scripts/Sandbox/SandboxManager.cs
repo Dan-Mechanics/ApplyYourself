@@ -9,8 +9,6 @@ namespace ApplyYourself
         [SerializeField] private List<Brush> brushes = default;
 
         private readonly FSM fsm = new FSM();
-        private float nextTickTime;
-
         private AdaptiveGradient adaptiveGradient;
         private SensitivityMouse sensitivityMouse;
         private EasyText easyText;
@@ -103,11 +101,9 @@ namespace ApplyYourself
 
             fsm.AddTransition(new StateTransition(terraformer, pivotController));
             fsm.AddTransition(new StateTransition(pivotController, terraformer));
-          // fsm.AddTransition(new StateTransition(fadeIn, terraformer));
             fsm.AddState(terraformer);
             fsm.AddState(pivotController);
             fsm.AddState(fadeOut);
-           // fsm.AddState(fadeIn);
 
             fsm.Open(terraformer);
             fadeIn.BeginFade(true);
