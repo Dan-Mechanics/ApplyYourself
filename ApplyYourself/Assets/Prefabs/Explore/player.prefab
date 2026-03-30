@@ -256,7 +256,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 1
-  rotation: {x: 0, y: 0}
+  rotation: {x: 0, y: 232}
   sensitivity: 0.33
   maxAngle: 90
   distance: 4
