@@ -39,6 +39,7 @@ namespace ApplyYourself
         {
             base.Exit();
             questHandler.Exit();
+            playerMovement.Exit();
         }
         
         public override void Enter()

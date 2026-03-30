@@ -208,7 +208,7 @@ MonoBehaviour:
   controller: {fileID: 3647801561732012112}
   leftRightPivot: {fileID: 1905645038698360357}
   speed: 5.75
-  fallingSpeed: 5
+  fallingSpeed: 7.5
   onWalk:
     m_PersistentCalls:
       m_Calls:
