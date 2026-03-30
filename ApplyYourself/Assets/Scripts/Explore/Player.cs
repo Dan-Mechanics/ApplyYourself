@@ -19,14 +19,6 @@ namespace ApplyYourself
             graphicRotator.Assign(moveInput);
 
             playerMovement.Teleport(spawnpoint);
-
-            GameObject camGameObject = GameObject.FindWithTag("MainCamera");
-            if(camGameObject == null)
-            {
-                Debug.LogError("There is no camera tagged with 'MainCamera'.");
-                return;
-            }
-
             thirdPersonLook.Setup(lookInput, cam);
             thirdPersonLook.OnUpdate();
 
