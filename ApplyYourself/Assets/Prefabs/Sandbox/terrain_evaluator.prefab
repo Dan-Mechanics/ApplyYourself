@@ -57,18 +57,18 @@ MonoBehaviour:
   flooded:
     bar: {fileID: 7736496740911784235}
     type: {fileID: 11400000, guid: 49b09ac93070eee4995a6a62c28b03c2, type: 2}
-    ending: 1
+    ending: 0
     threshold: 29
     count: 0
   pairs:
   - bar: {fileID: 6355050792986797605}
     type: {fileID: 11400000, guid: 7aba05f7576ad9b4cb5ec9549b6caf41, type: 2}
-    ending: 3
+    ending: 2
     threshold: 330
     count: 0
   - bar: {fileID: 2134396702143897427}
     type: {fileID: 11400000, guid: 28068dd81c650bc41b2e977fe3d2e751, type: 2}
-    ending: 4
+    ending: 3
     threshold: 40
     count: 0
 --- !u!1 &7065316027919474349

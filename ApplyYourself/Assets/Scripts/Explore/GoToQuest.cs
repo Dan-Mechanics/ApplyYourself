@@ -7,8 +7,6 @@ namespace ApplyYourself
     [Serializable]
     public class GoToQuest : IQuest
     {
-       // public string playerTag;
-       // public string targetTag;
         public float minDistance;
         
         public event Action<IQuest> OnQuestFinished;
@@ -36,7 +34,7 @@ namespace ApplyYourself
 
         private void ShowFeedback(float dist)
         {
-            builder.AppendLine($"Go to {point.name} ( {dist}m )");
+            builder.AppendLine($"Go to {point.name} ( {dist:F1}m )");
             OnDisplayString?.Invoke(builder.ToString());
             builder.Clear();
         }

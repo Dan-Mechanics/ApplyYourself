@@ -1040,16 +1040,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: timer
       objectReference: {fileID: 0}
-    - target: {fileID: 5537345969050056952, guid: d7e6724a83d69c741ae13129eded0c5d,
-        type: 3}
-      propertyPath: doneMinutes
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5537345969050056952, guid: d7e6724a83d69c741ae13129eded0c5d,
-        type: 3}
-      propertyPath: doneSeconds
-      value: 45
-      objectReference: {fileID: 0}
     - target: {fileID: 9000965494018335457, guid: d7e6724a83d69c741ae13129eded0c5d,
         type: 3}
       propertyPath: m_Pivot.x
