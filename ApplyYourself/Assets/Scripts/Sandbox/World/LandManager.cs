@@ -56,11 +56,11 @@ namespace ApplyYourself
             for (int i = positions.Count - 1; i >= 0; i--)
             {
                 Vector2Int pos = positions[i];
-                /*if (typemap[pos.x, pos.y] == city)
+                if (typemap[pos.x, pos.y] == city)
                 {
                     positions.RemoveAt(i);
                     continue;
-                }*/
+                }
 
                 heightmap[pos.x, pos.y] = Mathf.Clamp(heightmap[pos.x, pos.y] + meters, minHeight, maxHeight);
             }
