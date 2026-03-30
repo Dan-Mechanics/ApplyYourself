@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3955177860958927218}
   - component: {fileID: 935817749567678980}
   m_Layer: 0
-  m_Name: deco
+  m_Name: floating_deco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8632329002992586046}
   m_Layer: 0
-  m_Name: deco
+  m_Name: weeds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
