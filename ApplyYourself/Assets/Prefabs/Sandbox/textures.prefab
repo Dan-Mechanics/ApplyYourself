@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8008981618653485611}
   - component: {fileID: 5486283571649061294}
   m_Layer: 0
-  m_Name: startup_maps
+  m_Name: textures
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -107,22 +107,17 @@ namespace ApplyYourself
             questHandler.AddQuest(goToPortal);
             questHandler.BeginQuest();
 
-            portal.OnRequestFadeOut += BeginGoToNextScene;
-            fadeOut.OnYield += SwitchScenes;
+            portal.OnInteract += BeginGoToSandboxScene;
+            fadeOut.OnFadeComplete += portal.SwitchScenes;
 
             fsm.Open(player);
             fadeIn.BeginFade(true);
         }
 
-        private void SwitchScenes(StateBehaviour state)
+        private void BeginGoToSandboxScene()
         {
-            print($"{nameof(SwitchScenes)} --> {state.name}");
-            portal.Interact();
-        }
-
-        private void BeginGoToNextScene()
-        {
-            print(nameof(BeginGoToNextScene));
+            print(nameof(BeginGoToSandboxScene));
+            portal.OnInteract -= BeginGoToSandboxScene;
             fadeOut.BeginFade(false);
         }
 

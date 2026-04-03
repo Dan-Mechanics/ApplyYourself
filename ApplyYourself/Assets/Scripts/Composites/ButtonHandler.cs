@@ -8,8 +8,6 @@ namespace ApplyYourself
     public class ButtonHandler : MonoBehaviour
     {
         public event Action<int> OnClick;
-
-        [SerializeField] private List<int> disableInteraction = default;
         private List<BetterButton> buttons;
 
         public void Setup()
@@ -21,7 +19,7 @@ namespace ApplyYourself
                 buttons[i].OnClickIndex += ClickCallback;
             }
 
-            disableInteraction.ForEach(x => buttons[x].SetInteractable(false));
+            buttons[0].SetInteractable(false);
         }
 
         private void ClickCallback(int index)

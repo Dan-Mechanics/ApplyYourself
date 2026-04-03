@@ -24,7 +24,7 @@ namespace ApplyYourself
             this.landTypemap = landTypemap;
 
             pairs.ForEach(x => x.SetToDefault());
-            InvokeRepeating(nameof(Display), interval, interval);
+            InvokeRepeating(nameof(Display), 0f, interval);
         }
 
         private void Display()

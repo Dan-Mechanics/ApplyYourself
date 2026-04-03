@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ApplyYourself
 {
@@ -6,29 +7,29 @@ namespace ApplyYourself
     {
         private TerrainEvaluator terrainEvaluator;
         private Fade fadeOut;
-        private Portal portal;
         private Ending ending;
 
-        public void Setup(TerrainEvaluator terrainEvaluator, Portal portal, Fade fadeOut)
+        public void Setup(TerrainEvaluator terrainEvaluator, Fade fadeOut)
         {
             this.terrainEvaluator = terrainEvaluator;
-            this.portal = portal;
             this.fadeOut = fadeOut;
-            fadeOut.OnYield += SwitchScenes;
+            fadeOut.OnFadeComplete += SwitchScenes;
         }
 
+        /// <summary>
+        /// Invoked by Timer.
+        /// </summary>
         public void GoNextPhase()
         {
             ending = terrainEvaluator.GetEnding();
-            portal.SetScene(ending.ToString());
             fadeOut.BeginFade(false);
+            print(ending);
         }
 
-        private void SwitchScenes(StateBehaviour state)
+        private void SwitchScenes()
         {
-            print($"{state.name} --> {ending}");
-            fadeOut.OnYield -= SwitchScenes;
-            portal.Interact();
+            fadeOut.OnFadeComplete -= SwitchScenes;
+            SceneManager.LoadScene(ending.ToString());
         }
     }
 }

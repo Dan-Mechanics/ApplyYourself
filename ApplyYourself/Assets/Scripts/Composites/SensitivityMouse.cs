@@ -12,14 +12,15 @@ namespace ApplyYourself
         [SerializeField] private int decimalPlaces = default;
 
         [Header("Debug UI")]
+        [SerializeField] private bool displayVisible = default;
         [SerializeField] private Color color = Color.white;
         [SerializeField] private int fontSize = default;
         [SerializeField] private int padding = default;
         [SerializeField] private int width = default;
         [SerializeField] private int height = default;
 
-        private float sensitivity = 1f;
         private float scrollSensitivity = 1f;
+        private float sensitivity = 1f;
 
         private void Update()
         {
@@ -50,6 +51,9 @@ namespace ApplyYourself
 
         private void OnGUI()
         {
+            if (!displayVisible)
+                return;
+            
             GUI.color = color;
             Rect rect = new Rect(Screen.width - width - padding, Screen.height - height - padding, width, height);
             GUIStyle style = GUI.skin.GetStyle("Label");
