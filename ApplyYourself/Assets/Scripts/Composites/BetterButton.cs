@@ -15,7 +15,7 @@ namespace ApplyYourself
         [SerializeField] private EasyBinding primaryFire = default;
         [SerializeField] private TMP_Text text = default;
         [SerializeField] private Image image = default;
-        [SerializeField] private GameObject notInteractable = default;
+        [SerializeField] private GameObject blockedGraphic = default;
 
         [SerializeField] private UnityEvent onClick = default;
         [SerializeField] private UnityEvent onSelect = default;
@@ -44,7 +44,7 @@ namespace ApplyYourself
             onClick?.Invoke();
         }
 
-        private void FixedUpdate() => notInteractable.SetActive(!interactable);
+        private void FixedUpdate() => blockedGraphic.SetActive(!interactable);
 
         private bool HasClicked()
         {
