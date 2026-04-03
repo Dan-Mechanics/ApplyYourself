@@ -59,7 +59,7 @@ namespace ApplyYourself
             if (current == null)
                 return;
 
-            Debug.Log($"{state.gameObject.name}_{state.GetType().Name}");
+            Debug.Log($"{state.gameObject.name} --> {state.GetType().Name}");
             current.Enter();
         }
 
