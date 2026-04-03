@@ -22,12 +22,11 @@ namespace ApplyYourself
 
         public void Setup(UnitType[,] landTypemap, float[,] landHeightmap, float[,] waterHeightmap)
         {
-            Clear();
-
             this.landTypemap = landTypemap;
             this.landHeightmap = landHeightmap;
             this.waterHeightmap = waterHeightmap;
 
+            Clear();
             GameObject[,] grid = spawner.SpawnGrid(width);
             units = new UnitVisual[width, width];
             for (int x = 0; x < width; x++)

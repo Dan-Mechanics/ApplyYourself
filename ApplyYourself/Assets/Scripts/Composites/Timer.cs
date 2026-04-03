@@ -18,7 +18,7 @@ namespace ApplyYourself
             doneTime = DateTime.Now;
             doneTime = doneTime.AddSeconds(doneSeconds);
             doneTime = doneTime.AddMinutes(doneMinutes);
-            InvokeRepeating(nameof(Tick), invokeInterval, invokeInterval);
+            InvokeRepeating(nameof(Tick), 0f, invokeInterval);
         }
 
         public void End() => CancelInvoke(nameof(Tick));

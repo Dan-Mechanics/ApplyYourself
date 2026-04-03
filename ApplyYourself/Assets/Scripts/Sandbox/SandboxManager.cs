@@ -22,7 +22,6 @@ namespace ApplyYourself
         private TextureTypemap typemapStartup;
         private LerpFollow lerpFollow;
         private TerrainEvaluator terrainEvaluator;
-        private Portal portal;
         private Bridge bridge;
         private Timer timer;
         private Camera cam;
@@ -34,7 +33,6 @@ namespace ApplyYourself
             cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 
             lerpFollow = FindAnyObjectByType<LerpFollow>();
-            portal = FindAnyObjectByType<Portal>();
             easyText = FindAnyObjectByType<EasyText>();
             terraformer = FindAnyObjectByType<Terraformer>();
             pivotController = FindAnyObjectByType<PivotController>();
@@ -57,7 +55,7 @@ namespace ApplyYourself
 
         private void Start()
         {
-            bridge.Setup(terrainEvaluator, portal, fadeOut);
+            bridge.Setup(terrainEvaluator, fadeOut);
             timer.OnNewTime += easyText.WriteTime;
             timer.OnDone += bridge.GoNextPhase;
             timer.Begin();
@@ -92,7 +90,7 @@ namespace ApplyYourself
             unitManager.OnNewWaterRange += adaptiveGradient.SetRange;
             pivotController.Setup(sensitivityMouse);
 
-            // terrainEvaluator.Setup(landManager.Heightmap, waterManager.Heightmap, landManager.Typemap);
+            terrainEvaluator.Setup(landManager.Heightmap, waterManager.Heightmap, landManager.Typemap);
 
             lerpFollow.SetTarget(pivotController.transform.GetChild(0));
             lerpFollow.SetLookTarget(pivotController.transform);
@@ -109,7 +107,7 @@ namespace ApplyYourself
             fadeIn.BeginFade(true);
             InvokeRepeating(nameof(Tick), 0f, interval);
 
-            terrainEvaluator.Setup(landManager.Heightmap, waterManager.Heightmap, landManager.Typemap);
+            // terrainEvaluator.Setup(landManager.Heightmap, waterManager.Heightmap, landManager.Typemap);
         }
 
         private void Update() => fsm.Update();

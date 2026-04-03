@@ -1,35 +1,54 @@
+using System;
 using UnityEngine;
 
 namespace ApplyYourself
 {
+    /// <summary>
+    /// Must account for both fade in and out.
+    /// </summary>
     public class Fade : StateBehaviour
     {
+        public event Action OnFadeComplete;
+
         [SerializeField] private CanvasGroup group = default;
         [SerializeField, Min(0.01f)] private float fadeTime = default;
         private bool fadeIn;
         private float direction;
-        private float endPoint;
+        private float alphaTarget;
 
         public override void OnFixedUpdate()
         {
             base.OnFixedUpdate();
-            if (!fadeIn && Move() == endPoint)
+            if (fadeIn)
+                return;
+
+            DoFade();
+            if (group.alpha >= alphaTarget)
+            {
+                OnFadeComplete?.Invoke();
                 YieldState();
+            }
         }
 
         private void FixedUpdate()
         {
-            if (fadeIn && Move() == endPoint)
+            if (!fadeIn)
+                return;
+
+            DoFade();
+            if (group.alpha <= alphaTarget)
+            {
+                OnFadeComplete?.Invoke();
                 Destroy(this);
+            }
         }
 
-        private float Move()
+        private void DoFade()
         {
             float alpha = group.alpha;
             alpha += direction * (1f / fadeTime) * Time.fixedDeltaTime;
             alpha = Mathf.Clamp01(alpha);
             group.alpha = alpha;
-            return alpha;
         }
 
         public void BeginFade(bool fadeIn) 
@@ -37,7 +56,7 @@ namespace ApplyYourself
             this.fadeIn = fadeIn;
             group.alpha = fadeIn ? 1f : 0f;
             direction = fadeIn ? -1f : 1f;
-            endPoint = fadeIn ? 0f : 1f;
+            alphaTarget = fadeIn ? 0f : 1f;
 
             if (!fadeIn)
                 ClaimState();
