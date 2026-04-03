@@ -1249,7 +1249,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: b6dc1925b091ba14b84e142ff18792df,
+        type: 3}
     - target: {fileID: 4823744888829942179, guid: 56eb7b96da46c9c4f866f9d1a9e49d83,
         type: 3}
       propertyPath: m_Color.b
@@ -1934,7 +1935,7 @@ PrefabInstance:
     - target: {fileID: 8782754815193730119, guid: c08fbaabf4c32294191c37a03c04c5aa,
         type: 3}
       propertyPath: m_Name
-      value: pivot
+      value: camera_pivot_controller
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 2108999598492402645}
   - component: {fileID: 1656345014923524335}
   m_Layer: 0
-  m_Name: pivot
+  m_Name: camera_pivot_controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
