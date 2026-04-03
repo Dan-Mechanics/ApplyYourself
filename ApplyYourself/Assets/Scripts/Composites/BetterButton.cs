@@ -17,6 +17,10 @@ namespace ApplyYourself
         [SerializeField] private Image image = default;
         [SerializeField] private GameObject blockedGraphic = default;
 
+        [Header(nameof(SetColor))]
+        [SerializeField] private Color primaryColor = default;
+        [SerializeField] private Color secondaryColor = default;
+
         [SerializeField] private UnityEvent onClick = default;
         [SerializeField] private UnityEvent onSelect = default;
         [SerializeField] private UnityEvent onDeslect = default;
@@ -57,7 +61,7 @@ namespace ApplyYourself
 
         private void Select()
         {
-            if (isSelected || !interactable)
+            if (isSelected)
                 return;
 
             isSelected = true;
@@ -76,5 +80,6 @@ namespace ApplyYourself
         public void SetInteractable(bool interactable) => this.interactable = interactable;
         public void SetText(string str) => text.text = str;
         public void SetSprite(Sprite sprite) => image.sprite = sprite;
+        public void SetColor(bool showPrimary) => image.color = showPrimary ? primaryColor : secondaryColor;
     }
 }

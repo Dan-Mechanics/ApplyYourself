@@ -92,7 +92,7 @@ namespace ApplyYourself
             unitManager.OnNewWaterRange += adaptiveGradient.SetRange;
             pivotController.Setup(sensitivityMouse);
 
-            terrainEvaluator.Setup(landManager.Heightmap, waterManager.Heightmap, landManager.Typemap);
+            // terrainEvaluator.Setup(landManager.Heightmap, waterManager.Heightmap, landManager.Typemap);
 
             lerpFollow.SetTarget(pivotController.transform.GetChild(0));
             lerpFollow.SetLookTarget(pivotController.transform);
@@ -107,7 +107,9 @@ namespace ApplyYourself
 
             fsm.Open(terraformer);
             fadeIn.BeginFade(true);
-            InvokeRepeating(nameof(Tick), interval, interval);
+            InvokeRepeating(nameof(Tick), 0f, interval);
+
+            terrainEvaluator.Setup(landManager.Heightmap, waterManager.Heightmap, landManager.Typemap);
         }
 
         private void Update() => fsm.Update();

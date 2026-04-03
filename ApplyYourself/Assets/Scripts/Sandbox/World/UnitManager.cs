@@ -18,9 +18,7 @@ namespace ApplyYourself
         private UnitType[,] landTypemap;
         private float[,] landHeightmap;
         private float[,] waterHeightmap;
-
         private UnitVisual[,] units;
-        private float next;
 
         public void Setup(UnitType[,] landTypemap, float[,] landHeightmap, float[,] waterHeightmap)
         {
@@ -41,15 +39,8 @@ namespace ApplyYourself
                     units[x, y].SetDecoration(landTypemap[x, y].decoration);
                 }
             }
-        }
 
-        private void FixedUpdate()
-        {
-            if (Time.time < next)
-                return;
-
-            next = Time.time + waterGradientInterval;
-            RecalculateWaterGradient();
+            InvokeRepeating(nameof(RecalculateWaterGradient), 0f, waterGradientInterval);
         }
 
         public void RenderArea(List<Vector2Int> positions)
