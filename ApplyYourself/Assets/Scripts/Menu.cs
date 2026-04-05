@@ -19,25 +19,17 @@ namespace ApplyYourself
 
         private void Start()
         {
-            //fsm.AddTransition(new StateTransition(dialogueSystem, player));
-            //fsm.AddTransition(new StateTransition(fadeIn, player));
             fsm.AddState(fadeOut);
             portal.OnInteract += BeginGoToNextScene;
-            fadeOut.OnYield += SwitchScenes;
+            fadeOut.OnFadeComplete += portal.SwitchScenes;
 
             fsm.Open(null);
-            //fadeIn.BeginFade(true);
-        }
-
-        private void SwitchScenes(StateBehaviour state)
-        {
-            print(state.name);
-            portal.Interact();
         }
 
         private void BeginGoToNextScene()
         {
             playButton.interactable = false;
+            portal.OnInteract -= BeginGoToNextScene;
             fadeOut.BeginFade(false);
         }
 

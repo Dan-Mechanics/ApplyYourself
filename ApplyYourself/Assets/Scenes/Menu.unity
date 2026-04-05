@@ -275,7 +275,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.6901961, g: 0.82745105, b: 0.92549026, a: 1}
     m_PressedColor: {r: 0.3921569, g: 0.63529414, b: 0.882353, a: 1}
     m_SelectedColor: {r: 0.6901961, g: 0.827451, b: 0.9254902, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -395,7 +395,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: Sandbox
-  fade: 1
 --- !u!1 &762353138
 GameObject:
   m_ObjectHideFlags: 0
