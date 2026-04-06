@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,9 +6,8 @@ namespace ApplyYourself
 {
     public class Menu : MonoBehaviour
     {
-        [SerializeField] private Button playButton = default;
-
         private readonly FSM fsm = new FSM();
+        private Button[] buttons;
         private Portal portal;
         private Fade fadeOut;
 
@@ -15,6 +15,7 @@ namespace ApplyYourself
         {
             portal = FindAnyObjectByType<Portal>();
             fadeOut = FindAnyObjectByType<Fade>();
+            buttons = FindObjectsByType<Button>(FindObjectsSortMode.None);
         }
 
         private void Start()
@@ -28,7 +29,7 @@ namespace ApplyYourself
 
         private void BeginGoToNextScene()
         {
-            playButton.interactable = false;
+            buttons.ToList().ForEach(x => x.interactable = false);
             portal.OnInteract -= BeginGoToNextScene;
             fadeOut.BeginFade(false);
         }
