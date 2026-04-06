@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.90588236, g: 0.90588236, b: 0.89411765, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -492,7 +492,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 98216b2c02391d94ba125f0892ae5ff1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b6dc1925b091ba14b84e142ff18792df, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -513,17 +513,17 @@ PrefabInstance:
     - target: {fileID: 454442213005012616, guid: 8e9284b5a464691409a4b15d0d5b83cf,
         type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.99607843
       objectReference: {fileID: 0}
     - target: {fileID: 454442213005012616, guid: 8e9284b5a464691409a4b15d0d5b83cf,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.57088244
+      value: 0.46666667
       objectReference: {fileID: 0}
     - target: {fileID: 454442213005012616, guid: 8e9284b5a464691409a4b15d0d5b83cf,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.3915094
+      value: 0.28627452
       objectReference: {fileID: 0}
     - target: {fileID: 3598188905150169854, guid: 8e9284b5a464691409a4b15d0d5b83cf,
         type: 3}
@@ -608,7 +608,7 @@ PrefabInstance:
     - target: {fileID: 3598188905150169854, guid: 8e9284b5a464691409a4b15d0d5b83cf,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -130
+      value: -126.4
       objectReference: {fileID: 0}
     - target: {fileID: 3598188905150169854, guid: 8e9284b5a464691409a4b15d0d5b83cf,
         type: 3}
@@ -676,6 +676,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 114133381021866753}
     m_Modifications:
+    - target: {fileID: 454442213005012616, guid: 8e9284b5a464691409a4b15d0d5b83cf,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.050980393
+      objectReference: {fileID: 0}
+    - target: {fileID: 454442213005012616, guid: 8e9284b5a464691409a4b15d0d5b83cf,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.99607843
+      objectReference: {fileID: 0}
+    - target: {fileID: 454442213005012616, guid: 8e9284b5a464691409a4b15d0d5b83cf,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.050980393
+      objectReference: {fileID: 0}
     - target: {fileID: 3598188905150169854, guid: 8e9284b5a464691409a4b15d0d5b83cf,
         type: 3}
       propertyPath: m_Pivot.x
@@ -759,7 +774,7 @@ PrefabInstance:
     - target: {fileID: 3598188905150169854, guid: 8e9284b5a464691409a4b15d0d5b83cf,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -45
+      value: -83.2
       objectReference: {fileID: 0}
     - target: {fileID: 3598188905150169854, guid: 8e9284b5a464691409a4b15d0d5b83cf,
         type: 3}
@@ -815,17 +830,17 @@ PrefabInstance:
     - target: {fileID: 454442213005012616, guid: 8e9284b5a464691409a4b15d0d5b83cf,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.6037736
+      value: 0.5294118
       objectReference: {fileID: 0}
     - target: {fileID: 454442213005012616, guid: 8e9284b5a464691409a4b15d0d5b83cf,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.6037736
+      value: 0.5294118
       objectReference: {fileID: 0}
     - target: {fileID: 454442213005012616, guid: 8e9284b5a464691409a4b15d0d5b83cf,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.6037736
+      value: 0.5294118
       objectReference: {fileID: 0}
     - target: {fileID: 3598188905150169854, guid: 8e9284b5a464691409a4b15d0d5b83cf,
         type: 3}
@@ -910,7 +925,7 @@ PrefabInstance:
     - target: {fileID: 3598188905150169854, guid: 8e9284b5a464691409a4b15d0d5b83cf,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -88
+      value: -41.1
       objectReference: {fileID: 0}
     - target: {fileID: 3598188905150169854, guid: 8e9284b5a464691409a4b15d0d5b83cf,
         type: 3}
