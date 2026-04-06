@@ -27,10 +27,13 @@ namespace ApplyYourself
         private void Update()
         {
             if (reload.WasPressed)
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                ReloadScene();
 
             if ((shift.IsHeld || ctrl.IsHeld) && escape.WasPressed)
-                Application.Quit();
+                QuitGame();
         }
+
+        public void QuitGame() => Application.Quit();
+        public void ReloadScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

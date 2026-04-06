@@ -5,14 +5,14 @@ namespace ApplyYourself
 {
     public class Menu : MonoBehaviour
     {
+        [SerializeField] private Button playButton = default;
+
         private readonly FSM fsm = new FSM();
-        private Button playButton;
         private Portal portal;
         private Fade fadeOut;
 
         private void Awake()
         {
-            playButton = FindAnyObjectByType<Button>();
             portal = FindAnyObjectByType<Portal>();
             fadeOut = FindAnyObjectByType<Fade>();
         }
