@@ -34,8 +34,8 @@ ModelImporter:
       name: new_walk
       takeName: mixamo.com.001
       internalID: 7972392539074397677
-      firstFrame: 1
-      lastFrame: 33
+      firstFrame: 3
+      lastFrame: 31
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

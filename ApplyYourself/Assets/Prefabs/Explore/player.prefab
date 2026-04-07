@@ -221,7 +221,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: new_real_walk
+          m_StringArgument: real_new_walk
           m_BoolArgument: 0
         m_CallState: 2
   onIdle:
@@ -236,7 +236,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: new_real_idle
+          m_StringArgument: real_new_idle
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &7582943016857370818
@@ -391,10 +391,10 @@ Animation:
   m_GameObject: {fileID: 9115775342057292888}
   m_Enabled: 1
   serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: 6b6b779a33ec47143b359438785d72bc, type: 2}
+  m_Animation: {fileID: 7400000, guid: d90c4c9e1c310ce44ae7f1e26c6b786f, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: 6b6b779a33ec47143b359438785d72bc, type: 2}
-  - {fileID: 7400000, guid: 6921ecdeb544e7444bb0fbf8a997b91d, type: 2}
+  - {fileID: 7400000, guid: d90c4c9e1c310ce44ae7f1e26c6b786f, type: 2}
+  - {fileID: 7400000, guid: 374fcf213f0fcd147b62f70d9db6c224, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
