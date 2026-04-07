@@ -351,6 +351,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4541460597810118928, guid: 6640addbf1f1c0447955036976280d10,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c3c950e27737ff44bbff123e45b337d, type: 2}
     - target: {fileID: -1206874426333947015, guid: 6640addbf1f1c0447955036976280d10,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -391,10 +396,10 @@ Animation:
   m_GameObject: {fileID: 9115775342057292888}
   m_Enabled: 1
   serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: d90c4c9e1c310ce44ae7f1e26c6b786f, type: 2}
+  m_Animation: {fileID: 7400000, guid: c327e3a6e1237f64a8433cb54e5d73ac, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: d90c4c9e1c310ce44ae7f1e26c6b786f, type: 2}
-  - {fileID: 7400000, guid: 374fcf213f0fcd147b62f70d9db6c224, type: 2}
+  - {fileID: 7400000, guid: c327e3a6e1237f64a8433cb54e5d73ac, type: 2}
+  - {fileID: 7400000, guid: f635c9373fcaee743a097597881c0e96, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
