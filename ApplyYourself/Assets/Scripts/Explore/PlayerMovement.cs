@@ -46,6 +46,7 @@ namespace ApplyYourself
         {
             base.Exit();
             onIdle?.Invoke();
+            prevMovement = Vector3.zero;
         }
 
         public void Teleport(Vector3 position)
