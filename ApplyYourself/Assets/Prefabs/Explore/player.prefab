@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 3553187694032682028}
   - component: {fileID: 7582943016857370818}
   - component: {fileID: 8189917674282299612}
+  - component: {fileID: 6212143682663965354}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -212,31 +213,31 @@ MonoBehaviour:
   onWalk:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8523727892845357670}
-        m_TargetAssemblyTypeName: UnityEngine.Animation, UnityEngine
-        m_MethodName: CrossFade
+      - m_Target: {fileID: 6212143682663965354}
+        m_TargetAssemblyTypeName: ApplyYourself.PlayerAnimation, Assembly-CSharp
+        m_MethodName: Crossfade
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: real_new_walk
+          m_StringArgument: walk
           m_BoolArgument: 0
         m_CallState: 2
   onIdle:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8523727892845357670}
-        m_TargetAssemblyTypeName: UnityEngine.Animation, UnityEngine
-        m_MethodName: CrossFade
+      - m_Target: {fileID: 6212143682663965354}
+        m_TargetAssemblyTypeName: ApplyYourself.PlayerAnimation, Assembly-CSharp
+        m_MethodName: Crossfade
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: real_new_idle
+          m_StringArgument: idle
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &7582943016857370818
@@ -278,6 +279,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftRightPivot: {fileID: 1905645038698360357}
   graphic: {fileID: 2884527835457003309}
+--- !u!114 &6212143682663965354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195046949362653098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd180c8b301412241a19ff812411df9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6275880888765868906}
+  crossfadeTime: 0.3
 --- !u!1001 &8232813978453686537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -373,7 +388,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6640addbf1f1c0447955036976280d10,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8523727892845357670}
+      addedObject: {fileID: 6275880888765868906}
   m_SourcePrefab: {fileID: 100100000, guid: 6640addbf1f1c0447955036976280d10, type: 3}
 --- !u!4 &8487717174182895330 stripped
 Transform:
@@ -387,21 +402,25 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8232813978453686537}
   m_PrefabAsset: {fileID: 0}
---- !u!111 &8523727892845357670
-Animation:
+--- !u!95 &6275880888765868906
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9115775342057292888}
   m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: c327e3a6e1237f64a8433cb54e5d73ac, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: c327e3a6e1237f64a8433cb54e5d73ac, type: 2}
-  - {fileID: 7400000, guid: f635c9373fcaee743a097597881c0e96, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 86aae1c21cf341b4f955cfc724389f07, type: 2}
+  m_CullingMode: 0
   m_UpdateMode: 0
-  m_CullingType: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
