@@ -44,15 +44,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 534e2b0c9aa23764e9a1b4dbeb5899d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  next: {fileID: 11400000, guid: 16e5a7d1cf48a7842b45182a55100f82, type: 2}
-  previous: {fileID: 11400000, guid: cf79d0b742d550b43bf5ed48168ca231, type: 2}
-  min: 0.2
-  max: 5
+  upArrow: {fileID: 11400000, guid: 8b0be1e43edc93c4889bdab6a3b24765, type: 2}
+  downArrow: {fileID: 11400000, guid: be60847c4e280b647b992cfd96c71444, type: 2}
+  leftArrow: {fileID: 11400000, guid: 64c1b40f0aeea474e8ac3ee24c3660f4, type: 2}
+  rightArrow: {fileID: 11400000, guid: 770e9fd24b1fab04ab2d8664acfcb0cd, type: 2}
+  sensitivity: {fileID: 11400000, guid: 7211bde9ba8e69744aa9ae145e3e22a0, type: 2}
+  scrollSensitivity: {fileID: 11400000, guid: 74dc00cad61c73243a68a80a64586405, type: 2}
+  min: 0.1
+  max: 10
   sensitivityPerClick: 0.1
   decimalPlaces: 3
-  displayVisible: 1
+  reloadOnStart: 0
   color: {r: 0, g: 0, b: 0, a: 1}
   fontSize: 18
-  padding: 0
+  padding: 5
   width: 500
   height: 70
