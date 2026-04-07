@@ -66,7 +66,7 @@ MonoBehaviour:
   - bar: {fileID: 3899768634009185088}
     type: {fileID: 11400000, guid: 7aba05f7576ad9b4cb5ec9549b6caf41, type: 2}
     ending: 2
-    threshold: 330
+    threshold: 240
     count: 0
   - bar: {fileID: 8336595646552494646}
     type: {fileID: 11400000, guid: 28068dd81c650bc41b2e977fe3d2e751, type: 2}

@@ -34,8 +34,12 @@ namespace ApplyYourself
                 onWalk?.Invoke();
 
             controller.Move(movement * Time.deltaTime);
-            controller.Move(fallingSpeed * Time.deltaTime * Vector3.down);
             prevMovement = movement;
+        }
+
+        private void Update()
+        {
+            controller.Move(fallingSpeed * Time.deltaTime * Vector3.down);
         }
 
         public override void Exit()
