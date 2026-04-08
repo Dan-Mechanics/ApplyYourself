@@ -37,7 +37,7 @@ namespace ApplyYourself
             }
 
             flooded.bar.fillAmount = (float)flooded.count / flooded.threshold;
-            icon.sprite = Resources.Load<Sprite>($"Icons/{ending.ToString().ToLowerInvariant()}");
+            icon.sprite = Resources.Load<Sprite>($"{ending.ToString().ToLowerInvariant()}_sprite");
         }
 
         private void Tick()
