@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62bb093b660763245bad95fe8ff6f2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 0.25
+  interval: 0.32
   brushes:
   - {fileID: 11400000, guid: f9c4c0f37f79d8a4cbfa5e1ebb235147, type: 2}
   - {fileID: 11400000, guid: d99274f9b1e9df343af8619a48c0a92d, type: 2}

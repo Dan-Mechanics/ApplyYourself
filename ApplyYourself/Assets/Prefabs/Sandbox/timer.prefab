@@ -243,8 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63f94ba2ca78cc3498b41565d387ff68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doneMinutes: 0
-  doneSeconds: 42
+  doneMinutes: 1
+  doneSeconds: 0
   invokeInterval: 0.1
 --- !u!114 &2803123118441374815
 MonoBehaviour:
