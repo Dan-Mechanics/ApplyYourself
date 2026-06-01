@@ -80,13 +80,13 @@ namespace ApplyYourself
             float highestWater = waterHeightmap[0, 0];
             float lowestWater = highestWater;
 
-            bool skip = false;
+            bool toggle = false;
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)
                 {
-                    skip = !skip;
-                    if (skip)
+                    toggle = !toggle;
+                    if (toggle)
                         continue;
 
                     float waterHeight = waterHeightmap[x, y];

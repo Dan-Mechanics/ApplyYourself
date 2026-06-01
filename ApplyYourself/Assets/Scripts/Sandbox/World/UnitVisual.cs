@@ -19,7 +19,7 @@ namespace ApplyYourself
 
         public void Set(Material material, bool enableDecoration, float height)
         {
-            SetMaterial(material);
+            renderer.material = material;
             EnableDecoration(enableDecoration);
             SetHeight(height);
         }
@@ -34,10 +34,9 @@ namespace ApplyYourself
         {
             Vector3 pos = transform.position;
             pos.y = height;
-            transform.position = pos;   
+            transform.position = pos;
         }
 
-        public void SetMaterial(Material material) => renderer.material = material;
         public void SetDecoration(GameObject prefab)
         {
             if (decoration != null)

@@ -60,8 +60,6 @@ namespace ApplyYourself
             timer.OnDone += bridge.GoNextPhase;
             timer.Begin();
 
-            // ===
-
             waterManager.Initialize();
             landManager.Initialize(heightmapStartup, typemapStartup);
 
@@ -69,8 +67,6 @@ namespace ApplyYourself
             landManager.Setup(waterManager.Heightmap);
 
             unitManager.Setup(landManager.Typemap, landManager.Heightmap, waterManager.Heightmap);
-
-            // ===
 
             foreach (Brush brush in brushes)
             {
@@ -95,8 +91,6 @@ namespace ApplyYourself
             lerpFollow.SetTarget(pivotController.transform.GetChild(0));
             lerpFollow.SetLookTarget(pivotController.transform);
 
-            // ===
-
             fsm.AddTransition(new StateTransition(terraformer, pivotController));
             fsm.AddTransition(new StateTransition(pivotController, terraformer));
             fsm.AddState(terraformer);
@@ -106,8 +100,6 @@ namespace ApplyYourself
             fsm.Open(terraformer);
             fadeIn.BeginFade(true);
             InvokeRepeating(nameof(Tick), 0f, interval);
-
-            // terrainEvaluator.Setup(landManager.Heightmap, waterManager.Heightmap, landManager.Typemap);
         }
 
         private void Update() => fsm.Update();
@@ -116,6 +108,7 @@ namespace ApplyYourself
         private void Tick()
         {
             waterManager.Tick();
+            waterManager.SwapBuffers();
             unitManager.RenderAll();
         }
 

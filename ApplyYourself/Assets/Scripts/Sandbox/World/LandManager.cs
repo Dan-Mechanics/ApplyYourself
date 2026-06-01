@@ -15,6 +15,7 @@ namespace ApplyYourself
         [SerializeField] private int width = default;
         [SerializeField] private float minHeight = default;
         [SerializeField] private float maxHeight = default;
+        [SerializeField] private bool allowRaiseCity = default; 
         [SerializeField] private EasyBinding removeLand = default;
         [SerializeField] private UnitType city = default;
         [SerializeField] private UnitType plains = default;
@@ -53,11 +54,11 @@ namespace ApplyYourself
             for (int i = positions.Count - 1; i >= 0; i--)
             {
                 Vector2Int pos = positions[i];
-                /*if (typemap[pos.x, pos.y] == city)
+                if (allowRaiseCity && typemap[pos.x, pos.y] == city)
                 {
                     positions.RemoveAt(i);
                     continue;
-                }*/
+                }
 
                 heightmap[pos.x, pos.y] = Mathf.Clamp(heightmap[pos.x, pos.y] + meters, minHeight, maxHeight);
             }
@@ -89,7 +90,6 @@ namespace ApplyYourself
         {
             bool isLand = heightmap[pos.x, pos.y] >= waterHeightmap[pos.x, pos.y];
             bool validType = typemap[pos.x, pos.y] != type && typemap[pos.x, pos.y] != city;
-
             return isLand && validType;
         }
     }

@@ -16,10 +16,8 @@ namespace ApplyYourself
 
         private float[,] landHeightmap;
         private UnitType[,] landTypemap;
-
         private float[,] readBuffer;
         private float[,] writeBuffer;
-        private float next;
 
         public void Initialize()
         {
@@ -32,16 +30,7 @@ namespace ApplyYourself
         {
             this.landHeightmap = landHeightmap;
             this.landTypemap = landTypemap;
-            next = Time.time + raiseInterval;
-        }
-
-        private void FixedUpdate()
-        {
-            if (Time.time < next)
-                return;
-
-            RaiseWaterLevel();
-            next = Time.time + raiseInterval;
+            InvokeRepeating(nameof(RaiseSeaLevel), raiseInterval, raiseInterval);
         }
 
         private void SetHeight(int x, int y, float height)
@@ -77,8 +66,10 @@ namespace ApplyYourself
                     Raise(x, y + 1, parentHeight);
                 }
             }
+        }
 
-            // SWAP.
+        public void SwapBuffers()
+        {
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < width; y++)
@@ -88,7 +79,7 @@ namespace ApplyYourself
             }
         }
 
-        private void RaiseWaterLevel()
+        private void RaiseSeaLevel()
         {
             waterHeight += waterHeightPerTick;
             SetHeight(0, width - 1, waterHeight);
