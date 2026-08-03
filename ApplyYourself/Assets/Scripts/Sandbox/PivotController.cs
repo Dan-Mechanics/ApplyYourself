@@ -71,7 +71,7 @@ namespace ApplyYourself
         {
             // rotation.y += sensitivity * Input.GetAxisRaw("Mouse X");
             // rotation.x -= sensitivity * Input.GetAxisRaw("Mouse Y");
-            rotation = Utils.Add(rotation, lookInput.GetLook() * sensitivity);
+            rotation = Utils.Sum(rotation, lookInput.GetLook() * sensitivity);
             rotation.x = Mathf.Clamp(rotation.x, minAngle, maxAngle);
         }
 

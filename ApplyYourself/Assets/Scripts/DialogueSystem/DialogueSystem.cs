@@ -34,9 +34,7 @@ namespace ApplyYourself
         private InputComposite composite;
 
         public void Setup()
-        {
-            composite = new InputComposite(primaryFire, jump, interact);
-        }
+            => composite = new InputComposite(primaryFire, jump, interact);
 
         public override void OnUpdate()
         {

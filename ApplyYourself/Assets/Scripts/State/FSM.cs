@@ -66,6 +66,7 @@ namespace ApplyYourself
 
         private void Yield(StateBehaviour from)
         {
+            // ONLY THE CURRENTLY ACTIVE STATE CAN YIELD.
             if (from != current)
                 return;
 

@@ -39,7 +39,7 @@ namespace ApplyYourself
             if (group.alpha <= alphaTarget)
             {
                 OnFadeComplete?.Invoke();
-                Destroy(this);
+                enabled = false;
             }
         }
 
@@ -57,6 +57,7 @@ namespace ApplyYourself
             group.alpha = fadeIn ? 1f : 0f;
             direction = fadeIn ? -1f : 1f;
             alphaTarget = fadeIn ? 0f : 1f;
+            enabled = true;
 
             if (!fadeIn)
                 ClaimState();
@@ -64,7 +65,7 @@ namespace ApplyYourself
 
         private void OnValidate()
         {
-            if(group == null)
+            if (group == null)
                 group = GetComponent<CanvasGroup>();
         }
     }
