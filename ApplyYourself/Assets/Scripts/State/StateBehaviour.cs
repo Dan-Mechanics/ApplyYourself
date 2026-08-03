@@ -14,8 +14,13 @@ namespace ApplyYourself
         public virtual void OnUpdate() { }
         public virtual void OnFixedUpdate() { }
 
-        protected void YieldState() => OnYield?.Invoke(this);
-        protected void ClaimState() => OnClaim?.Invoke(this);
-        protected virtual void OnDestroy() => OnDeregister?.Invoke(this);
+        protected void YieldState() 
+            => OnYield?.Invoke(this);
+
+        protected void ClaimState() 
+            => OnClaim?.Invoke(this);
+
+        protected virtual void OnDestroy()
+            => OnDeregister?.Invoke(this);
     }
 }

@@ -9,7 +9,8 @@ namespace ApplyYourself
         private readonly List<StateTransition> transitions = new List<StateTransition>();
         private StateBehaviour current;
 
-        public void AddTransition(StateTransition transition) => transitions.Add(transition);
+        public void AddTransition(StateTransition transition) 
+            => transitions.Add(transition);
 
         public void AddState(StateBehaviour state)
         {

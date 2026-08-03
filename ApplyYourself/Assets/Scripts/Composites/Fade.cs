@@ -22,7 +22,7 @@ namespace ApplyYourself
             if (fadeIn)
                 return;
 
-            DoFade();
+            ProgressFade();
             if (group.alpha >= alphaTarget)
             {
                 OnFadeComplete?.Invoke();
@@ -35,7 +35,7 @@ namespace ApplyYourself
             if (!fadeIn)
                 return;
 
-            DoFade();
+            ProgressFade();
             if (group.alpha <= alphaTarget)
             {
                 OnFadeComplete?.Invoke();
@@ -43,7 +43,7 @@ namespace ApplyYourself
             }
         }
 
-        private void DoFade()
+        private void ProgressFade()
         {
             float alpha = group.alpha;
             alpha += direction * (1f / fadeTime) * Time.fixedDeltaTime;
@@ -62,6 +62,10 @@ namespace ApplyYourself
                 ClaimState();
         }
 
-        private void OnValidate() => group = GetComponent<CanvasGroup>();
+        private void OnValidate()
+        {
+            if(group == null)
+                group = GetComponent<CanvasGroup>();
+        }
     }
 }
